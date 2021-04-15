@@ -73,13 +73,10 @@ int pr1_ej2() {
 
 		// RENDER
 		glBegin(GL_TRIANGLES);
-			glColor3f(1., 1., 1.); // Ej3. Comment this and uncomment others for one color per vertex
+			glColor3f(1., 1., 1.);
 			glColor3f(1., 0., 0.);
-			//glVertex3f(-1.5, 1., -6.);
 			glColor3f(0., 1., 0.);
-			//glVertex3f(-2.5, -1., -6.);
 			glColor3f(0., 0., 1.);
-			//glVertex3f(-0.5, -1., -6.);
 		glEnd();
 		glPopMatrix();
 

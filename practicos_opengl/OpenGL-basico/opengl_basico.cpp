@@ -105,10 +105,10 @@ int opengl_basico() {
 		// RENDER
 		// Colored triangle
 		glBegin(GL_TRIANGLES);
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex3f(1., -1., 0.);
-		glVertex3f(-1., -1., 0.);
-		glVertex3f(0., 1., 0.);
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex3f(1., -1., 0.);
+			glVertex3f(-1., -1., 0.);
+			glVertex3f(0., 1., 0.);
 		glEnd();
 		glPopMatrix();
 
@@ -118,23 +118,23 @@ int opengl_basico() {
 			glBindTexture(GL_TEXTURE_2D, textura);
 		}
 		glBegin(GL_TRIANGLES);
-		glColor3f(1.0, 1.0, 1.0);
-		glTexCoord2f(0, 0);
-		glVertex3f(3., -1., 0.);
-		glTexCoord2f(0, 1);
-		glVertex3f(1., -1., 0.);
-		glTexCoord2f(1, 0);
-		glVertex3f(2., 1., 0.);
+			glColor3f(1.0, 1.0, 1.0);
+			glTexCoord2f(0, 0);
+			glVertex3f(3., -1., 0.);
+			glTexCoord2f(0, 1);
+			glVertex3f(1., -1., 0.);
+			glTexCoord2f(1, 0);
+			glVertex3f(2., 1., 0.);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 
 		// Illuminated triangle
 		glEnable(GL_LIGHTING);
 		glBegin(GL_TRIANGLES);
-		glNormal3f(0, 0, 1);
-		glVertex3f(-1., -1., 0.);
-		glVertex3f(-3., -1., 0.);
-		glVertex3f(-2., 1., 0.);
+			glNormal3f(0, 0, 1);
+			glVertex3f(-1., -1., 0.);
+			glVertex3f(-3., -1., 0.);
+			glVertex3f(-2., 1., 0.);
 		glEnd();
 		glDisable(GL_LIGHTING);
 

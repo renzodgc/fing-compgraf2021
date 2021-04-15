@@ -40,7 +40,7 @@ int pr1_ej2() {
 
 	// WINDOW
 	SDL_Window* window = SDL_CreateWindow(
-		"Pr1-Ej1",
+		"Pr1-Ej2",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		SCR_WIDTH, SCR_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN
@@ -73,22 +73,22 @@ int pr1_ej2() {
 
 		// RENDER
 		glBegin(GL_TRIANGLES);
-		glColor3f(1., 1., 1.); // Ej3. Comment this and uncomment others for one color per vertex
-		//glColor3f(1., 0., 0.);
-		glVertex3f(-1.5, 1., -6.);
-		//glColor3f(0., 1., 0.);
-		glVertex3f(-2.5, -1., -6.);
-		//glColor3f(0., 0., 1.);
-		glVertex3f(-0.5, -1., -6.);
+			glColor3f(1., 1., 1.); // Ej3. Comment this and uncomment others for one color per vertex
+			glColor3f(1., 0., 0.);
+			//glVertex3f(-1.5, 1., -6.);
+			glColor3f(0., 1., 0.);
+			//glVertex3f(-2.5, -1., -6.);
+			glColor3f(0., 0., 1.);
+			//glVertex3f(-0.5, -1., -6.);
 		glEnd();
 		glPopMatrix();
 
 		glBegin(GL_QUADS);
-		glColor3f(1., 1., 1.);
-		glVertex3f(0.5, 1., -6.);
-		glVertex3f(2.5, 1., -6.);
-		glVertex3f(2.5, -1., -6.);
-		glVertex3f(0.5, -1., -6.);
+			glColor3f(1., 1., 1.);
+			glVertex3f(0.5, 1., -6.);
+			glVertex3f(2.5, 1., -6.);
+			glVertex3f(2.5, -1., -6.);
+			glVertex3f(0.5, -1., -6.);
 		glEnd();
 		glPopMatrix();
 
@@ -97,21 +97,21 @@ int pr1_ej2() {
 			glTranslatef(-1.5, 0., -6.);
 
 			glBegin(GL_TRIANGLES);
-			glColor3f(1., 1., 1.);
-			glVertex3f(0., 1., 0.);
-			glVertex3f(-1., -1., 0.);
-			glVertex3f(1., -1., 0.);
+				glColor3f(1., 1., 1.);
+				glVertex3f(0., 1., 0.);
+				glVertex3f(-1., -1., 0.);
+				glVertex3f(1., -1., 0.);
 			glEnd();
 			glPopMatrix();
 
 			glTranslatef(3, 0., 0.);
 
 			glBegin(GL_QUADS);
-			glColor3f(1., 1., 1.);
-			glVertex3f(-1., 1., 0.);
-			glVertex3f(1., 1., 0.);
-			glVertex3f(1., -1., 0.);
-			glVertex3f(-1., -1., 0.);
+				glColor3f(1., 1., 1.);
+				glVertex3f(-1., 1., 0.);
+				glVertex3f(1., 1., 0.);
+				glVertex3f(1., -1., 0.);
+				glVertex3f(-1., -1., 0.);
 			glEnd();
 			glPopMatrix();
 		}

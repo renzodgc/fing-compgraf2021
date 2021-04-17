@@ -38,12 +38,12 @@ int opengl_basico() {
 	glMatrixMode(GL_MODELVIEW);
 
 	// TEXTURE
-	char* archivo = new char[20];
+	string archivo;
 	archivo = "../canon.png";
 
 	// Load texture's image
-	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(archivo);
-	FIBITMAP* bitmap = FreeImage_Load(fif, archivo);
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(archivo.c_str());
+	FIBITMAP* bitmap = FreeImage_Load(fif, archivo.c_str());
 	bitmap = FreeImage_ConvertTo24Bits(bitmap);
 	int w = FreeImage_GetWidth(bitmap);
 	int h = FreeImage_GetHeight(bitmap);

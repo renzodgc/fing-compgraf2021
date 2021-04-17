@@ -93,9 +93,11 @@
     <ClCompile Include="pr3_ej1.cpp" />
     <ClCompile Include="pr3_ej2.cpp" />
     <ClCompile Include="pr3_ej3.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exercises.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

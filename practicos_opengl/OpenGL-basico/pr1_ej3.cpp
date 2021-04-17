@@ -1,4 +1,5 @@
 #include "exercises.h"
+#include "utils.h"
 #include "SDL.h"
 #include "SDL_opengl.h"
 #include <iostream>
@@ -12,13 +13,6 @@ using namespace std;
 // SETTINGS
 const unsigned int SCR_WIDTH = 640;
 const unsigned int SCR_HEIGHT = 480;
-
-void ToggleFullscreen(SDL_Window* Window) {
-	Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-	bool IsFullscreen = SDL_GetWindowFlags(Window) & FullscreenFlag;
-	SDL_SetWindowFullscreen(Window, IsFullscreen ? 0 : FullscreenFlag);
-	SDL_ShowCursor(IsFullscreen);
-}
 
 int pr1_ej3() {
 	// INITIALIZATION

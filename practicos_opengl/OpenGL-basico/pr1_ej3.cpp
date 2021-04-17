@@ -73,24 +73,6 @@ int pr1_ej3() {
 		gluLookAt(x, y, z, 0, 0, 0, 0, 1, 0);
 
 		// RENDER
-		glBegin(GL_TRIANGLES);
-			glColor3f(1., 0., 0.);
-			glVertex3f(-1.5, 1., -6.);
-			glColor3f(0., 1., 0.);
-			glVertex3f(-2.5, -1., -6.);
-			glColor3f(0., 0., 1.);
-			glVertex3f(-0.5, -1., -6.);
-		glEnd();
-		glPopMatrix();
-
-		glBegin(GL_QUADS);
-			glColor3f(1., 1., 1.);
-			glVertex3f(0.5, 1., -6.);
-			glVertex3f(2.5, 1., -6.);
-			glVertex3f(2.5, -1., -6.);
-			glVertex3f(0.5, -1., -6.);
-		glEnd();
-		glPopMatrix();
 
 		// Linear Transformation
 		if (translate) {
@@ -114,6 +96,26 @@ int pr1_ej3() {
 				glVertex3f(1., 1., 0.);
 				glVertex3f(1., -1., 0.);
 				glVertex3f(-1., -1., 0.);
+			glEnd();
+			glPopMatrix();
+		}
+		else {
+			glBegin(GL_TRIANGLES);
+				glColor3f(1., 0., 0.);
+				glVertex3f(-1.5, 1., -6.);
+				glColor3f(0., 1., 0.);
+				glVertex3f(-2.5, -1., -6.);
+				glColor3f(0., 0., 1.);
+				glVertex3f(-0.5, -1., -6.);
+			glEnd();
+			glPopMatrix();
+
+			glBegin(GL_QUADS);
+				glColor3f(1., 1., 1.);
+				glVertex3f(0.5, 1., -6.);
+				glVertex3f(2.5, 1., -6.);
+				glVertex3f(2.5, -1., -6.);
+				glVertex3f(0.5, -1., -6.);
 			glEnd();
 			glPopMatrix();
 		}

@@ -74,7 +74,7 @@ int pr2_ej1() {
 		gluLookAt(x, y, z, 0, 0, 0, 0, 1, 0);
 
 		// RENDER
-		rotation += 0.1;
+		rotation += 0.1f;
 		glRotatef(rotation, 0.0, 0.0, -6.0);
 
 		// Linear Transformation

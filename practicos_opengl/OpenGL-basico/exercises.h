@@ -2,6 +2,11 @@
 #ifndef EXERCISES_H
 #define EXERCISES_H
 
+#include "constants.h"
+#include "utils.h"
+
+using namespace std;
+
 int opengl_basico();
 
 int pr1_ej1();

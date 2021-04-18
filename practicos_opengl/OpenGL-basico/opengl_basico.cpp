@@ -1,17 +1,5 @@
 #include "exercises.h"
-#include "SDL.h"
-#include "SDL_opengl.h"
-#include <iostream>
-#include "FreeImage.h"
-#include <stdio.h>
-#include <conio.h>
-#include <GL/glu.h>
 
-using namespace std;
-
-// SETTINGS
-const unsigned int SCR_WIDTH = 640;
-const unsigned int SCR_HEIGHT = 480;
 
 int opengl_basico() {
 	// INITIALIZATION
@@ -98,7 +86,7 @@ int opengl_basico() {
 		glPushMatrix();
 		// Linear Transformation
 		if (rotate) {
-			degrees = degrees + 0.1;
+			degrees = degrees + 0.1f;
 		}
 		glRotatef(degrees, 0.0, 1.0, 0.0);
 

@@ -1,27 +1,7 @@
 #include "exercises.h"
-#include "utils.h"
-#include "SDL.h"
-#include "SDL_opengl.h"
-#include <iostream>
-#include "FreeImage.h"
-#include <stdio.h>
-#include <conio.h>
-#include <GL/glu.h>
-
-using namespace std;
-
-// SETTINGS
-const unsigned int SCR_WIDTH = 640;
-const unsigned int SCR_HEIGHT = 480;
 
 
 int pr1_ej4() {
-	// INITIALIZATION
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		cerr << "[Error]: No se pudo iniciar SDL: " << SDL_GetError() << endl;
-		exit(1);
-	}
-
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << " ESC         -> Salir" << endl;
@@ -32,74 +12,39 @@ int pr1_ej4() {
 	bool program_running = true;
 	SDL_Event sdl_event;
 
-	float clear_color_red = 0.0f;
-	float clear_color_green = 0.0f;
-	float clear_color_blue = 0.0f;
-	float x = 0.0f;
-	float y = 0.0f;
-	float z = 7.0f;
+	color clear_color = { 0.f, 0.f, 0.f, 1.f }; // RGBA
+	position camera_eye = { 0.f, 0.f, 7.f }; // XYZ
+	multicolored_triangle multi_tri;
+	square sq;
+	textured_square tex_sq;
+
+	bool translate = false;
+	bool texture_on = true;
 	float scale = 1.f;
 
-	bool texture_on = true;
-	bool translate = false;
-
-	// WINDOW
-	SDL_Window* window = SDL_CreateWindow(
-		"Pr1-Ej4",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		SCR_WIDTH, SCR_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN
-	);
-	if (window == NULL) {
-		cerr << "[Video Error]: " << SDL_GetError() << endl;
-		SDL_Quit();
-		exit(1);
-	}
-	SDL_GLContext context = SDL_GL_CreateContext(window);
-	if (window == NULL) {
-		cerr << "[GL Context Error]: " << SDL_GetError() << endl;
-		SDL_Quit();
-		exit(1);
-	}
+	// INITIALIZE WINDOW
+	SDL_Window* window;
+	SDL_GLContext context;
+	tie(window, context) = InitializeSDL("Pr1-Ej4", SCR_WIDTH, SCR_HEIGHT);
 
 	glMatrixMode(GL_PROJECTION);
-	glClearColor(clear_color_red, clear_color_green, clear_color_blue, 1);
+	glClearColor(clear_color.red, clear_color.green, clear_color.blue, clear_color.alpha);
 
 	gluPerspective(45, SCR_WIDTH / (float)SCR_HEIGHT, 0.1, 100);
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_MODELVIEW);
 
-	// TEXTURE
-	string texture_file;
-	texture_file = "../practicos/pr1/opengl.png";
-
-	// Load texture's image
-	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(texture_file.c_str());
-	FIBITMAP* bitmap = FreeImage_Load(fif, texture_file.c_str());
-	bitmap = FreeImage_ConvertTo24Bits(bitmap);
-	int texture_width = FreeImage_GetWidth(bitmap);
-	int texture_height = FreeImage_GetHeight(bitmap);
-	void* data = FreeImage_GetBits(bitmap);
+	// TEXTURES
+	GLuint texture = LoadTexture("../practicos/pr1/opengl.png");
 	float rectangle_aspect_ratio = 452 / 212.f;
 	float scaleRectX = 452. / 512.f;
 	float scaleRectY = 212. / 512.f;
-
-	// Apply texture
-	GLuint texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	// RENDER LOOP
 	do {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
-		gluLookAt(x, y, z, 0, 0, 0, 0, 1, 0);
+		gluLookAt(camera_eye.x, camera_eye.y, camera_eye.z, 0, 0, 0, 0, 1, 0);
 
 		// RENDER
 		
@@ -107,76 +52,56 @@ int pr1_ej4() {
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			glBegin(GL_TRIANGLES);
-				glColor3f(1., 1., 0.);
-				glVertex3f(0., 1., 0.);
-				glColor3f(0., 1., 1.);
-				glVertex3f(-1., -1., 0.);
-				glColor3f(1., 0., 1.);
-				glVertex3f(1., -1., 0.);
-			glEnd();
-			glPopMatrix();
+			multi_tri = {
+				RED, BLUE, GREEN,
+				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
+			};
+			DrawMulticoloredTriangle(multi_tri);
 
 			glTranslatef(3, 0., 0.);
 
 			if (texture_on) {
-				// source and dest are arbitrary rectangles.
-				
-				glEnable(GL_TEXTURE_2D);
-				glBindTexture(GL_TEXTURE_2D, texture);
-				
 				glScalef(scaleRectX * scale, scaleRectY * scale, 0.0);
-				glBegin(GL_QUADS);
-					glColor3f(1., 1., 1.);
-					glTexCoord2f(0.095703125f, 0.486328125f); glVertex3f(-1., -1., 0.); // Bottom Left
-					glTexCoord2f(0.978515625f, 0.486328125f); glVertex3f(1., -1., 0.); // Bottom Right
-					glTexCoord2f(0.978515625f, 0.900390625f); glVertex3f(1, 1., 0.); // Top Right
-					glTexCoord2f(0.095703125f, 0.900390625f); glVertex3f(-1, 1., 0.); // Top Right
-				glEnd();
-				glPopMatrix();
-				glDisable(GL_TEXTURE_2D);
+				tex_sq = {
+					WHITE,
+					{0.095703125f, 0.486328125f}, {-1., -1., 0.}, // Bottom Left
+					{0.978515625f, 0.486328125f}, {1., -1., 0.}, // Bottom Right
+					{0.978515625f, 0.900390625f}, {1., 1., 0.}, // Top Right
+					{0.095703125f, 0.900390625f}, {-1., 1., 0.} // Top Right
+				};
+				DrawTexturedSquare(texture, tex_sq);
 			}
 			else {
-				glBegin(GL_QUADS);
-					glColor3f(0., 1., 1.);
-					glVertex3f(-1., -1., 0.);
-					glVertex3f(1., -1., 0.);
-					glVertex3f(1., 1., 0.);
-					glVertex3f(-1., 1., 0.);
-					glEnd();
-				glPopMatrix();
+				sq = {
+					CYAN,
+					{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
+				};
+				DrawSquare(sq);
 			}
 		}
 		else {
-			glBegin(GL_TRIANGLES);
-				glColor3f(1., 0., 0.); glVertex3f(-1.5, 1., -6.);
-				glColor3f(0., 1., 0.); glVertex3f(-2.5, -1., -6.);
-				glColor3f(0., 0., 1.); glVertex3f(-0.5, -1., -6.);
-			glEnd();
-			glPopMatrix();
+			multi_tri = {
+				CYAN, MAGENTA, YELLOW,
+				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
+			};
+			DrawMulticoloredTriangle(multi_tri);
 
 			if (texture_on) {
-				glEnable(GL_TEXTURE_2D);
-				glBindTexture(GL_TEXTURE_2D, texture);
-				glBegin(GL_QUADS);
-					glColor3f(1., 1., 1.);
-					glTexCoord2f(0.0f, 0.0f); glVertex3f(0.5, -1., -6.);
-					glTexCoord2f(1.0f, 0.0f); glVertex3f(2.5, -1., -6.);
-					glTexCoord2f(1.0f, 1.0f); glVertex3f(2.5, 1., -6.);
-					glTexCoord2f(0.0f, 1.0f); glVertex3f(0.5, 1., -6.);
-				glEnd();
-				glPopMatrix();
-				glDisable(GL_TEXTURE_2D);
+				tex_sq = {
+					WHITE,
+					{0., 0.}, {0.5, -1., -6.}, // Bottom Left
+					{1., 0.}, {2.5, -1., -6.}, // Bottom Right
+					{1., 1.}, {2.5, 1., -6.}, // Top Right
+					{0., 1.}, {0.5, 1., -6.} // Top Right
+				};
+				DrawTexturedSquare(texture, tex_sq);
 			}
 			else {
-				glBegin(GL_QUADS);
-					glColor3f(1., 1., 1.);
-					glVertex3f(0.5, 1., -6.);
-					glVertex3f(2.5, 1., -6.);
-					glVertex3f(2.5, -1., -6.);
-					glVertex3f(0.5, -1., -6.);
-				glEnd();
-				glPopMatrix();
+				sq = {
+					WHITE,
+					{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
+				};
+				DrawSquare(sq);
 			}
 		}
 

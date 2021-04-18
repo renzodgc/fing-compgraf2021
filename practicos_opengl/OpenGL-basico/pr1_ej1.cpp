@@ -1,28 +1,10 @@
 #include "exercises.h"
-#include "SDL.h"
-#include "SDL_opengl.h"
-#include <iostream>
-#include "FreeImage.h"
-#include <stdio.h>
-#include <conio.h>
-#include <GL/glu.h>
 
-using namespace std;
 
 #define SDL_NUMERIC_MINUS 1073741910
 #define SDL_NUMERIC_PLUS 1073741911
 
-// SETTINGS
-const unsigned int SCR_WIDTH = 640;
-const unsigned int SCR_HEIGHT = 480;
-
 int pr1_ej1() {
-	// INITIALIZATION
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		cerr << "[Error]: No se pudo iniciar SDL: " << SDL_GetError() << endl;
-		exit(1);
-	}
-
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << "   R -> Incrementar Rojo" << endl;
@@ -31,41 +13,24 @@ int pr1_ej1() {
 	cout << "   + -> Incrementar Blanco" << endl;
 	cout << "   - -> Decrementar Blanco" << endl;
 	cout << " ESC -> Salir" << endl;
-	
 
 	// VARIABLES
 	bool program_running = true;
 	SDL_Event sdl_event;
 
-	float clear_color_red = 0.3f;
-	float clear_color_green = 0.3f;
-	float clear_color_blue = 0.3f;
+	color clear_color = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
-	// WINDOW
-	SDL_Window* window = SDL_CreateWindow(
-		"Pr1-Ej1",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		SCR_WIDTH, SCR_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN
-	);
-	if (window == NULL) {
-		cerr << "[Video Error]: " << SDL_GetError() << endl;
-		SDL_Quit();
-		exit(1);
-	}
-	SDL_GLContext context = SDL_GL_CreateContext(window);
-	if (window == NULL) {
-		cerr << "[GL Context Error]: " << SDL_GetError() << endl;
-		SDL_Quit();
-		exit(1);
-	}
+	// INITIALIZE WINDOW
+	SDL_Window* window;
+	SDL_GLContext context;
+	tie(window, context) = InitializeSDL("Pr2-Ej1", SCR_WIDTH, SCR_HEIGHT);
 
 	glMatrixMode(GL_PROJECTION);
-	glClearColor(clear_color_red, clear_color_green, clear_color_blue, 1);
+	glClearColor(clear_color.red, clear_color.green, clear_color.blue, clear_color.alpha);
 
 	// RENDER LOOP
 	do {
-		glClearColor(clear_color_red, clear_color_green, clear_color_blue, 1);
+		glClearColor(clear_color.red, clear_color.green, clear_color.blue, clear_color.alpha);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// RENDER
@@ -84,25 +49,25 @@ int pr1_ej1() {
 					program_running = false;
 					break;
 				case SDLK_r:
-					clear_color_red = min(clear_color_red + 0.1f, 1.0f);
+					clear_color.red = min(clear_color.red + 0.1f, 1.0f);
 					break;
 				case SDLK_g:
-					clear_color_green = min(clear_color_green + 0.1f, 1.0f);
+					clear_color.green = min(clear_color.green + 0.1f, 1.0f);
 					break;
 				case SDLK_b:
-					clear_color_blue = min(clear_color_blue + 0.1f, 1.0f);
+					clear_color.blue = min(clear_color.blue + 0.1f, 1.0f);
 					break;
 				case SDLK_PLUS:
 				case SDL_NUMERIC_PLUS:
-					clear_color_red = min(clear_color_red + 0.1f, 1.0f);
-					clear_color_green = min(clear_color_green + 0.1f, 1.0f);
-					clear_color_blue = min(clear_color_blue + 0.1f, 1.0f);
+					clear_color.red = min(clear_color.red + 0.1f, 1.0f);
+					clear_color.green = min(clear_color.green + 0.1f, 1.0f);
+					clear_color.blue = min(clear_color.blue + 0.1f, 1.0f);
 					break;
 				case SDLK_MINUS:
 				case SDL_NUMERIC_MINUS:
-					clear_color_red = max(clear_color_red - 0.1f, 0.0f);
-					clear_color_green = max(clear_color_green - 0.1f, 0.0f);
-					clear_color_blue = max(clear_color_blue - 0.1f, 0.0f);
+					clear_color.red = max(clear_color.red - 0.1f, 0.0f);
+					clear_color.green = max(clear_color.green - 0.1f, 0.0f);
+					clear_color.blue = max(clear_color.blue - 0.1f, 0.0f);
 					break;
 				}
 			}

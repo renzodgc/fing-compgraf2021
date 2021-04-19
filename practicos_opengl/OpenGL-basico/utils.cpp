@@ -59,6 +59,21 @@ GLuint LoadTexture(string texture_file) {
 	return texture;
 }
 
+tuple<vector<char>, vector<vector<float>>> LoadTrianglePolygonFile(string texture_file) {
+	ifstream file_stream(texture_file);
+	vector<char> commands;
+	vector<vector<float>> data;
+
+	char command;
+	float x, y, z;
+
+	while (file_stream >> command >> x >> y >> z) {
+		commands.push_back(command);
+		data.push_back({ x, y, z });
+	}
+	return { commands, data };
+}
+
 void DrawTriangle(triangle triangle) {
 	glBegin(GL_TRIANGLES);
 		glColor3f(triangle.color.red, triangle.color.green, triangle.color.blue);
@@ -106,4 +121,22 @@ void DrawTexturedSquare(GLuint texture, textured_square square) {
 	glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+}
+
+void DrawMultipleTriangles(vector<char> commands, vector<vector<float>> data) {
+	glBegin(GL_TRIANGLES);
+	for (size_t i = 0; i < commands.size(); i++) {
+		switch (commands[i]) {
+			case('C'): {
+				glColor3f(data[i][0], data[i][1], data[i][2]);
+				break;
+			}
+			case('V'): {
+				glVertex3f(data[i][0], data[i][1], data[i][2]);
+				break;
+			}
+		}
+	}
+	glEnd();
+	glPopMatrix();
 }

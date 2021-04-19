@@ -14,6 +14,8 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -23,6 +25,8 @@ void ToggleFullscreen(SDL_Window* Window);
 
 GLuint LoadTexture(string texture_file);
 
+tuple<vector<char>, vector<vector<float>>> LoadTrianglePolygonFile(string texture_file);
+
 void DrawTriangle(triangle triangle);
 
 void DrawMulticoloredTriangle(multicolored_triangle triangle);
@@ -30,5 +34,7 @@ void DrawMulticoloredTriangle(multicolored_triangle triangle);
 void DrawSquare(square square);
 
 void DrawTexturedSquare(GLuint texture, textured_square square);
+
+void DrawMultipleTriangles(vector<char> commands, vector<vector<float>> data);
 
 #endif

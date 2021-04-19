@@ -44,7 +44,7 @@ int pr2_ej1() {
 		// RENDERa
 		current_t = chrono::high_resolution_clock::now();
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
-		rotation_angle += 360 * ANGULAR_SPEED * delta_time.count();
+		rotation_angle += (float) (360 * ANGULAR_SPEED * delta_time.count());
 		previous_t = chrono::high_resolution_clock::now();
 		glTranslatef(0.0, 0.0, -6.);
 		glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);

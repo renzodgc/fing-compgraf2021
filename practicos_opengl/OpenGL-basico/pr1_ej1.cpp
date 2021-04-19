@@ -70,6 +70,7 @@ int pr1_ej1() {
 					clear_color.blue = max(clear_color.blue - 0.1f, 0.0f);
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

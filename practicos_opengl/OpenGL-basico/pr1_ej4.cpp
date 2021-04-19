@@ -14,9 +14,6 @@ int pr1_ej4() {
 
 	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
-	multicolored_triangle multi_tri;
-	square sq;
-	textured_square tex_sq;
 
 	bool translate = false;
 	bool texture_on = true;
@@ -52,56 +49,50 @@ int pr1_ej4() {
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				RED, BLUE, GREEN,
 				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
 			glTranslatef(3, 0., 0.);
 
 			if (texture_on) {
 				glScalef(scaleRectX * scale, scaleRectY * scale, 0.0);
-				tex_sq = {
+				DrawTexturedSquare(texture, {
 					WHITE,
 					{0.095703125f, 0.486328125f}, {-1., -1., 0.}, // Bottom Left
 					{0.978515625f, 0.486328125f}, {1., -1., 0.}, // Bottom Right
 					{0.978515625f, 0.900390625f}, {1., 1., 0.}, // Top Right
 					{0.095703125f, 0.900390625f}, {-1., 1., 0.} // Top Right
-				};
-				DrawTexturedSquare(texture, tex_sq);
+				});
 			}
 			else {
-				sq = {
+				DrawSquare({
 					CYAN,
 					{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
-				};
-				DrawSquare(sq);
+				});
 			}
 		}
 		else {
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				CYAN, MAGENTA, YELLOW,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
 			if (texture_on) {
-				tex_sq = {
+				DrawTexturedSquare(texture, {
 					WHITE,
 					{0., 0.}, {0.5, -1., -6.}, // Bottom Left
 					{1., 0.}, {2.5, -1., -6.}, // Bottom Right
 					{1., 1.}, {2.5, 1., -6.}, // Top Right
 					{0., 1.}, {0.5, 1., -6.} // Top Right
-				};
-				DrawTexturedSquare(texture, tex_sq);
+				});
 			}
 			else {
-				sq = {
+				DrawSquare({
 					WHITE,
 					{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
-				};
-				DrawSquare(sq);
+				});
 			}
 		}
 
@@ -133,6 +124,7 @@ int pr1_ej4() {
 					scale -= 0.1f;
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

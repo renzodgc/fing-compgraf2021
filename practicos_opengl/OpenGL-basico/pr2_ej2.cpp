@@ -80,6 +80,7 @@ int pr2_ej2() {
 					tie(commands, data) = LoadTrianglePolygonFile(POLYGON_FILE);
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

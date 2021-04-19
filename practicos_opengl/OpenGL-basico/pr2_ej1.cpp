@@ -56,11 +56,10 @@ int pr2_ej1() {
 
 			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				RED, BLUE, GREEN,
 				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
 			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 
@@ -68,11 +67,10 @@ int pr2_ej1() {
 
 			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 		
-			sq = {
+			DrawSquare({
 				CYAN,
 				{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
-			};
-			DrawSquare(sq);
+			});
 
 			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 		}
@@ -81,11 +79,10 @@ int pr2_ej1() {
 			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			glTranslatef(1.5, 0., 6.);
 			
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				CYAN, MAGENTA, YELLOW,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
 			glTranslatef(-1.5, 0., -6.);
 			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
@@ -95,11 +92,10 @@ int pr2_ej1() {
 			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			glTranslatef(-1.5, 0., 6.);
 
-			sq = {
+			DrawSquare({
 				WHITE,
 				{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
-			};
-			DrawSquare(sq);
+			});
 
 			glTranslatef(1.5, 0.0, -6.0);
 			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
@@ -125,6 +121,7 @@ int pr2_ej1() {
 					ToggleFullscreen(window);
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

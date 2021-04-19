@@ -13,8 +13,6 @@ int pr1_ej3() {
 
 	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
-	multicolored_triangle multi_tri;
-	square sq;
 
 	bool translate = false;
 
@@ -42,32 +40,28 @@ int pr1_ej3() {
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				RED, BLUE, GREEN,
 				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
 			glTranslatef(3, 0., 0.);
 
-			sq = {
+			DrawSquare({
 				CYAN,
 				{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
-			};
-			DrawSquare(sq);
+			});
 		}
 		else {
-			multi_tri = {
+			DrawMulticoloredTriangle({
 				CYAN, MAGENTA, YELLOW,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
-			};
-			DrawMulticoloredTriangle(multi_tri);
+			});
 
-			sq = {
+			DrawSquare({
 				WHITE,
 				{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
-			};
-			DrawSquare(sq);
+			});
 		}
 
 
@@ -89,6 +83,7 @@ int pr1_ej3() {
 					ToggleFullscreen(window);
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

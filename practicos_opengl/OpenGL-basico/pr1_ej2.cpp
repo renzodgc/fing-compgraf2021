@@ -13,8 +13,6 @@ int pr1_ej2() {
 
 	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
-	triangle tri;
-	square sq;
 
 	bool translate = false;
 
@@ -43,32 +41,28 @@ int pr1_ej2() {
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			tri = {
+			DrawTriangle({
 				WHITE,
 				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
-			};
-			DrawTriangle(tri);
+			});
 
 			glTranslatef(3, 0., 0.);
 
-			sq = {
+			DrawSquare({
 				WHITE,
 				{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
-			};
-			DrawSquare(sq);
+			});
 		}
 		else {
-			tri = {
+			DrawTriangle({
 				WHITE,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
-			};
-			DrawTriangle(tri);
+			});
 
-			sq = {
+			DrawSquare({
 				WHITE,
 				{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
-			};
-			DrawSquare(sq);
+			});
 		}
 
 
@@ -87,6 +81,7 @@ int pr1_ej2() {
 					program_running = false;
 					break;
 				}
+				break;
 			}
 		}
 		SDL_GL_SwapWindow(window);

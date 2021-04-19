@@ -1,5 +1,6 @@
 #include "exercises.h"
 
+const double ANGULAR_SPEED = 0.2; // Hz (1 turn / 5 seconds)
 
 int pr2_ej1() {
 	// DOCUMENTATION
@@ -17,7 +18,9 @@ int pr2_ej1() {
 	square sq;
 	
 	bool translate = false;
-	float rotation = 0.0f;
+	float rotation_angle = 0.f;
+	chrono::duration<double> delta_time;
+	chrono::high_resolution_clock::time_point current_t, previous_t;
 
 	// INITIALIZE WINDOW
 	SDL_Window* window;
@@ -31,23 +34,27 @@ int pr2_ej1() {
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_MODELVIEW);
 
+	previous_t = chrono::high_resolution_clock::now();
 	// RENDER LOOP
 	do {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		gluLookAt(camera_eye.x, camera_eye.y, camera_eye.z, 0, 0, 0, 0, 1, 0);
 
-		// RENDER
-		rotation += 0.5f;
+		// RENDERa
+		current_t = chrono::high_resolution_clock::now();
+		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
+		rotation_angle += 360 * ANGULAR_SPEED * delta_time.count();
+		previous_t = chrono::high_resolution_clock::now();
 		glTranslatef(0.0, 0.0, -6.);
-		glRotatef(rotation, 0.0f, 1.0f, 0.0f);
+		glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 		glTranslatef(0.0, 0., 6.);
 
 		// Linear Transformation
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			glRotatef(rotation, 0.0f, 1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			
 			multi_tri = {
 				RED, BLUE, GREEN,
@@ -55,11 +62,11 @@ int pr2_ej1() {
 			};
 			DrawMulticoloredTriangle(multi_tri);
 
-			glRotatef(rotation, 0.0f, -1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 
 			glTranslatef(3, 0., 0.);
 
-			glRotatef(rotation, 0.0f, 1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 		
 			sq = {
 				CYAN,
@@ -67,11 +74,11 @@ int pr2_ej1() {
 			};
 			DrawSquare(sq);
 
-			glRotatef(rotation, 0.0f, -1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 		}
 		else {
 			glTranslatef(-1.5, 0., -6.);
-			glRotatef(rotation, 0.0f, 1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			glTranslatef(1.5, 0., 6.);
 			
 			multi_tri = {
@@ -81,11 +88,11 @@ int pr2_ej1() {
 			DrawMulticoloredTriangle(multi_tri);
 
 			glTranslatef(-1.5, 0., -6.);
-			glRotatef(rotation, 0.0f, -1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 			glTranslatef(1.5, 0., 6.);
 
 			glTranslatef(1.5, 0.0, -6.0);
-			glRotatef(rotation, 0.0f, 1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 			glTranslatef(-1.5, 0., 6.);
 
 			sq = {
@@ -95,7 +102,7 @@ int pr2_ej1() {
 			DrawSquare(sq);
 
 			glTranslatef(1.5, 0.0, -6.0);
-			glRotatef(rotation, 0.0f, -1.0f, 0.0f);
+			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 			glTranslatef(-1.5, 0., 6.);
 		}
 

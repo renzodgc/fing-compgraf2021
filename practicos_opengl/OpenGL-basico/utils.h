@@ -11,6 +11,9 @@
 #include <conio.h>
 #include <GL/glu.h>
 #include <tuple>
+#include <ctime>
+#include <ratio>
+#include <chrono>
 
 using namespace std;
 

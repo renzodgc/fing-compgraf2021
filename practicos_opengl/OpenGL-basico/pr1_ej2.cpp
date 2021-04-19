@@ -12,7 +12,7 @@ int pr1_ej2() {
 	SDL_Event sdl_event;
 
 	color clear_color = BLACK;
-	position camera_eye = { 0.f, 0.f, 7.f }; // XYZ
+	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
 	triangle tri;
 	square sq;
 

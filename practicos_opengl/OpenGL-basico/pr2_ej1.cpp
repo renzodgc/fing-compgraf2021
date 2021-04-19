@@ -13,7 +13,7 @@ int pr2_ej1() {
 	SDL_Event sdl_event;
 
 	color clear_color = { 0.f, 0.f, 0.f, 1.f }; // RGBA
-	position camera_eye = { 0.f, 0.f, 7.f }; // XYZ
+	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
 	multicolored_triangle multi_tri;
 	square sq;
 	

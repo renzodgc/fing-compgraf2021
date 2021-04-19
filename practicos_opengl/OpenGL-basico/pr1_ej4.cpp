@@ -12,7 +12,7 @@ int pr1_ej4() {
 	bool program_running = true;
 	SDL_Event sdl_event;
 
-	color clear_color = { 0.f, 0.f, 0.f, 1.f }; // RGBA
+	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
 	multicolored_triangle multi_tri;
 	square sq;

@@ -35,6 +35,6 @@ void DrawSquare(square square);
 
 void DrawTexturedSquare(GLuint texture, textured_square square);
 
-void DrawMultipleTriangles(vector<char> commands, vector<vector<float>> data);
+void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
 
 #endif

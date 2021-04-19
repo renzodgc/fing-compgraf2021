@@ -5,14 +5,14 @@ const double ANGULAR_SPEED = 0.2; // Hz (1 turn / 5 seconds)
 int pr2_ej1() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
-	cout << " ESC		  -> Salir" << endl;
+	cout << " ESC         -> Salir" << endl;
 	cout << " MOUSE CLICK -> Static/Translation Render" << endl;
 
 	// VARIABLES
 	bool program_running = true;
 	SDL_Event sdl_event;
 
-	color clear_color = { 0.f, 0.f, 0.f, 1.f }; // RGBA
+	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
 	multicolored_triangle multi_tri;
 	square sq;

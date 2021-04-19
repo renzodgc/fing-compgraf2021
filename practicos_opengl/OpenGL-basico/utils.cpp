@@ -123,8 +123,8 @@ void DrawTexturedSquare(GLuint texture, textured_square square) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void DrawMultipleTriangles(vector<char> commands, vector<vector<float>> data) {
-	glBegin(GL_TRIANGLES);
+void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
+	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {
 		switch (commands[i]) {
 			case('C'): {
@@ -133,6 +133,10 @@ void DrawMultipleTriangles(vector<char> commands, vector<vector<float>> data) {
 			}
 			case('V'): {
 				glVertex3f(data[i][0], data[i][1], data[i][2]);
+				break;
+			}
+			case('N'): {
+				glNormal3f(data[i][0], data[i][1], data[i][2]);
 				break;
 			}
 		}

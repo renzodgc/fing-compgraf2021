@@ -4,7 +4,7 @@
 int pr1_ej2() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
-	cout << " ESC		  -> Salir" << endl;
+	cout << " ESC         -> Salir" << endl;
 	cout << " MOUSE CLICK -> Static/Translation Render" << endl;
 
 	// VARIABLES

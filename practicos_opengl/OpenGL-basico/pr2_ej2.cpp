@@ -6,7 +6,7 @@ const string POLYGON_FILE = "../practicos/pr2/polygons.txt";
 int pr2_ej2() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
-	cout << " ESC		  -> Salir" << endl;
+	cout << " ESC         -> Salir" << endl;
 	cout << " MOUSE CLICK -> Static/Translation Render" << endl;
 	cout << " ESPACIO     -> Recargar datos" << endl;
 
@@ -14,7 +14,7 @@ int pr2_ej2() {
 	bool program_running = true;
 	SDL_Event sdl_event;
 
-	color clear_color = { 0.f, 0.f, 0.f, 1.f }; // RGBA
+	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
 
 	float rotation_angle = 0.f;
@@ -54,9 +54,10 @@ int pr2_ej2() {
 		
 		// Linear Transformation
 		glTranslatef(0.0, 0.0, -6.);
+
 		glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
 		
-		DrawMultipleTriangles(commands, data);
+		DrawMultiplePoints(GL_TRIANGLES, commands, data);
 
 		// INPUT EVENT HANDLING
 		while (SDL_PollEvent(&sdl_event)) {

@@ -7,7 +7,6 @@ int pr2_ej3() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << " ESC         -> Salir" << endl;
-	cout << " MOUSE CLICK -> Static/Translation Render" << endl;
 	cout << " ESPACIO     -> Recargar datos" << endl;
 
 	// VARIABLES

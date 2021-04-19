@@ -8,7 +8,6 @@ tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_wid
 		cerr << "[Error]: No se pudo iniciar SDL: " << SDL_GetError() << endl;
 		exit(1);
 	}
-
 	SDL_Window* window = SDL_CreateWindow(
 		program_name.c_str(),
 		SDL_WINDOWPOS_CENTERED,
@@ -81,7 +80,6 @@ void DrawTriangle(triangle triangle) {
 		glVertex3f(triangle.b.x, triangle.b.y, triangle.b.z);
 		glVertex3f(triangle.c.x, triangle.c.y, triangle.c.z);
 	glEnd();
-	glPopMatrix();
 }
 
 void DrawMulticoloredTriangle(multicolored_triangle triangle) {
@@ -95,7 +93,6 @@ void DrawMulticoloredTriangle(multicolored_triangle triangle) {
 		glVertex3f(triangle.c.x, triangle.c.y, triangle.c.z);
 	}
 	glEnd();
-	glPopMatrix();
 }
 
 void DrawSquare(square square) {
@@ -106,7 +103,6 @@ void DrawSquare(square square) {
 		glVertex3f(square.c.x, square.c.y, square.c.z);
 		glVertex3f(square.d.x, square.d.y, square.d.z);
 	glEnd();
-	glPopMatrix();
 }
 
 void DrawTexturedSquare(GLuint texture, textured_square square) {
@@ -119,7 +115,6 @@ void DrawTexturedSquare(GLuint texture, textured_square square) {
 		glTexCoord2f(square.tex_c.x, square.tex_c.y); glVertex3f(square.c.x, square.c.y, square.c.z);
 		glTexCoord2f(square.tex_d.x, square.tex_d.y); glVertex3f(square.d.x, square.d.y, square.d.z);
 	glEnd();
-	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }
 
@@ -142,5 +137,4 @@ void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<f
 		}
 	}
 	glEnd();
-	glPopMatrix();
 }

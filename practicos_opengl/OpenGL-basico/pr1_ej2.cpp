@@ -49,13 +49,13 @@ int pr1_ej2() {
 			glTranslatef(3, 0., 0.);
 
 			DrawSquare({
-				WHITE,
+				BLUE,
 				{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
 			});
 		}
 		else {
 			DrawTriangle({
-				WHITE,
+				BLUE,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
 			});
 

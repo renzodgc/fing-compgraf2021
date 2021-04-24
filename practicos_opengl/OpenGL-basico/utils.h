@@ -16,6 +16,7 @@
 #include <chrono>
 #include <vector>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 
@@ -36,5 +37,11 @@ void DrawSquare(square square);
 void DrawTexturedSquare(GLuint texture, textured_square square);
 
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
+
+position normalize_vector(position pos);
+
+position cross_product_vector(position a, position b);
+
+float degree_to_radian(float degree);
 
 #endif

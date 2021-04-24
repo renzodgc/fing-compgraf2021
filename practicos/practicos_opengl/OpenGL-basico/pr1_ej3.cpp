@@ -1,8 +1,7 @@
 #include "exercises.h"
 
-const double ANGULAR_SPEED = 0.2; // Hz (1 turn / 5 seconds)
 
-int pr2_ej1() {
+int pr1_ej3() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << " ESC         -> Salir" << endl;
@@ -14,13 +13,8 @@ int pr2_ej1() {
 
 	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 0.5f }; // XYZ
-	multicolored_triangle multi_tri;
-	square sq;
-	
+
 	bool translate = false;
-	float rotation_angle = 0.f;
-	chrono::duration<double> delta_time;
-	chrono::high_resolution_clock::time_point current_t, previous_t;
 
 	// INITIALIZE WINDOW
 	SDL_Window* window;
@@ -34,72 +28,40 @@ int pr2_ej1() {
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_MODELVIEW);
 
-	previous_t = chrono::high_resolution_clock::now();
 	// RENDER LOOP
 	do {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		gluLookAt(camera_eye.x, camera_eye.y, camera_eye.z, 0, 0, 0, 0, 1, 0);
 
-		// RENDERa
-		current_t = chrono::high_resolution_clock::now();
-		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
-		rotation_angle += (float) (360 * ANGULAR_SPEED * delta_time.count());
-		previous_t = chrono::high_resolution_clock::now();
-		glTranslatef(0.0, 0.0, -6.);
-		glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
-		glTranslatef(0.0, 0., 6.);
+		// RENDER
 
 		// Linear Transformation
 		if (translate) {
 			glTranslatef(-1.5, 0., -6.);
 
-			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
-			
 			DrawMulticoloredTriangle({
 				RED, BLUE, GREEN,
 				{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.}
 			});
 
-			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
-
 			glTranslatef(3, 0., 0.);
 
-			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
-		
 			DrawSquare({
 				CYAN,
 				{-1., -1., 0.}, {1., -1., 0.}, {1., 1., 0.}, {-1., 1., 0.}
 			});
-
-			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
 		}
 		else {
-			glTranslatef(-1.5, 0., -6.);
-			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
-			glTranslatef(1.5, 0., 6.);
-			
 			DrawMulticoloredTriangle({
 				CYAN, MAGENTA, YELLOW,
 				{-1.5, 1., -6.}, {-2.5, -1., -6.}, {-0.5, -1., -6.}
 			});
 
-			glTranslatef(-1.5, 0., -6.);
-			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
-			glTranslatef(1.5, 0., 6.);
-
-			glTranslatef(1.5, 0.0, -6.0);
-			glRotatef(rotation_angle, 0.0f, 1.0f, 0.0f);
-			glTranslatef(-1.5, 0., 6.);
-
 			DrawSquare({
 				WHITE,
 				{0.5, -1., -6.}, {2.5, -1., -6.}, {2.5, 1., -6.}, {0.5, 1., -6.}
 			});
-
-			glTranslatef(1.5, 0.0, -6.0);
-			glRotatef(rotation_angle, 0.0f, -1.0f, 0.0f);
-			glTranslatef(-1.5, 0., 6.);
 		}
 
 

@@ -1,6 +1,6 @@
 #include "exercises.h"
 
-const double MOVEMENT_CAMERA_SPEED = 0.01f;
+const double MOVEMENT_CAMERA_SPEED = 0.005f;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 // Reference: https://learnopengl.com/Getting-started/Camera
@@ -14,7 +14,7 @@ int pr3_ej1() {
 	// VARIABLES
 	bool program_running = true;
 	SDL_Event sdl_event;
-	const Uint8 *keyboard_state;
+	const Uint8* keyboard_state;
 
 	color clear_color = BLACK;
 	position camera_eye = { 0.f, 0.f, 1.f }; // Specifies the position of the eye point.
@@ -28,14 +28,13 @@ int pr3_ej1() {
 	float camera_speed;
 	float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 	float pitch = 0.0f;
-	float last_mouse_x = (float)(SCR_WIDTH / 2.0f);
-	float last_mouse_y = (float)(SCR_HEIGHT / 2.0f);
-	float mouse_x, mouse_y, mouse_offset_x, mouse_offset_y;
+	float mouse_offset_x, mouse_offset_y;
 
 	// INITIALIZE WINDOW
 	SDL_Window* window;
 	SDL_GLContext context;
 	tie(window, context) = InitializeSDL("Pr3-Ej1", SCR_WIDTH, SCR_HEIGHT);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	glMatrixMode(GL_PROJECTION);
 	glClearColor(clear_color.red, clear_color.green, clear_color.blue, clear_color.alpha);
@@ -54,6 +53,40 @@ int pr3_ej1() {
 		{0.f, -1.0f, -1.0f}, {0.f, -1.0f, 1.0f}, {0.f, 1.0f, 1.0f}, {0.f, 1.0f, -1.0f},
 		{0.f, 0.f, 1.f, 1.f},
 		{-1.0f, 0.f, -1.0f}, {1.0f, 0.f, -1.0f}, {1.0f, 0.f, 1.0f}, {-1.0f, 0.f, 1.0f}
+	};
+
+	vector<char> commands_triangle_row = { 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V' };
+	vector<vector<float>> data_triangle_row = {
+		{0., 1., 0.}, {-1., -1., 0.}, {1., -1., 0.},
+		{0., 3., 0.}, {-1., 1., 0.}, {1., 1., 0.},
+		{0., 5., 0.}, {-1., 3., 0.}, {1., 3., 0.},
+		{0., 7., 0.}, {-1., 5., 0.}, {1., 5., 0.},
+		{0., 9., 0.}, {-1., 7., 0.}, {1., 7., 0.},
+		{0., 11., 0.}, {-1., 9., 0.}, {1., 9., 0.}
+	};
+
+	vector<vector<float>> translate_triangle_rows = {
+		{1., 0., 0.},
+		{2., 0., 0.},
+		{3., 0., 0.},
+		{0., 0., 1.},
+		{0., 0., 2.},
+		{0., 0., 3.},
+		{1., 0., 1.},
+		{2., 0., 2.},
+		{3., 0., 3.},
+	};
+
+	vector<vector<float>> color_triangle_rows = {
+		{1., 1., 0.},
+		{1., 0., 1.},
+		{0., 1., 1.},
+		{1., 0., 1.},
+		{1., 0., 1.},
+		{0., 1., 1.},
+		{1., 0., 1.},
+		{1., 0., 1.},
+		{0., 1., 1.}
 	};
 
 	previous_t = chrono::high_resolution_clock::now();
@@ -92,13 +125,8 @@ int pr3_ej1() {
 				}
 				break;
 			case SDL_MOUSEMOTION:
-				mouse_x = sdl_event.motion.x;
-				mouse_y = sdl_event.motion.y;
-
-				mouse_offset_x = MOUSE_SENSITIVITY * (mouse_x - last_mouse_x);
-				mouse_offset_y = MOUSE_SENSITIVITY * (last_mouse_y - mouse_y); // reversed since y-coordinates go from bottom to top
-				last_mouse_x = mouse_x;
-				last_mouse_y = mouse_y;
+				mouse_offset_x = MOUSE_SENSITIVITY * (sdl_event.motion.xrel);
+				mouse_offset_y = MOUSE_SENSITIVITY * (-sdl_event.motion.yrel); // reversed since y-coordinates go from bottom to top
 
 				yaw += mouse_offset_x;
 				pitch += mouse_offset_y;
@@ -114,8 +142,6 @@ int pr3_ej1() {
 					sin(degree_to_radian(pitch)),
 					sin(degree_to_radian(yaw)) * cos(degree_to_radian(pitch))
 				});
-
-				cout << mouse_x << "." << mouse_y << endl;
 				break;
 			}
 			// Keys pressed
@@ -152,8 +178,27 @@ int pr3_ej1() {
 
 		DrawMultiplePoints(GL_QUADS, commands_reference, data_reference);
 
+		// Ref: http://www.songho.ca/opengl/gl_displaylist.html
+		// Create a display list
+		GLuint display_list = glGenLists(1);
+
+		// Compile the display list, store a triangle in it
+		glNewList(display_list, GL_COMPILE);
+			DrawMultiplePoints(GL_TRIANGLES, commands_triangle_row, data_triangle_row);
+		glEndList();
+		
+		// Draw the display list N times
+		for (size_t i = 0; i < translate_triangle_rows.size(); i++) {
+			glPushMatrix();
+			glTranslatef(translate_triangle_rows[i][0], translate_triangle_rows[i][1], translate_triangle_rows[i][2]);
+			glColor3f(color_triangle_rows[i][0], color_triangle_rows[i][1], color_triangle_rows[i][2]);
+			glCallList(display_list);
+			glPopMatrix();
+		}
 		glPopMatrix();
 
+		// Delete it if it is not used any more
+		glDeleteLists(display_list, 1);
 
 		
 		SDL_GL_SwapWindow(window);

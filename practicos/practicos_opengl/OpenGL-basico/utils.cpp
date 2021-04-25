@@ -134,10 +134,6 @@ void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<f
 				glNormal3f(data[i][0], data[i][1], data[i][2]);
 				break;
 			}
-			case('A'): {
-				glColor4f(data[i][0], data[i][1], data[i][2], data[i][3]);
-				break;
-			}
 		}
 	}
 	glEnd();

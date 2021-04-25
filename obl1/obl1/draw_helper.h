@@ -1,6 +1,9 @@
 #pragma once
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef DRAW_HELPER_H
+#define DRAW_HELPER_H
+
+// DEPENDENCIES
+// -----------------------------------------------------------------------------------
 
 #include "models.h"
 #include "SDL.h"
@@ -17,15 +20,12 @@
 #include <vector>
 #include <fstream>
 
+// NAMESPACE
+// -----------------------------------------------------------------------------------
 using namespace std;
 
-tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_width, int scr_height);
-
-void ToggleFullscreen(SDL_Window* Window);
-
-GLuint LoadTexture(string texture_file);
-
-tuple<vector<char>, vector<vector<float>>> LoadTrianglePolygonFile(string texture_file);
+// HEADERS
+// -----------------------------------------------------------------------------------
 
 void DrawTriangle(triangle triangle);
 

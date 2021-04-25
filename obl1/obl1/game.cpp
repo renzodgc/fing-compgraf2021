@@ -1,10 +1,7 @@
-#include "exercises.h"
+#include "headers.h"
 
+int game() {
 
-#define SDL_NUMERIC_MINUS 1073741910
-#define SDL_NUMERIC_PLUS 1073741911
-
-int pr1_ej1() {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << "   R -> Incrementar Rojo" << endl;
@@ -58,13 +55,11 @@ int pr1_ej1() {
 					clear_color.blue = min(clear_color.blue + 0.1f, 1.0f);
 					break;
 				case SDLK_PLUS:
-				case SDL_NUMERIC_PLUS:
 					clear_color.red = min(clear_color.red + 0.1f, 1.0f);
 					clear_color.green = min(clear_color.green + 0.1f, 1.0f);
 					clear_color.blue = min(clear_color.blue + 0.1f, 1.0f);
 					break;
 				case SDLK_MINUS:
-				case SDL_NUMERIC_MINUS:
 					clear_color.red = max(clear_color.red - 0.1f, 0.0f);
 					clear_color.green = max(clear_color.green - 0.1f, 0.0f);
 					clear_color.blue = max(clear_color.blue - 0.1f, 0.0f);

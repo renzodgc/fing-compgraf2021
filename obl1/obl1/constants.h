@@ -5,8 +5,8 @@
 #include "models.h"
 
 // SETTINGS
-const unsigned int SCR_WIDTH = 640;
-const unsigned int SCR_HEIGHT = 480;
+const unsigned int SCR_WIDTH = 1024;
+const unsigned int SCR_HEIGHT = 768;
 
 // COLORS
 const color BLACK = { 0.f, 0.f, 0.f, 1.f }; // RGBA

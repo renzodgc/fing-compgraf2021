@@ -13,56 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\extras">
+      <UniqueIdentifier>{beb320ee-29d8-4069-ac2f-8be722c5192b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\helpers">
+      <UniqueIdentifier>{ac0ef2ff-65ce-41a6-9593-ba64f450085e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\helpers">
+      <UniqueIdentifier>{d9e15f4b-ca32-43c9-86d6-bc69abdd5cd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pr1_ej1.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\extras</Filter>
     </ClCompile>
-    <ClCompile Include="pr1_ej2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="file_helper.cpp">
+      <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="pr1_ej3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="window_helper.cpp">
+      <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="pr1_ej4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="opengl_basico.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr2_ej1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr2_ej2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr2_ej3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr2_ej4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr3_ej1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr3_ej2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pr3_ej3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="draw_helper.cpp">
+      <Filter>Source Files\helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="exercises.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="models.h">
@@ -70,6 +49,15 @@
     </ClInclude>
     <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_helper.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="window_helper.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_helper.h">
+      <Filter>Header Files\helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

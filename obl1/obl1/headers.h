@@ -10,6 +10,8 @@
 #include "draw_helper.h"
 #include "file_helper.h"
 #include "window_helper.h"
+#include "math_helper.h"
+#include "camera_helper.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DRAW_HELPER_H
-#define DRAW_HELPER_H
+#ifndef MATH_HELPER_H
+#define MATH_HELPER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
@@ -18,6 +18,7 @@
 #include <ratio>
 #include <chrono>
 #include <vector>
+#include <math.h>
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -26,14 +27,10 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-void DrawTriangle(triangle triangle);
+position normalize_vector(position pos);
 
-void DrawMulticoloredTriangle(multicolored_triangle triangle);
+position cross_product_vector(position a, position b);
 
-void DrawSquare(square square);
-
-void DrawTexturedSquare(GLuint texture, textured_square square);
-
-void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
+float degree_to_radian(float degree);
 
 #endif

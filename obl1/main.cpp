@@ -1,6 +1,4 @@
 #include "obl1/headers.h"
-#include <iostream>
-#include <stdio.h>
 
 using namespace std;
 

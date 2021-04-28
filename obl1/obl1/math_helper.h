@@ -1,16 +1,14 @@
 #pragma once
-#ifndef WINDOW_HELPER_H
-#define WINDOW_HELPER_H
+#ifndef MATH_HELPER_H
+#define MATH_HELPER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
 #include <iostream>
-#include <tuple>
+#include <math.h>
 
-#include "SDL.h"
-#include "SDL_opengl.h"
-#include <GL/glu.h>
+#include "models.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -19,8 +17,10 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_width, int scr_height);
+position normalize_vector(position pos);
 
-void ToggleFullscreen(SDL_Window* Window);
+position cross_product_vector(position a, position b);
+
+float degree_to_radian(float degree);
 
 #endif

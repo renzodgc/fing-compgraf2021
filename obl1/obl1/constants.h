@@ -18,4 +18,8 @@ const color CYAN = { 0.f, 1.f, 1.f, 1.f }; // RGBA
 const color MAGENTA = { 1.f, 0.f, 1.f, 1.f }; // RGBA
 const color YELLOW = { 1.f, 1.f, 0.f, 1.f }; // RGBA
 
+// CAMERA
+const double MOVEMENT_CAMERA_SPEED = 0.005;
+const float MOUSE_SENSITIVITY = 0.1f;
+
 #endif

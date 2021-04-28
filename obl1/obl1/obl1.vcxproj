@@ -81,16 +81,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="camera_helper.cpp" />
     <ClCompile Include="draw_helper.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="window_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera_helper.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="draw_helper.h" />
     <ClInclude Include="file_helper.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="math_helper.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="window_helper.h" />
   </ItemGroup>

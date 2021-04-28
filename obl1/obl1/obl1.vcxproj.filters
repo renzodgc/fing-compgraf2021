@@ -39,6 +39,12 @@
     <ClCompile Include="draw_helper.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
+    <ClCompile Include="math_helper.cpp">
+      <Filter>Source Files\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_helper.cpp">
+      <Filter>Source Files\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.h">
@@ -57,6 +63,12 @@
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
     <ClInclude Include="draw_helper.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="math_helper.h">
+      <Filter>Header Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="camera_helper.h">
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
   </ItemGroup>

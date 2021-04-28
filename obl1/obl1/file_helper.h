@@ -5,20 +5,15 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
-#include "models.h"
+#include <iostream>
+#include <fstream>
+#include <tuple>
+#include <vector>
+
 #include "SDL.h"
 #include "SDL_opengl.h"
-#include <iostream>
 #include "FreeImage.h"
-#include <stdio.h>
-#include <conio.h>
 #include <GL/glu.h>
-#include <tuple>
-#include <ctime>
-#include <ratio>
-#include <chrono>
-#include <vector>
-#include <fstream>
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

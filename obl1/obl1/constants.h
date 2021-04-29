@@ -2,7 +2,10 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <vector>
 #include "models.h"
+
+using namespace std;
 
 // SETTINGS
 const unsigned int SCR_WIDTH = 1024;
@@ -17,9 +20,44 @@ const color GREEN = { 0.f, 0.f, 1.f, 1.f }; // RGBA
 const color CYAN = { 0.f, 1.f, 1.f, 1.f }; // RGBA
 const color MAGENTA = { 1.f, 0.f, 1.f, 1.f }; // RGBA
 const color YELLOW = { 1.f, 1.f, 0.f, 1.f }; // RGBA
+const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
 // CAMERA
 const double MOVEMENT_CAMERA_SPEED = 0.005;
 const float MOUSE_SENSITIVITY = 0.1f;
+
+// MODELS
+const vector<char> COMMANDS_REFERENCE_OBJECT = { 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V' , 'V' , 'V' };
+const vector<vector<float>> DATA_REFERENCE_OBJECT = {
+	{1.f, 0.f, 0.f, 1.f},
+	{-1.0f, -1.0f, 0.f}, {1.0f, -1.0f, 0.f}, {1.0f, 1.0f, 0.f}, {-1.0f, 1.0f, 0.f},
+	{0.f, 1.f, 0.f, 1.f},
+	{0.f, -1.0f, -1.0f}, {0.f, -1.0f, 1.0f}, {0.f, 1.0f, 1.0f}, {0.f, 1.0f, -1.0f},
+	{0.f, 0.f, 1.f, 1.f},
+	{-1.0f, 0.f, -1.0f}, {1.0f, 0.f, -1.0f}, {1.0f, 0.f, 1.0f}, {-1.0f, 0.f, 1.0f}
+};
+
+const vector<char> COMMANDS_CUBE_OBJECT = {
+		'C', 'V', 'V', 'V', 'V',
+		'C', 'V', 'V', 'V', 'V',
+		'C', 'V', 'V', 'V', 'V',
+		'C', 'V', 'V', 'V', 'V',
+		'C', 'V', 'V', 'V', 'V',
+		'C', 'V', 'V', 'V', 'V'
+};
+const vector<vector<float>> DATA_CUBE_OBJECT = {
+	{1.f, 0.f, 0.f, 1.f},
+	{-1.0f, -1.0f, 1.f}, {1.0f, -1.0f, 1.f}, {1.0f, 1.0f, 1.f}, {-1.0f, 1.0f, 1.f},
+	{1.f, 1.f, 0.f, 1.f},
+	{-1.f, -1.0f, -1.0f}, {-1.f, 1.0f, -1.0f},  {1.f, 1.0f, -1.0f},  {1.f, -1.0f, -1.0f},
+	{0.f, 1.f, 0.f, 1.f},
+	{-1.f, 1.0f, -1.0f}, {-1.f, 1.0f, 1.0f},  {1.f, 1.0f, 1.0f},  {1.f, 1.0f, -1.0f},
+	{0.f, 1.f, 1.f, 1.f},
+	{-1.f, -1.0f, -1.0f}, {1.f, -1.0f, -1.0f},  {1.f, -1.0f, 1.0f},  {-1.f, -1.0f, 1.0f},
+	{0.f, 0.f, 1.f, 1.f},
+	{1.f, -1.0f, -1.0f}, {1.f, 1.0f, -1.0f},  {1.f, 1.0f, 1.0f},  {1.f, -1.0f, 1.0f},
+	{1.f, 0.f, 1.f, 1.f},
+	{-1.f, -1.0f, -1.0f}, {-1.f, -1.0f, 1.0f},  {-1.f, 1.0f, 1.0f},  {-1.f, 1.0f, -1.0f}
+};
 
 #endif

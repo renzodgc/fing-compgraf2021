@@ -78,3 +78,13 @@ void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<f
 	}
 	glEnd();
 }
+
+void DrawCube() {
+
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
+}
+
+void DrawReferenceObject() {
+
+	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
+}

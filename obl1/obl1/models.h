@@ -2,6 +2,8 @@
 #ifndef MODELS_H
 #define MODELS_H
 
+enum class CameraType { isometric, third_person, free_view };
+
 struct color {
 	float red;
 	float blue;
@@ -18,6 +20,14 @@ struct position {
 struct position2d {
 	float x;
 	float y;
+};
+
+struct camera {
+	position camera_eye;   // Specifies the position of the eye point.
+	position camera_front; // Specifies the position of the reference point.
+	position camera_up;    // Specifies the direction of the up vector.
+	float yaw;
+	float pitch;
 };
 
 struct triangle {

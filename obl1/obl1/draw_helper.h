@@ -12,6 +12,7 @@
 #include "SDL_opengl.h"
 #include <GL/glu.h>
 
+#include "constants.h"
 #include "models.h"
 
 // NAMESPACE
@@ -30,5 +31,9 @@ void DrawSquare(square square);
 void DrawTexturedSquare(GLuint texture, textured_square square);
 
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
+
+void DrawCube();
+
+void DrawReferenceObject();
 
 #endif

@@ -36,7 +36,7 @@ tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_wid
 
 void ToggleFullscreen(SDL_Window* Window) {
 	Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-	bool IsFullscreen = SDL_GetWindowFlags(Window) & FullscreenFlag;
+	bool IsFullscreen = SDL_GetWindowFlags(Window)& FullscreenFlag;
 	SDL_SetWindowFullscreen(Window, IsFullscreen ? 0 : FullscreenFlag);
 	SDL_ShowCursor(IsFullscreen);
 }

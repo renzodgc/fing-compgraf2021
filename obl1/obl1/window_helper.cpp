@@ -31,6 +31,7 @@ tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_wid
 		SDL_Quit();
 		exit(1);
 	}
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return { window, context };
 }
 

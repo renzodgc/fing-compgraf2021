@@ -22,6 +22,12 @@
     <Filter Include="Header Files\helpers">
       <UniqueIdentifier>{d9e15f4b-ca32-43c9-86d6-bc69abdd5cd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\managers">
+      <UniqueIdentifier>{972e4bcf-054a-4729-80f2-bf04ed2e387e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{2c2b8434-22ec-474a-81ed-464bba36ab46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -42,8 +48,8 @@
     <ClCompile Include="math_helper.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="camera_helper.cpp">
-      <Filter>Source Files\helpers</Filter>
+    <ClCompile Include="camera_manager.cpp">
+      <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +74,8 @@
     <ClInclude Include="math_helper.h">
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="camera_helper.h">
-      <Filter>Header Files\helpers</Filter>
+    <ClInclude Include="camera_manager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

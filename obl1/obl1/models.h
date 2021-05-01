@@ -22,14 +22,6 @@ struct position2d {
 	float y;
 };
 
-struct camera {
-	position camera_eye;   // Specifies the position of the eye point.
-	position camera_front; // Specifies the position of the reference point.
-	position camera_up;    // Specifies the direction of the up vector.
-	float yaw;
-	float pitch;
-};
-
 struct triangle {
 	color color;
 	position a;

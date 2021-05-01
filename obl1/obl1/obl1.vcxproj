@@ -81,7 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="camera_helper.cpp" />
+    <ClCompile Include="camera_manager.cpp" />
     <ClCompile Include="draw_helper.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="game.cpp" />
@@ -89,7 +89,7 @@
     <ClCompile Include="window_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera_helper.h" />
+    <ClInclude Include="camera_manager.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="draw_helper.h" />
     <ClInclude Include="file_helper.h" />

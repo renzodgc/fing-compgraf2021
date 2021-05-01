@@ -23,7 +23,7 @@ const color YELLOW = { 1.f, 1.f, 0.f, 1.f }; // RGBA
 const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
 // CAMERA
-const double MOVEMENT_CAMERA_SPEED = 0.005;
+const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 // MODELS

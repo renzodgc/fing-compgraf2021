@@ -17,11 +17,13 @@
 #include "models.h"
 
 // Helpers
-#include "camera_helper.h"
 #include "draw_helper.h"
 #include "file_helper.h"
 #include "math_helper.h"
 #include "window_helper.h"
+
+// Managers
+#include "camera_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

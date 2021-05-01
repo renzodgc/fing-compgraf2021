@@ -24,6 +24,7 @@
 
 // Managers
 #include "camera_manager.h"
+#include "player_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

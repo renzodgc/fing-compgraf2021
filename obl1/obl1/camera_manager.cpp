@@ -11,13 +11,17 @@ using namespace std;
 
 // GENERIC
 
-void Camera::update_position(position player_position, double elapsed_time, const Uint8* keyboard_state) {
+Camera::Camera(Player * player_model) {
+	player = player_model;
+}
+
+void Camera::update_position(double elapsed_time, const Uint8* keyboard_state) {
 	switch (selected_camera) {
 	case CameraType::isometric:
-		isometric_camera_update_position(player_position);
+		isometric_camera_update_position();
 		break;
 	case CameraType::third_person:
-		third_person_camera_update_position(player_position);
+		third_person_camera_update_position();
 		break;
 	case CameraType::free_view:
 		free_view_camera_update_position(elapsed_time, keyboard_state);
@@ -40,6 +44,8 @@ void Camera::update_angle(float mouse_offset_x, float mouse_offset_y) {
 }
 
 void Camera::call_look_at() {
+	float rel_cam_to_head_height = 4.f;
+	float cam_dist = 4.f;
 	switch (selected_camera) {
 	case CameraType::isometric:
 		gluLookAt(
@@ -49,11 +55,13 @@ void Camera::call_look_at() {
 		);
 		break;
 	case CameraType::third_person:
+		glPushMatrix();
 		gluLookAt(
 			camera_eye.x, camera_eye.y, camera_eye.z,
-			camera_eye.x + camera_front.x, camera_eye.y + camera_front.y, camera_eye.z + camera_front.z,
+			camera_front.x, camera_front.y, camera_front.z,
 			camera_up.x, camera_up.y, camera_up.z
 		);
+		glPopMatrix();
 		break;
 	case CameraType::free_view:
 		gluLookAt(
@@ -69,7 +77,7 @@ void Camera::call_look_at() {
 
 // Reference: https://stackoverflow.com/questions/1059200/true-isometric-projection-with-opengl
 // Read reference for 2d view
-void Camera::start_isometric_view(position player_position) {
+void Camera::start_isometric_view() {
 	float distance = (float)sqrt(1 / 3.0);
 	double scale = 10.;
 
@@ -84,6 +92,7 @@ void Camera::start_isometric_view(position player_position) {
 	glLoadIdentity(); // Reset the view
 
 	glClearColor(LIGHT_GREY.red, LIGHT_GREY.green, LIGHT_GREY.blue, LIGHT_GREY.alpha);
+
 	glOrtho(-scale, scale, -scale * 0.7, scale * 0.7, -scale, scale);
 
 	glMatrixMode(GL_MODELVIEW);
@@ -93,16 +102,28 @@ void Camera::start_isometric_view(position player_position) {
 	glRotatef(-45.0f, 0.0f, 1.0f, 0.0f);
 }
 
-void Camera::isometric_camera_update_position(position player_position) {};
+void Camera::isometric_camera_update_position() {
+	//camera_eye = { player_position.x + 1.f, player_position.y + 1.f, player_position.z + 1.f };
+};
 
 // THIRD PERSON CAMERA
-void Camera::start_third_person_view(position player_position) {
+void Camera::start_third_person_view() {
 	selected_camera = CameraType::third_person;
 	camera_eye = { 0.f, 0.f, 1.f };
 	camera_front = { 0.f, 0.f, -1.f };
 	camera_up = { 0.f, 1.f, 0.f };
 	yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-	pitch = 0.0f;
+	pitch = 20.0f;
+
+	third_person_angle_around_player = 0.f;
+	third_person_distance_from_player = 50.f;
+	
+	third_person_horizontal_distance_from_player = third_person_distance_from_player * cos(degree_to_radian(pitch));
+	third_person_vertical_distance_from_player = third_person_distance_from_player * sin(degree_to_radian(pitch));
+
+	third_person_angle = third_person_angle_around_player; // + Player.getRotY();
+	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
+	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(yaw));
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); // Reset the view
@@ -115,12 +136,43 @@ void Camera::start_third_person_view(position player_position) {
 	glLoadIdentity(); // Reset the view
 }
 
-void Camera::third_person_camera_update_position(position player_position) {};
+void Camera::third_person_camera_update_position() {
+	position player_position = player->get_player_position();
+	camera_eye = {
+		player_position.x + third_person_offset_x,
+		player_position.y + third_person_vertical_distance_from_player,
+		player_position.z + third_person_offset_z + 20.f
+	};
 
-void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_offset_y) {};
+	camera_front = player_position;
+};
+
+void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_offset_y) {
+	yaw += mouse_offset_x;
+	pitch += mouse_offset_y;
+
+	// make sure that when pitch is out of bounds, screen doesn't get flipped
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	third_person_horizontal_distance_from_player = third_person_distance_from_player * cos(degree_to_radian(pitch));
+	third_person_vertical_distance_from_player = third_person_distance_from_player * sin(degree_to_radian(pitch));
+
+	third_person_angle = third_person_angle_around_player; // + Player.getRotY();
+	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
+	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(yaw));
+
+	camera_front = normalize_vector({
+		cos(degree_to_radian(yaw)) * cos(degree_to_radian(pitch)),
+		sin(degree_to_radian(pitch)),
+		sin(degree_to_radian(yaw)) * cos(degree_to_radian(pitch))
+	});
+};
 
 // FREE CAMERA
-void Camera::start_free_view(position player_position) {
+void Camera::start_free_view() {
 	selected_camera = CameraType::free_view;
 	camera_eye = { 0.f, 0.f, 1.f };
 	camera_front = { 0.f, 0.f, -1.f };

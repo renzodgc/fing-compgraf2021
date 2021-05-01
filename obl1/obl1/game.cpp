@@ -1,5 +1,7 @@
 #include "headers.h"
 
+double MOVEMENT_RATE = 0.5;
+
 int game() {
 
 	// DOCUMENTATION
@@ -10,6 +12,7 @@ int game() {
 	// VARIABLES
 	bool program_running = true;
 	// We need an enum or something of what actions the player can take (and were taken) in order to pass them to update_player
+	bool player_moving = true;
 
 	SDL_Event sdl_event;
 	const Uint8* keyboard_state;
@@ -17,8 +20,9 @@ int game() {
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
-	position player_position = { 3.f, 0.f, 3.f };
-	Camera camera = Camera();
+	position player_position;
+	Player player = Player({ 3.f, 0.f, 3.f });
+	Camera camera = Camera(&player);
 	float mouse_offset_x, mouse_offset_y;
 
 	// INITIALIZE WINDOW
@@ -27,7 +31,7 @@ int game() {
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
 	// RENDER LOOP
-	camera.start_free_view(player_position);
+	camera.start_isometric_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -53,14 +57,17 @@ int game() {
 				case SDLK_F11:
 					ToggleFullscreen(window);
 					break;
+				case SDLK_p:
+					player_moving = !player_moving;
+					break;
 				case SDLK_i:
-					camera.start_isometric_view(player_position);
+					camera.start_isometric_view();
 					break;
 				case SDLK_t:
-					camera.start_third_person_view(player_position);
+					camera.start_third_person_view();
 					break;
 				case SDLK_f:
-					camera.start_free_view(player_position);
+					camera.start_free_view();
 					break;
 				}
 				break;
@@ -76,8 +83,13 @@ int game() {
 		// UPDATE OBJECTS
 
 		// Player.update(action)
+		if(player_moving) {
+			player_position = player.get_player_position();
+			player_position.x += (float)(MOVEMENT_RATE * elapsed_time);
+			player.set_player_position(player_position);
+		}
 
-		camera.update_position(player_position, elapsed_time, keyboard_state);
+		camera.update_position(elapsed_time, keyboard_state);
 
 		// destroy old lanes, create new ones
 		// for lane in lanes: update()
@@ -89,7 +101,9 @@ int game() {
 
 		DrawReferenceObject();
 
+		player_position = player.get_player_position();
 		glTranslatef(player_position.x, player_position.y, player_position.z);
+
 		DrawCube();
 
 		glPopMatrix();

@@ -193,23 +193,23 @@ void Camera::start_free_view() {
 
 void Camera::free_view_camera_update_position(double elapsed_time, const Uint8* keyboard_state) {
 	float camera_speed = (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
-	if (keyboard_state[SDL_SCANCODE_UP] || keyboard_state[SDL_SCANCODE_W]) {
+	if (keyboard_state[SDL_SCANCODE_W]) {
 		camera_eye.x += camera_speed * camera_front.x;
 		camera_eye.y += camera_speed * camera_front.y;
 		camera_eye.z += camera_speed * camera_front.z;
 	}
-	if (keyboard_state[SDL_SCANCODE_RIGHT] || keyboard_state[SDL_SCANCODE_D]) {
+	if (keyboard_state[SDL_SCANCODE_D]) {
 		position normalized_front_up = normalize_vector(cross_product_vector(camera_front, camera_up));
 		camera_eye.x += camera_speed * normalized_front_up.x;
 		camera_eye.y += camera_speed * normalized_front_up.y;
 		camera_eye.z += camera_speed * normalized_front_up.z;
 	}
-	if (keyboard_state[SDL_SCANCODE_DOWN] || keyboard_state[SDL_SCANCODE_S]) {
+	if (keyboard_state[SDL_SCANCODE_S]) {
 		camera_eye.x -= camera_speed * camera_front.x;
 		camera_eye.y -= camera_speed * camera_front.y;
 		camera_eye.z -= camera_speed * camera_front.z;
 	}
-	if (keyboard_state[SDL_SCANCODE_LEFT] || keyboard_state[SDL_SCANCODE_A]) {
+	if (keyboard_state[SDL_SCANCODE_A]) {
 		position normalized_front_up = normalize_vector(cross_product_vector(camera_front, camera_up));
 		camera_eye.x -= camera_speed * normalized_front_up.x;
 		camera_eye.y -= camera_speed * normalized_front_up.y;

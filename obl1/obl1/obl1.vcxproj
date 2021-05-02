@@ -82,23 +82,27 @@
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="camera_manager.cpp" />
-    <ClCompile Include="draw_helper.cpp" />
+    <ClCompile Include="draw_manager.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="lane_model.cpp" />
     <ClCompile Include="math_helper.cpp" />
-    <ClCompile Include="player_manager.cpp" />
-    <ClCompile Include="window_helper.cpp" />
+    <ClCompile Include="player_model.cpp" />
+    <ClCompile Include="ui_manager.cpp" />
+    <ClCompile Include="window_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera_manager.h" />
     <ClInclude Include="constants.h" />
-    <ClInclude Include="draw_helper.h" />
+    <ClInclude Include="draw_manager.h" />
     <ClInclude Include="file_helper.h" />
-    <ClInclude Include="player_manager.h" />
+    <ClInclude Include="lane_model.h" />
+    <ClInclude Include="player_model.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="models.h" />
-    <ClInclude Include="window_helper.h" />
+    <ClInclude Include="ui_manager.h" />
+    <ClInclude Include="window_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

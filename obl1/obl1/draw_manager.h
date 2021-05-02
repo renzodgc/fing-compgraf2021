@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DRAW_HELPER_H
-#define DRAW_HELPER_H
+#ifndef DRAW_MANAGER_H
+#define DRAW_MANAGER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
@@ -21,12 +21,6 @@ using namespace std;
 
 // HEADERS
 // -----------------------------------------------------------------------------------
-
-void DrawTriangle(triangle triangle);
-
-void DrawMulticoloredTriangle(multicolored_triangle triangle);
-
-void DrawSquare(square square);
 
 void DrawTexturedSquare(GLuint texture, textured_square square);
 

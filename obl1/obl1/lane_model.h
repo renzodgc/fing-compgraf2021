@@ -1,6 +1,6 @@
 #pragma once
-#ifndef PLAYER_MANAGER_H
-#define PLAYER_MANAGER_H
+#ifndef LANE_MODEL_H
+#define LANE_MODEL_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
@@ -18,15 +18,15 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 
-class Player {
+class Lane {
 private:
-    position player_position;
+    position lane_position;
 public:
-    Player() {};
-    Player(position starting_position);
+    Lane() {};
+    Lane(position pos);
 
-    position get_player_position();
-    void set_player_position(position new_position);
+    position get_lane_position();
+    void set_lane_position(position pos);
 };
 
 #endif

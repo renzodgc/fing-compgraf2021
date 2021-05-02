@@ -55,13 +55,11 @@ void Camera::call_look_at() {
 		);
 		break;
 	case CameraType::third_person:
-		glPushMatrix();
 		gluLookAt(
 			camera_eye.x, camera_eye.y, camera_eye.z,
 			camera_front.x, camera_front.y, camera_front.z,
 			camera_up.x, camera_up.y, camera_up.z
 		);
-		glPopMatrix();
 		break;
 	case CameraType::free_view:
 		gluLookAt(
@@ -85,8 +83,8 @@ void Camera::start_isometric_view() {
 	camera_eye = { 1.f, 1.f, 1.f };
 	camera_front = { 0.f, 0.f, 0.f };
 	camera_up = { 0.f, 1.f, 0.f };
-	yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-	pitch = 0.0f;
+	//yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
+	//pitch = 0.0f;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); // Reset the view
@@ -103,7 +101,9 @@ void Camera::start_isometric_view() {
 }
 
 void Camera::isometric_camera_update_position() {
-	//camera_eye = { player_position.x + 1.f, player_position.y + 1.f, player_position.z + 1.f };
+	position player_position = player->get_player_position();
+	camera_eye = { player_position.x + 1.f, player_position.y + 1.f, player_position.z + 1.f };
+	camera_front = { player_position.x, player_position.y, player_position.z };
 };
 
 // THIRD PERSON CAMERA

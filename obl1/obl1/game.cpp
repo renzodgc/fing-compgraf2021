@@ -6,11 +6,25 @@ int game() {
 
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
-	cout << " FLECHAS/WASD -> Mover Camara" << endl;
-	cout << " ESC          -> Salir" << endl;
+	cout << " FLECHAS  -> Mover Personaje" << endl;
+	cout << " WASD     -> Mover Camara" << endl;
+	cout << " MOUSE    -> Rotar Camara" << endl;
+	cout << " I        -> Vista Isometrica" << endl;
+	cout << " T        -> Vista Tercera Persona" << endl;
+	cout << " F        -> Vista Libre" << endl;
+	cout << " P        -> Pausa" << endl;
+	cout << " F11      -> Pantalla Completa" << endl;
+	cout << " F1       -> Toggle Wireframe On/Off" << endl;
+	cout << " F2       -> Toggle Texturas On/Off" << endl;
+	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminación, si liso o interpolado (flag de luz)
+	cout << " Q/ESC    -> Salir" << endl;
 
 	// VARIABLES
 	bool program_running = true;
+	bool paused = false;
+	bool wireframe = false;
+	bool textures = false;
+	bool interpolated_lightning = false;
 	// We need an enum or something of what actions the player can take (and were taken) in order to pass them to update_player
 	bool player_moving = true;
 
@@ -34,6 +48,8 @@ int game() {
 	camera.start_isometric_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
+		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
@@ -52,12 +68,11 @@ int game() {
 				// cout << sdl_event.key.keysym.sym << endl;
 				switch (sdl_event.key.keysym.sym) {
 				case SDLK_ESCAPE:
+				case SDLK_q:
 					program_running = false;
 					break;
-				case SDLK_F11:
-					ToggleFullscreen(window);
-					break;
 				case SDLK_p:
+					paused = !paused;
 					player_moving = !player_moving;
 					break;
 				case SDLK_i:
@@ -68,6 +83,18 @@ int game() {
 					break;
 				case SDLK_f:
 					camera.start_free_view();
+					break;
+				case SDLK_F1:
+					wireframe = !wireframe;
+					break;
+				case SDLK_F2:
+					textures = !textures;
+					break;
+				case SDLK_F3:
+					interpolated_lightning = !interpolated_lightning;
+					break;
+				case SDLK_F11:
+					ToggleFullscreen(window);
 					break;
 				}
 				break;

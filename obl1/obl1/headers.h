@@ -14,17 +14,22 @@
 
 // Generic
 #include "constants.h"
-#include "models.h"
 
 // Helpers
-#include "draw_helper.h"
 #include "file_helper.h"
 #include "math_helper.h"
-#include "window_helper.h"
+
+// Models
+#include "models.h"
+
+#include "lane_model.h"
+#include "player_model.h"
 
 // Managers
 #include "camera_manager.h"
-#include "player_manager.h"
+#include "draw_manager.h"
+#include "ui_manager.h"
+#include "window_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

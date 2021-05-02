@@ -14,7 +14,7 @@
 #include "models.h"
 #include "constants.h"
 #include "math_helper.h"
-#include "player_manager.h"
+#include "player_model.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

@@ -59,6 +59,8 @@ int game() {
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
 		elapsed_time = delta_time.count();
 
+		
+
 		while (SDL_PollEvent(&sdl_event)) {
 			switch (sdl_event.type) {
 			case SDL_QUIT:
@@ -100,8 +102,12 @@ int game() {
 				case SDLK_F11:
 					ToggleFullscreen(window);
 					break;
-				}
-				break;
+				case SDLK_LEFT:
+					player.move_left();
+					break;
+				case SDLK_RIGHT:
+					player.move_right();
+					break;
 			case SDL_MOUSEMOTION:
 				mouse_offset_x = MOUSE_SENSITIVITY * (sdl_event.motion.xrel);
 				mouse_offset_y = MOUSE_SENSITIVITY * (-sdl_event.motion.yrel); // reversed since y-coordinates go from bottom to top
@@ -117,11 +123,12 @@ int game() {
 		// UPDATE OBJECTS
 
 		// Player.update(action)
-		if(player_moving) {
+		/*if(player_moving) {
 			player_position = player.get_player_position();
 			player_position.x += (float)(MOVEMENT_RATE * elapsed_time);
 			player.set_player_position(player_position);
-		}
+		}*/
+		player.update(elapsed_time);
 
 		camera.update_position(elapsed_time, keyboard_state);
 

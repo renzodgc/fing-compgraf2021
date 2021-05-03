@@ -108,6 +108,8 @@ int game() {
 				case SDLK_RIGHT:
 					player.move_right();
 					break;
+				}
+				break;
 			case SDL_MOUSEMOTION:
 				mouse_offset_x = MOUSE_SENSITIVITY * (sdl_event.motion.xrel);
 				mouse_offset_y = MOUSE_SENSITIVITY * (-sdl_event.motion.yrel); // reversed since y-coordinates go from bottom to top

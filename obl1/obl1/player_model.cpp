@@ -12,9 +12,6 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-// CONSTANTS
-enum class PlayerIs { idle, moving_left, moving_right, moving_down, moving_up };
-
 // GENERIC
 
 Player::Player(position starting_position) {
@@ -68,8 +65,6 @@ void Player::update(double elapsed_time) {
 		if (player_position.x - before_movement.x <= -1) {
 			player_state = PlayerIs::idle;
 		}
-		break;
-	default:
 		break;
 	}
 }

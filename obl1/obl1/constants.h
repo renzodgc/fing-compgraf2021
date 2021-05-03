@@ -15,6 +15,9 @@ const unsigned int SCR_HEIGHT = 768;
 const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
+// PLAYER
+const double PLAYER_SPEED = 1.5;
+
 
 // COLORS
 const color BLACK = { 0.f, 0.f, 0.f, 1.f }; // RGBA
@@ -31,13 +34,14 @@ const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
 // Reference object
 const vector<char> COMMANDS_REFERENCE_OBJECT = { 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V' , 'V' , 'V' };
+
 const vector<vector<float>> DATA_REFERENCE_OBJECT = {
 	{1.f, 0.f, 0.f, 1.f},
-	{-1.0f, -1.0f, 0.f}, {1.0f, -1.0f, 0.f}, {1.0f, 1.0f, 0.f}, {-1.0f, 1.0f, 0.f},
+	{-0.5f, -0.5f, 0.f}, {0.5f, -0.5f, 0.f}, {0.5f, 0.5f, 0.f}, {-0.5f, 0.5f, 0.f},
 	{0.f, 1.f, 0.f, 1.f},
-	{0.f, -1.0f, -1.0f}, {0.f, -1.0f, 1.0f}, {0.f, 1.0f, 1.0f}, {0.f, 1.0f, -1.0f},
+	{0.f, -0.5f, -0.5f}, {0.f, -0.5f, 0.5f}, {0.f, 0.5f, 0.5f}, {0.f, 0.5f, -0.5f},
 	{0.f, 0.f, 1.f, 1.f},
-	{-1.0f, 0.f, -1.0f}, {1.0f, 0.f, -1.0f}, {1.0f, 0.f, 1.0f}, {-1.0f, 0.f, 1.0f}
+	{-0.5f, 0.f, -0.5f}, {0.5f, 0.f, -0.5f}, {0.5f, 0.f, 0.5f}, {-0.5f, 0.f, 0.5f}
 };
 
 // Cube
@@ -49,19 +53,20 @@ const vector<char> COMMANDS_CUBE_OBJECT = {
 		'C', 'V', 'V', 'V', 'V',
 		'C', 'V', 'V', 'V', 'V'
 };
+
 const vector<vector<float>> DATA_CUBE_OBJECT = {
 	{1.f, 0.f, 0.f, 1.f},
-	{-1.0f, -1.0f, 1.f}, {1.0f, -1.0f, 1.f}, {1.0f, 1.0f, 1.f}, {-1.0f, 1.0f, 1.f},
+	{-0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}, {-0.5f, 0.5f, 0.5f},
 	{1.f, 1.f, 0.f, 1.f},
-	{-1.f, -1.0f, -1.0f}, {-1.f, 1.0f, -1.0f},  {1.f, 1.0f, -1.0f},  {1.f, -1.0f, -1.0f},
+	{-0.5f, -0.5f, -0.5f}, {-0.5f, 0.5f, -0.5f},  {0.5f, 0.5f, -0.5f},  {0.5f, -0.5f, -0.5f},
 	{0.f, 1.f, 0.f, 1.f},
-	{-1.f, 1.0f, -1.0f}, {-1.f, 1.0f, 1.0f},  {1.f, 1.0f, 1.0f},  {1.f, 1.0f, -1.0f},
+	{-0.5f, 0.5f, -0.5f}, {-0.5f, 0.5f, 0.5f},  {0.5f, 0.5f, 0.5f},  {0.5f, 0.5f, -0.5f},
 	{0.f, 1.f, 1.f, 1.f},
-	{-1.f, -1.0f, -1.0f}, {1.f, -1.0f, -1.0f},  {1.f, -1.0f, 1.0f},  {-1.f, -1.0f, 1.0f},
+	{-0.5f, -0.5f, -0.5f}, {0.5f, -0.5f, -0.5f},  {0.5f, -0.5f, 0.5f},  {-0.5f, -0.5f, 0.5f},
 	{0.f, 0.f, 1.f, 1.f},
-	{1.f, -1.0f, -1.0f}, {1.f, 1.0f, -1.0f},  {1.f, 1.0f, 1.0f},  {1.f, -1.0f, 1.0f},
+	{0.5f, -0.5f, -0.5f}, {0.5f, 0.5f, -0.5f},  {0.5f, 0.5f, 0.5f},  {0.5f, -0.5f, 0.5f},
 	{1.f, 0.f, 1.f, 1.f},
-	{-1.f, -1.0f, -1.0f}, {-1.f, -1.0f, 1.0f},  {-1.f, 1.0f, 1.0f},  {-1.f, 1.0f, -1.0f}
+	{-0.5f, -0.5f, -0.5f}, {-0.5f, -0.5f, 0.5f},  {-0.5f, 0.5f, 0.5f},  {-0.5f, 0.5f, -0.5f}
 };
 
 #endif

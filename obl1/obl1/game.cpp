@@ -108,6 +108,12 @@ int game() {
 				case SDLK_RIGHT:
 					player.move_right();
 					break;
+				case SDLK_UP:
+					player.move_up();
+					break;
+				case SDLK_DOWN:
+					player.move_down();
+					break;
 				}
 				break;
 			case SDL_MOUSEMOTION:

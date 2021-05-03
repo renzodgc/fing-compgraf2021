@@ -50,19 +50,48 @@ void Player::move_left() {
 	}
 }
 
+void Player::move_up() {
+	if (player_state == PlayerIs::idle) {
+		player_state = PlayerIs::moving_up;
+		before_movement = player_position;
+	}
+}
+
+void Player::move_down() {
+	if (player_state == PlayerIs::idle) {
+		player_state = PlayerIs::moving_down;
+		before_movement = player_position;
+	}
+}
+
+
 void Player::update(double elapsed_time) {
 	switch (player_state) {
-	case PlayerIs::moving_left:
-		player_position.x += elapsed_time * MOVEMENT_CAMERA_SPEED;
+	case PlayerIs::moving_right:
+		player_position.x = min(before_movement.x + 1.0, player_position.x + elapsed_time * PLAYER_SPEED);
 		cout << player_position.x << endl;
 		if (player_position.x - before_movement.x >= 1) {
 			player_state = PlayerIs::idle;
 		}
 		break;
-	case PlayerIs::moving_right:
-		player_position.x -= elapsed_time * MOVEMENT_CAMERA_SPEED;
+	case PlayerIs::moving_left:
+		player_position.x = max(before_movement.x - 1.0, player_position.x - elapsed_time * PLAYER_SPEED);
 		cout << player_position.x << endl;
 		if (player_position.x - before_movement.x <= -1) {
+			player_state = PlayerIs::idle;
+		}
+		break;
+	case PlayerIs::moving_down:
+		player_position.z = min(before_movement.z + 1.0, player_position.z + elapsed_time * PLAYER_SPEED);
+		cout << player_position.z << endl;
+		if (player_position.z - before_movement.z >= 1) {
+			player_state = PlayerIs::idle;
+		}
+		break;
+	case PlayerIs::moving_up:
+		player_position.z = max(before_movement.z - 1.0, player_position.z - elapsed_time * PLAYER_SPEED);
+		cout << player_position.z << endl;
+		if (player_position.z - before_movement.z <= -1) {
 			player_state = PlayerIs::idle;
 		}
 		break;

@@ -121,7 +121,7 @@ void Camera::start_third_person_view() {
 	yaw = 0.0f;
 	pitch = 25.0f; // Side view angle
 	distance_from_player = 10.f; // Radius
-	third_person_angle_around_player = 0.f; // Top view angle
+	third_person_angle_around_player = 180.f; // Top view angle
 
 	third_person_camera_update_angle(0.f, 0.f);
 	

@@ -45,7 +45,7 @@ int game() {
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
 	// RENDER LOOP
-	camera.start_isometric_view();
+	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
 		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop

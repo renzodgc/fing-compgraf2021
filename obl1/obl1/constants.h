@@ -16,7 +16,7 @@ const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 // PLAYER
-const double PLAYER_SPEED = 1.5;
+const double PLAYER_SPEED = 2.0;
 
 
 // COLORS

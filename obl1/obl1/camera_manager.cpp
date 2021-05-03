@@ -43,12 +43,12 @@ void Camera::update_angle(float mouse_offset_x, float mouse_offset_y) {
 	}
 }
 
-void Camera::update_distance(Sint32 mouse_wheel_y) {
+void Camera::update_distance(double elapsed_time, Sint32 mouse_wheel_y) {
 	switch (selected_camera) {
 	case CameraType::isometric:
 		break;
 	case CameraType::third_person:
-		third_person_camera_update_distance(mouse_wheel_y);
+		third_person_camera_update_distance(elapsed_time, mouse_wheel_y);
 		break;
 	case CameraType::free_view:
 		break;
@@ -91,8 +91,6 @@ void Camera::start_isometric_view() {
 	camera_front = { 0.f, 0.f, 0.f };
 	camera_up = { 0.f, 1.f, 0.f };
 	distance_from_player = 10.f;
-	//yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-	//pitch = 0.0f;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); // Reset the view
@@ -120,19 +118,13 @@ void Camera::start_third_person_view() {
 	camera_eye = { 0.f, 0.f, 1.f };
 	camera_front = { 0.f, 0.f, -1.f };
 	camera_up = { 0.f, 1.f, 0.f };
-	yaw = 0.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-
-	pitch = 20.0f; // Side view angle
-	distance_from_player = 50.f; // Radius
+	yaw = 0.0f;
+	pitch = 25.0f; // Side view angle
+	distance_from_player = 20.f; // Radius
 	third_person_angle_around_player = 0.f; // Top view angle
+
+	third_person_camera_update_angle(0.f, 0.f);
 	
-	third_person_horizontal_distance_from_player = third_person_angle_around_player * cos(degree_to_radian(pitch));
-	third_person_vertical_distance_from_player = third_person_angle_around_player * sin(degree_to_radian(pitch));
-
-	third_person_angle = third_person_angle_around_player; // + player->get_player_angle();
-	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
-	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(yaw));
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); // Reset the view
 
@@ -147,17 +139,17 @@ void Camera::start_third_person_view() {
 void Camera::third_person_camera_update_position() {
 	position player_position = player->get_player_position();
 	camera_eye = {
-		player_position.x + third_person_offset_x,
+		player_position.x - third_person_offset_x,
 		player_position.y + third_person_vertical_distance_from_player,
-		player_position.z + third_person_offset_z + 20.f
+		player_position.z - third_person_offset_z
 	};
 
 	camera_front = player_position;
 };
 
 void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_offset_y) {
-	yaw += mouse_offset_x;
-	pitch += mouse_offset_y;
+	third_person_angle_around_player = fmod((third_person_angle_around_player - mouse_offset_x), 360.f);
+	pitch = max(0.f, pitch - mouse_offset_y);
 
 	// make sure that when pitch is out of bounds, screen doesn't get flipped
 	if (pitch > 89.0f)
@@ -168,9 +160,10 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 	third_person_horizontal_distance_from_player = distance_from_player * cos(degree_to_radian(pitch));
 	third_person_vertical_distance_from_player = distance_from_player * sin(degree_to_radian(pitch));
 
-	third_person_angle = third_person_angle_around_player; // + Player.getRotY();
-	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
-	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(yaw));
+	float third_person_angle = third_person_angle_around_player; // + Player.getRotY();
+	yaw = 180 - third_person_angle;
+	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(third_person_angle));
+	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(third_person_angle));
 
 	camera_front = normalize_vector({
 		cos(degree_to_radian(yaw)) * cos(degree_to_radian(pitch)),
@@ -179,8 +172,8 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 	});
 };
 
-void Camera::third_person_camera_update_distance(Sint32 mouse_wheel_offset_y) {
-	distance_from_player -= (float)(mouse_wheel_offset_y);
+void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mouse_wheel_offset_y) {
+	distance_from_player = max(4.f, (distance_from_player - (float)(75. * elapsed_time * mouse_wheel_offset_y)));
 }
 
 // FREE CAMERA

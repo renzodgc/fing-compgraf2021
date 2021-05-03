@@ -108,7 +108,7 @@ int game() {
 				camera.update_angle(mouse_offset_x, mouse_offset_y);
 				break;
 			case SDL_MOUSEWHEEL:
-				camera.update_distance(sdl_event.wheel.y);
+				camera.update_distance(elapsed_time, sdl_event.wheel.y);
 				break;
 			}
 		}
@@ -137,6 +137,15 @@ int game() {
 
 		player_position = player.get_player_position();
 		glTranslatef(player_position.x, player_position.y, player_position.z);
+
+		// Draw "floor" as reference
+		DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
+			{0.7f, 0.7f, 0.7f, 1.f},
+			{-500.f, -1.f, -500.f},
+			{-500.f, -1.f, 500.f},
+			{500.f, -1.f, 500.f},
+			{500.f, -1.f, -500.f}
+		});
 
 		DrawCube();
 

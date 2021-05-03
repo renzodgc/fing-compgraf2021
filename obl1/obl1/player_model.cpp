@@ -28,6 +28,6 @@ void Player::set_player_position(position new_position) {
 	player_position = new_position;
 }
 
-void Player::set_player_angle(position new_angle) {
+void Player::set_player_angle(float new_angle) {
 	player_angle = new_angle;
 }

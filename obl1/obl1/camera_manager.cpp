@@ -90,7 +90,7 @@ void Camera::start_isometric_view() {
 	camera_eye = { 1.f, 1.f, 1.f };
 	camera_front = { 0.f, 0.f, 0.f };
 	camera_up = { 0.f, 1.f, 0.f };
-	distance_from_player = 10.f;
+	distance_from_player = 8.f;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); // Reset the view
@@ -120,8 +120,8 @@ void Camera::start_third_person_view() {
 	camera_up = { 0.f, 1.f, 0.f };
 	yaw = 0.0f;
 	pitch = 25.0f; // Side view angle
-	distance_from_player = 20.f; // Radius
-	third_person_angle_around_player = 0.f; // Top view angle
+	distance_from_player = 10.f; // Radius
+	third_person_angle_around_player = 180.f; // Top view angle
 
 	third_person_camera_update_angle(0.f, 0.f);
 	
@@ -173,7 +173,7 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 };
 
 void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mouse_wheel_offset_y) {
-	distance_from_player = max(4.f, (distance_from_player - (float)(75. * elapsed_time * mouse_wheel_offset_y)));
+	distance_from_player = max(2.f, (distance_from_player - (float)(75. * elapsed_time * mouse_wheel_offset_y)));
 }
 
 // FREE CAMERA

@@ -45,7 +45,7 @@ int game() {
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
 	// RENDER LOOP
-	camera.start_isometric_view();
+	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
 		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
@@ -100,6 +100,18 @@ int game() {
 				case SDLK_F11:
 					ToggleFullscreen(window);
 					break;
+				case SDLK_LEFT:
+					player.move_left();
+					break;
+				case SDLK_RIGHT:
+					player.move_right();
+					break;
+				case SDLK_UP:
+					player.move_up();
+					break;
+				case SDLK_DOWN:
+					player.move_down();
+					break;
 				}
 				break;
 			case SDL_MOUSEMOTION:
@@ -116,13 +128,7 @@ int game() {
 
 		// UPDATE OBJECTS
 
-		// Player.update(action)
-		if(player_moving) {
-			player_position = player.get_player_position();
-			player_position.x += (float)(MOVEMENT_RATE * elapsed_time);
-			player.set_player_position(player_position);
-		}
-
+		player.update(elapsed_time);
 		camera.update_position(elapsed_time, keyboard_state);
 
 		// destroy old lanes, create new ones
@@ -135,9 +141,6 @@ int game() {
 
 		DrawReferenceObject();
 
-		player_position = player.get_player_position();
-		glTranslatef(player_position.x, player_position.y, player_position.z);
-
 		// Draw "floor" as reference
 		DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
 			{0.7f, 0.7f, 0.7f, 1.f},
@@ -147,7 +150,8 @@ int game() {
 			{500.f, -1.f, -500.f}
 		});
 
-		DrawCube();
+		// Draw player
+		player.draw();
 
 		glPopMatrix();
 

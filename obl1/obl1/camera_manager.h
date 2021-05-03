@@ -34,9 +34,10 @@ private:
     position camera_up;    // Specifies the direction of the up vector.
     float yaw;
     float pitch;
+    float distance_from_player;
 
     position camera_position;
-    float third_person_distance_from_player, third_person_angle_around_player;
+    float third_person_angle_around_player;
     float third_person_horizontal_distance_from_player, third_person_vertical_distance_from_player;
     float third_person_angle, third_person_offset_x, third_person_offset_z;
 
@@ -44,6 +45,7 @@ private:
 
     void third_person_camera_update_position();
     void third_person_camera_update_angle(float mouse_offset_x, float mouse_offset_y);
+    void third_person_camera_update_distance(Sint32 mouse_wheel_y);
 
     void free_view_camera_update_position(double elapsed_time, const Uint8* keyboard_state);
     void free_view_camera_update_angle(float mouse_offset_x, float mouse_offset_y);
@@ -57,6 +59,7 @@ public:
     void start_free_view();
     void update_position(double elapsed_time, const Uint8* keyboard_state);
     void update_angle(float mouse_offset_x, float mouse_offset_y);
+    void update_distance(Sint32 mouse_wheel_y);
     void call_look_at();
 };
 

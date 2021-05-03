@@ -107,6 +107,9 @@ int game() {
 				mouse_offset_y = MOUSE_SENSITIVITY * (-sdl_event.motion.yrel); // reversed since y-coordinates go from bottom to top
 				camera.update_angle(mouse_offset_x, mouse_offset_y);
 				break;
+			case SDL_MOUSEWHEEL:
+				camera.update_distance(sdl_event.wheel.y);
+				break;
 			}
 		}
 		keyboard_state = SDL_GetKeyboardState(NULL);

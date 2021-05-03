@@ -43,9 +43,19 @@ void Camera::update_angle(float mouse_offset_x, float mouse_offset_y) {
 	}
 }
 
+void Camera::update_distance(Sint32 mouse_wheel_y) {
+	switch (selected_camera) {
+	case CameraType::isometric:
+		break;
+	case CameraType::third_person:
+		third_person_camera_update_distance(mouse_wheel_y);
+		break;
+	case CameraType::free_view:
+		break;
+	}
+}
+
 void Camera::call_look_at() {
-	float rel_cam_to_head_height = 4.f;
-	float cam_dist = 4.f;
 	switch (selected_camera) {
 	case CameraType::isometric:
 		gluLookAt(
@@ -76,13 +86,11 @@ void Camera::call_look_at() {
 // Reference: https://stackoverflow.com/questions/1059200/true-isometric-projection-with-opengl
 // Read reference for 2d view
 void Camera::start_isometric_view() {
-	float distance = (float)sqrt(1 / 3.0);
-	double scale = 10.;
-
 	selected_camera = CameraType::isometric;
 	camera_eye = { 1.f, 1.f, 1.f };
 	camera_front = { 0.f, 0.f, 0.f };
 	camera_up = { 0.f, 1.f, 0.f };
+	distance_from_player = 10.f;
 	//yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 	//pitch = 0.0f;
 
@@ -91,7 +99,7 @@ void Camera::start_isometric_view() {
 
 	glClearColor(LIGHT_GREY.red, LIGHT_GREY.green, LIGHT_GREY.blue, LIGHT_GREY.alpha);
 
-	glOrtho(-scale, scale, -scale * 0.7, scale * 0.7, -scale, scale);
+	glOrtho(-distance_from_player, distance_from_player, -distance_from_player * 0.7, distance_from_player * 0.7, -distance_from_player, distance_from_player);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity(); // Reset the view
@@ -112,16 +120,16 @@ void Camera::start_third_person_view() {
 	camera_eye = { 0.f, 0.f, 1.f };
 	camera_front = { 0.f, 0.f, -1.f };
 	camera_up = { 0.f, 1.f, 0.f };
-	yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
-	pitch = 20.0f;
+	yaw = 0.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 
-	third_person_angle_around_player = 0.f;
-	third_person_distance_from_player = 50.f;
+	pitch = 20.0f; // Side view angle
+	distance_from_player = 50.f; // Radius
+	third_person_angle_around_player = 0.f; // Top view angle
 	
-	third_person_horizontal_distance_from_player = third_person_distance_from_player * cos(degree_to_radian(pitch));
-	third_person_vertical_distance_from_player = third_person_distance_from_player * sin(degree_to_radian(pitch));
+	third_person_horizontal_distance_from_player = third_person_angle_around_player * cos(degree_to_radian(pitch));
+	third_person_vertical_distance_from_player = third_person_angle_around_player * sin(degree_to_radian(pitch));
 
-	third_person_angle = third_person_angle_around_player; // + Player.getRotY();
+	third_person_angle = third_person_angle_around_player; // + player->get_player_angle();
 	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
 	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(yaw));
 
@@ -157,8 +165,8 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	third_person_horizontal_distance_from_player = third_person_distance_from_player * cos(degree_to_radian(pitch));
-	third_person_vertical_distance_from_player = third_person_distance_from_player * sin(degree_to_radian(pitch));
+	third_person_horizontal_distance_from_player = distance_from_player * cos(degree_to_radian(pitch));
+	third_person_vertical_distance_from_player = distance_from_player * sin(degree_to_radian(pitch));
 
 	third_person_angle = third_person_angle_around_player; // + Player.getRotY();
 	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(yaw));
@@ -170,6 +178,10 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 		sin(degree_to_radian(yaw)) * cos(degree_to_radian(pitch))
 	});
 };
+
+void Camera::third_person_camera_update_distance(Sint32 mouse_wheel_offset_y) {
+	distance_from_player -= (float)(mouse_wheel_offset_y);
+}
 
 // FREE CAMERA
 void Camera::start_free_view() {

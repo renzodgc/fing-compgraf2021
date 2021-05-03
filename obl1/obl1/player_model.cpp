@@ -1,9 +1,6 @@
 // HEADERS
 // -----------------------------------------------------------------------------------
 #include "player_model.h"
-#include <SDL_stdinc.h>
-#include <SDL_scancode.h>
-#include <SDL_keycode.h>
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -40,6 +37,7 @@ void Player::move_right() {
 	if (player_state == PlayerIs::idle) {
 		player_state = PlayerIs::moving_right;
 		before_movement = player_position;
+		player_angle = 270.f;
 	}
 }
 
@@ -47,6 +45,7 @@ void Player::move_left() {
 	if (player_state == PlayerIs::idle) {
 		player_state = PlayerIs::moving_left;
 		before_movement = player_position;
+		player_angle = 90.f;
 	}
 }
 
@@ -54,6 +53,7 @@ void Player::move_up() {
 	if (player_state == PlayerIs::idle) {
 		player_state = PlayerIs::moving_up;
 		before_movement = player_position;
+		player_angle = 0.f;
 	}
 }
 
@@ -61,6 +61,7 @@ void Player::move_down() {
 	if (player_state == PlayerIs::idle) {
 		player_state = PlayerIs::moving_down;
 		before_movement = player_position;
+		player_angle = 180.f;
 	}
 }
 
@@ -92,4 +93,15 @@ void Player::update(double elapsed_time) {
 		}
 		break;
 	}
+}
+
+void Player::draw() {
+	glPushMatrix();
+
+	glTranslatef(player_position.x, player_position.y, player_position.z);
+	glRotatef(player_angle, 0.f, 1.f, 0.f);
+
+	DrawCube();
+
+	glPopMatrix();
 }

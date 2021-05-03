@@ -86,6 +86,10 @@ int game() {
 					break;
 				case SDLK_F1:
 					wireframe = !wireframe;
+					if (wireframe)
+						glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+					else
+						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 					break;
 				case SDLK_F2:
 					textures = !textures;

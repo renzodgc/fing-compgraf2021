@@ -32,6 +32,7 @@ tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_wid
 		exit(1);
 	}
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	return { window, context };
 }
 

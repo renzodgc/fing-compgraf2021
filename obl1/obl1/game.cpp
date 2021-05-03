@@ -59,8 +59,6 @@ int game() {
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
 		elapsed_time = delta_time.count();
 
-		
-
 		while (SDL_PollEvent(&sdl_event)) {
 			switch (sdl_event.type) {
 			case SDL_QUIT:
@@ -130,14 +128,7 @@ int game() {
 
 		// UPDATE OBJECTS
 
-		// Player.update(action)
-		/*if(player_moving) {
-			player_position = player.get_player_position();
-			player_position.x += (float)(MOVEMENT_RATE * elapsed_time);
-			player.set_player_position(player_position);
-		}*/
 		player.update(elapsed_time);
-
 		camera.update_position(elapsed_time, keyboard_state);
 
 		// destroy old lanes, create new ones

@@ -77,6 +77,20 @@ void DrawHUDComponent(HUDComponent component) {
 	glDisable(GL_TEXTURE_2D);
 }
 
+void DrawLane(LaneIs laneType) {
+	switch (laneType) {
+	case LaneIs::grass:
+		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_GRASS_OBJECT);
+		break;
+	case LaneIs::street:
+		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		break;
+	default:
+		break;
+	}
+	
+}
+
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
 	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {

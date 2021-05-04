@@ -37,6 +37,17 @@ int game() {
 
 	Player player = Player({ 3.f, 0.f, 3.f });
 	Camera camera = Camera(&player);
+
+	vector<Lane> lanes = { 
+		Lane({ 1.f, 0.f, 1.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 2.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 3.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 4.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, 5.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, 6.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 7.f }, LaneIs::grass)
+	};
+
 	float mouse_offset_x, mouse_offset_y;
 
 	// INITIALIZE WINDOW
@@ -153,6 +164,10 @@ int game() {
 
 		// Draw player
 		player.draw();
+		for (size_t i = 0; i < lanes.size(); i++) {
+			lanes[i].draw();
+		}
+
 
 		glPopMatrix();
 

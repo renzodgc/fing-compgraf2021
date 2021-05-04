@@ -34,4 +34,6 @@ void DrawCube();
 
 void DrawReferenceObject();
 
+void DrawLane(LaneIs laneType);
+
 #endif

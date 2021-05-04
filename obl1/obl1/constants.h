@@ -55,18 +55,40 @@ const vector<char> COMMANDS_CUBE_OBJECT = {
 };
 
 const vector<vector<float>> DATA_CUBE_OBJECT = {
-	{1.f, 0.f, 0.f, 1.f},
+	{2.55f, 2.12f, 1.73f, 1.f}, // BACK
 	{-0.5f, -0.5f, 0.5f}, {0.5f, -0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}, {-0.5f, 0.5f, 0.5f},
-	{1.f, 1.f, 0.f, 1.f},
+	{.250f, .0f, .0f, 1.f}, // FRONT
 	{-0.5f, -0.5f, -0.5f}, {-0.5f, 0.5f, -0.5f},  {0.5f, 0.5f, -0.5f},  {0.5f, -0.5f, -0.5f},
-	{0.f, 1.f, 0.f, 1.f},
+	{2.55f, 2.12f, 1.73f, 1.f},
 	{-0.5f, 0.5f, -0.5f}, {-0.5f, 0.5f, 0.5f},  {0.5f, 0.5f, 0.5f},  {0.5f, 0.5f, -0.5f},
-	{0.f, 1.f, 1.f, 1.f},
+	{2.55f, 2.12f, 1.73f, 1.f},
 	{-0.5f, -0.5f, -0.5f}, {0.5f, -0.5f, -0.5f},  {0.5f, -0.5f, 0.5f},  {-0.5f, -0.5f, 0.5f},
-	{0.f, 0.f, 1.f, 1.f},
+	{2.55f, 2.12f, 1.73f, 1.f},
 	{0.5f, -0.5f, -0.5f}, {0.5f, 0.5f, -0.5f},  {0.5f, 0.5f, 0.5f},  {0.5f, -0.5f, 0.5f},
-	{1.f, 0.f, 1.f, 1.f},
+	{2.55f, 2.12f, 1.73f, 1.f},
 	{-0.5f, -0.5f, -0.5f}, {-0.5f, -0.5f, 0.5f},  {-0.5f, 0.5f, 0.5f},  {-0.5f, 0.5f, -0.5f}
+};
+
+// Lane
+const vector<char> COMMANDS_LANE_OBJECT = {
+		'C', 'V', 'V', 'V', 'V',
+};
+
+enum class LaneIs { grass, street };
+const float LANE_LENGTH = 11.f;
+
+const vector<vector<float>> DATA_LANE_INNER_OBJECT = {
+	{-LANE_LENGTH, -0.5f, -0.5f}, {LANE_LENGTH, -0.5f, -0.5f},  {LANE_LENGTH, -0.5f, 0.5f},  {-LANE_LENGTH, -0.5f, 0.5f},
+};
+
+const vector<vector<float>> DATA_LANE_GRASS_OBJECT = {
+	{0.f, 1.f, 0.f, 1.f},
+	{-LANE_LENGTH, -0.5f, -0.5f}, {LANE_LENGTH, -0.5f, -0.5f},  {LANE_LENGTH, -0.5f, 0.5f},  {-LANE_LENGTH, -0.5f, 0.5f},
+};
+
+const vector<vector<float>> DATA_LANE_STREET_OBJECT = {
+	{.2f, .2f, .2f, 1.f},
+	{-LANE_LENGTH, -0.5f, -0.5f}, {LANE_LENGTH, -0.5f, -0.5f},  {LANE_LENGTH, -0.5f, 0.5f},  {-LANE_LENGTH, -0.5f, 0.5f},
 };
 
 #endif

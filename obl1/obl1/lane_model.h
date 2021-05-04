@@ -21,12 +21,14 @@ using namespace std;
 class Lane {
 private:
     position lane_position;
+    LaneIs lane_type;
 public:
     Lane() {};
-    Lane(position pos);
+    Lane(position pos, LaneIs type);
 
     position get_lane_position();
     void set_lane_position(position pos);
+    void draw();
 };
 
 #endif

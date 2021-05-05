@@ -36,4 +36,6 @@ void DrawReferenceObject();
 
 void DrawLane(LaneIs laneType);
 
+void DrawTree();
+
 #endif

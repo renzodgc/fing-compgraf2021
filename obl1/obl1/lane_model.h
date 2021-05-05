@@ -9,6 +9,7 @@
 
 #include "models.h"
 #include "constants.h"
+#include "draw_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

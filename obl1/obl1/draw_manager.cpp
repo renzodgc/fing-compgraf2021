@@ -91,6 +91,10 @@ void DrawLane(LaneIs laneType) {
 	
 }
 
+void DrawTree() {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
+}
+
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
 	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {

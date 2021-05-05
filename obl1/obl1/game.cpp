@@ -14,7 +14,7 @@ int game() {
 	cout << " F11      -> Pantalla Completa" << endl;
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
-	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminación, si liso o interpolado (flag de luz)
+	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminaciï¿½n, si liso o interpolado (flag de luz)
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// VARIABLES
@@ -35,17 +35,22 @@ int game() {
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
-	Player player = Player({ 3.f, 0.f, 3.f });
+	Player player = Player({ 0.f, 0.f, -2.f });
 	Camera camera = Camera(&player);
 
 	vector<Lane> lanes = { 
-		Lane({ 1.f, 0.f, 1.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 2.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 4.f }, LaneIs::grass),
 		Lane({ 1.f, 0.f, 3.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 4.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, 5.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, 6.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 7.f }, LaneIs::grass)
+		Lane({ 1.f, 0.f, 2.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 1.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, 0.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, -1.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, -2.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, -3.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, -4.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, -5.f }, LaneIs::street),
+		Lane({ 1.f, 0.f, -6.f }, LaneIs::grass),
+		Lane({ 1.f, 0.f, -7.f }, LaneIs::grass)
 	};
 
 	float mouse_offset_x, mouse_offset_y;
@@ -168,6 +173,10 @@ int game() {
 			lanes[i].draw();
 		}
 
+		glTranslatef(1.f, 0.f, -3.f);
+		DrawTree();
+		glTranslatef(3.f, 0.f, -4.f);
+		DrawTree();
 
 		glPopMatrix();
 

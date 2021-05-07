@@ -26,6 +26,9 @@ int game() {
 	// We need an enum or something of what actions the player can take (and were taken) in order to pass them to update_player
 	bool player_moving = true;
 
+	int score = 0;
+	int coins = 0;
+
 	SDL_Event sdl_event;
 	const Uint8* keyboard_state;
 	chrono::duration<double> delta_time;
@@ -153,6 +156,9 @@ int game() {
 
 		glPopMatrix();
 
+		if (score < -player.get_player_position().z) {
+			ui->set_score(-player.get_player_position().z);
+		}
 		ui->draw();
 
 		// RENDER CLEANUP

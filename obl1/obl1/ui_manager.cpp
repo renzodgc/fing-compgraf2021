@@ -23,8 +23,8 @@ UI::UI() {
 	score.position = HUDComponentIs::left;
 	coins.position = HUDComponentIs::right;
 
-	set_score(321);
-	set_coins(23);
+	set_score(0);
+	set_coins(0);
 }
 
 UI::~UI() {

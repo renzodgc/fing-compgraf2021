@@ -26,6 +26,10 @@ void DrawTexturedSquare(GLuint texture, textured_square square);
 
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
 
+void DrawHUD(HUDComponent left, HUDComponent right);
+
+void DrawHUDComponent(HUDComponent component);
+
 void DrawCube();
 
 void DrawReferenceObject();

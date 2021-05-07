@@ -1,7 +1,5 @@
 #include "headers.h"
 
-double MOVEMENT_RATE = 0.5;
-
 int game() {
 
 	// DOCUMENTATION
@@ -34,7 +32,6 @@ int game() {
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
-	position player_position;
 	Player player = Player({ 3.f, 0.f, 3.f });
 	Camera camera = Camera(&player);
 	float mouse_offset_x, mouse_offset_y;
@@ -44,12 +41,13 @@ int game() {
 	SDL_GLContext context;
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
+	UI* ui = new UI();
+
 	// RENDER LOOP
 	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
 		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
@@ -155,13 +153,17 @@ int game() {
 
 		glPopMatrix();
 
+		ui->draw();
+
 		// RENDER CLEANUP
 		SDL_GL_SwapWindow(window);
 	} while (program_running);
 
 	// CLEANUP
+	delete ui;
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
+	TTF_Quit();
 	SDL_Quit();
 	return 0;
 }

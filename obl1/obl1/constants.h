@@ -32,6 +32,10 @@ const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
 // MODELS
 
+// GUI
+
+const vector<char> COMMANDS_HUD_BACKGROUND = { 'C', 'V', 'V', 'V', 'V' };
+
 // Reference object
 const vector<char> COMMANDS_REFERENCE_OBJECT = { 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V' , 'V' , 'V' };
 

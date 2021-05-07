@@ -157,7 +157,8 @@ int game() {
 		glPopMatrix();
 
 		if (score < -player.get_player_position().z) {
-			ui->set_score(-player.get_player_position().z);
+			score = -player.get_player_position().z;
+			ui->set_score(score);
 		}
 		ui->draw();
 

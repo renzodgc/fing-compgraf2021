@@ -48,7 +48,6 @@ void UI::draw() {
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();
 }
 
-// TODO: Create a new method that receives a &component and refactor
 void UI::set_score(int score_number) {
 	string message = "Score: " + to_string(score_number);
 	set_message_on_component(message, &score);

@@ -24,19 +24,16 @@ using namespace std;
 
 class UI {
 private:
-    // Generic
     TTF_Font* font;
     HUDComponent score;
     HUDComponent coins;
 
     void set_message_on_component(string message, HUDComponent* component);
-
 public:
     UI();
     ~UI();
 
     void draw();
-
     void set_score(int score_number);
     void set_coins(int coins_number);
 };

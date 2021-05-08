@@ -18,7 +18,7 @@ UI::UI() {
 	}
 	// TODO: Fix why green channel gets ignored
 	score.message_color = { 255, 255, 255 };
-	coins.message_color = { 255, 0, 255 };
+	coins.message_color = { 255, 255, 255 };
 
 	score.position = HUDComponentIs::left;
 	coins.position = HUDComponentIs::right;

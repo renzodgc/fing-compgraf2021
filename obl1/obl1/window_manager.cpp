@@ -26,13 +26,20 @@ tuple<SDL_Window*, SDL_GLContext> InitializeSDL(string program_name, int scr_wid
 		exit(1);
 	}
 	SDL_GLContext context = SDL_GL_CreateContext(window);
-	if (window == NULL) {
+	if (context == NULL) {
 		cerr << "[GL Context Error]: " << SDL_GetError() << endl;
 		SDL_Quit();
 		exit(1);
 	}
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	
+	int ttf = TTF_Init();
+	if (ttf == -1) {
+		cerr << "[SDL TTF Error]: " << SDL_GetError() << endl;
+		SDL_Quit();
+		exit(1);
+	}
 	return { window, context };
 }
 

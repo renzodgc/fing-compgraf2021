@@ -30,6 +30,53 @@ void DrawReferenceObject() {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
 }
 
+void DrawHUD(HUDComponent left, HUDComponent right) {
+	int height = max(left.height, right.height);
+	DrawHUDComponent(left);
+	DrawHUDComponent(right);
+
+	// Draw the rest of the overlay
+	glBegin(GL_QUADS); {
+		glColor3f(0.f, 0.f, 0.f);
+		glVertex3f(0.f, height + 6.f, 0.f);
+		glVertex3f(SCR_WIDTH, height + 6.f, 0.f);
+		glVertex3f(SCR_WIDTH, 0.f, 0.f);
+		glVertex3f(0.f, 0.f, 0.f);
+	} glEnd();
+}
+
+void DrawHUDComponent(HUDComponent component) {
+	glEnable(GL_TEXTURE_2D);
+	SDL_BlitSurface(component.surface_message, NULL, component.rgb_surface, NULL);
+
+	//Avoid mipmap filtering
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	//Copy the created image into OpenGL format
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, component.width, component.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, component.rgb_surface->pixels);
+
+	switch (component.position) {
+	case HUDComponentIs::left:
+		glBegin(GL_QUADS); {
+			glTexCoord2d(0.f, 1.f); glVertex3f(30.f, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 1.f); glVertex3f(30.f + component.surface_message->w, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 0.f); glVertex3f(30.f + component.surface_message->w, 3.f, 0.f);
+			glTexCoord2d(0.f, 0.f); glVertex3f(30.f, 3.f, 0.f);
+		} glEnd();
+		break;
+	case HUDComponentIs::right:
+		glBegin(GL_QUADS); {
+			glTexCoord2d(0.f, 1.f); glVertex3f(SCR_WIDTH - 30.f - component.surface_message->w, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH - 30.f, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH - 30.f, 3.f, 0.f);
+			glTexCoord2d(0.f, 0.f); glVertex3f(SCR_WIDTH - 30.f - component.surface_message->w, 3.f, 0.f);
+		} glEnd();
+		break;
+	}
+	glDisable(GL_TEXTURE_2D);
+}
+
 void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
 	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {

@@ -58,12 +58,6 @@ void Camera::update_distance(double elapsed_time, Sint32 mouse_wheel_y) {
 void Camera::call_look_at() {
 	switch (selected_camera) {
 	case CameraType::isometric:
-		gluLookAt(
-			camera_eye.x, camera_eye.y, camera_eye.z,
-			camera_front.x, camera_front.y, camera_front.z,
-			camera_up.x, camera_up.y, camera_up.z
-		);
-		break;
 	case CameraType::third_person:
 		gluLookAt(
 			camera_eye.x, camera_eye.y, camera_eye.z,

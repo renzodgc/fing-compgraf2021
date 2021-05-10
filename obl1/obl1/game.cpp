@@ -159,7 +159,6 @@ int game() {
 			score = -player.get_player_position().z;
 			ui->set_score(score);
 		}
-		// TEST: Remove
 		ui->draw();
 		
 		glPopMatrix();

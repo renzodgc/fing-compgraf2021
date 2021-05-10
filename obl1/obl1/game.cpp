@@ -35,7 +35,7 @@ int game() {
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
-	Player player = Player({ 3.f, 0.f, 3.f });
+	Player player = Player({ 0.f, 0.f, -2.f });
 	Camera camera = Camera(&player);
 	float mouse_offset_x, mouse_offset_y;
 
@@ -44,6 +44,7 @@ int game() {
 	SDL_GLContext context;
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
+	Draw& draw_manager = Draw::get_instance();
 	UI* ui = new UI();
 
 	// RENDER LOOP
@@ -139,28 +140,28 @@ int game() {
 
 		// RENDER
 		glPushMatrix();
-
-		DrawReferenceObject();
+		
+		Draw::DrawReferenceObject();
 
 		// Draw "floor" as reference
-		DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
+		Draw::DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
 			{0.7f, 0.7f, 0.7f, 1.f},
 			{-500.f, -1.f, -500.f},
 			{-500.f, -1.f, 500.f},
 			{500.f, -1.f, 500.f},
 			{500.f, -1.f, -500.f}
-		});
+		}, NULL, false);
 
 		// Draw player
 		player.draw();
-
-		glPopMatrix();
 
 		if (score < -player.get_player_position().z) {
 			score = -player.get_player_position().z;
 			ui->set_score(score);
 		}
 		ui->draw();
+		
+		glPopMatrix();
 
 		// RENDER CLEANUP
 		SDL_GL_SwapWindow(window);

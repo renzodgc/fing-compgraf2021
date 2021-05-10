@@ -9,7 +9,7 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
  
-GLuint LoadTexture(string texture_file) {
+GLuint load_texture(string texture_file) {
 	// Load texture's image
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(texture_file.c_str());
 	FIBITMAP* bitmap = FreeImage_Load(fif, texture_file.c_str());
@@ -32,18 +32,76 @@ GLuint LoadTexture(string texture_file) {
 	return texture;
 }
  
-tuple<vector<char>, vector<vector<float>>> LoadTrianglePolygonFile(string texture_file) {
-	ifstream file_stream(texture_file);
+// References: https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Load_OBJ
+// http://www.opengl-tutorial.org/beginners-tutorials/tutorial-7-model-loading/
+tuple<vector<char>, vector<vector<float>>> load_obj(string file) {
+	ifstream file_stream(file);
+	if (!file_stream) {
+		cerr << "Cannot open: " << file << endl;
+		exit(1);
+	}
 	vector<char> commands;
 	vector<vector<float>> data;
 
-	char command;
-	float x, y, z;
+	vector<unsigned int> vertex_indices, uv_indices, normal_indices;
+	vector<vector<float>> temp_vertices, temp_uvs, temp_normals;
 
-	while (file_stream >> command >> x >> y >> z) {
-		commands.push_back(command);
-		data.push_back({ x, y, z });
+	string line, subline, command, face1, face2, face3, face4;
+	vector<string> faces;
+	float x, y, z;
+	unsigned int aux;
+
+	while (getline(file_stream, line)) {
+		file_stream >> command;
+
+		if (command == "v") {
+			file_stream >> x >> y >> z;
+			temp_vertices.push_back({ x, y, z });
+		} else if(command == "vt") {
+			file_stream >> x >> y;
+			temp_uvs.push_back({ x, y });
+		} else if(command == "vn") {
+			file_stream >> x >> y >> z;
+			temp_normals.push_back({ x, y, z });
+		} else if (command == "f") {
+			file_stream >> face1 >> face2 >> face3 >> face4;
+			faces = { face1, face2, face3, face4 };
+			for (size_t i = 0; i < faces.size(); i++) {
+				istringstream sub_stream(faces[i]);
+				getline(sub_stream, subline, '/');
+				if (stoi(subline) < 0) {
+					aux = temp_vertices.size() - stoi(subline);
+				} else {
+					aux = stoi(subline) - 1;
+				}
+				vertex_indices.push_back(aux);
+
+				getline(sub_stream, subline, '/');
+				if (stoi(subline) < 0) {
+					aux = temp_uvs.size() - stoi(subline);
+				} else {
+					aux = stoi(subline) - 1;
+				}
+				uv_indices.push_back(aux);
+
+				getline(sub_stream, subline, '/');
+				if (stoi(subline) < 0) {
+					aux = temp_normals.size() - stoi(subline);
+				} else {
+					aux = stoi(subline) - 1;
+				}
+				normal_indices.push_back(aux);
+			}
+		}
 	}
+	commands.push_back('C');
+	data.push_back({ 1.f, 1.f, 1.f });
+	for(size_t i = 0; i < uv_indices.size(); i++) {
+		commands.push_back('T'); data.push_back(temp_uvs[uv_indices[i]]);
+		commands.push_back('N'); data.push_back(temp_normals[normal_indices[i]]);
+		commands.push_back('V'); data.push_back(temp_vertices[vertex_indices[i]]);
+	}
+
 	return { commands, data };
 }
 

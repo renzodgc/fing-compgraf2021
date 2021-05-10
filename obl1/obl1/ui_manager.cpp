@@ -18,7 +18,7 @@ UI::UI() {
 	}
 	// TODO: Fix why green channel gets ignored
 	score.message_color = { 255, 255, 255 };
-	coins.message_color = { 255, 0, 255 };
+	coins.message_color = { 0, 255, 255 };
 
 	score.position = HUDComponentIs::left;
 	coins.position = HUDComponentIs::right;
@@ -42,7 +42,7 @@ void UI::draw() {
 
 	glMatrixMode(GL_MODELVIEW); glPushMatrix(); glLoadIdentity();
 
-	DrawHUD(score, coins);
+	Draw::DrawHUD(score, coins);
 
 	glMatrixMode(GL_PROJECTION); glPopMatrix();
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();
@@ -78,5 +78,14 @@ void UI::set_message_on_component(string message, HUDComponent* component) {
 			cerr << "SDL_CreateRGBSurface() failed: " << SDL_GetError() << endl;
 			exit(1);
 		}
+		SDL_BlitSurface(component->surface_message, NULL, component->rgb_surface, NULL);
+
+		//Avoid mipmap filtering
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		//Copy the created image into OpenGL format
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, component->width, component->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, component->rgb_surface->pixels);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 }

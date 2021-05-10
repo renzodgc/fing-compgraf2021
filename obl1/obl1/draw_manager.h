@@ -14,6 +14,7 @@
 
 #include "constants.h"
 #include "models.h"
+#include "file_helper.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -22,16 +23,27 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-void DrawTexturedSquare(GLuint texture, textured_square square);
+class Draw {
+private:
+    Draw(); // Singleton
 
-void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
+    vector<char>  player_commands;
+    vector<vector<float>> player_data;
+    GLuint player_texture;
+public:
+    Draw(Draw const&) = delete;
+    void operator=(Draw const&) = delete;
+    static Draw& get_instance();
 
-void DrawHUD(HUDComponent left, HUDComponent right);
+    void player();
+    static void DrawTexturedSquare(GLuint texture, textured_square square);
+    static void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
+    static void DrawHUD(HUDComponent left, HUDComponent right);
+    static void DrawHUDComponent(HUDComponent component);
+    static void DrawCube();
+    static void DrawReferenceObject();
+};
 
-void DrawHUDComponent(HUDComponent component);
 
-void DrawCube();
-
-void DrawReferenceObject();
 
 #endif

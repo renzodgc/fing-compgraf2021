@@ -96,12 +96,13 @@ void Player::update(double elapsed_time) {
 }
 
 void Player::draw() {
+	Draw& draw_manager = Draw::get_instance();
 	glPushMatrix();
 
 	glTranslatef(player_position.x, player_position.y, player_position.z);
 	glRotatef(player_angle, 0.f, 1.f, 0.f);
 
-	DrawCube();
+	draw_manager.player();
 
 	glPopMatrix();
 }

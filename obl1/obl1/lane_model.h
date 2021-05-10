@@ -6,10 +6,12 @@
 // -----------------------------------------------------------------------------------
 
 #include <iostream>
+#include <vector>
 
 #include "models.h"
 #include "constants.h"
 #include "draw_manager.h"
+#include "scenario_object_model.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -20,15 +22,29 @@ using namespace std;
 
 
 class Lane {
-private:
+protected:
     position lane_position;
     LaneIs lane_type;
+    vector<ScenarioObject*> objects;
 public:
-    Lane() {};
-    Lane(position pos, LaneIs type);
+    Lane(position pos);
 
     position get_lane_position();
     void set_lane_position(position pos);
+    void draw();
+};
+
+class Grass : public Lane {
+public:
+    Grass(position pos);
+
+    void draw();
+};
+
+class Street : public Lane {
+public:
+    Street(position pos);
+
     void draw();
 };
 

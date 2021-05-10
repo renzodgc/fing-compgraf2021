@@ -75,7 +75,7 @@ const vector<vector<float>> DATA_CUBE_OBJECT = {
 
 // Lane
 enum class LaneIs { grass, street };
-const float LANE_LENGTH = 16.f;
+const int LANE_LENGTH = 16;
 
 const vector<char> COMMANDS_LANE_OBJECT = {
 		'C', 'V', 'V', 'V', 'V',

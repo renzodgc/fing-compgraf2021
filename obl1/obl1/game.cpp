@@ -38,19 +38,19 @@ int game() {
 	Player player = Player({ 0.f, 0.f, -2.f });
 	Camera camera = Camera(&player);
 
-	vector<Lane> lanes = { 
-		Lane({ 1.f, 0.f, 4.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 3.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 2.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 1.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, 0.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, -1.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, -2.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, -3.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, -4.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, -5.f }, LaneIs::street),
-		Lane({ 1.f, 0.f, -6.f }, LaneIs::grass),
-		Lane({ 1.f, 0.f, -7.f }, LaneIs::grass)
+	vector<Lane*> lanes = { 
+		new Grass({ 1.f, 0.f, 4.f }),
+		new Grass({ 1.f, 0.f, 3.f }),
+		new Grass({ 1.f, 0.f, 2.f }),
+		new Grass({ 1.f, 0.f, 1.f }),
+		new Grass({ 1.f, 0.f, 0.f }),
+		new Street({ 1.f, 0.f, -1.f }),
+		new Street({ 1.f, 0.f, -2.f }),
+		new Grass({ 1.f, 0.f, -3.f }),
+		new Street({ 1.f, 0.f, -4.f }),
+		new Street({ 1.f, 0.f, -5.f }),
+		new Grass({ 1.f, 0.f, -6.f }),
+		new Grass({ 1.f, 0.f, -7.f })
 	};
 
 	float mouse_offset_x, mouse_offset_y;
@@ -170,7 +170,7 @@ int game() {
 		// Draw player
 		player.draw();
 		for (size_t i = 0; i < lanes.size(); i++) {
-			lanes[i].draw();
+			lanes[i]->draw();
 		}
 
 		glTranslatef(1.f, 0.f, -3.f);

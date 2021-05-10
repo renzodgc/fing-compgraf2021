@@ -91,6 +91,19 @@ void DrawLane(LaneIs laneType) {
 	
 }
 
+void DrawObjectInLane(LaneIs laneType){
+	switch (laneType) {
+	case LaneIs::grass:
+		DrawTree();
+		break;
+	case LaneIs::street:
+		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		break;
+	default:
+		break;
+	}
+}
+
 void DrawTree() {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
 }

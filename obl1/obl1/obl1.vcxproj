@@ -88,6 +88,7 @@
     <ClCompile Include="lane_model.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="player_model.cpp" />
+    <ClCompile Include="scenario_object_model.cpp" />
     <ClCompile Include="ui_manager.cpp" />
     <ClCompile Include="window_manager.cpp" />
   </ItemGroup>
@@ -96,6 +97,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="draw_manager.h" />
     <ClInclude Include="file_helper.h" />
+    <ClInclude Include="scenario_object_model.h" />
     <ClInclude Include="lane_model.h" />
     <ClInclude Include="player_model.h" />
     <ClInclude Include="headers.h" />

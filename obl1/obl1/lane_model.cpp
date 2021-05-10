@@ -11,10 +11,8 @@ using namespace std;
 
 // GENERIC
 
-Lane::Lane(position pos, LaneIs type) {
+Lane::Lane(position pos) {
 	lane_position = pos;
-	lane_type = type;
-
 }
 
 position Lane::get_lane_position() {
@@ -31,7 +29,26 @@ void Lane::draw() {
 	glTranslatef(lane_position.x, lane_position.y, lane_position.z);
 
 	DrawLane(lane_type);
-
+	
+	for (size_t i = 0; i < objects.size(); i++) {
+		objects[i]->draw();
+	}
 
 	glPopMatrix();
+}
+
+Grass::Grass(position pos): Lane(pos) {
+	lane_type = LaneIs::grass;
+
+	int number_of_trees = rand() % LANE_LENGTH / 2;
+
+	for (size_t i = 0; i < number_of_trees; i++) {
+		int offset_x = rand() % LANE_LENGTH / 2;
+		objects.push_back(new Tree({ pos.x + offset_x, pos.y, pos.z }));
+	}
+}
+
+Street::Street(position pos) : Lane(pos) {
+	lane_type = LaneIs::street;
+	/*objects = {  }*/
 }

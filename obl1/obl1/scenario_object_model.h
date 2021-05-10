@@ -21,35 +21,34 @@ using namespace std;
 const enum ObjectIs { car, tree, border };
 
 class ScenarioObject {
-private:
+protected:
     position object_position;
     ObjectIs object_type;
 public:
-    ScenarioObject() {};
     ScenarioObject(position pos);
 
     position get_object_position();
     void set_object_position(position pos);
-    virtual void draw();
+    virtual void draw() {};
 };
 
 class Tree : public ScenarioObject {
 public:
-    Tree() = delete;
+    Tree(position pos);
 
     void draw();
 };
 
 class Car : public ScenarioObject {
 public:
-    Car() = delete;
+    Car(position pos);
 
     void draw();
 };
 
 class Border : public ScenarioObject {
 public:
-    Border() = delete;
+    Border(position pos);
 
     void draw();
 };

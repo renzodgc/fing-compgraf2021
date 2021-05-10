@@ -9,7 +9,12 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-void DrawTexturedSquare(GLuint texture, textured_square square) {
+Draw& Draw::get_instance() {
+	static Draw instance; // Guaranteed to be destroyed. Instantiated on first use.
+	return instance;
+}
+
+void Draw::DrawTexturedSquare(GLuint texture, textured_square square) {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBegin(GL_QUADS);
@@ -22,18 +27,19 @@ void DrawTexturedSquare(GLuint texture, textured_square square) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void DrawCube() {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
+void Draw::DrawCube() {
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT, NULL, false);
 }
 
-void DrawReferenceObject() {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
+void Draw::DrawReferenceObject() {
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT, NULL, false);
 }
 
-void DrawHUD(HUDComponent left, HUDComponent right) {
+void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
+	glPushMatrix();
 	int height = max(left.height, right.height);
-	DrawHUDComponent(left);
-	DrawHUDComponent(right);
+	Draw::DrawHUDComponent(left);
+	Draw::DrawHUDComponent(right);
 
 	// Draw the rest of the overlay
 	glBegin(GL_QUADS); {
@@ -43,19 +49,12 @@ void DrawHUD(HUDComponent left, HUDComponent right) {
 		glVertex3f(SCR_WIDTH, 0.f, 0.f);
 		glVertex3f(0.f, 0.f, 0.f);
 	} glEnd();
+	glPopMatrix();
 }
 
-void DrawHUDComponent(HUDComponent component) {
+void Draw::DrawHUDComponent(HUDComponent component) {
 	glEnable(GL_TEXTURE_2D);
-	SDL_BlitSurface(component.surface_message, NULL, component.rgb_surface, NULL);
-
-	//Avoid mipmap filtering
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	//Copy the created image into OpenGL format
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, component.width, component.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, component.rgb_surface->pixels);
-
+	glBindTexture(GL_TEXTURE_2D, component.texture_id);
 	switch (component.position) {
 	case HUDComponentIs::left:
 		glBegin(GL_QUADS); {
@@ -77,13 +76,13 @@ void DrawHUDComponent(HUDComponent component) {
 	glDisable(GL_TEXTURE_2D);
 }
 
-void DrawLane(LaneIs laneType) {
+void Draw::DrawLane(LaneIs laneType) {
 	switch (laneType) {
 	case LaneIs::grass:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_GRASS_OBJECT);
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_GRASS_OBJECT);
 		break;
 	case LaneIs::street:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
 		break;
 	default:
 		break;
@@ -91,37 +90,58 @@ void DrawLane(LaneIs laneType) {
 	
 }
 
-void DrawObjectInLane(LaneIs laneType){
+void Draw::DrawObjectInLane(LaneIs laneType){
 	switch (laneType) {
 	case LaneIs::grass:
-		DrawTree();
+		Draw::DrawTree();
 		break;
 	case LaneIs::street:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
 		break;
 	default:
 		break;
 	}
 }
 
-void DrawTree() {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
+void Draw::DrawTree() {
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
 }
 
-void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
+Draw::Draw() {
+	player_texture = load_texture("Chicken02Col.jpg");
+	tie(player_commands, player_data) = load_obj("Chicken02.obj");
+}
+
+void Draw::player() {
+	glPushMatrix();
+	glScalef(0.5f, 0.5f, 0.5f);
+	Draw::DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, true);
+	glPopMatrix();
+}
+
+void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture) {
+	glPushMatrix();
+	if (use_texture) {
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
 	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {
 		switch (commands[i]) {
-		case('C'): {
-			glColor3f(data[i][0], data[i][1], data[i][2]);
-			break;
-		}
 		case('V'): {
 			glVertex3f(data[i][0], data[i][1], data[i][2]);
 			break;
 		}
+		case('T'): {
+			glTexCoord2d(data[i][0], data[i][1]);
+			break;
+		}
 		case('N'): {
 			glNormal3f(data[i][0], data[i][1], data[i][2]);
+			break;
+		}
+		case('C'): {
+			glColor3f(data[i][0], data[i][1], data[i][2]);
 			break;
 		}
 		case('A'): {
@@ -131,4 +151,8 @@ void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<f
 		}
 	}
 	glEnd();
+	if (use_texture) {
+		glDisable(GL_TEXTURE_2D);
+	}
+	glPopMatrix();
 }

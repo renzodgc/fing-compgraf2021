@@ -13,6 +13,8 @@
 #include "draw_manager.h"
 #include "scenario_object_model.h"
 
+#include "draw_manager.h"
+
 // NAMESPACE
 // -----------------------------------------------------------------------------------
 using namespace std;

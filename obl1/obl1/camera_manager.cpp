@@ -173,7 +173,8 @@ void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mou
 // FREE CAMERA
 void Camera::start_free_view() {
 	selected_camera = CameraType::free_view;
-	camera_eye = { 0.f, 0.f, 1.f };
+	position player_position = player->get_player_position();
+	camera_eye = { player_position.x, player_position.y + 0.5f, player_position.z + 1.5f };
 	camera_front = { 0.f, 0.f, -1.f };
 	camera_up = { 0.f, 1.f, 0.f };
 	yaw = -90.0f; // Initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.

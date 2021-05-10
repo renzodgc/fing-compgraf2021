@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <sstream>
 #include <tuple>
 #include <vector>
 
@@ -22,8 +24,8 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-GLuint LoadTexture(string texture_file);
+GLuint load_texture(string texture_file);
 
-tuple<vector<char>, vector<vector<float>>> LoadTrianglePolygonFile(string texture_file);
+tuple<vector<char>, vector<vector<float>>> load_obj(string file);
 
 #endif

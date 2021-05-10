@@ -43,7 +43,8 @@ Grass::Grass(position pos): Lane(pos) {
 	int number_of_trees = rand() % LANE_LENGTH / 2;
 
 	for (size_t i = 0; i < number_of_trees; i++) {
-		int offset_x = rand() % LANE_LENGTH / 2;
+		int offset_x = (rand() % LANE_LENGTH) - ( LANE_LENGTH / 2 );
+		cout << pos.x + offset_x << endl;
 		objects.push_back(new Tree({ pos.x + offset_x, pos.y, pos.z }));
 	}
 }

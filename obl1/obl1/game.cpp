@@ -39,18 +39,18 @@ int game() {
 	Camera camera = Camera(&player);
 
 	vector<Lane*> lanes = { 
-		new Grass({ 1.f, 0.f, 4.f }),
-		new Grass({ 1.f, 0.f, 3.f }),
-		new Grass({ 1.f, 0.f, 2.f }),
-		new Grass({ 1.f, 0.f, 1.f }),
-		new Grass({ 1.f, 0.f, 0.f }),
-		new Street({ 1.f, 0.f, -1.f }),
-		new Street({ 1.f, 0.f, -2.f }),
-		new Grass({ 1.f, 0.f, -3.f }),
-		new Street({ 1.f, 0.f, -4.f }),
-		new Street({ 1.f, 0.f, -5.f }),
-		new Grass({ 1.f, 0.f, -6.f }),
-		new Grass({ 1.f, 0.f, -7.f })
+		new Grass(4.f),
+		new Grass(3.f),
+		new Grass(2.f),
+		new Grass(1.f),
+		new Grass(0.f),
+		new Street(-1.f),
+		new Street(-2.f),
+		new Grass(-3.f),
+		new Street(-4.f),
+		new Street(-5.f),
+		new Grass(-6.f),
+		new Grass(-7.f)
 	};
 
 	float mouse_offset_x, mouse_offset_y;
@@ -166,18 +166,13 @@ int game() {
 			{-500.f, -1.f, 500.f},
 			{500.f, -1.f, 500.f},
 			{500.f, -1.f, -500.f}
-		}, NULL, false);
+		});
 
 		// Draw player
 		player.draw();
 		for (size_t i = 0; i < lanes.size(); i++) {
 			lanes[i]->draw();
 		}
-
-		glTranslatef(1.f, 0.f, -3.f);
-		DrawTree();
-		glTranslatef(3.f, 0.f, -4.f);
-		DrawTree();
 
 		if (score < -player.get_player_position().z) {
 			score = -player.get_player_position().z;

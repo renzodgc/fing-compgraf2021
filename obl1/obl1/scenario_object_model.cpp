@@ -5,8 +5,10 @@ Tree::Tree(position pos) : ScenarioObject(pos) {
 }
 
 void Tree::draw() {
-	glTranslatef(object_position.x, object_position.y, object_position.z);
-	DrawTree();
+	glPushMatrix();
+	glTranslatef(object_position.x, 0.f, 0.f);
+	Draw::DrawTree();
+	glPopMatrix();
 }
 
 Car::Car(position pos) : ScenarioObject(pos) {
@@ -21,7 +23,13 @@ Border::Border(position pos) : ScenarioObject(pos) {
 }
 
 void Border::draw() {
+	glPushMatrix();
+	glTranslatef(object_position.x, 0.f, 0.f);
+	glScalef(1.f, 3.f, 1.f);
+	Draw::DrawCube();
+	glPopMatrix();
 }
+
 
 ScenarioObject::ScenarioObject(position pos)
 {

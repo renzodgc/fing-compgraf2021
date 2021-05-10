@@ -11,8 +11,10 @@ using namespace std;
 
 // GENERIC
 
-Lane::Lane(position pos) {
-	lane_position = pos;
+Lane::Lane(float pos_z) {
+	lane_position = { 0.f, 0.f, pos_z };
+	objects.push_back(new Border({ -LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
+	objects.push_back(new Border({ LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
 }
 
 position Lane::get_lane_position() {
@@ -28,7 +30,7 @@ void Lane::draw() {
 
 	glTranslatef(lane_position.x, lane_position.y, lane_position.z);
 
-	DrawLane(lane_type);
+	Draw::DrawLane(lane_type);
 	
 	for (size_t i = 0; i < objects.size(); i++) {
 		objects[i]->draw();
@@ -37,19 +39,18 @@ void Lane::draw() {
 	glPopMatrix();
 }
 
-Grass::Grass(position pos): Lane(pos) {
+Grass::Grass(float pos_z): Lane(pos_z) {
 	lane_type = LaneIs::grass;
 
 	int number_of_trees = rand() % LANE_LENGTH / 2;
 
 	for (size_t i = 0; i < number_of_trees; i++) {
-		int offset_x = (rand() % LANE_LENGTH) - ( LANE_LENGTH / 2 );
-		cout << pos.x + offset_x << endl;
-		objects.push_back(new Tree({ pos.x + offset_x, pos.y, pos.z }));
+		int offset_x = (rand() % (LANE_LENGTH - 1)) - ( LANE_LENGTH / 2 - 1 );
+		objects.push_back(new Tree({ lane_position.x + offset_x, lane_position.y, lane_position.z }));
 	}
 }
 
-Street::Street(position pos) : Lane(pos) {
+Street::Street(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::street;
 	/*objects = {  }*/
 }

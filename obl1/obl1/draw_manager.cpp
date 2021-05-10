@@ -28,11 +28,11 @@ void Draw::DrawTexturedSquare(GLuint texture, textured_square square) {
 }
 
 void Draw::DrawCube() {
-	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT, NULL, false);
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
 }
 
 void Draw::DrawReferenceObject() {
-	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT, NULL, false);
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
 }
 
 void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
@@ -155,4 +155,8 @@ void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<ve
 		glDisable(GL_TEXTURE_2D);
 	}
 	glPopMatrix();
+}
+
+void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
+	Draw::DrawMultiplePoints(primitive, commands, data, NULL, false);
 }

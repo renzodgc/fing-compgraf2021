@@ -29,7 +29,7 @@ protected:
     LaneIs lane_type;
     vector<ScenarioObject*> objects;
 public:
-    Lane(position pos);
+    Lane(float pos_z);
 
     position get_lane_position();
     void set_lane_position(position pos);
@@ -38,14 +38,14 @@ public:
 
 class Grass : public Lane {
 public:
-    Grass(position pos);
+    Grass(float pos_z);
 
     void draw();
 };
 
 class Street : public Lane {
 public:
-    Street(position pos);
+    Street(float pos_z);
 
     void draw();
 };

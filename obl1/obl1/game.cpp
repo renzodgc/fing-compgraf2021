@@ -14,7 +14,7 @@ int game() {
 	cout << " F11      -> Pantalla Completa" << endl;
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
-	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminaci�n, si liso o interpolado (flag de luz)
+	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// VARIABLES

@@ -31,17 +31,14 @@ void Border::draw() {
 }
 
 
-ScenarioObject::ScenarioObject(position pos)
-{
+ScenarioObject::ScenarioObject(position pos) {
 	object_position = pos;
 }
 
-position ScenarioObject::get_object_position()
-{
+position ScenarioObject::get_object_position() {
 	return position();
 }
 
-void ScenarioObject::set_object_position(position pos)
-{
+void ScenarioObject::set_object_position(position pos) {
 	object_position = pos;
 }

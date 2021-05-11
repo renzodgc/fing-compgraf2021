@@ -38,7 +38,6 @@ void Lane::draw() {
 
 Grass::Grass(float pos_z): Lane(pos_z) {
 	lane_type = LaneIs::grass;
-
 	int number_of_trees = rand() % LANE_LENGTH / 2;
 
 	for (size_t i = 0; i < number_of_trees; i++) {

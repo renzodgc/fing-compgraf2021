@@ -14,7 +14,7 @@ int game() {
 	cout << " F11      -> Pantalla Completa" << endl;
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
-	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminación, si liso o interpolado (flag de luz)
+	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// VARIABLES
@@ -37,6 +37,22 @@ int game() {
 
 	Player player = Player({ 0.f, 0.f, -2.f });
 	Camera camera = Camera(&player);
+
+	vector<Lane*> lanes = { 
+		new Grass(4.f),
+		new Grass(3.f),
+		new Grass(2.f),
+		new Grass(1.f),
+		new Grass(0.f),
+		new Street(-1.f),
+		new Street(-2.f),
+		new Grass(-3.f),
+		new Street(-4.f),
+		new Street(-5.f),
+		new Grass(-6.f),
+		new Grass(-7.f)
+	};
+
 	float mouse_offset_x, mouse_offset_y;
 
 	// INITIALIZE WINDOW
@@ -150,10 +166,13 @@ int game() {
 			{-500.f, -1.f, 500.f},
 			{500.f, -1.f, 500.f},
 			{500.f, -1.f, -500.f}
-		}, NULL, false);
+		});
 
 		// Draw player
 		player.draw();
+		for (size_t i = 0; i < lanes.size(); i++) {
+			lanes[i]->draw();
+		}
 
 		if (score < -player.get_player_position().z) {
 			score = -player.get_player_position().z;

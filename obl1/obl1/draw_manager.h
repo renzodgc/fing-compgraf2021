@@ -38,12 +38,14 @@ public:
     void player();
     static void DrawTexturedSquare(GLuint texture, textured_square square);
     static void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
+    static void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
     static void DrawHUD(HUDComponent left, HUDComponent right);
     static void DrawHUDComponent(HUDComponent component);
     static void DrawCube();
     static void DrawReferenceObject();
+    static void DrawLane(LaneIs laneType);
+    static void DrawTree();
+    static void DrawObjectInLane(LaneIs laneType);
 };
-
-
 
 #endif

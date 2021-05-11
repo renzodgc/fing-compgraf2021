@@ -1,18 +1,14 @@
 #pragma once
-#ifndef LANE_MODEL_H
-#define LANE_MODEL_H
+#ifndef SCENARIO_OBJECT_MODEL_H
+#define SCENARIO_OBJECT_MODEL_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
 #include <iostream>
-#include <vector>
 
 #include "models.h"
 #include "constants.h"
-#include "draw_manager.h"
-#include "scenario_object_model.h"
-
 #include "draw_manager.h"
 
 // NAMESPACE
@@ -22,30 +18,37 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
+const enum ObjectIs { car, tree, border };
 
-class Lane {
+class ScenarioObject {
 protected:
-    position lane_position;
-    LaneIs lane_type;
-    vector<ScenarioObject*> objects;
+    position object_position;
+    ObjectIs object_type;
 public:
-    Lane(float pos_z);
+    ScenarioObject(position pos);
 
-    position get_lane_position();
-    void set_lane_position(position pos);
+    position get_object_position();
+    void set_object_position(position pos);
+    virtual void draw() {};
+};
+
+class Tree : public ScenarioObject {
+public:
+    Tree(position pos);
+
     void draw();
 };
 
-class Grass : public Lane {
+class Car : public ScenarioObject {
 public:
-    Grass(float pos_z);
+    Car(position pos);
 
     void draw();
 };
 
-class Street : public Lane {
+class Border : public ScenarioObject {
 public:
-    Street(float pos_z);
+    Border(position pos);
 
     void draw();
 };

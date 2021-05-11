@@ -28,11 +28,11 @@ void Draw::DrawTexturedSquare(GLuint texture, textured_square square) {
 }
 
 void Draw::DrawCube() {
-	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT, NULL, false);
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
 }
 
 void Draw::DrawReferenceObject() {
-	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT, NULL, false);
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
 }
 
 void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
@@ -74,6 +74,33 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 		break;
 	}
 	glDisable(GL_TEXTURE_2D);
+}
+
+void Draw::DrawLane(LaneIs laneType) {
+	switch (laneType) {
+	case LaneIs::grass:
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_GRASS_OBJECT);
+		break;
+	case LaneIs::street:
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		break;
+	}
+	
+}
+
+void Draw::DrawObjectInLane(LaneIs laneType){
+	switch (laneType) {
+	case LaneIs::grass:
+		Draw::DrawTree();
+		break;
+	case LaneIs::street:
+		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		break;
+	}
+}
+
+void Draw::DrawTree() {
+	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
 }
 
 Draw::Draw() {
@@ -124,4 +151,8 @@ void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<ve
 		glDisable(GL_TEXTURE_2D);
 	}
 	glPopMatrix();
+}
+
+void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data) {
+	Draw::DrawMultiplePoints(primitive, commands, data, NULL, false);
 }

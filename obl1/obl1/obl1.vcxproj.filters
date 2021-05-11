@@ -66,6 +66,9 @@
     <ClCompile Include="lane_model.cpp">
       <Filter>Source Files\models</Filter>
     </ClCompile>
+    <ClCompile Include="scenario_object_model.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files\models</Filter>
     </ClInclude>
     <ClInclude Include="lane_model.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="scenario_object_model.h">
       <Filter>Header Files\models</Filter>
     </ClInclude>
   </ItemGroup>

@@ -52,5 +52,4 @@ Grass::Grass(float pos_z): Lane(pos_z) {
 
 Street::Street(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::street;
-	/*objects = {  }*/
 }

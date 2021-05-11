@@ -96,8 +96,6 @@ void Draw::DrawObjectInLane(LaneIs laneType){
 	case LaneIs::street:
 		Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
 		break;
-	default:
-		break;
 	}
 }
 

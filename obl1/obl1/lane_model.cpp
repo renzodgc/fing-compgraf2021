@@ -27,15 +27,12 @@ void Lane::set_lane_position(position pos) {
 
 void Lane::draw() {
 	glPushMatrix();
-
 	glTranslatef(lane_position.x, lane_position.y, lane_position.z);
 
 	Draw::DrawLane(lane_type);
-	
 	for (size_t i = 0; i < objects.size(); i++) {
 		objects[i]->draw();
 	}
-
 	glPopMatrix();
 }
 

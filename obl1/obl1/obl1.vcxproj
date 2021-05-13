@@ -90,7 +90,7 @@
     <ClCompile Include="player_model.cpp" />
     <ClCompile Include="scenario_object_model.cpp" />
     <ClCompile Include="ui_manager.cpp" />
-    <ClCompile Include="window_manager.cpp" />
+    <ClCompile Include="window_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera_manager.h" />
@@ -104,7 +104,7 @@
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="ui_manager.h" />
-    <ClInclude Include="window_manager.h" />
+    <ClInclude Include="window_helper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

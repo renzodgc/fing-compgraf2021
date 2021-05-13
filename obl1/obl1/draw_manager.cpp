@@ -55,6 +55,7 @@ void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
 void Draw::DrawHUDComponent(HUDComponent component) {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, component.texture_id);
+	glColor3f(component.message_color.r, component.message_color.g, component.message_color.b);
 	switch (component.position) {
 	case HUDComponentIs::left:
 		glBegin(GL_QUADS); {

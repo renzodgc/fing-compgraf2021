@@ -24,18 +24,23 @@ using namespace std;
 
 class UI {
 private:
+    UI(); // Singleton
+
     TTF_Font* font;
     HUDComponent score;
     HUDComponent coins;
 
     void set_message_on_component(string message, HUDComponent* component);
 public:
-    UI();
-    ~UI();
+    UI(UI const&) = delete;
+    void operator=(UI const&) = delete;
+    static UI& get_instance();
 
     void draw();
     void set_score(int score_number);
     void set_coins(int coins_number);
+
+    void clean_memory();
 };
 
 #endif

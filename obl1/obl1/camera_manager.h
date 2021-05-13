@@ -27,6 +27,8 @@ using namespace std;
 
 class Camera {
 private:
+    Camera(); // Singleton
+
     Player * player;
 
     CameraType selected_camera;
@@ -52,8 +54,11 @@ private:
     void free_view_camera_update_angle(float mouse_offset_x, float mouse_offset_y);
 
 public:
-    Camera(){};
-    Camera(Player * player_model);
+    Camera(Camera const&) = delete;
+    void operator=(Camera const&) = delete;
+    static Camera& get_instance();
+    
+    void set_player(Player* player_model);
 
     void start_third_person_view();
     void start_isometric_view();

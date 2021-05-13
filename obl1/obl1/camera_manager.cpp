@@ -11,7 +11,14 @@ using namespace std;
 
 // GENERIC
 
-Camera::Camera(Player * player_model) {
+// TODO: If the GameManager has the player we can change the set_method for a get in the constructor of the Camera
+
+Camera& Camera::get_instance() {
+	static Camera instance; // Guaranteed to be destroyed. Instantiated on first use.
+	return instance;
+}
+
+void Camera::set_player(Player* player_model) {
 	player = player_model;
 }
 

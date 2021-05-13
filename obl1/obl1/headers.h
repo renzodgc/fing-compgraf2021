@@ -18,6 +18,7 @@
 // Helpers
 #include "file_helper.h"
 #include "math_helper.h"
+#include "window_helper.h"
 
 // Models
 #include "models.h"
@@ -29,7 +30,6 @@
 #include "camera_manager.h"
 #include "draw_manager.h"
 #include "ui_manager.h"
-#include "window_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

@@ -23,20 +23,28 @@ int game() {
 	bool wireframe = false;
 	bool textures = false;
 	bool interpolated_lightning = false;
-	// We need an enum or something of what actions the player can take (and were taken) in order to pass them to update_player
-	bool player_moving = true;
-
-	int score = 0;
-	int coins = 0;
 
 	SDL_Event sdl_event;
 	const Uint8* keyboard_state;
+	float mouse_offset_x, mouse_offset_y;
 	chrono::duration<double> delta_time;
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
+	int score = 0;
+	int coins = 0;
+
+	// INITIALIZE WINDOW
+	SDL_Window* window;
+	SDL_GLContext context;
+	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
+
+	Draw& draw_manager = Draw::get_instance();
+	UI& ui = UI::get_instance();
+
 	Player player = Player({ 0.f, 0.f, -2.f });
-	Camera camera = Camera(&player);
+	Camera& camera = Camera::get_instance();
+	camera.set_player(&player);
 
 	vector<Lane*> lanes = { 
 		new Grass(4.f),
@@ -52,16 +60,6 @@ int game() {
 		new Grass(-6.f),
 		new Grass(-7.f)
 	};
-
-	float mouse_offset_x, mouse_offset_y;
-
-	// INITIALIZE WINDOW
-	SDL_Window* window;
-	SDL_GLContext context;
-	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
-
-	Draw& draw_manager = Draw::get_instance();
-	UI* ui = new UI();
 
 	// RENDER LOOP
 	camera.start_third_person_view();
@@ -91,7 +89,6 @@ int game() {
 					break;
 				case SDLK_p:
 					paused = !paused;
-					player_moving = !player_moving;
 					break;
 				case SDLK_i:
 					camera.start_isometric_view();
@@ -175,10 +172,10 @@ int game() {
 		}
 
 		if (score < -player.get_player_position().z) {
-			score = -player.get_player_position().z;
-			ui->set_score(score);
+			score = (int)-player.get_player_position().z;
+			ui.set_score(score);
 		}
-		ui->draw();
+		ui.draw();
 		
 		glPopMatrix();
 
@@ -187,7 +184,7 @@ int game() {
 	} while (program_running);
 
 	// CLEANUP
-	delete ui;
+	ui.clean_memory();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	TTF_Quit();

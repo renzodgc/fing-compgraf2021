@@ -97,13 +97,13 @@ void Player::update(double elapsed_time) {
 	}
 }
 
-void Player::draw() {
+void Player::draw(bool use_texture) {
 	glPushMatrix();
 
 	glTranslatef(player_position.x, player_position.y, player_position.z);
 	glRotatef(player_angle, 0.f, 1.f, 0.f);
 
-	draw_manager->player();
+	draw_manager->player(use_texture);
 
 	glPopMatrix();
 }

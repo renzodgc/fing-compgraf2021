@@ -27,11 +27,11 @@ void Lane::set_lane_position(position pos) {
 	lane_position = pos;
 }
 
-void Lane::draw() {
+void Lane::draw(bool use_texture) {
 	glPushMatrix();
 	glTranslatef(lane_position.x, lane_position.y, lane_position.z);
 
-	Draw::DrawLane(lane_type);
+	draw_manager->lane(lane_type, use_texture);
 	for (size_t i = 0; i < objects.size(); i++) {
 		objects[i]->draw();
 	}

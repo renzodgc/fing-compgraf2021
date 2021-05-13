@@ -37,21 +37,21 @@ class Tree : public ScenarioObject {
 public:
     Tree(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 class Car : public ScenarioObject {
 public:
     Car(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 class Border : public ScenarioObject {
 public:
     Border(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 #endif

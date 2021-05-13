@@ -48,7 +48,7 @@ void UI::draw() {
 
 	glMatrixMode(GL_MODELVIEW); glPushMatrix(); glLoadIdentity();
 
-	Draw::DrawHUD(score, coins);
+	draw_manager->DrawHUD(score, coins);
 
 	glMatrixMode(GL_PROJECTION); glPopMatrix();
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();

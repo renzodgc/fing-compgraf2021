@@ -33,7 +33,7 @@ public:
     void set_player_position(position new_position);
     void set_player_angle(float new_angle);
     void update(double elapsed_time);
-    void draw();
+    void draw(bool use_texture);
     void move_left();
     void move_right();
     void move_up();

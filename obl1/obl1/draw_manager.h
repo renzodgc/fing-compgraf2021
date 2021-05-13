@@ -35,17 +35,18 @@ public:
     void operator=(Draw const&) = delete;
     static Draw& get_instance();
 
-    void player();
-    static void DrawTexturedSquare(GLuint texture, textured_square square);
-    static void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
-    static void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
-    static void DrawHUD(HUDComponent left, HUDComponent right);
-    static void DrawHUDComponent(HUDComponent component);
-    static void DrawCube();
-    static void DrawReferenceObject();
-    static void DrawLane(LaneIs laneType);
-    static void DrawTree();
-    static void DrawObjectInLane(LaneIs laneType);
+    void player(bool use_texture);
+    void lane(LaneIs laneType, bool use_texture);
+    void tree(bool use_texture);
+    void border(bool use_texture);
+
+    void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
+    void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
+    void DrawHUD(HUDComponent left, HUDComponent right);
+    void DrawHUDComponent(HUDComponent component);
+
+    void DrawTexturedSquare(GLuint texture, textured_square square);
+    void DrawReferenceObject();
 };
 
 #endif

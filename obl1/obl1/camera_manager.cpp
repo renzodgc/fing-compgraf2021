@@ -12,6 +12,7 @@ using namespace std;
 // GENERIC
 
 // TODO: If the GameManager has the player we can change the set_method for a get in the constructor of the Camera
+Camera::Camera() {}
 
 Camera& Camera::get_instance() {
 	static Camera instance; // Guaranteed to be destroyed. Instantiated on first use.

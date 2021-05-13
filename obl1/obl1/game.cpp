@@ -26,7 +26,7 @@ int game() {
 	bool program_running = true;
 	bool paused = false;
 	bool wireframe = false;
-	bool textures = false;
+	bool textures = true;
 	bool interpolated_lightning = false;
 
 	SDL_Event sdl_event;
@@ -154,10 +154,10 @@ int game() {
 		// RENDER
 		glPushMatrix();
 		
-		Draw::DrawReferenceObject();
+		draw_manager.DrawReferenceObject();
 
 		// Draw "floor" as reference
-		Draw::DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
+		draw_manager.DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
 			{0.7f, 0.7f, 0.7f, 1.f},
 			{-500.f, -1.f, -500.f},
 			{-500.f, -1.f, 500.f},
@@ -166,9 +166,9 @@ int game() {
 		});
 
 		// Draw player
-		player.draw();
+		player.draw(textures);
 		for (size_t i = 0; i < lanes.size(); i++) {
-			lanes[i]->draw();
+			lanes[i]->draw(textures);
 		}
 
 		if (score < -player.get_player_position().z) {

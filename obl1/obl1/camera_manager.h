@@ -54,6 +54,7 @@ private:
     void free_view_camera_update_angle(float mouse_offset_x, float mouse_offset_y);
 
 public:
+
     Camera(Camera const&) = delete;
     void operator=(Camera const&) = delete;
     static Camera& get_instance();

@@ -1,5 +1,22 @@
 #include "scenario_object_model.h"
 
+// GENERIC
+
+ScenarioObject::ScenarioObject(position pos) {
+	object_position = pos;
+	draw_manager = &Draw::get_instance();
+}
+
+position ScenarioObject::get_object_position() {
+	return position();
+}
+
+void ScenarioObject::set_object_position(position pos) {
+	object_position = pos;
+}
+
+// TREE
+
 Tree::Tree(position pos) : ScenarioObject(pos) {
 	object_type = ObjectIs::tree;
 }
@@ -11,12 +28,7 @@ void Tree::draw() {
 	glPopMatrix();
 }
 
-Car::Car(position pos) : ScenarioObject(pos) {
-	object_type = ObjectIs::car;
-}
-
-void Car::draw() {
-}
+// BORDER
 
 Border::Border(position pos) : ScenarioObject(pos) {
 	object_type = ObjectIs::border;
@@ -31,14 +43,11 @@ void Border::draw() {
 }
 
 
-ScenarioObject::ScenarioObject(position pos) {
-	object_position = pos;
+// CAR
+
+Car::Car(position pos) : ScenarioObject(pos) {
+	object_type = ObjectIs::car;
 }
 
-position ScenarioObject::get_object_position() {
-	return position();
-}
-
-void ScenarioObject::set_object_position(position pos) {
-	object_position = pos;
+void Car::draw() {
 }

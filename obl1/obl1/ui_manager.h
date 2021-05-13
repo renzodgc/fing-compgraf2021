@@ -29,6 +29,7 @@ private:
     TTF_Font* font;
     HUDComponent score;
     HUDComponent coins;
+    Draw* draw_manager;
 
     void set_message_on_component(string message, HUDComponent* component);
 public:

@@ -9,6 +9,11 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
+Draw::Draw() {
+	player_texture = load_texture("Chicken02Col.jpg");
+	tie(player_commands, player_data) = load_obj("Chicken02.obj");
+}
+
 Draw& Draw::get_instance() {
 	static Draw instance; // Guaranteed to be destroyed. Instantiated on first use.
 	return instance;
@@ -102,11 +107,6 @@ void Draw::DrawObjectInLane(LaneIs laneType){
 
 void Draw::DrawTree() {
 	Draw::DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
-}
-
-Draw::Draw() {
-	player_texture = load_texture("Chicken02Col.jpg");
-	tie(player_commands, player_data) = load_obj("Chicken02.obj");
 }
 
 void Draw::player() {

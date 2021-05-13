@@ -11,6 +11,8 @@ using namespace std;
 
 // Reference: https://stackoverflow.com/questions/30016083/sdl2-opengl-sdl2-ttf-displaying-text
 UI::UI() {
+	draw_manager = &Draw::get_instance();
+	
 	font = TTF_OpenFont("OpenSans-Regular.ttf", 24); //this opens a font style and sets a size
 	if (font == nullptr) {
 		cerr << "TTF_OpenFont error: " << SDL_GetError() << endl;

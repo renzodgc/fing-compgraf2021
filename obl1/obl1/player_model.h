@@ -24,8 +24,8 @@ private:
     position player_position, before_movement;
     float player_angle;
     PlayerIs player_state;
+    Draw* draw_manager;
 public:
-    Player() {};
     Player(position starting_position);
 
     position get_player_position();

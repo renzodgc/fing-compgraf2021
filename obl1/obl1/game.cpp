@@ -17,6 +17,11 @@ int game() {
 	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
 	cout << " Q/ESC    -> Salir" << endl;
 
+	// INITIALIZE WINDOW
+	SDL_Window* window;
+	SDL_GLContext context;
+	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
+
 	// VARIABLES
 	bool program_running = true;
 	bool paused = false;
@@ -33,11 +38,6 @@ int game() {
 
 	int score = 0;
 	int coins = 0;
-
-	// INITIALIZE WINDOW
-	SDL_Window* window;
-	SDL_GLContext context;
-	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
 	Draw& draw_manager = Draw::get_instance();
 	UI& ui = UI::get_instance();

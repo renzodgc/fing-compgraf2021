@@ -15,6 +15,8 @@ Lane::Lane(float pos_z) {
 	lane_position = { 0.f, 0.f, pos_z };
 	objects.push_back(new Border({ -LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
 	objects.push_back(new Border({ LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
+
+	draw_manager = &Draw::get_instance();
 }
 
 position Lane::get_lane_position() {
@@ -38,7 +40,7 @@ void Lane::draw() {
 
 Grass::Grass(float pos_z): Lane(pos_z) {
 	lane_type = LaneIs::grass;
-	int number_of_trees = rand() % LANE_LENGTH / 2;
+	unsigned int number_of_trees = rand() % LANE_LENGTH / 2;
 
 	for (size_t i = 0; i < number_of_trees; i++) {
 		// TODO: Create the list of positions beforehand so they do not repeat

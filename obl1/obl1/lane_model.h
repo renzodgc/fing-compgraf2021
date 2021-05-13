@@ -28,6 +28,7 @@ protected:
     position lane_position;
     LaneIs lane_type;
     vector<ScenarioObject*> objects;
+    Draw* draw_manager;
 public:
     Lane(float pos_z);
 

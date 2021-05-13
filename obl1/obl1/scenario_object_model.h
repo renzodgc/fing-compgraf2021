@@ -24,6 +24,7 @@ class ScenarioObject {
 protected:
     position object_position;
     ObjectIs object_type;
+    Draw* draw_manager;
 public:
     ScenarioObject(position pos);
 

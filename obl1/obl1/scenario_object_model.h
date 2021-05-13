@@ -30,7 +30,9 @@ public:
 
     position get_object_position();
     void set_object_position(position pos);
-    virtual void draw() {};
+    ObjectIs get_object_type();
+    void set_object_type(ObjectIs type);
+    virtual void draw(bool use_texture) {};
 };
 
 class Tree : public ScenarioObject {

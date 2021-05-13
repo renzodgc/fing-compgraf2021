@@ -33,7 +33,7 @@ void Lane::draw(bool use_texture) {
 
 	draw_manager->lane(lane_type, use_texture);
 	for (size_t i = 0; i < objects.size(); i++) {
-		objects[i]->draw();
+		objects[i]->draw(use_texture);
 	}
 	glPopMatrix();
 }

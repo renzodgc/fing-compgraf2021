@@ -15,6 +15,14 @@ void ScenarioObject::set_object_position(position pos) {
 	object_position = pos;
 }
 
+ObjectIs ScenarioObject::get_object_type() {
+	return object_type;
+}
+
+void ScenarioObject::set_object_type(ObjectIs type) {
+	object_type = type;
+}
+
 // TREE
 
 Tree::Tree(position pos) : ScenarioObject(pos) {
@@ -24,7 +32,6 @@ Tree::Tree(position pos) : ScenarioObject(pos) {
 void Tree::draw(bool use_texture) {
 	glPushMatrix();
 	glTranslatef(object_position.x, 0.f, 0.f);
-	cout << object_position.x << endl;
 	draw_manager->tree(use_texture);
 	glPopMatrix();
 }
@@ -36,7 +43,6 @@ Border::Border(position pos) : ScenarioObject(pos) {
 }
 
 void Border::draw(bool use_texture) {
-	cout << object_position.x << endl;
 	glPushMatrix();
 	glTranslatef(object_position.x, 0.f, 0.f);
 	glScalef(1.f, 3.f, 1.f);
@@ -52,5 +58,4 @@ Car::Car(position pos) : ScenarioObject(pos) {
 }
 
 void Car::draw(bool use_texture) {
-	cout << object_position.x << endl;
 }

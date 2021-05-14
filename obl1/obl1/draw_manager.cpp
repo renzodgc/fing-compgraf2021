@@ -13,8 +13,8 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 Draw::Draw() {
-	player_texture = load_texture("Chicken02Col.jpg");
-	tie(player_commands, player_data) = load_obj("Chicken02.obj");
+	player_texture = load_texture(ROUTE_PLAYER_TEXTURE);
+	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT);
 }
 
 Draw& Draw::get_instance() {

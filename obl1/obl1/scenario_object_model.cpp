@@ -64,6 +64,7 @@ void Car::draw(bool use_texture) {
 		object_position.x = initial_position.x;
 	}
 	glPushMatrix();
+	// 0.03f == HARCODED elapsed time
 	object_position.x += velocity * 0.03f;
 	glTranslatef(object_position.x, 0.f, 0.f);
 	draw_manager->car(use_texture);

@@ -43,8 +43,11 @@ public:
 };
 
 class Car : public ScenarioObject {
+private:
+    float velocity;
+    position initial_position;
 public:
-    Car(position pos);
+    Car(position pos, float vel);
 
     void draw(bool use_texture);
 };

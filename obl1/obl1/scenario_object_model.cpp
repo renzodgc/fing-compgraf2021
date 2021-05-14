@@ -53,9 +53,19 @@ void Border::draw(bool use_texture) {
 
 // CAR
 
-Car::Car(position pos) : ScenarioObject(pos) {
+Car::Car(position pos, float vel) : ScenarioObject(pos) {
 	object_type = ObjectIs::car;
+	velocity = vel;
+	initial_position = pos;
 }
 
 void Car::draw(bool use_texture) {
+	if (object_position.x > LANE_HALF_LENGTH) {
+		object_position.x = initial_position.x;
+	}
+	glPushMatrix();
+	object_position.x += velocity * 0.03f;
+	glTranslatef(object_position.x, 0.f, 0.f);
+	draw_manager->car(use_texture);
+	glPopMatrix();
 }

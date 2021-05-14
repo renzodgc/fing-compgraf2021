@@ -23,6 +23,10 @@ void Draw::border(bool use_texture) {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
 }
 
+void Draw::car(bool use_texture) {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CAR_OBJECT);
+}
+
 void Draw::lane(LaneIs laneType, bool use_texture) {
 	switch (laneType) {
 	case LaneIs::grass:

@@ -51,4 +51,11 @@ Grass::Grass(float pos_z): Lane(pos_z) {
 
 Street::Street(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::street;
+	unsigned int number_of_cars = rand() % 8;
+	float random_velocity = ((rand() % 4) + 1);
+	for (size_t i = 0; i < number_of_cars; i++) {
+		// TODO: Create the list of positions beforehand so they do not repeat
+		int offset_x = (rand() % (LANE_LENGTH - 1)) - (LANE_LENGTH / 2 - 1);
+		objects.push_back(new Car({ lane_position.x - LANE_HALF_LENGTH - offset_x, lane_position.y, lane_position.z }, random_velocity));
+	}
 }

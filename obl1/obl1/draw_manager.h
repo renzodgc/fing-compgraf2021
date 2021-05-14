@@ -39,6 +39,7 @@ public:
     void lane(LaneIs laneType, bool use_texture);
     void tree(bool use_texture);
     void border(bool use_texture);
+    void car(bool use_texture);
 
     void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
     void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);

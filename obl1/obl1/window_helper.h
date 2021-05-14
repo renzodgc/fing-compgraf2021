@@ -1,6 +1,6 @@
 #pragma once
-#ifndef WINDOW_MANAGER_H
-#define WINDOW_MANAGER_H
+#ifndef WINDOW_HELPER_H
+#define WINDOW_HELPER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------

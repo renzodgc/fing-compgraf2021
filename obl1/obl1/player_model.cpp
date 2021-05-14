@@ -15,6 +15,8 @@ Player::Player(position starting_position) {
 	player_position = starting_position;
 	player_angle = 0.f;
 	player_state = PlayerIs::idle;
+
+	draw_manager = &Draw::get_instance();
 }
 
 position Player::get_player_position() {
@@ -69,25 +71,25 @@ void Player::move_down() {
 void Player::update(double elapsed_time) {
 	switch (player_state) {
 	case PlayerIs::moving_right:
-		player_position.x = min(before_movement.x + 1.0, player_position.x + elapsed_time * PLAYER_SPEED);
+		player_position.x = min(before_movement.x + 1.0f, player_position.x + (float)(elapsed_time * PLAYER_SPEED));
 		if (player_position.x - before_movement.x >= 1) {
 			player_state = PlayerIs::idle;
 		}
 		break;
 	case PlayerIs::moving_left:
-		player_position.x = max(before_movement.x - 1.0, player_position.x - elapsed_time * PLAYER_SPEED);
+		player_position.x = max(before_movement.x - 1.0f, player_position.x - (float)(elapsed_time * PLAYER_SPEED));
 		if (player_position.x - before_movement.x <= -1) {
 			player_state = PlayerIs::idle;
 		}
 		break;
 	case PlayerIs::moving_down:
-		player_position.z = min(before_movement.z + 1.0, player_position.z + elapsed_time * PLAYER_SPEED);
+		player_position.z = min(before_movement.z + 1.0f, player_position.z + (float)(elapsed_time * PLAYER_SPEED));
 		if (player_position.z - before_movement.z >= 1) {
 			player_state = PlayerIs::idle;
 		}
 		break;
 	case PlayerIs::moving_up:
-		player_position.z = max(before_movement.z - 1.0, player_position.z - elapsed_time * PLAYER_SPEED);
+		player_position.z = max(before_movement.z - 1.0f, player_position.z - (float)(elapsed_time * PLAYER_SPEED));
 		if (player_position.z - before_movement.z <= -1) {
 			player_state = PlayerIs::idle;
 		}
@@ -95,14 +97,13 @@ void Player::update(double elapsed_time) {
 	}
 }
 
-void Player::draw() {
-	Draw& draw_manager = Draw::get_instance();
+void Player::draw(bool use_texture) {
 	glPushMatrix();
 
 	glTranslatef(player_position.x, player_position.y, player_position.z);
 	glRotatef(player_angle, 0.f, 1.f, 0.f);
 
-	draw_manager.player();
+	draw_manager->player(use_texture);
 
 	glPopMatrix();
 }

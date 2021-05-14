@@ -11,14 +11,15 @@ using namespace std;
 
 // Reference: https://stackoverflow.com/questions/30016083/sdl2-opengl-sdl2-ttf-displaying-text
 UI::UI() {
+	draw_manager = &Draw::get_instance();
+	
 	font = TTF_OpenFont("OpenSans-Regular.ttf", 24); //this opens a font style and sets a size
 	if (font == nullptr) {
 		cerr << "TTF_OpenFont error: " << SDL_GetError() << endl;
 		return;
 	}
-	// TODO: Fix why green channel gets ignored
 	score.message_color = { 255, 255, 255 };
-	coins.message_color = { 0, 255, 255 };
+	coins.message_color = { 255, 255, 0 };
 
 	score.position = HUDComponentIs::left;
 	coins.position = HUDComponentIs::right;
@@ -27,7 +28,12 @@ UI::UI() {
 	set_coins(0);
 }
 
-UI::~UI() {
+UI& UI::get_instance() {
+	static UI instance; // Guaranteed to be destroyed. Instantiated on first use.
+	return instance;
+}
+
+void UI::clean_memory() {
 	SDL_FreeSurface(score.surface_message);
 	SDL_FreeSurface(score.rgb_surface);
 	SDL_FreeSurface(coins.surface_message);
@@ -42,7 +48,7 @@ void UI::draw() {
 
 	glMatrixMode(GL_MODELVIEW); glPushMatrix(); glLoadIdentity();
 
-	Draw::DrawHUD(score, coins);
+	draw_manager->DrawHUD(score, coins);
 
 	glMatrixMode(GL_PROJECTION); glPopMatrix();
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();
@@ -59,7 +65,8 @@ void UI::set_coins(int coins_number) {
 }
 
 void UI::set_message_on_component(string message, HUDComponent* component) {
-	component->surface_message = TTF_RenderText_Blended(font, message.c_str(), component->message_color/*, background_color*/);
+	glColor3f(component->message_color.r, component->message_color.g, component->message_color.b);
+	component->surface_message = TTF_RenderText_Blended(font, message.c_str(), {255, 255, 255});
 	if (component->surface_message == NULL) {
 		cerr << "TTF_RenderText error: " << SDL_GetError() << endl;
 		return;
@@ -73,7 +80,7 @@ void UI::set_message_on_component(string message, HUDComponent* component) {
 		TTF_SizeText(font, message.c_str(), &(component->width), &(component->height));
 	
 		//Create a surface to the correct size in RGB format, and copy the old image
-		component->rgb_surface = SDL_CreateRGBSurface(0, component->width, component->height, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+		component->rgb_surface = SDL_CreateRGBSurface(0, component->width, component->height, 32, 0, 0x0000ff00, 0x000000ff, 0xff000000);
 		if (component->rgb_surface == NULL) {
 			cerr << "SDL_CreateRGBSurface() failed: " << SDL_GetError() << endl;
 			exit(1);

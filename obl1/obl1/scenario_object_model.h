@@ -24,33 +24,36 @@ class ScenarioObject {
 protected:
     position object_position;
     ObjectIs object_type;
+    Draw* draw_manager;
 public:
     ScenarioObject(position pos);
 
     position get_object_position();
     void set_object_position(position pos);
-    virtual void draw() {};
+    ObjectIs get_object_type();
+    void set_object_type(ObjectIs type);
+    virtual void draw(bool use_texture) {};
 };
 
 class Tree : public ScenarioObject {
 public:
     Tree(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 class Car : public ScenarioObject {
 public:
     Car(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 class Border : public ScenarioObject {
 public:
     Border(position pos);
 
-    void draw();
+    void draw(bool use_texture);
 };
 
 #endif

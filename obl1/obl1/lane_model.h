@@ -28,26 +28,23 @@ protected:
     position lane_position;
     LaneIs lane_type;
     vector<ScenarioObject*> objects;
+    Draw* draw_manager;
 public:
     Lane(float pos_z);
 
     position get_lane_position();
     void set_lane_position(position pos);
-    void draw();
+    void draw(bool use_texture);
 };
 
 class Grass : public Lane {
 public:
     Grass(float pos_z);
-
-    void draw();
 };
 
 class Street : public Lane {
 public:
     Street(float pos_z);
-
-    void draw();
 };
 
 #endif

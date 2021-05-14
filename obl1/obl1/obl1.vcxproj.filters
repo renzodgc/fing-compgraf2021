@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\extras">
-      <UniqueIdentifier>{beb320ee-29d8-4069-ac2f-8be722c5192b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\helpers">
       <UniqueIdentifier>{ac0ef2ff-65ce-41a6-9593-ba64f450085e}</UniqueIdentifier>
     </Filter>
@@ -36,12 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files\extras</Filter>
-    </ClCompile>
     <ClCompile Include="file_helper.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
@@ -68,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="window_helper.cpp">
       <Filter>Source Files\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

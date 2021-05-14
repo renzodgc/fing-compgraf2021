@@ -1,6 +1,8 @@
 #include "headers.h"
 
-int game() {
+using namespace std;
+
+int main(int argc, char* argv[]) {
 
 	// DOCUMENTATION
 	cout << "Controles:" << endl;

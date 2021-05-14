@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="camera_manager.cpp" />
     <ClCompile Include="draw_manager.cpp" />
     <ClCompile Include="file_helper.cpp" />

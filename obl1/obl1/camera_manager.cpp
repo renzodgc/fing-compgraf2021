@@ -9,7 +9,8 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-// GENERIC
+// Constructor and Singleton method
+// -----------------------------------------------------------------------------------
 
 // TODO: If the GameManager has the player we can change the set_method for a get in the constructor of the Camera
 Camera::Camera() {}
@@ -19,9 +20,15 @@ Camera& Camera::get_instance() {
 	return instance;
 }
 
+// Getters & Setters
+// -----------------------------------------------------------------------------------
+
 void Camera::set_player(Player* player_model) {
 	player = player_model;
 }
+
+// Generic methods
+// -----------------------------------------------------------------------------------
 
 void Camera::update_position(double elapsed_time, const Uint8* keyboard_state) {
 	switch (selected_camera) {
@@ -83,7 +90,8 @@ void Camera::call_look_at() {
 	}
 }
 
-// ORTHOGONAL CAMERA
+// Isometric camera methods
+// -----------------------------------------------------------------------------------
 
 // Reference: https://stackoverflow.com/questions/1059200/true-isometric-projection-with-opengl
 // Read reference for 2d view
@@ -114,7 +122,9 @@ void Camera::isometric_camera_update_position() {
 	camera_front = { player_position.x, player_position.y, player_position.z };
 };
 
-// THIRD PERSON CAMERA
+// Third person camera methods
+// -----------------------------------------------------------------------------------
+
 void Camera::start_third_person_view() {
 	selected_camera = CameraType::third_person;
 	camera_eye = { 0.f, 0.f, 1.f };
@@ -178,7 +188,9 @@ void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mou
 	distance_from_player = max(2.f, (distance_from_player - (float)(75. * elapsed_time * mouse_wheel_offset_y)));
 }
 
-// FREE CAMERA
+// Free view camera methods
+// -----------------------------------------------------------------------------------
+
 void Camera::start_free_view() {
 	selected_camera = CameraType::free_view;
 	position player_position = player->get_player_position();

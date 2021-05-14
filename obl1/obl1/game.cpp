@@ -41,14 +41,9 @@ int main(int argc, char* argv[]) {
 	int score = 0;
 	int coins = 0;
 
-	Draw& draw_manager = Draw::get_instance();
-	UI& ui = UI::get_instance();
-
-	Player player = Player({ 0.f, 0.f, -2.f });
-	Camera& camera = Camera::get_instance();
-	camera.set_player(&player);
-
-	vector<Lane*> lanes = { 
+	// MAIN OBJECTS
+	Player& player = Player::get_instance();
+	vector<Lane*> lanes = {
 		new Grass(4.f),
 		new Grass(3.f),
 		new Grass(2.f),
@@ -62,6 +57,12 @@ int main(int argc, char* argv[]) {
 		new Grass(-6.f),
 		new Grass(-7.f)
 	};
+
+	// MANAGERS
+	Draw& draw_manager = Draw::get_instance();
+	UI& ui = UI::get_instance();
+	Camera& camera = Camera::get_instance();
+
 
 	// RENDER LOOP
 	camera.start_third_person_view();

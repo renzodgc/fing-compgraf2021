@@ -65,9 +65,6 @@ class Camera {
         Camera(Camera const&) = delete;
         void operator=(Camera const&) = delete;
         static Camera& get_instance();
-    
-        // Getters & Setters
-        void set_player(Player* player_model);
 
         // Camera type methods
         void start_third_person_view();

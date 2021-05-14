@@ -28,11 +28,13 @@ class UI {
         // Singleton
         UI();
         
+        // References
+        Draw* draw_manager;
+
         // Basic properties
         TTF_Font* font;
         HUDComponent score;
         HUDComponent coins;
-        Draw* draw_manager;
 
         // Basic methods
         void set_message_on_component(string message, HUDComponent* component);

@@ -19,32 +19,44 @@
 // -----------------------------------------------------------------------------------
 using namespace std;
 
-// HEADERS
+// CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
-
 class Lane {
-protected:
-    position lane_position;
-    LaneIs lane_type;
-    vector<ScenarioObject*> objects;
-    Draw* draw_manager;
-public:
-    Lane(float pos_z);
 
-    position get_lane_position();
-    void set_lane_position(position pos);
-    void draw(bool use_texture);
-};
+    protected:
+        // References
+        Draw* draw_manager;
+
+        // Basic properties
+        LaneIs lane_type;
+        position lane_position;
+        vector<ScenarioObject*> objects;
+
+    public:
+        // Constructor
+        Lane(float pos_z);
+
+        // Getters & Setters
+        position get_lane_position();
+        void set_lane_position(position pos);
+
+        // Main methods
+        void draw(bool use_texture);
+    };
 
 class Grass : public Lane {
-public:
-    Grass(float pos_z);
+
+    public:
+        // Constructor
+        Grass(float pos_z);
 };
 
 class Street : public Lane {
-public:
-    Street(float pos_z);
+
+    public:
+        // Constructor
+        Street(float pos_z);
 };
 
 #endif

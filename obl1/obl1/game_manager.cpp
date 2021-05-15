@@ -45,6 +45,9 @@ vector<Lane*> Game::getLanes() {
 
 void Game::setScore(int score) {
 	this->score = score;
+	if (this->score >= (this->level * LEVEL_RAISE_COEF)) {
+		this->level++;
+	}
 }
 
 void Game::addCoin() {
@@ -96,6 +99,7 @@ vector<Lane*> Game::generateBaseLanes() {
 		lanes.push_back(addLane((float)(-INITIAL_LANES_INTERVAL - i)));
 	}
 
+	// Set limits
 	this->upper_lane_limit = -(INITIAL_LANES_INTERVAL + LANES_INTERVAL);
 	this->lower_lane_limit = INITIAL_LANES_INTERVAL;
 
@@ -106,14 +110,19 @@ Lane* Game::addLane(float position) {
 	
 	Lane* lane{};
 
-	if (grass_in_a_row >= (MAX_GRASS_COEF * this->level)) {
-		lane = new Grass(position);
+	// If too many grasses in a row, create street and reset counter
+	if (grass_in_a_row >= MAX_GRASS_COEF) {
+		lane = new Street(position);
+		this->street_in_a_row++;
 		this->grass_in_a_row = 0;
 	}
+	// If too many streets in a row, create grass and reset counter
 	else if (street_in_a_row >= (MAX_STREET_COEF * this->level)) {
-		lane = new Street(position);
+		lane = new Grass(position);
+		this->grass_in_a_row++;
 		this->street_in_a_row = 0;
 	}
+	// If max coefficients are not passed, pick randomly
 	else {
 		LaneIs laneType = LaneIs(get_random(LANE_TYPES));
 		switch (laneType) {

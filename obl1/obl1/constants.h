@@ -23,9 +23,9 @@ const float MOUSE_SENSITIVITY = 0.1f;
 // PLAYER
 // ---------------------------------------------------------------------------------------
 
-const double PLAYER_SPEED = 2.0;
+const double PLAYER_SPEED = 7.0;
 
-// LANES
+// LANE
 // ---------------------------------------------------------------------------------------
 
 enum class LaneIs { grass, street };

@@ -11,6 +11,8 @@ enum class CameraType { isometric, third_person, free_view };
 
 enum class HUDComponentIs { left, right };
 
+enum class ObjType { squares, triangles };
+
 struct HUDComponent {
 	HUDComponentIs position;
 	SDL_Surface* surface_message;

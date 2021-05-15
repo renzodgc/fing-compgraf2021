@@ -17,9 +17,9 @@ Game::Game() {
 	this->level = 0;
 	this->coins = 0;
 	this->lanes = {
-			new Grass(1.f),
-			new Grass(0.f),
-			new Grass(-1.f)
+		new Grass(1.f),
+		new Grass(0.f),
+		new Grass(-1.f)
 	};
 }
 
@@ -54,4 +54,3 @@ void Game::setScore(int score) {
 void Game::addCoin() {
 	this->coins++;
 }
-

@@ -31,6 +31,7 @@ public:
 
     position get_object_position();
     void set_object_position(position pos);
+    void set_object_x(float x);
     ObjectIs get_object_type();
     void set_object_type(ObjectIs type);
     virtual void draw(bool use_texture) {};
@@ -44,8 +45,10 @@ public:
 };
 
 class Car : public ScenarioObject {
+private:
+    int direction;
 public:
-    Car(position pos);
+    Car(position pos, int direct);
 
     void draw(bool use_texture);
 };

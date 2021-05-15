@@ -44,6 +44,7 @@ class Lane {
 
         // Main methods
         void draw(bool use_texture);
+        virtual void update(double elapsed_time);
     };
 
 class Grass : public Lane {
@@ -55,9 +56,21 @@ class Grass : public Lane {
 
 class Street : public Lane {
 
+    private:
+        // General properties
+        float objects_speed;
+        int direction;
+        double current_cooldown;
+
+        // Spawn properties
+        bool ready_to_spawn;
+        float spawn_rate;
+        float spawn_cooldown;
+    
     public:
         // Constructor
         Street(float pos_z);
+        void update(double elapsed_time);
 };
 
 #endif

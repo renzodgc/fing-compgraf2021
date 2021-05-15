@@ -17,6 +17,8 @@
 #include "FreeImage.h"
 #include <GL/glu.h>
 
+#include "models.h"
+
 // NAMESPACE
 // -----------------------------------------------------------------------------------
 using namespace std;
@@ -26,6 +28,6 @@ using namespace std;
 
 GLuint load_texture(string texture_file);
 
-tuple<vector<char>, vector<vector<float>>> load_obj(string file);
+tuple<vector<char>, vector<vector<float>>> load_obj(string file, ObjType obj_type);
 
 #endif

@@ -143,6 +143,11 @@ int main(int argc, char* argv[]) {
 		// Update player
 		player.update(elapsed_time);
 
+		// Update lanes
+		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+			game_manager.getLanes()[i]->update(elapsed_time);
+		}
+
 		// Update camera
 		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();

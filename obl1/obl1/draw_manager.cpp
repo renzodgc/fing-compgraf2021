@@ -14,7 +14,7 @@ using namespace std;
 
 Draw::Draw() {
 	player_texture = load_texture(ROUTE_PLAYER_TEXTURE);
-	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT);
+	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT, ObjType::squares);
 }
 
 Draw& Draw::get_instance() {
@@ -27,6 +27,10 @@ Draw& Draw::get_instance() {
 
 void Draw::border(bool use_texture) {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
+}
+
+void Draw::car(bool use_texture) {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CAR_OBJECT, DATA_CAR_OBJECT);
 }
 
 void Draw::lane(LaneIs laneType, bool use_texture) {

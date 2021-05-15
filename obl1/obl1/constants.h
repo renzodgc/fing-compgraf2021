@@ -25,16 +25,19 @@ const float MOUSE_SENSITIVITY = 0.1f;
 
 const double PLAYER_SPEED = 7.0;
 
+// GAME
+// ---------------------------------------------------------------------------------------
+
+const unsigned int LEVEL_RAISE_COEF = 10;
+
 // LANE
 // ---------------------------------------------------------------------------------------
 
 enum class LaneIs { wall, grass, street };
 const unsigned int LANE_TYPES = 3;
 
-const int LANES_INTERVAL = 20;
+const int LANES_INTERVAL = 10;
 const int INITIAL_LANES_INTERVAL = 10;
-
-const unsigned int LEVEL_RAISE_COEF = 10;
 
 const unsigned int MAX_GRASS_COEF = 4;
 const unsigned int MAX_STREET_COEF = 2;

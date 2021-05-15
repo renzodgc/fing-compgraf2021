@@ -54,6 +54,33 @@ void Game::addCoin() {
 // Aux methods
 // -----------------------------------------------------------------------------------
 
+void Game::update(float player_position) {
+
+	// Only create new lanes if upper limit is passed
+	if (player_position <= this->upper_lane_limit + LANES_INTERVAL) {
+
+		// Create new LANES_INTERVAL lanes
+		for (int i = 0; i < LANES_INTERVAL; i++) {
+			this->lanes.push_back(addLane((float)(upper_lane_limit - i)));
+		}
+
+		// Delete old LANES_INTERVAL lanes
+		this->lanes.erase(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL);
+
+		// Update limits
+		this->upper_lane_limit -= LANES_INTERVAL;
+		this->lower_lane_limit -= LANES_INTERVAL - 1;
+
+		// Insert wall
+		this->lanes.insert(this->lanes.begin(), new Wall((float)this->lower_lane_limit));
+
+	}
+
+}
+
+// Aux methods
+// -----------------------------------------------------------------------------------
+
 vector<Lane*> Game::generateBaseLanes() {
 
 	// Generate lanes vector with back wall
@@ -68,6 +95,9 @@ vector<Lane*> Game::generateBaseLanes() {
 	for (int i = 0; i < LANES_INTERVAL; i++) {
 		lanes.push_back(addLane((float)(-INITIAL_LANES_INTERVAL - i)));
 	}
+
+	this->upper_lane_limit = -(INITIAL_LANES_INTERVAL + LANES_INTERVAL);
+	this->lower_lane_limit = INITIAL_LANES_INTERVAL;
 
 	return lanes;
 }
@@ -101,13 +131,4 @@ Lane* Game::addLane(float position) {
 
 	return lane;
 }
-
-void Game::removeLane() {
-
-	Lane* lane{};
-
-}
-
-
-
 

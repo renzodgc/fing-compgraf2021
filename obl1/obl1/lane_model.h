@@ -10,6 +10,7 @@
 
 #include "models.h"
 #include "constants.h"
+#include "gl_constants.h"
 #include "math_helper.h"
 #include "draw_manager.h"
 #include "scenario_object_model.h"

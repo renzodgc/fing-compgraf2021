@@ -13,6 +13,7 @@
 #include <GL/glu.h>
 
 #include "constants.h"
+#include "gl_constants.h"
 #include "models.h"
 #include "file_helper.h"
 

@@ -98,6 +98,7 @@
     <ClInclude Include="draw_manager.h" />
     <ClInclude Include="file_helper.h" />
     <ClInclude Include="game_manager.h" />
+    <ClInclude Include="gl_constants.h" />
     <ClInclude Include="scenario_object_model.h" />
     <ClInclude Include="lane_model.h" />
     <ClInclude Include="player_model.h" />

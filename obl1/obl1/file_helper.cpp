@@ -34,7 +34,8 @@ GLuint load_texture(string texture_file) {
  
 // References: https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Load_OBJ
 // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-7-model-loading/
-tuple<vector<char>, vector<vector<float>>> load_obj(string file) {
+// triangles is true if the model is composed by triangles or false if made by squares
+tuple<vector<char>, vector<vector<float>>> load_obj(string file, ObjType obj_type) {
 	ifstream file_stream(file);
 	if (!file_stream) {
 		cerr << "Cannot open: " << file << endl;
@@ -64,8 +65,13 @@ tuple<vector<char>, vector<vector<float>>> load_obj(string file) {
 			file_stream >> x >> y >> z;
 			temp_normals.push_back({ x, y, z });
 		} else if (command == "f") {
-			file_stream >> face1 >> face2 >> face3 >> face4;
-			faces = { face1, face2, face3, face4 };
+			if (obj_type == ObjType::squares) {
+				file_stream >> face1 >> face2 >> face3 >> face4;
+				faces = { face1, face2, face3, face4 };
+			} else { // Conformed by triangles
+				file_stream >> face1 >> face2 >> face3;
+				faces = { face1, face2, face3 };
+			}
 			for (size_t i = 0; i < faces.size(); i++) {
 				istringstream sub_stream(faces[i]);
 				getline(sub_stream, subline, '/');

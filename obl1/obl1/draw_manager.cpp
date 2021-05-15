@@ -14,7 +14,7 @@ using namespace std;
 
 Draw::Draw() {
 	player_texture = load_texture(ROUTE_PLAYER_TEXTURE);
-	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT);
+	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT, ObjType::squares);
 }
 
 Draw& Draw::get_instance() {

@@ -146,8 +146,9 @@ int game() {
 		player.update(elapsed_time);
 		camera.update_position(elapsed_time, keyboard_state);
 
-		// destroy old lanes, create new ones
-		// for lane in lanes: update()
+		for (size_t i = 0; i < lanes.size(); i++) {
+			lanes[i]->update(elapsed_time);
+		}
 
 		camera.call_look_at();
 
@@ -168,7 +169,6 @@ int game() {
 		// Draw player
 		player.draw(textures);
 		for (size_t i = 0; i < lanes.size(); i++) {
-			lanes[i]->draw(textures);
 			lanes[i]->update(elapsed_time);
 		}
 

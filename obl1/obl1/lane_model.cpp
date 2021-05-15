@@ -49,23 +49,23 @@ void Street::update(double elapsed_time) {
 	vector<int> objects_indices_to_destroy;
 	for (size_t i = 0; i < objects.size(); i++) {
 		if (objects[i]->get_object_type() == ObjectIs::car) {
-			// 1. Mover objetos
+			// 1. Move the objects
 			float x = objects[i]->get_object_position().x;
 			objects[i]->set_object_x(x + objects_speed * elapsed_time * direction);
-			// 2. Marcar para destruir
+			// 2. Mark to destroy the objects out of bounds
 			if (abs(x) > LANE_HALF_LENGTH) {
 				objects_indices_to_destroy.push_back(i);
 			}
 		}
 	}
 
-	// 3. Destruir objetos
+	// 3. Destroy objects out of bounds
 	for (size_t i = 0; i < objects_indices_to_destroy.size(); i++) {
 		delete objects[objects_indices_to_destroy[i]];
 		objects.erase(objects.begin() + objects_indices_to_destroy[i]);
 	}
 
-	// 4. Spawnear nuevos objetos
+	// 4. Spawn new objects
 	if (!ready_to_spawn) {
 		current_cooldown -= elapsed_time;
 		if (current_cooldown <= 0) {
@@ -74,7 +74,7 @@ void Street::update(double elapsed_time) {
 	}
 
 	if (ready_to_spawn) {
-		// Tiro un dado
+		// Throw a dice
 		if (((rand() % 100)) <= spawn_rate * elapsed_time) {
 			ready_to_spawn = false;
 			current_cooldown = spawn_cooldown;

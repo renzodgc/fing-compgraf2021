@@ -17,18 +17,9 @@ Game::Game() {
 	this->level = 0;
 	this->coins = 0;
 	this->lanes = {
-		new Grass(4.f),
-		new Grass(3.f),
-		new Grass(2.f),
 		new Grass(1.f),
 		new Grass(0.f),
-		new Street(-1.f),
-		new Street(-2.f),
-		new Grass(-3.f),
-		new Street(-4.f),
-		new Street(-5.f),
-		new Grass(-6.f),
-		new Grass(-7.f)
+		new Grass(-1.f)
 	};
 }
 

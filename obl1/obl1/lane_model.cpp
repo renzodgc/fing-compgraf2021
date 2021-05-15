@@ -9,7 +9,7 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-// Constructor parent
+// Constructor
 // -----------------------------------------------------------------------------------
 
 Lane::Lane(float pos_z) {
@@ -48,6 +48,23 @@ void Lane::draw(bool use_texture) {
 
 void Lane::update(double elapsed_time) {
 	// coins here
+}
+
+// Street methods
+// -----------------------------------------------------------------------------------
+
+Street::Street(float pos_z) : Lane(pos_z) {
+	lane_type = LaneIs::street;
+
+	objects_speed = (float)((rand() % 4) + 2);
+	// TODO: Revisar
+	spawn_cooldown = 2.5f / objects_speed;
+	spawn_rate = (float)((rand() % 40) + 25);
+	ready_to_spawn = true;
+	direction = rand() % 2;
+	if (direction == 0) {
+		direction = -1;
+	}
 }
 
 void Street::update(double elapsed_time) {
@@ -91,30 +108,20 @@ void Street::update(double elapsed_time) {
 
 }
 
-// Constructors children
+// Grass methods
 // -----------------------------------------------------------------------------------
-
-Street::Street(float pos_z) : Lane(pos_z) {
-	lane_type = LaneIs::street;
-
-	objects_speed = (float)((rand() % 4) + 2);
-	// TODO: Revisar
-	spawn_cooldown = 2.5f / objects_speed;
-	spawn_rate = (float)((rand() % 40) + 25);
-	ready_to_spawn = true;
-	direction = rand() % 2;
-	if (direction == 0) {
-		direction = -1;
-	}
-}
 
 Grass::Grass(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::grass;
-	unsigned int number_of_trees = rand() % LANE_LENGTH / 2;
+	
+	// Get amount of trees
+	unsigned int number_of_trees = get_random(LANE_LENGTH / 2);
 
+	// Get random unrepeated positions for trees
+	vector<int> positions = get_random_vector(number_of_trees, LANE_LENGTH / 2);
+
+	// Create trees
 	for (size_t i = 0; i < number_of_trees; i++) {
-		// TODO: Create the list of positions beforehand so they do not repeat
-		int offset_x = (rand() % (LANE_LENGTH - 1)) - (LANE_LENGTH / 2 - 1);
-		objects.push_back(new Tree({ lane_position.x + offset_x, lane_position.y, lane_position.z }));
+		objects.push_back(new Tree({ lane_position.x + positions[i], lane_position.y, lane_position.z }));
 	}
 }

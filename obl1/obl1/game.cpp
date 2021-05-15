@@ -177,6 +177,8 @@ int main(int argc, char* argv[]) {
 
 		// Draw player
 		player.draw(textures);
+
+		// Draw lanes
 		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
 			game_manager.getLanes()[i]->draw(textures);
 		}

@@ -14,6 +14,7 @@
 
 // Generic
 #include "constants.h"
+#include "gl_constants.h"
 
 // Helpers
 #include "file_helper.h"

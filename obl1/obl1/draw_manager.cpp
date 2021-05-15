@@ -25,12 +25,12 @@ Draw& Draw::get_instance() {
 // Main objects' drawing methods
 // -----------------------------------------------------------------------------------
 
-void Draw::border(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
-}
+void Draw::player(bool use_texture) {
+	glPushMatrix();
+	glScalef(0.5f, 0.5f, 0.5f);
+	DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, use_texture);
+	glPopMatrix();
 
-void Draw::car(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CAR_OBJECT, DATA_CAR_OBJECT);
 }
 
 void Draw::lane(LaneIs laneType, bool use_texture) {
@@ -43,17 +43,19 @@ void Draw::lane(LaneIs laneType, bool use_texture) {
 		break;
 	}
 }
-	
+
+void Draw::border(bool use_texture) {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
+}
+
 void Draw::tree(bool use_texture) {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
 }
 
-void Draw::player(bool use_texture) {
-	glPushMatrix();
-	glScalef(0.5f, 0.5f, 0.5f);
-	DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, use_texture);
-	glPopMatrix();
+void Draw::car(bool use_texture) {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CAR_OBJECT, DATA_CAR_OBJECT);
 }
+
 
 // Primitive objects' drawing methods
 // -----------------------------------------------------------------------------------

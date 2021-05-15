@@ -10,10 +10,11 @@
 
 #include "models.h"
 #include "constants.h"
+#include "gl_constants.h"
+#include "math_helper.h"
 #include "draw_manager.h"
 #include "scenario_object_model.h"
 
-#include "draw_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -54,13 +55,18 @@ class Grass : public Lane {
 };
 
 class Street : public Lane {
+
     private:
+        // General properties
         float objects_speed;
+        int direction;
+        double current_cooldown;
+
+        // Spawn properties
         bool ready_to_spawn;
         float spawn_rate;
         float spawn_cooldown;
-        int direction;
-        double current_cooldown;
+    
     public:
         // Constructor
         Street(float pos_z);

@@ -58,7 +58,7 @@ void Street::update(double elapsed_time) {
 		if (objects[i]->get_object_type() == ObjectIs::car) {
 			// 1. Move the objects
 			float x = objects[i]->get_object_position().x;
-			objects[i]->set_object_x(x + objects_speed * elapsed_time * direction);
+			objects[i]->set_object_x(x + (float)(objects_speed * elapsed_time * direction));
 			// 2. Mark to destroy the objects out of bounds
 			if (abs(x) > LANE_HALF_LENGTH) {
 				objects_indices_to_destroy.push_back(i);
@@ -97,10 +97,10 @@ void Street::update(double elapsed_time) {
 Street::Street(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::street;
 
-	objects_speed = ((rand() % 4) + 2);
+	objects_speed = (float)((rand() % 4) + 2);
 	// TODO: Revisar
 	spawn_cooldown = 2.5f / objects_speed;
-	spawn_rate = ((rand() % 40) + 25);
+	spawn_rate = (float)((rand() % 40) + 25);
 	ready_to_spawn = true;
 	direction = rand() % 2;
 	if (direction == 0) {

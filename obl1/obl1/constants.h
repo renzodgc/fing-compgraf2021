@@ -12,7 +12,7 @@ const unsigned int SCR_WIDTH = 1024;
 const unsigned int SCR_HEIGHT = 768;
 
 // CAMERA
-const double MOVEMENT_CAMERA_SPEED = 2.0;
+const double MOVEMENT_CAMERA_SPEED = 4.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 // PLAYER

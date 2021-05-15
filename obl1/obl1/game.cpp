@@ -144,8 +144,8 @@ int main(int argc, char* argv[]) {
 		player.update(elapsed_time);
 
 		// Update lanes
-		for (size_t i = 0; i < lanes.size(); i++) {
-			lanes[i]->update(elapsed_time);
+		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+			game_manager.getLanes()[i]->update(elapsed_time);
 		}
 
 		// Update camera

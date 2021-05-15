@@ -19,7 +19,14 @@ Game::Game() {
 	this->lanes = {
 		new Grass(1.f),
 		new Grass(0.f),
-		new Grass(-1.f)
+		new Grass(-1.f),
+		new Grass(-2.f),
+		new Street(-3.f),
+		new Street(-4.f),
+		new Grass(-5.f),
+		new Street(-6.f),
+		new Street(-7.f),
+		new Grass(-8.f)
 	};
 }
 

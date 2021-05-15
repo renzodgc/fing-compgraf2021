@@ -34,6 +34,9 @@ class Draw {
         vector<char>  player_commands;
         vector<vector<float>> player_data;
         GLuint player_texture;
+        vector<char>  car_commands;
+        vector<vector<float>> car_data;
+        GLuint car_texture;
 
     public:
         // Constructor and singleton method

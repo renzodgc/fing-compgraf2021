@@ -115,7 +115,7 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::grass;
 	
 	// Get amount of trees
-	unsigned int number_of_trees = get_random(LANE_LENGTH / 2);
+	unsigned int number_of_trees = get_random(LANE_LENGTH / 3);
 
 	// Get random unrepeated positions for trees
 	vector<int> positions = get_random_vector(number_of_trees, LANE_LENGTH / 2);
@@ -124,4 +124,10 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 	for (size_t i = 0; i < number_of_trees; i++) {
 		objects.push_back(new Tree({ lane_position.x + positions[i], lane_position.y, lane_position.z }));
 	}
+}
+
+// Wall methods
+// -----------------------------------------------------------------------------------
+Wall::Wall(float pos_z) : Lane(pos_z) {
+	lane_type = LaneIs::wall;
 }

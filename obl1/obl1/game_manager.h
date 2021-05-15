@@ -30,6 +30,13 @@ class Game {
         int coins;
         vector<Lane*> lanes;
 
+        // Auxiliary properties
+        unsigned int grass_in_a_row;
+        unsigned int street_in_a_row;
+
+        // Auxiliary methods
+        vector<Lane*> generateBaseLanes();
+
     public:
         // Constructor and singleton method
         Game(Game const&) = delete;
@@ -43,6 +50,10 @@ class Game {
         vector<Lane*> getLanes();
         void setScore(int score);
         void addCoin();
+
+        // Lane generation methods
+        Lane* addLane(float position);
+        void removeLane();
 
 };
 

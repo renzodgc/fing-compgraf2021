@@ -15,6 +15,8 @@ using namespace std;
 Draw::Draw() {
 	player_texture = load_texture(ROUTE_PLAYER_TEXTURE);
 	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT, ObjType::squares);
+	car_texture = load_texture(ROUTE_CAR_TEXTURE);
+	tie(car_commands, car_data) = load_obj(ROUTE_CAR_OBJECT, ObjType::triangles);
 }
 
 Draw& Draw::get_instance() {
@@ -30,7 +32,10 @@ void Draw::player(bool use_texture) {
 	glScalef(0.5f, 0.5f, 0.5f);
 	DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, use_texture);
 	glPopMatrix();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e57ee0c3caf6eb343a001e797ab5544b26f5245
 }
 
 void Draw::lane(LaneIs laneType, bool use_texture) {
@@ -56,7 +61,7 @@ void Draw::tree(bool use_texture) {
 }
 
 void Draw::car(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CAR_OBJECT, DATA_CAR_OBJECT);
+	DrawMultiplePoints(GL_TRIANGLES, car_commands, car_data, car_texture, use_texture);
 }
 
 

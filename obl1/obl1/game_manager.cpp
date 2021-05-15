@@ -94,6 +94,10 @@ vector<Lane*> Game::generateBaseLanes() {
 		lanes.push_back(new Grass((float)(INITIAL_LANES_INTERVAL - i)));
 	}
 
+	// Set counters at 0
+	this->grass_in_a_row = 0;
+	this->street_in_a_row = 0;
+
 	// Generate first LANES_INTERVAL lanes, after the initial ones, using the random way
 	for (int i = 0; i < LANES_INTERVAL; i++) {
 		lanes.push_back(addLane((float)(-INITIAL_LANES_INTERVAL - i)));

@@ -50,12 +50,16 @@ void Lane::draw(bool use_texture) {
 
 Grass::Grass(float pos_z): Lane(pos_z) {
 	lane_type = LaneIs::grass;
-	unsigned int number_of_trees = rand() % LANE_LENGTH / 2;
+	
+	// Get amount of trees
+	unsigned int number_of_trees = get_random(LANE_LENGTH / 2);
 
+	// Get random unrepeated positions for trees
+	vector<int> positions = get_random_vector(number_of_trees, LANE_LENGTH / 2);
+
+	// Create trees
 	for (size_t i = 0; i < number_of_trees; i++) {
-		// TODO: Create the list of positions beforehand so they do not repeat
-		int offset_x = (rand() % (LANE_LENGTH - 1)) - ( LANE_LENGTH / 2 - 1 );
-		objects.push_back(new Tree({ lane_position.x + offset_x, lane_position.y, lane_position.z }));
+		objects.push_back(new Tree({ lane_position.x + positions[i], lane_position.y, lane_position.z }));
 	}
 }
 

@@ -24,7 +24,7 @@ void Draw::border(bool use_texture) {
 }
 
 void Draw::car(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CAR_OBJECT);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CAR_OBJECT, DATA_CAR_OBJECT);
 }
 
 void Draw::lane(LaneIs laneType, bool use_texture) {

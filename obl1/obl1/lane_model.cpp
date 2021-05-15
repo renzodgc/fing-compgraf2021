@@ -35,27 +35,77 @@ void Lane::draw(bool use_texture) {
 	for (size_t i = 0; i < objects.size(); i++) {
 		objects[i]->draw(use_texture);
 	}
+
 	glPopMatrix();
 }
 
-Grass::Grass(float pos_z): Lane(pos_z) {
+void Lane::update(double elapsed_time) {
+	// coins here
+}
+
+void Street::update(double elapsed_time) {
+	Lane::update(elapsed_time);
+
+	vector<int> objects_indices_to_destroy;
+	for (size_t i = 0; i < objects.size(); i++) {
+		if (objects[i]->get_object_type() == ObjectIs::car) {
+			// 1. Mover objetos
+			float x = objects[i]->get_object_position().x;
+			objects[i]->set_object_x(x + objects_speed * elapsed_time * direction);
+			// 2. Marcar para destruir
+			if (abs(x) > LANE_HALF_LENGTH) {
+				objects_indices_to_destroy.push_back(i);
+			}
+		}
+	}
+
+	// 3. Destruir objetos
+	for (size_t i = 0; i < objects_indices_to_destroy.size(); i++) {
+		delete objects[objects_indices_to_destroy[i]];
+		objects.erase(objects.begin() + objects_indices_to_destroy[i]);
+	}
+
+	// 4. Spawnear nuevos objetos
+	if (!ready_to_spawn) {
+		current_cooldown -= elapsed_time;
+		if (current_cooldown <= 0) {
+			ready_to_spawn = true;
+		}
+	}
+
+	if (ready_to_spawn) {
+		// Tiro un dado
+		if (((rand() % 100)) <= spawn_rate * elapsed_time) {
+			ready_to_spawn = false;
+			current_cooldown = spawn_cooldown;
+			objects.push_back(new Car({ lane_position.x - LANE_HALF_LENGTH * direction, lane_position.y, lane_position.z }, direction));
+		}
+	}
+
+}
+
+
+Street::Street(float pos_z) : Lane(pos_z) {
+	lane_type = LaneIs::street;
+
+	objects_speed = ((rand() % 4) + 2);
+	// TODO: Revisar
+	spawn_cooldown = 2.5f / objects_speed;
+	spawn_rate = ((rand() % 40) + 25);
+	ready_to_spawn = true;
+	direction = rand() % 2;
+	if (direction == 0) {
+		direction = -1;
+	}
+}
+
+Grass::Grass(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::grass;
 	unsigned int number_of_trees = rand() % LANE_LENGTH / 2;
 
 	for (size_t i = 0; i < number_of_trees; i++) {
 		// TODO: Create the list of positions beforehand so they do not repeat
-		int offset_x = (rand() % (LANE_LENGTH - 1)) - ( LANE_LENGTH / 2 - 1 );
-		objects.push_back(new Tree({ lane_position.x + offset_x, lane_position.y, lane_position.z }));
-	}
-}
-
-Street::Street(float pos_z) : Lane(pos_z) {
-	lane_type = LaneIs::street;
-	unsigned int number_of_cars = rand() % 8;
-	float random_velocity = ((rand() % 4) + 1);
-	for (size_t i = 0; i < number_of_cars; i++) {
-		// TODO: Create the list of positions beforehand so they do not repeat
 		int offset_x = (rand() % (LANE_LENGTH - 1)) - (LANE_LENGTH / 2 - 1);
-		objects.push_back(new Car({ lane_position.x - LANE_HALF_LENGTH - offset_x, lane_position.y, lane_position.z }, random_velocity));
+		objects.push_back(new Tree({ lane_position.x + offset_x, lane_position.y, lane_position.z }));
 	}
 }

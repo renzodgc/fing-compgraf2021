@@ -15,6 +15,10 @@ void ScenarioObject::set_object_position(position pos) {
 	object_position = pos;
 }
 
+void ScenarioObject::set_object_x(float x) {
+	object_position.x = x;
+}
+
 ObjectIs ScenarioObject::get_object_type() {
 	return object_type;
 }
@@ -53,20 +57,18 @@ void Border::draw(bool use_texture) {
 
 // CAR
 
-Car::Car(position pos, float vel) : ScenarioObject(pos) {
+Car::Car(position pos, int direct) : ScenarioObject(pos) {
 	object_type = ObjectIs::car;
-	velocity = vel;
-	initial_position = pos;
+	direction = direct;
 }
 
 void Car::draw(bool use_texture) {
-	if (object_position.x > LANE_HALF_LENGTH) {
-		object_position.x = initial_position.x;
-	}
 	glPushMatrix();
-	// 0.03f == HARCODED elapsed time
-	object_position.x += velocity * 0.03f;
 	glTranslatef(object_position.x, 0.f, 0.f);
+	glScalef(2.f, 1.f, 1.f);
+	if (direction == -1) {
+		glRotatef(180.f, 0.f, 1.f, 0.f);
+	}
 	draw_manager->car(use_texture);
 	glPopMatrix();
 }

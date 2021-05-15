@@ -169,6 +169,7 @@ int game() {
 		player.draw(textures);
 		for (size_t i = 0; i < lanes.size(); i++) {
 			lanes[i]->draw(textures);
+			lanes[i]->update(elapsed_time);
 		}
 
 		if (score < -player.get_player_position().z) {

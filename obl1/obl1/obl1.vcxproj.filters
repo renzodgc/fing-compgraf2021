@@ -45,9 +45,6 @@
     <ClCompile Include="file_helper.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="math_helper.cpp">
-      <Filter>Source Files\helpers</Filter>
-    </ClCompile>
     <ClCompile Include="camera_manager.cpp">
       <Filter>Source Files\managers</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="window_helper.cpp">
       <Filter>Source Files\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="math_helper.cpp">
+      <Filter>Source Files\extras</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -36,4 +36,7 @@ enum class LaneIs { grass, street };
 const string ROUTE_PLAYER_TEXTURE = "resources/Chicken02Col.jpg";
 const string ROUTE_PLAYER_OBJECT = "resources/Chicken02.obj";
 
+const string ROUTE_CAR_TEXTURE = "resources/Truck04Colour.png";
+const string ROUTE_CAR_OBJECT = "resources/Truck02.obj";
+
 #endif

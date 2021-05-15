@@ -9,15 +9,21 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
+// Constructor and Singleton method
+// -----------------------------------------------------------------------------------
+
 Draw::Draw() {
-	player_texture = load_texture("Chicken02Col.jpg");
-	tie(player_commands, player_data) = load_obj("Chicken02.obj");
+	player_texture = load_texture(ROUTE_PLAYER_TEXTURE);
+	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT);
 }
 
 Draw& Draw::get_instance() {
 	static Draw instance; // Guaranteed to be destroyed. Instantiated on first use.
 	return instance;
 }
+
+// Main objects' drawing methods
+// -----------------------------------------------------------------------------------
 
 void Draw::border(bool use_texture) {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
@@ -48,6 +54,9 @@ void Draw::player(bool use_texture) {
 	DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, use_texture);
 	glPopMatrix();
 }
+
+// Primitive objects' drawing methods
+// -----------------------------------------------------------------------------------
 
 void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture) {
 	glPushMatrix();
@@ -133,10 +142,12 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 	glDisable(GL_TEXTURE_2D);
 }
 
+// Other objects' drawing methods
+// -----------------------------------------------------------------------------------
+
 void Draw::DrawReferenceObject() {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
 }
-
 
 void Draw::DrawTexturedSquare(GLuint texture, textured_square square) {
 	glEnable(GL_TEXTURE_2D);

@@ -1,3 +1,5 @@
+// Reference: https://stackoverflow.com/questions/30016083/sdl2-opengl-sdl2-ttf-displaying-text
+
 // HEADERS
 // -----------------------------------------------------------------------------------
 #include "ui_manager.h"
@@ -9,7 +11,9 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-// Reference: https://stackoverflow.com/questions/30016083/sdl2-opengl-sdl2-ttf-displaying-text
+// Constructor and Singleton method
+// -----------------------------------------------------------------------------------
+
 UI::UI() {
 	draw_manager = &Draw::get_instance();
 	
@@ -33,14 +37,8 @@ UI& UI::get_instance() {
 	return instance;
 }
 
-void UI::clean_memory() {
-	SDL_FreeSurface(score.surface_message);
-	SDL_FreeSurface(score.rgb_surface);
-	SDL_FreeSurface(coins.surface_message);
-	SDL_FreeSurface(coins.rgb_surface);
-	TTF_CloseFont(font);
-}
-
+// Main methods
+// -----------------------------------------------------------------------------------
 
 void UI::draw() {
 	glMatrixMode(GL_PROJECTION); glPushMatrix(); glLoadIdentity();
@@ -53,6 +51,17 @@ void UI::draw() {
 	glMatrixMode(GL_PROJECTION); glPopMatrix();
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();
 }
+
+void UI::clean_memory() {
+	SDL_FreeSurface(score.surface_message);
+	SDL_FreeSurface(score.rgb_surface);
+	SDL_FreeSurface(coins.surface_message);
+	SDL_FreeSurface(coins.rgb_surface);
+	TTF_CloseFont(font);
+}
+
+// Getters & Setters
+// -----------------------------------------------------------------------------------
 
 void UI::set_score(int score_number) {
 	string message = "Score: " + to_string(score_number);

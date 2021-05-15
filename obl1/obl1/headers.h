@@ -30,14 +30,11 @@
 #include "camera_manager.h"
 #include "draw_manager.h"
 #include "ui_manager.h"
+#include "game_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
 using namespace std;
 
-// HEADERS
-// -----------------------------------------------------------------------------------
-
-int game();
 
 #endif

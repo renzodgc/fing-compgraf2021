@@ -1,6 +1,8 @@
 #include "headers.h"
 
-int game() {
+using namespace std;
+
+int main(int argc, char* argv[]) {
 
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
@@ -22,13 +24,14 @@ int game() {
 	SDL_GLContext context;
 	tie(window, context) = InitializeSDL("Game", SCR_WIDTH, SCR_HEIGHT);
 
-	// VARIABLES
+	// FLAGS
 	bool program_running = true;
 	bool paused = false;
 	bool wireframe = false;
 	bool textures = true;
 	bool interpolated_lightning = false;
 
+	// GENERAL OBJECTS AND VARIABLES
 	SDL_Event sdl_event;
 	const Uint8* keyboard_state;
 	float mouse_offset_x, mouse_offset_y;
@@ -36,45 +39,38 @@ int game() {
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 
-	int score = 0;
-	int coins = 0;
+	// MAIN OBJECTS
+	Player& player = Player::get_instance();
 
+	// MANAGERS
+	Game& game_manager = Game::get_instance();
 	Draw& draw_manager = Draw::get_instance();
 	UI& ui = UI::get_instance();
-
-	Player player = Player({ 0.f, 0.f, -2.f });
 	Camera& camera = Camera::get_instance();
-	camera.set_player(&player);
-
-	vector<Lane*> lanes = { 
-		new Grass(4.f),
-		new Grass(3.f),
-		new Grass(2.f),
-		new Grass(1.f),
-		new Grass(0.f),
-		new Street(-1.f),
-		new Street(-2.f),
-		new Grass(-3.f),
-		new Street(-4.f),
-		new Street(-5.f),
-		new Grass(-6.f),
-		new Grass(-7.f)
-	};
 
 	// RENDER LOOP
 	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();
 	do {
+
+		// PRE RENDER
+		// -----------------------------------------------------------------------------------------------
+
 		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
-		// INPUT EVENT HANDLING
+		// TIME CALCULATIONS
+		// -----------------------------------------------------------------------------------------------
+		
 		previous_t = current_t;
 		current_t = chrono::high_resolution_clock::now();
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
 		elapsed_time = delta_time.count();
 
+		// INPUT EVENT HANDLING
+		// -----------------------------------------------------------------------------------------------
+		
 		while (SDL_PollEvent(&sdl_event)) {
 			switch (sdl_event.type) {
 			case SDL_QUIT:
@@ -141,20 +137,33 @@ int game() {
 		}
 		keyboard_state = SDL_GetKeyboardState(NULL);
 
-		// UPDATE OBJECTS
-
+		// UPDATE
+		// -----------------------------------------------------------------------------------------------
+		
+		// Update player
 		player.update(elapsed_time);
-		camera.update_position(elapsed_time, keyboard_state);
 
+		// Update lanes
 		for (size_t i = 0; i < lanes.size(); i++) {
 			lanes[i]->update(elapsed_time);
 		}
 
+		// Update camera
+		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();
 
+		// Update HUD
+		if (game_manager.getScore() < -player.get_player_position().z) {
+			game_manager.setScore((int)-player.get_player_position().z);
+			ui.set_score(game_manager.getScore());
+		}
+
 		// RENDER
+		// -----------------------------------------------------------------------------------------------
+
 		glPushMatrix();
 		
+		// Draw origin reference
 		draw_manager.DrawReferenceObject();
 
 		// Draw "floor" as reference
@@ -168,27 +177,27 @@ int game() {
 
 		// Draw player
 		player.draw(textures);
-		for (size_t i = 0; i < lanes.size(); i++) {
-			lanes[i]->update(elapsed_time);
+		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+			game_manager.getLanes()[i]->draw(textures);
 		}
 
-		if (score < -player.get_player_position().z) {
-			score = (int)-player.get_player_position().z;
-			ui.set_score(score);
-		}
+		// Draw HUD
 		ui.draw();
 		
 		glPopMatrix();
 
-		// RENDER CLEANUP
+		// POST RENDER
+		// -----------------------------------------------------------------------------------------------
 		SDL_GL_SwapWindow(window);
+
 	} while (program_running);
 
-	// CLEANUP
+	// FINAL CLEANUP
 	ui.clean_memory();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	TTF_Quit();
 	SDL_Quit();
+
 	return 0;
 }

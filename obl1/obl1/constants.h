@@ -18,7 +18,6 @@ const float MOUSE_SENSITIVITY = 0.1f;
 // PLAYER
 const double PLAYER_SPEED = 7.0;
 
-
 // COLORS
 const color BLACK = { 0.f, 0.f, 0.f, 1.f }; // RGBA
 const color WHITE = { 1.f, 1.f, 1.f, 1.f }; // RGBA
@@ -29,6 +28,10 @@ const color CYAN = { 0.f, 1.f, 1.f, 1.f }; // RGBA
 const color MAGENTA = { 1.f, 0.f, 1.f, 1.f }; // RGBA
 const color YELLOW = { 1.f, 1.f, 0.f, 1.f }; // RGBA
 const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
+
+// FILE ROUTES
+const string ROUTE_PLAYER_TEXTURE = "resources/Chicken02Col.jpg";
+const string ROUTE_PLAYER_OBJECT = "resources/Chicken02.obj";
 
 // MODELS
 

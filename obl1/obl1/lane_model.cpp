@@ -9,7 +9,8 @@ using namespace std;
 // METHODS
 // -----------------------------------------------------------------------------------
 
-// GENERIC
+// Constructor parent
+// -----------------------------------------------------------------------------------
 
 Lane::Lane(float pos_z) {
 	lane_position = { 0.f, 0.f, pos_z };
@@ -19,6 +20,9 @@ Lane::Lane(float pos_z) {
 	draw_manager = &Draw::get_instance();
 }
 
+// Getters & Setters
+// -----------------------------------------------------------------------------------
+
 position Lane::get_lane_position() {
 	return lane_position;
 }
@@ -26,6 +30,9 @@ position Lane::get_lane_position() {
 void Lane::set_lane_position(position pos) {
 	lane_position = pos;
 }
+
+// Main methods
+// -----------------------------------------------------------------------------------
 
 void Lane::draw(bool use_texture) {
 	glPushMatrix();
@@ -84,6 +91,8 @@ void Street::update(double elapsed_time) {
 
 }
 
+// Constructors children
+// -----------------------------------------------------------------------------------
 
 Street::Street(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::street;

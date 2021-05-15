@@ -80,11 +80,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="camera_manager.cpp" />
     <ClCompile Include="draw_manager.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="lane_model.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="player_model.cpp" />
@@ -97,6 +97,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="draw_manager.h" />
     <ClInclude Include="file_helper.h" />
+    <ClInclude Include="game_manager.h" />
     <ClInclude Include="scenario_object_model.h" />
     <ClInclude Include="lane_model.h" />
     <ClInclude Include="player_model.h" />

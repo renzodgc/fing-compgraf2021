@@ -19,29 +19,40 @@
 // -----------------------------------------------------------------------------------
 using namespace std;
 
-// HEADERS
+// CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
 class UI {
-private:
-    UI(); // Singleton
 
-    TTF_Font* font;
-    HUDComponent score;
-    HUDComponent coins;
-    Draw* draw_manager;
+    private:
+        // Singleton
+        UI();
+        
+        // References
+        Draw* draw_manager;
 
-    void set_message_on_component(string message, HUDComponent* component);
-public:
-    UI(UI const&) = delete;
-    void operator=(UI const&) = delete;
-    static UI& get_instance();
+        // Basic properties
+        TTF_Font* font;
+        HUDComponent score;
+        HUDComponent coins;
 
-    void draw();
-    void set_score(int score_number);
-    void set_coins(int coins_number);
+        // Basic methods
+        void set_message_on_component(string message, HUDComponent* component);
+    
+    public:
+        // Constructor and singleton method
+        UI(UI const&) = delete;
+        void operator=(UI const&) = delete;
+        static UI& get_instance();
 
-    void clean_memory();
+        // Main methods
+        void draw();
+        void clean_memory();
+
+        // Setters
+        void set_score(int score_number);
+        void set_coins(int coins_number);
+
 };
 
 #endif

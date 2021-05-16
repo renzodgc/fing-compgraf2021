@@ -112,17 +112,19 @@ int main(int argc, char* argv[]) {
 					ToggleFullscreen(window);
 					break;
 				case SDLK_LEFT:
-					player.move_left();
+					if (!paused) player.move_left();
 					break;
 				case SDLK_RIGHT:
-					player.move_right();
+					if (!paused) player.move_right();
 					break;
 				case SDLK_UP:
-					player.move_up();
-					game_manager.update(player.get_player_position().z);
+					if (!paused) {
+						player.move_up();
+						game_manager.update(player.get_player_position().z);
+					}
 					break;
 				case SDLK_DOWN:
-					player.move_down();
+					if (!paused) player.move_down();
 					break;
 				}
 				break;
@@ -141,23 +143,28 @@ int main(int argc, char* argv[]) {
 		// UPDATE
 		// -----------------------------------------------------------------------------------------------
 		
-		// Update player
-		player.update(elapsed_time);
-
-		// Update lanes
-		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
-			game_manager.getLanes()[i]->update(elapsed_time);
-		}
-
 		// Update camera
 		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();
 
-		// Update HUD
-		if (game_manager.getScore() < -player.get_player_position().z) {
-			game_manager.setScore((int)-player.get_player_position().z);
-			ui.set_score(game_manager.getScore());
+		if (!paused) {
+
+			// Update player
+			player.update(elapsed_time);
+
+			// Update lanes
+			for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+				game_manager.getLanes()[i]->update(elapsed_time);
+			}
+
+			// Update HUD
+			if (game_manager.getScore() < -player.get_player_position().z) {
+				game_manager.setScore((int)-player.get_player_position().z);
+				ui.set_score(game_manager.getScore());
+			}
+
 		}
+		
 
 		// RENDER
 		// -----------------------------------------------------------------------------------------------

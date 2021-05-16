@@ -30,4 +30,6 @@ float degree_to_radian(float degree);
 int get_random(int limit);
 vector<int> get_random_vector(int length, int limit);
 
+bool is_zero_one_or_minus_one(int k);
+
 #endif

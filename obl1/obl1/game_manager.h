@@ -25,10 +25,21 @@ class Game {
         Game();
 
         // Basic properties
-        int score;
-        int level;
-        int coins;
-        vector<Lane*> lanes;
+        int score; // Based on player position
+        int level; // Level of difficulty based on player score
+        int coins; // Amount of coins gathered
+        vector<Lane*> lanes; // Current existing lanes
+
+        // Used for checking lane window constraints
+        int upper_lane_limit; 
+        int lower_lane_limit; 
+        // Used for creating new lanes
+        unsigned int grass_in_a_row; 
+        unsigned int street_in_a_row;
+
+        // Lane generating methods
+        vector<Lane*> generateBaseLanes();
+        Lane* addLane(float position);
 
     public:
         // Constructor and singleton method
@@ -43,6 +54,9 @@ class Game {
         vector<Lane*> getLanes();
         void setScore(int score);
         void addCoin();
+
+        // Main methods
+        void update(float player_position);
 
 };
 

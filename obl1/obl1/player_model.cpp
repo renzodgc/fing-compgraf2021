@@ -13,7 +13,7 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 Player::Player() {
-	player_position = { 0.f, 0.f, -2.f };
+	player_position = { 0.f, 0.f, 0.f };
 	player_angle = 0.f;
 	player_state = PlayerIs::idle;
 

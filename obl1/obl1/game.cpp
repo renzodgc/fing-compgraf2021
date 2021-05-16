@@ -119,6 +119,7 @@ int main(int argc, char* argv[]) {
 					break;
 				case SDLK_UP:
 					player.move_up();
+					game_manager.update(player.get_player_position().z);
 					break;
 				case SDLK_DOWN:
 					player.move_down();

@@ -47,6 +47,14 @@ class Lane {
         virtual void update(double elapsed_time);
     };
 
+class Wall : public Lane {
+
+    public:
+        // Constructor
+        Wall(float pos_z);
+
+};
+
 class Grass : public Lane {
 
     public:

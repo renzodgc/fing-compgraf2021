@@ -59,3 +59,7 @@ vector<int> get_random_vector(int length, int limit) {
 
 	return sliced_vector;
 }
+
+bool is_zero_one_or_minus_one(int k) {
+	return(k >= -1 && k <= 1);
+}

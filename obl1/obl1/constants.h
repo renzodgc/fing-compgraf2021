@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 // SETTINGS
 // ---------------------------------------------------------------------------------------
 
@@ -17,8 +18,14 @@ const unsigned int SCR_HEIGHT = 768;
 // CAMERA
 // ---------------------------------------------------------------------------------------
 
+enum class CameraType { isometric, third_person, free_view };
 const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
+
+// DRAW MANAGER
+// ---------------------------------------------------------------------------------------
+
+enum class ObjType { squares, triangles };
 
 // PLAYER
 // ---------------------------------------------------------------------------------------
@@ -28,11 +35,13 @@ const double PLAYER_SPEED = 7.0;
 // GAME
 // ---------------------------------------------------------------------------------------
 
+enum class OnCollision { uneventful, bounce, death, coin };
 const unsigned int LEVEL_RAISE_COEF = 10;
 
 // LANE
 // ---------------------------------------------------------------------------------------
 
+enum class LaneIs { wall, grass, street };
 const unsigned int LANE_TYPES = 3;
 
 const int LANES_INTERVAL = 10;

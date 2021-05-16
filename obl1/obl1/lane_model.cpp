@@ -127,8 +127,13 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 	// Get random unrepeated positions for trees
 	vector<int> positions = get_random_vector(number_of_trees, LANE_LENGTH / 2);
 
+	// If lane is -1, 0 or 1 remove objects adyacent to player spawn position
+	if (pos_z >= -1 && pos_z <= 1) {
+		positions.erase(remove_if(positions.begin(), positions.end(), is_zero_one_or_minus_one), positions.end());
+	}
+
 	// Create trees
-	for (size_t i = 0; i < number_of_trees; i++) {
+	for (size_t i = 0; i < positions.size(); i++) {
 		objects.push_back(new Tree({ lane_position.x + positions[i], lane_position.y, lane_position.z }));
 	}
 }

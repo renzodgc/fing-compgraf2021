@@ -7,11 +7,8 @@
 #include "SDL_ttf.h"
 #include <GL/glu.h>
 
-enum class CameraType { isometric, third_person, free_view };
+
 enum class HUDComponentIs { left, right };
-enum class ObjType { squares, triangles };
-enum class OnCollision { uneventful, bounce, death, coin };
-enum class LaneIs { wall, grass, street };
 
 struct HUDComponent {
 	HUDComponentIs position;

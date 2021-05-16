@@ -17,7 +17,7 @@
 #include "FreeImage.h"
 #include <GL/glu.h>
 
-#include "models.h"
+#include "constants.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

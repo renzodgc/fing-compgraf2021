@@ -45,7 +45,7 @@ vector<Lane*> Game::getLanes() {
 
 void Game::setScore(int score) {
 	this->score = score;
-	if (this->score >= (this->level * LEVEL_RAISE_COEF)) {
+	if (this->score >= (this->level * (int)LEVEL_RAISE_COEF)) {
 		this->level++;
 	}
 }

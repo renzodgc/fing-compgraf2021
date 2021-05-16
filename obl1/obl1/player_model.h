@@ -19,8 +19,6 @@ using namespace std;
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
-enum class PlayerIs { idle, moving_left, moving_right, moving_down, moving_up };
-
 class Player {
 
     private:

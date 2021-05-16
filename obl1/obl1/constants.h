@@ -30,6 +30,7 @@ enum class ObjType { squares, triangles };
 // PLAYER
 // ---------------------------------------------------------------------------------------
 
+enum class PlayerIs { idle, moving_left, moving_right, moving_down, moving_up };
 const double PLAYER_SPEED = 7.0;
 
 // GAME

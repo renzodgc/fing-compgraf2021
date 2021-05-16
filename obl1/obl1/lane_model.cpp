@@ -53,8 +53,30 @@ void Lane::draw(bool use_texture) {
 	glPopMatrix();
 }
 
-void Lane::update(double elapsed_time) {
-	// coins here
+// AABB - AABB Collisions (Axis-aligned bounding box)
+// Reference: https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection
+vector<OnCollision> Lane::update(double elapsed_time, position player_position) {
+	// Check for collisions only if the player is in or adyacent to this lane.
+	vector<OnCollision> collision_events;
+	if (abs(lane_position.z - player_position.z) <= 1) {
+		bool collision_x, collision_z;
+		float player_bounding_box_radius = TILE_LENGTH;
+		for (size_t i = 0; i < objects.size(); i++) {
+			// Check for overlaping on BOTH the Z and the X axis (Y axis doesn't matter)
+			collision_x = (
+				((player_position.x + player_bounding_box_radius) > (objects[i]->get_object_position().x - objects[i]->get_bounding_box_radius().x)) &&
+				((objects[i]->get_object_position().x + objects[i]->get_bounding_box_radius().x) > (player_position.x - player_bounding_box_radius))
+			);
+			collision_z = (
+				((player_position.z + player_bounding_box_radius) > (objects[i]->get_object_position().z - objects[i]->get_bounding_box_radius().z)) &&
+				((objects[i]->get_object_position().z + objects[i]->get_bounding_box_radius().z) > (player_position.z - player_bounding_box_radius))
+			);
+			if (collision_x && collision_z) {
+				collision_events.push_back(objects[i]->get_on_collision_behaviour());
+			}
+		}
+	}
+	return collision_events;
 }
 
 // Street methods
@@ -74,9 +96,7 @@ Street::Street(float pos_z) : Lane(pos_z) {
 	}
 }
 
-void Street::update(double elapsed_time) {
-	Lane::update(elapsed_time);
-
+vector<OnCollision> Street::update(double elapsed_time, position player_position) {
 	vector<int> objects_indices_to_destroy;
 	for (size_t i = 0; i < objects.size(); i++) {
 		if (objects[i]->get_object_type() == ObjectIs::car) {
@@ -113,6 +133,8 @@ void Street::update(double elapsed_time) {
 		}
 	}
 
+	// Check for collisions
+	return Lane::update(elapsed_time, player_position);
 }
 
 // Grass methods
@@ -124,8 +146,8 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 	// Get amount of trees
 	unsigned int number_of_trees = get_random(LANE_LENGTH / 3);
 
-	// Get random unrepeated positions for trees
-	vector<int> positions = get_random_vector(number_of_trees, LANE_LENGTH / 2);
+	// Get random unrepeated positions for trees. Exclude borders
+	vector<int> positions = get_random_vector(number_of_trees, (LANE_LENGTH / 2) - 1);
 
 	// If lane is -1, 0 or 1 remove objects adyacent to player spawn position
 	if (pos_z >= -1 && pos_z <= 1) {
@@ -142,4 +164,22 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 // -----------------------------------------------------------------------------------
 Wall::Wall(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::wall;
+}
+
+vector<OnCollision> Wall::update(double elapsed_time, position player_position) {
+	// Check for collisions only if the player is in or adyacent to this lane.
+	vector<OnCollision> collision_events;
+	if (abs(lane_position.z - player_position.z) <= 1) {
+		float player_bounding_box_radius = TILE_LENGTH;
+		float lane_bounding_box_radius = TILE_LENGTH;
+		// Check for overlaping on the Z axis
+		bool collision_z = (
+			((player_position.z + player_bounding_box_radius) > (lane_position.z - lane_bounding_box_radius)) &&
+			((lane_position.z + lane_bounding_box_radius) > (player_position.z - player_bounding_box_radius))
+			);
+		if (collision_z) {
+			collision_events.push_back(OnCollision::bounce);
+		}
+	}
+	return collision_events;
 }

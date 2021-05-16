@@ -45,7 +45,7 @@ class Lane {
 
         // Main methods
         void draw(bool use_texture);
-        virtual void update(double elapsed_time);
+        virtual vector<OnCollision> update(double elapsed_time, position player_position);
     };
 
 class Wall : public Lane {
@@ -53,6 +53,7 @@ class Wall : public Lane {
     public:
         // Constructor
         Wall(float pos_z);
+        vector<OnCollision> update(double elapsed_time, position player_position);
 
 };
 
@@ -79,7 +80,7 @@ class Street : public Lane {
     public:
         // Constructor
         Street(float pos_z);
-        void update(double elapsed_time);
+        vector<OnCollision> update(double elapsed_time, position player_position);
 };
 
 // Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector

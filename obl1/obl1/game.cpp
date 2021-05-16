@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
 	chrono::duration<double> delta_time;
 	double elapsed_time;
 	chrono::high_resolution_clock::time_point current_t, previous_t;
+	vector<OnCollision> collision_events;
 
 	// MAIN OBJECTS
 	Player& player = Player::get_instance();
@@ -142,20 +143,35 @@ int main(int argc, char* argv[]) {
 
 		// UPDATE
 		// -----------------------------------------------------------------------------------------------
-		
+
 		// Update camera
 		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();
 
 		if (!paused) {
 
-			// Update player
-			player.update(elapsed_time);
-
 			// Update lanes
 			for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
-				game_manager.getLanes()[i]->update(elapsed_time);
+				collision_events = game_manager.getLanes()[i]->update(elapsed_time, player.get_player_position());
+				// Apply collisions events if any
+				for (size_t i = 0; i < collision_events.size(); i++) {
+					switch (collision_events[i]) {
+					case OnCollision::bounce:
+						player.bounce_back();
+						break;
+					case OnCollision::coin:
+						game_manager.addCoin();
+						ui.set_coins(game_manager.getCoins());
+						break;
+					case OnCollision::death:
+						cout << "GAME OVER!" << endl;
+						break;
+					}
+				}
 			}
+
+			// Update player
+			player.update(elapsed_time);
 
 			// Update HUD
 			if (game_manager.getScore() < -player.get_player_position().z) {

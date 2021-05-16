@@ -27,6 +27,12 @@ struct color {
 	float alpha;
 };
 
+struct vector3d {
+	float x;
+	float y;
+	float z;
+};
+
 struct position {
 	float x;
 	float y;

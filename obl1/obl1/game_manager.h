@@ -5,6 +5,8 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include <algorithm>
+#include <functional>
 #include <iostream>
 #include <vector>
 
@@ -58,6 +60,15 @@ class Game {
         // Main methods
         void update(float player_position);
 
+};
+
+// Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector
+// Function object to delete lanes
+struct lane_deleter {
+    void operator()(Lane*& e) { // important to take pointer by reference!
+        delete e;
+        e = NULL;
+    }
 };
 
 #endif

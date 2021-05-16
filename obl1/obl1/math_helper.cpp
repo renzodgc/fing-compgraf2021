@@ -58,5 +58,4 @@ vector<int> get_random_vector(int length, int limit) {
 	sliced_vector = { random_vector.begin(), random_vector.begin() + length};
 
 	return sliced_vector;
-
 }

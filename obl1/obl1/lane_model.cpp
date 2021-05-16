@@ -20,6 +20,13 @@ Lane::Lane(float pos_z) {
 	draw_manager = &Draw::get_instance();
 }
 
+Lane::~Lane() {
+	// Apply lane_deleter to each element (to free their memory)
+	for_each(this->objects.begin(), this->objects.end(), scenario_object_deleter());
+	// Delete null elements
+	this->objects.erase(this->objects.begin(), this->objects.end());
+}
+
 // Getters & Setters
 // -----------------------------------------------------------------------------------
 

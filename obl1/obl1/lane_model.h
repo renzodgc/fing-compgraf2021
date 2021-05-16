@@ -37,6 +37,7 @@ class Lane {
     public:
         // Constructor
         Lane(float pos_z);
+        ~Lane();
 
         // Getters & Setters
         position get_lane_position();
@@ -79,6 +80,15 @@ class Street : public Lane {
         // Constructor
         Street(float pos_z);
         void update(double elapsed_time);
+};
+
+// Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector
+// Function object to delete lanes
+struct scenario_object_deleter {
+    void operator()(ScenarioObject*& e) { // important to take pointer by reference!
+        delete e;
+        e = NULL;
+    }
 };
 
 #endif

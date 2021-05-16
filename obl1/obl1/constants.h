@@ -33,7 +33,6 @@ const unsigned int LEVEL_RAISE_COEF = 10;
 // LANE
 // ---------------------------------------------------------------------------------------
 
-enum class LaneIs { wall, grass, street };
 const unsigned int LANE_TYPES = 3;
 
 const int LANES_INTERVAL = 10;

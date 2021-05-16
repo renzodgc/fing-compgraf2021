@@ -64,7 +64,7 @@ Car::Car(position pos, int direct) : ScenarioObject(pos) {
 
 void Car::draw(bool use_texture) {
 	glPushMatrix();
-	glTranslatef(object_position.x, 0.f, 0.f);
+	glTranslatef(object_position.x, -0.25f, 0.f);
 	if (direction == -1) {
 		glRotatef(180.f, 0.f, 1.f, 0.f);
 	}

@@ -67,7 +67,11 @@ void Game::update(float player_position) {
 			this->lanes.push_back(addLane((float)(upper_lane_limit - i)));
 		}
 
-		// Delete old LANES_INTERVAL lanes
+		// Delete old LANES_INTERVAL lanes:
+		
+		// Apply lane_deleter to each element (to free their memory)
+		for_each(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL, lane_deleter());
+		// Delete null elements
 		this->lanes.erase(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL);
 
 		// Update limits

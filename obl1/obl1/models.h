@@ -8,10 +8,10 @@
 #include <GL/glu.h>
 
 enum class CameraType { isometric, third_person, free_view };
-
 enum class HUDComponentIs { left, right };
-
 enum class ObjType { squares, triangles };
+enum class OnCollision { uneventful, bounce, death, coin };
+enum class LaneIs { wall, grass, street };
 
 struct HUDComponent {
 	HUDComponentIs position;
@@ -39,30 +39,6 @@ struct position {
 struct position2d {
 	float x;
 	float y;
-};
-
-struct triangle {
-	color color;
-	position a;
-	position b;
-	position c;
-};
-
-struct multicolored_triangle {
-	color color_a;
-	color color_b;
-	color color_c;
-	position a;
-	position b;
-	position c;
-};
-
-struct square {
-	color color;
-	position a;
-	position b;
-	position c;
-	position d;
 };
 
 struct textured_square {

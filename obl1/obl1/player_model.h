@@ -34,6 +34,7 @@ class Player {
         PlayerIs player_state;
         position player_position, before_movement;
         float player_angle;
+        bool is_bouncing;
 
     public:
         // Constructor and singleton method
@@ -56,6 +57,7 @@ class Player {
         void move_right();
         void move_up();
         void move_down();
+        void bounce_back();
 };
 
 #endif

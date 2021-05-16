@@ -16,6 +16,7 @@ Player::Player() {
 	player_position = { 0.f, 0.f, 0.f };
 	player_angle = 0.f;
 	player_state = PlayerIs::idle;
+	is_bouncing = false;
 
 	draw_manager = &Draw::get_instance();
 }
@@ -73,6 +74,9 @@ void Player::update(double elapsed_time) {
 			player_state = PlayerIs::idle;
 		}
 		break;
+	case PlayerIs::idle:
+		is_bouncing = false;
+		break;
 	}
 }
 
@@ -91,7 +95,7 @@ void Player::draw(bool use_texture) {
 // -----------------------------------------------------------------------------------
 
 void Player::move_right() {
-	if (player_state == PlayerIs::idle) {
+	if (player_state == PlayerIs::idle && !is_bouncing) {
 		player_state = PlayerIs::moving_right;
 		before_movement = player_position;
 		player_angle = 270.f;
@@ -99,7 +103,7 @@ void Player::move_right() {
 }
 
 void Player::move_left() {
-	if (player_state == PlayerIs::idle) {
+	if (player_state == PlayerIs::idle && !is_bouncing) {
 		player_state = PlayerIs::moving_left;
 		before_movement = player_position;
 		player_angle = 90.f;
@@ -107,7 +111,7 @@ void Player::move_left() {
 }
 
 void Player::move_up() {
-	if (player_state == PlayerIs::idle) {
+	if (player_state == PlayerIs::idle && !is_bouncing) {
 		player_state = PlayerIs::moving_up;
 		before_movement = player_position;
 		player_angle = 0.f;
@@ -115,9 +119,34 @@ void Player::move_up() {
 }
 
 void Player::move_down() {
-	if (player_state == PlayerIs::idle) {
+	if (player_state == PlayerIs::idle && !is_bouncing) {
 		player_state = PlayerIs::moving_down;
 		before_movement = player_position;
 		player_angle = 180.f;
 	}
+}
+
+void Player::bounce_back() {
+	if (!is_bouncing) {
+		is_bouncing = true;
+		switch (player_state) {
+		case PlayerIs::moving_right:
+			player_state = PlayerIs::moving_left;
+			before_movement = { before_movement.x + 1, before_movement.y, before_movement.z };
+			break;
+		case PlayerIs::moving_left:
+			player_state = PlayerIs::moving_right;
+			before_movement = { before_movement.x - 1, before_movement.y, before_movement.z };
+			break;
+		case PlayerIs::moving_down:
+			player_state = PlayerIs::moving_up;
+			before_movement = { before_movement.x, before_movement.y, before_movement.z + 1 };
+			break;
+		case PlayerIs::moving_up:
+			player_state = PlayerIs::moving_down;
+			before_movement = { before_movement.x, before_movement.y, before_movement.z - 1 };
+			break;
+		}
+	}
+	
 }

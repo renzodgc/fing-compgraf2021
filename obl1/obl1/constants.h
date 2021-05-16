@@ -35,7 +35,7 @@ const double PLAYER_SPEED = 7.0;
 // GAME
 // ---------------------------------------------------------------------------------------
 
-enum class OnCollision { uneventful, bounce, death, coin };
+enum class OnCollision { bounce, death, coin };
 const unsigned int LEVEL_RAISE_COEF = 10;
 
 // LANE

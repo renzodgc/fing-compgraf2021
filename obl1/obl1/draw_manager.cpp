@@ -32,10 +32,6 @@ void Draw::player(bool use_texture) {
 	glScalef(0.5f, 0.5f, 0.5f);
 	DrawMultiplePoints(GL_QUADS, player_commands, player_data, player_texture, use_texture);
 	glPopMatrix();
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e57ee0c3caf6eb343a001e797ab5544b26f5245
 }
 
 void Draw::lane(LaneIs laneType, bool use_texture) {

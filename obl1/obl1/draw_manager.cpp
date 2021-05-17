@@ -18,6 +18,8 @@ Draw::Draw() {
 	car_texture = load_texture(ROUTE_CAR_TEXTURE);
 	tie(car_commands, car_data) = load_obj(ROUTE_CAR_OBJECT, ObjType::triangles);
 	grass_texture = load_texture(ROUTE_GRASS_TEXTURE);
+	wood_texture = load_texture(ROUTE_WOOD_TEXTURE);
+	street_texture = load_texture(ROUTE_STREET_TEXTURE);
 }
 
 Draw& Draw::get_instance() {
@@ -44,7 +46,7 @@ void Draw::lane(LaneIs laneType, bool use_texture) {
 		DrawMultiplePoints(GL_QUADS, COMMANDS_GRASS_OBJECT, DATA_LANE_GRASS_OBJECT, grass_texture, use_texture);
 		break;
 	case LaneIs::street:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);
+		DrawMultiplePoints(GL_QUADS, COMMANDS_STREET_OBJECT, DATA_LANE_STREET_OBJECT, street_texture, use_texture);
 		break;
 	}
 }
@@ -54,7 +56,7 @@ void Draw::border(bool use_texture) {
 }
 
 void Draw::tree(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT, wood_texture, use_texture);
 }
 
 void Draw::car(bool use_texture) {
@@ -70,6 +72,7 @@ void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<ve
 	if (use_texture) {
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
+		glColor3f(1.f, 1.f, 1.f);
 	}
 	glBegin(primitive);
 	for (size_t i = 0; i < commands.size(); i++) {
@@ -87,7 +90,9 @@ void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<ve
 			break;
 		}
 		case('C'): {
-			glColor3f(data[i][0], data[i][1], data[i][2]);
+			if (!use_texture) {
+				glColor3f(data[i][0], data[i][1], data[i][2]);
+			}
 			break;
 		}
 		case('A'): {

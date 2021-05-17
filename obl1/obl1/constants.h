@@ -66,6 +66,7 @@ const unsigned int SPAWN_RATE_RANDOM_COEF = 15;
 const unsigned int BASE_SPEED_COEF = 2;
 const unsigned int SPEED_COEF = 4;
 const unsigned int SPEED_RANDOM_COEF = 2;
+SPEED_SCALING_COEF = 2; // Inversely proportional
 
 
 // OBJECTS

@@ -51,9 +51,13 @@ const int INITIAL_LANES_INTERVAL = 10;
 const unsigned int MAX_GRASS_COEF = 4;
 const unsigned int MAX_STREET_COEF = 2;
 
-// FILE ROUTES
+// OBJECTS
 // ---------------------------------------------------------------------------------------
 
+enum class ObjectIs { car, tree, border };
+
+// FILE ROUTES
+// ---------------------------------------------------------------------------------------
 
 const string ROUTE_PLAYER_TEXTURE = "resources/Chicken02Col.jpg";
 const string ROUTE_PLAYER_OBJECT = "resources/Chicken02.obj";

@@ -53,6 +53,8 @@ class Wall : public Lane {
     public:
         // Constructor
         Wall(float pos_z);
+
+        // Main methods
         vector<OnCollision> update(double elapsed_time, position player_position);
 
 };
@@ -80,6 +82,8 @@ class Street : public Lane {
     public:
         // Constructor
         Street(float pos_z);
+
+        // Main methods
         vector<OnCollision> update(double elapsed_time, position player_position);
 };
 

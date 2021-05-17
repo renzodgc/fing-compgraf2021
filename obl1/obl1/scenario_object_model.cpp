@@ -1,17 +1,33 @@
+// HEADERS
+// -----------------------------------------------------------------------------------
 #include "scenario_object_model.h"
 
-// GENERIC
+// NAMESPACE
+// -----------------------------------------------------------------------------------
+using namespace std;
+
+// METHODS
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
 
 ScenarioObject::ScenarioObject(position pos) {
-	object_position = pos;
+
+	// References
 	draw_manager = &Draw::get_instance();
+
+	// Basic properties
+	object_position = pos;
 	on_collision_behaviour = OnCollision::bounce;
 }
+
+// Getters & Setters
+// -----------------------------------------------------------------------------------
 
 position ScenarioObject::get_object_position() {
 	return object_position;
 }
-
 void ScenarioObject::set_object_position(position pos) {
 	object_position = pos;
 }
@@ -37,18 +53,26 @@ void ScenarioObject::set_object_x(float x) {
 ObjectIs ScenarioObject::get_object_type() {
 	return object_type;
 }
-
 void ScenarioObject::set_object_type(ObjectIs type) {
 	object_type = type;
 }
 
 // TREE
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
 
 Tree::Tree(position pos) : ScenarioObject(pos) {
+
+	// Basic properties
 	object_type = ObjectIs::tree;
 	on_collision_behaviour = OnCollision::bounce;
 	bounding_box_radius = { 0.5f, 0.5f, 0.5f };
 }
+
+// Main methods
+// -----------------------------------------------------------------------------------
 
 void Tree::draw(bool use_texture) {
 	glPushMatrix();
@@ -58,12 +82,21 @@ void Tree::draw(bool use_texture) {
 }
 
 // BORDER
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
 
 Border::Border(position pos) : ScenarioObject(pos) {
+
+	// Basic properties
 	object_type = ObjectIs::border;
 	on_collision_behaviour = OnCollision::bounce;
 	bounding_box_radius = { 0.5f, 0.5f, 0.5f };
 }
+
+// Main methods
+// -----------------------------------------------------------------------------------
 
 void Border::draw(bool use_texture) {
 	glPushMatrix();
@@ -75,13 +108,24 @@ void Border::draw(bool use_texture) {
 
 
 // CAR
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
 
 Car::Car(position pos, int direct) : ScenarioObject(pos) {
+	
+	// Basic properties
 	object_type = ObjectIs::car;
-	direction = direct;
 	on_collision_behaviour = OnCollision::death;
 	bounding_box_radius = { 1.f, 0.5f, 0.5f };
+
+	// Other properties
+	direction = direct;
 }
+
+// Main methods
+// -----------------------------------------------------------------------------------
 
 void Car::draw(bool use_texture) {
 	glPushMatrix();

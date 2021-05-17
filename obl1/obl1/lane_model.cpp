@@ -162,6 +162,7 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 
 // Wall methods
 // -----------------------------------------------------------------------------------
+
 Wall::Wall(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::wall;
 }

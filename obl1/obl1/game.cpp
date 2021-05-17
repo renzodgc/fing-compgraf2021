@@ -190,15 +190,6 @@ int main(int argc, char* argv[]) {
 		// Draw origin reference
 		draw_manager.DrawReferenceObject();
 
-		// Draw "floor" as reference
-		draw_manager.DrawMultiplePoints(GL_QUADS, { 'C', 'V', 'V', 'V', 'V' }, {
-			{0.7f, 0.7f, 0.7f, 1.f},
-			{-500.f, -1.f, -500.f},
-			{-500.f, -1.f, 500.f},
-			{500.f, -1.f, 500.f},
-			{500.f, -1.f, -500.f}
-		});
-
 		// Draw player
 		player.draw(textures);
 

@@ -102,7 +102,7 @@ void Camera::start_isometric_view() {
 
 	glClearColor(LIGHT_GREY.red, LIGHT_GREY.green, LIGHT_GREY.blue, LIGHT_GREY.alpha);
 
-	glOrtho(-distance_from_player, distance_from_player, -distance_from_player * 0.7, distance_from_player * 0.7, -distance_from_player, distance_from_player);
+	glOrtho(-distance_from_player, distance_from_player, -distance_from_player * 0.7f, distance_from_player * 0.7f, -distance_from_player*1.4f, distance_from_player*1.4f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity(); // Reset the view

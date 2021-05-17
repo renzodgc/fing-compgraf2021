@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	// FLAGS
 	bool program_running = true;
 	bool paused = false;
+	bool game_over = false;
 	bool wireframe = false;
 	bool textures = true;
 	bool interpolated_lightning = false;
@@ -115,19 +116,19 @@ int main(int argc, char* argv[]) {
 					ToggleFullscreen(window);
 					break;
 				case SDLK_LEFT:
-					if (!paused) player.move_left();
+					if (!paused && !game_over) player.move_left();
 					break;
 				case SDLK_RIGHT:
-					if (!paused) player.move_right();
+					if (!paused && !game_over) player.move_right();
 					break;
 				case SDLK_UP:
-					if (!paused) {
+					if (!paused && !game_over) {
 						player.move_up();
 						game_manager.update(player.get_player_position().z);
 					}
 					break;
 				case SDLK_DOWN:
-					if (!paused) player.move_down();
+					if (!paused && !game_over) player.move_down();
 					break;
 				}
 				break;
@@ -150,7 +151,7 @@ int main(int argc, char* argv[]) {
 		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();
 
-		if (!paused) {
+		if (!paused && !game_over) {
 
 			// Update lanes
 			for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
@@ -166,7 +167,7 @@ int main(int argc, char* argv[]) {
 						ui.set_coins(game_manager.getCoins());
 						break;
 					case OnCollision::death:
-						cout << "GAME OVER!" << endl;
+						//game_over = true;
 						break;
 					}
 				}
@@ -189,9 +190,6 @@ int main(int argc, char* argv[]) {
 
 		glPushMatrix();
 		
-		// Draw origin reference
-		draw_manager.DrawReferenceObject();
-
 		// Draw player
 		player.draw(textures);
 

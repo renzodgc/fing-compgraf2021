@@ -175,10 +175,9 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 	third_person_horizontal_distance_from_player = distance_from_player * cos(degree_to_radian(pitch));
 	third_person_vertical_distance_from_player = distance_from_player * sin(degree_to_radian(pitch));
 
-	float third_person_angle = third_person_angle_around_player; // + Player.getRotY();
-	yaw = 180 - third_person_angle;
-	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(third_person_angle));
-	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(third_person_angle));
+	yaw = 180 - third_person_angle_around_player;
+	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(third_person_angle_around_player));
+	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(third_person_angle_around_player));
 
 	camera_front = {
 		cos(degree_to_radian(yaw)) * cos(degree_to_radian(pitch)),

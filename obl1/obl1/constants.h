@@ -20,7 +20,7 @@ const unsigned int SCR_HEIGHT = 768;
 // ---------------------------------------------------------------------------------------
 
 enum class CameraType { isometric, third_person, free_view };
-const double MOVEMENT_CAMERA_SPEED = 2.0;
+const double MOVEMENT_CAMERA_SPEED = 6.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 const float NEAR_PLANE_CAMERA = 0.1f;
@@ -66,6 +66,7 @@ const unsigned int SPAWN_RATE_RANDOM_COEF = 15;
 const unsigned int BASE_SPEED_COEF = 2;
 const unsigned int SPEED_COEF = 4;
 const unsigned int SPEED_RANDOM_COEF = 2;
+const unsigned int SPEED_SCALING_COEF = 2; // Inversely proportional
 
 
 // OBJECTS

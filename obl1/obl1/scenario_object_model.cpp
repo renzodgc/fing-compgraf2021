@@ -40,7 +40,6 @@ void ScenarioObject::set_object_position(Vector3 pos) {
 Vector3 ScenarioObject::get_bounding_box_radius() {
 	return bounding_box_radius;
 }
-
 void ScenarioObject::set_bounding_box_radius(Vector3 radius) {
 	bounding_box_radius = radius;
 }
@@ -48,7 +47,6 @@ void ScenarioObject::set_bounding_box_radius(Vector3 radius) {
 OnCollision ScenarioObject::get_on_collision_behaviour() {
 	return on_collision_behaviour;
 }
-
 void ScenarioObject::set_on_collision_behaviour(OnCollision behaviour) {
 	on_collision_behaviour = behaviour;
 }
@@ -116,7 +114,6 @@ void Border::draw(bool use_texture) {
 		glPopMatrix();
 	}
 }
-
 
 // CAR
 // -----------------------------------------------------------------------------------

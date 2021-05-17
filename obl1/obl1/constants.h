@@ -24,7 +24,7 @@ const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 const float NEAR_PLANE_CAMERA = 0.1f;
-const float FAR_PLANE_CAMERA = 30.0f;
+const float FAR_PLANE_CAMERA = 75.0f;
 const float ANGLE_CAMERA = 45.f;
 const float RATIO_CAMERA = SCR_WIDTH / (float)SCR_HEIGHT;
 

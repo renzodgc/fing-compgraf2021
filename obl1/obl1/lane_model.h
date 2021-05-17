@@ -31,7 +31,7 @@ class Lane {
 
         // Basic properties
         LaneIs lane_type;
-        position lane_position;
+        Vector3 lane_position;
         vector<ScenarioObject*> objects;
 
     public:
@@ -40,12 +40,12 @@ class Lane {
         ~Lane();
 
         // Getters & Setters
-        position get_lane_position();
-        void set_lane_position(position pos);
+        Vector3 get_lane_position();
+        void set_lane_position(Vector3 pos);
 
         // Main methods
         void draw(bool use_texture);
-        virtual vector<OnCollision> update(double elapsed_time, position player_position);
+        virtual vector<OnCollision> update(double elapsed_time, Vector3 player_position);
     };
 
 class Wall : public Lane {
@@ -53,7 +53,7 @@ class Wall : public Lane {
     public:
         // Constructor
         Wall(float pos_z);
-        vector<OnCollision> update(double elapsed_time, position player_position);
+        vector<OnCollision> update(double elapsed_time, Vector3 player_position);
 
 };
 
@@ -80,7 +80,7 @@ class Street : public Lane {
     public:
         // Constructor
         Street(float pos_z);
-        vector<OnCollision> update(double elapsed_time, position player_position);
+        vector<OnCollision> update(double elapsed_time, Vector3 player_position);
 };
 
 // Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector

@@ -66,6 +66,15 @@
     <ClCompile Include="draw_manager.cpp">
       <Filter>Source Files\managers</Filter>
     </ClCompile>
+    <ClCompile Include="vector3.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="frustum_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera_manager.h">
@@ -112,6 +121,15 @@
     </ClInclude>
     <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vector3.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="plane.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="frustum_manager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

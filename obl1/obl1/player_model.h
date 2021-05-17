@@ -30,7 +30,7 @@ class Player {
 
         // Basic properties
         PlayerIs player_state;
-        position player_position, before_movement;
+        Vector3 player_position, before_movement;
         float player_angle;
         bool is_bouncing;
 
@@ -41,9 +41,9 @@ class Player {
         static Player& get_instance();
 
         // Getters & Setters
-        position get_player_position();
+        Vector3 get_player_position();
         float get_player_angle();
-        void set_player_position(position new_position);
+        void set_player_position(Vector3 new_position);
         void set_player_angle(float new_angle);
 
         // Main methods

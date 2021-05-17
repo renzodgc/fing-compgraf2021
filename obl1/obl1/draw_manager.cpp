@@ -160,16 +160,3 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 void Draw::DrawReferenceObject() {
 	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
 }
-
-void Draw::DrawTexturedSquare(GLuint texture, textured_square square) {
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBegin(GL_QUADS);
-	glColor3f(square.color.red, square.color.green, square.color.blue);
-	glTexCoord2f(square.tex_a.x, square.tex_a.y); glVertex3f(square.a.x, square.a.y, square.a.z);
-	glTexCoord2f(square.tex_b.x, square.tex_b.y); glVertex3f(square.b.x, square.b.y, square.b.z);
-	glTexCoord2f(square.tex_c.x, square.tex_c.y); glVertex3f(square.c.x, square.c.y, square.c.z);
-	glTexCoord2f(square.tex_d.x, square.tex_d.y); glVertex3f(square.d.x, square.d.y, square.d.z);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}

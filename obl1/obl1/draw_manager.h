@@ -61,7 +61,6 @@ class Draw {
         void DrawHUDComponent(HUDComponent component);
 
         // Other objects' drawing methods
-        void DrawTexturedSquare(GLuint texture, textured_square square);
         void DrawReferenceObject();
 };
 

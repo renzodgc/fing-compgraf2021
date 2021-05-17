@@ -15,7 +15,7 @@ using namespace std;
 const float TILE_LENGTH = 0.5f;
 
 // Lane
-const int LANE_LENGTH = 32;
+const int LANE_LENGTH = 16;
 const int LANE_HALF_LENGTH = LANE_LENGTH / 2;
 
 // Tree

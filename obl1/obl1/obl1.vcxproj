@@ -83,13 +83,16 @@
     <ClCompile Include="camera_manager.cpp" />
     <ClCompile Include="draw_manager.cpp" />
     <ClCompile Include="file_helper.cpp" />
+    <ClCompile Include="frustum_manager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="lane_model.cpp" />
     <ClCompile Include="math_helper.cpp" />
+    <ClCompile Include="plane.cpp" />
     <ClCompile Include="player_model.cpp" />
     <ClCompile Include="scenario_object_model.cpp" />
     <ClCompile Include="ui_manager.cpp" />
+    <ClCompile Include="vector3.cpp" />
     <ClCompile Include="window_helper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,8 +100,10 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="draw_manager.h" />
     <ClInclude Include="file_helper.h" />
+    <ClInclude Include="frustum_manager.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="gl_constants.h" />
+    <ClInclude Include="plane.h" />
     <ClInclude Include="scenario_object_model.h" />
     <ClInclude Include="lane_model.h" />
     <ClInclude Include="player_model.h" />
@@ -106,6 +111,7 @@
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="models.h" />
     <ClInclude Include="ui_manager.h" />
+    <ClInclude Include="vector3.h" />
     <ClInclude Include="window_helper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

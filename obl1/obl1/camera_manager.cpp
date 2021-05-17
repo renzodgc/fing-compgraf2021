@@ -74,13 +74,16 @@ void Camera::call_look_at() {
 			camera_front.x, camera_front.y, camera_front.z,
 			camera_up.x, camera_up.y, camera_up.z
 		);
+		FrustumGeometric::get_instance().set_cam_def(camera_eye, camera_front, camera_up);
 		break;
 	case CameraType::free_view:
+		Vector3 camera_eye_front = camera_eye + camera_front;
 		gluLookAt(
 			camera_eye.x, camera_eye.y, camera_eye.z,
-			camera_eye.x + camera_front.x, camera_eye.y + camera_front.y, camera_eye.z + camera_front.z,
+			camera_eye_front.x, camera_eye_front.y, camera_eye_front.z,
 			camera_up.x, camera_up.y, camera_up.z
 		);
+		FrustumGeometric::get_instance().set_cam_def(camera_eye, camera_eye_front, camera_up);
 		break;
 	}
 }
@@ -109,12 +112,15 @@ void Camera::start_isometric_view() {
 
 	glRotatef(35.264f, 1.0f, 0.0f, 0.0f);
 	glRotatef(-45.0f, 0.0f, 1.0f, 0.0f);
+
+	// TODO: Review this for isometric
+	FrustumGeometric::get_instance().set_cam_internals(RATIO_CAMERA, ANGLE_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 }
 
 void Camera::isometric_camera_update_position() {
-	position player_position = player->get_player_position();
+	Vector3 player_position = player->get_player_position();
 	camera_eye = { player_position.x + 1.f, player_position.y + 1.f, player_position.z + 1.f };
-	camera_front = { player_position.x, player_position.y, player_position.z };
+	camera_front.copy(player_position);
 };
 
 // Third person camera methods
@@ -136,15 +142,17 @@ void Camera::start_third_person_view() {
 	glLoadIdentity(); // Reset the view
 
 	glClearColor(LIGHT_GREY.red, LIGHT_GREY.green, LIGHT_GREY.blue, LIGHT_GREY.alpha);
-	gluPerspective(45., SCR_WIDTH / (float)SCR_HEIGHT, 0.1, 100.);
+	gluPerspective(ANGLE_CAMERA, RATIO_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 	glEnable(GL_DEPTH_TEST);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity(); // Reset the view
+
+	FrustumGeometric::get_instance().set_cam_internals(RATIO_CAMERA, ANGLE_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 }
 
 void Camera::third_person_camera_update_position() {
-	position player_position = player->get_player_position();
+	Vector3 player_position = player->get_player_position();
 	camera_eye = {
 		player_position.x - third_person_offset_x,
 		player_position.y + third_person_vertical_distance_from_player,
@@ -172,11 +180,12 @@ void Camera::third_person_camera_update_angle(float mouse_offset_x, float mouse_
 	third_person_offset_x = third_person_horizontal_distance_from_player * sin(degree_to_radian(third_person_angle));
 	third_person_offset_z = third_person_horizontal_distance_from_player * cos(degree_to_radian(third_person_angle));
 
-	camera_front = normalize_vector({
+	camera_front = {
 		cos(degree_to_radian(yaw)) * cos(degree_to_radian(pitch)),
 		sin(degree_to_radian(pitch)),
 		sin(degree_to_radian(yaw)) * cos(degree_to_radian(pitch))
-	});
+	};
+	camera_front.normalize();
 };
 
 void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mouse_wheel_offset_y) {
@@ -188,7 +197,7 @@ void Camera::third_person_camera_update_distance(double elapsed_time, Sint32 mou
 
 void Camera::start_free_view() {
 	selected_camera = CameraType::free_view;
-	position player_position = player->get_player_position();
+	Vector3 player_position = player->get_player_position();
 	camera_eye = { player_position.x, player_position.y + 0.5f, player_position.z + 1.5f };
 	camera_front = { 0.f, 0.f, -1.f };
 	camera_up = { 0.f, 1.f, 0.f };
@@ -199,11 +208,13 @@ void Camera::start_free_view() {
 	glLoadIdentity(); // Reset the view
 
 	glClearColor(LIGHT_GREY.red, LIGHT_GREY.green, LIGHT_GREY.blue, LIGHT_GREY.alpha);
-	gluPerspective(45., SCR_WIDTH / (float)SCR_HEIGHT, 0.1, 100.);
+	gluPerspective(ANGLE_CAMERA, RATIO_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 	glEnable(GL_DEPTH_TEST);
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity(); // Reset the view
+
+	FrustumGeometric::get_instance().set_cam_internals(RATIO_CAMERA, ANGLE_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 }
 
 void Camera::free_view_camera_update_position(double elapsed_time, const Uint8* keyboard_state) {
@@ -214,7 +225,8 @@ void Camera::free_view_camera_update_position(double elapsed_time, const Uint8* 
 		camera_eye.z += camera_speed * camera_front.z;
 	}
 	if (keyboard_state[SDL_SCANCODE_D]) {
-		position normalized_front_up = normalize_vector(cross_product_vector(camera_front, camera_up));
+		Vector3 normalized_front_up = camera_front.cross_product(camera_up);
+		normalized_front_up.normalize();
 		camera_eye.x += camera_speed * normalized_front_up.x;
 		camera_eye.y += camera_speed * normalized_front_up.y;
 		camera_eye.z += camera_speed * normalized_front_up.z;
@@ -225,7 +237,8 @@ void Camera::free_view_camera_update_position(double elapsed_time, const Uint8* 
 		camera_eye.z -= camera_speed * camera_front.z;
 	}
 	if (keyboard_state[SDL_SCANCODE_A]) {
-		position normalized_front_up = normalize_vector(cross_product_vector(camera_front, camera_up));
+		Vector3 normalized_front_up = camera_front.cross_product(camera_up);
+		normalized_front_up.normalize();
 		camera_eye.x -= camera_speed * normalized_front_up.x;
 		camera_eye.y -= camera_speed * normalized_front_up.y;
 		camera_eye.z -= camera_speed * normalized_front_up.z;
@@ -242,9 +255,10 @@ void Camera::free_view_camera_update_angle(float mouse_offset_x, float mouse_off
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	camera_front = normalize_vector({
+	camera_front = {
 		cos(degree_to_radian(yaw)) * cos(degree_to_radian(pitch)),
 		sin(degree_to_radian(pitch)),
 		sin(degree_to_radian(yaw)) * cos(degree_to_radian(pitch))
-	});
+	};
+	camera_front.normalize();
 }

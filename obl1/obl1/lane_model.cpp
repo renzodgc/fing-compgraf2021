@@ -30,11 +30,11 @@ Lane::~Lane() {
 // Getters & Setters
 // -----------------------------------------------------------------------------------
 
-position Lane::get_lane_position() {
+Vector3 Lane::get_lane_position() {
 	return lane_position;
 }
 
-void Lane::set_lane_position(position pos) {
+void Lane::set_lane_position(Vector3 pos) {
 	lane_position = pos;
 }
 
@@ -55,7 +55,7 @@ void Lane::draw(bool use_texture) {
 
 // AABB - AABB Collisions (Axis-aligned bounding box)
 // Reference: https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection
-vector<OnCollision> Lane::update(double elapsed_time, position player_position) {
+vector<OnCollision> Lane::update(double elapsed_time, Vector3 player_position) {
 	// Check for collisions only if the player is in or adyacent to this lane.
 	vector<OnCollision> collision_events;
 	if (abs(lane_position.z - player_position.z) <= 1) {
@@ -102,8 +102,7 @@ Street::Street(float pos_z, unsigned int level) : Lane(pos_z) {
 	ready_to_spawn = true;
 }
 
-vector<OnCollision> Street::update(double elapsed_time, position player_position) {
-	
+vector<OnCollision> Street::update(double elapsed_time, Vector3 player_position) {
 	vector<int> objects_indices_to_destroy;
 	
 	for (size_t i = 0; i < objects.size(); i++) {
@@ -177,7 +176,7 @@ Wall::Wall(float pos_z) : Lane(pos_z) {
 	lane_type = LaneIs::wall;
 }
 
-vector<OnCollision> Wall::update(double elapsed_time, position player_position) {
+vector<OnCollision> Wall::update(double elapsed_time, Vector3 player_position) {
 	// Check for collisions only if the player is in or adyacent to this lane.
 	vector<OnCollision> collision_events;
 	if (abs(lane_position.z - player_position.z) <= 1) {

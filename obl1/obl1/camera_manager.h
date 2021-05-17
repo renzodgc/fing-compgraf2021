@@ -17,6 +17,7 @@
 #include "gl_constants.h"
 #include "math_helper.h"
 #include "player_model.h"
+#include "frustum_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -36,15 +37,15 @@ class Camera {
 
         // Basic camera properties
         CameraType selected_camera;
-        position camera_eye;   // Specifies the position of the eye point.
-        position camera_front; // Specifies the position of the reference point.
-        position camera_up;    // Specifies the direction of the up vector.
+        Vector3 camera_eye;   // Specifies the position of the eye point.
+        Vector3 camera_front; // Specifies the position of the reference point.
+        Vector3 camera_up;    // Specifies the direction of the up vector.
         float yaw;
         float pitch;
         float distance_from_player;
 
         // Third person camera properties
-        position camera_position;
+        Vector3 camera_position;
         float third_person_angle_around_player;
         float third_person_horizontal_distance_from_player, third_person_vertical_distance_from_player;
         float third_person_offset_x, third_person_offset_z;

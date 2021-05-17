@@ -21,15 +21,12 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-// Vector utils
-position normalize_vector(position pos);
-position cross_product_vector(position a, position b);
+// Math utils
 float degree_to_radian(float degree);
+bool is_zero_one_or_minus_one(int k);
 
 // Random utils
 int get_random(int limit);
 vector<int> get_random_vector(int length, int limit);
-
-bool is_zero_one_or_minus_one(int k);
 
 #endif

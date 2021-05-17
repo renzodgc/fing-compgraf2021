@@ -23,6 +23,8 @@
 
 // Models
 #include "models.h"
+#include "vector3.h"
+#include "plane.h"
 
 #include "lane_model.h"
 #include "player_model.h"
@@ -32,6 +34,7 @@
 #include "draw_manager.h"
 #include "ui_manager.h"
 #include "game_manager.h"
+#include "frustum_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

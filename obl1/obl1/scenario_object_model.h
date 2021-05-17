@@ -11,6 +11,7 @@
 #include "constants.h"
 #include "gl_constants.h"
 #include "draw_manager.h"
+#include "frustum_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -26,21 +27,23 @@ class ScenarioObject {
         Draw* draw_manager;
 
         // Basic properties
-        position object_position;
+        Vector3 object_position;
         ObjectIs object_type;
-        vector3d bounding_box_radius;
+        Vector3 bounding_box_radius;
         OnCollision on_collision_behaviour;
 
+        // Helpers
+        bool should_be_drawn();
     public:
         // Constructor
-        ScenarioObject(position pos);
+        ScenarioObject(Vector3 pos);
 
         // Getters & Setters
-        position get_object_position();
-        void set_object_position(position pos);
+        Vector3 get_object_position();
+        void set_object_position(Vector3 pos);
         void set_object_x(float x);
-        vector3d get_bounding_box_radius();
-        void set_bounding_box_radius(vector3d radius);
+        Vector3 get_bounding_box_radius();
+        void set_bounding_box_radius(Vector3 radius);
         OnCollision get_on_collision_behaviour();
         void set_on_collision_behaviour(OnCollision behaviour);
         ObjectIs get_object_type();
@@ -54,7 +57,7 @@ class Tree : public ScenarioObject {
 
     public:
         // Constructor
-        Tree(position pos);
+        Tree(Vector3 pos);
 
         // Main methods
         void draw(bool use_texture);
@@ -68,7 +71,7 @@ class Car : public ScenarioObject {
 
     public:
         // Constructor
-        Car(position pos, int direct);
+        Car(Vector3 pos, int direct);
 
         // Main methods
         void draw(bool use_texture);
@@ -78,7 +81,7 @@ class Border : public ScenarioObject {
 
     public:
         // Constructor
-        Border(position pos);
+        Border(Vector3 pos);
 
         // Main methods
         void draw(bool use_texture);

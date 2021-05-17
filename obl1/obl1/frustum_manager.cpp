@@ -50,6 +50,7 @@ int FrustumGeometric::sphere_in_frustum(Vector3& point, float radio) {
 
 }
 
+// TODO: Remove unused methods
 /*int FrustumGeometric::box_in_frustum(AABox& b) {
 	int result = INSIDE;
 	for (int i = 0; i < 6; i++) {

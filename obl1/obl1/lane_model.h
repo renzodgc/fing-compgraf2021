@@ -34,6 +34,10 @@ class Lane {
         Vector3 lane_position;
         vector<ScenarioObject*> objects;
 
+        // Aux properties
+        bool has_coin;
+        Vector3 coin_position;
+
     public:
         // Constructor
         Lane(float pos_z);

@@ -13,11 +13,31 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 Lane::Lane(float pos_z) {
+
+	// References
+	draw_manager = &Draw::get_instance();
+
+	// Set basic properties
 	lane_position = { 0.f, 0.f, pos_z };
+	
+	// Create borders
 	objects.push_back(new Border({ -LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
 	objects.push_back(new Border({ LANE_HALF_LENGTH, lane_position.y, lane_position.z }));
+	
+	// Spawn coin
+	has_coin = false;
+	if (get_random(100) <= COIN_SPAWN_RATE) {
 
-	draw_manager = &Draw::get_instance();
+		// Set random x position
+		int x = get_random(LANE_LENGTH - 2) - LANE_HALF_LENGTH;
+	
+		// Set property values
+		this->coin_position = { (float) x, lane_position.y, lane_position.z };
+		this->has_coin = true;
+
+		// Create coin object
+		objects.push_back(new Coin(coin_position));
+	}
 }
 
 Lane::~Lane() {
@@ -56,6 +76,7 @@ void Lane::draw(bool use_texture) {
 // AABB - AABB Collisions (Axis-aligned bounding box)
 // Reference: https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection
 vector<OnCollision> Lane::update(double elapsed_time, Vector3 player_position) {
+
 	// Check for collisions only if the player is in or adyacent to this lane.
 	vector<OnCollision> collision_events;
 	if (abs(lane_position.z - player_position.z) <= 1) {
@@ -73,11 +94,17 @@ vector<OnCollision> Lane::update(double elapsed_time, Vector3 player_position) {
 			);
 			if (collision_x && collision_z) {
 				collision_events.push_back(objects[i]->get_on_collision_behaviour());
+				// if it is a coin, delete it
+				if (objects[i]->get_on_collision_behaviour() == OnCollision::coin) {
+					delete this->objects[i];
+					this->objects.erase(this->objects.begin() + i);
+				}
 			}
 		}
 	}
 	return collision_events;
 }
+	
 
 // Street methods
 // -----------------------------------------------------------------------------------
@@ -158,6 +185,13 @@ Grass::Grass(float pos_z) : Lane(pos_z) {
 	// Get random unrepeated positions for trees. Exclude borders
 	vector<int> positions = get_random_vector(number_of_trees, (LANE_LENGTH / 2) - 1);
 
+	// If coin has spawn, remove its position from vector (if it's present)
+	if (this->has_coin) {
+		vector<int>::iterator position = find(positions.begin(), positions.end(), this->coin_position.x);
+		if (position != positions.end()) // end() means the element was not found
+			positions.erase(position);
+	}
+	
 	// If lane is -1, 0 or 1 remove objects adyacent to player spawn position
 	if (pos_z >= -1 && pos_z <= 1) {
 		positions.erase(remove_if(positions.begin(), positions.end(), is_zero_one_or_minus_one), positions.end());

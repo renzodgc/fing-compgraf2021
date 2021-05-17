@@ -146,3 +146,30 @@ void Car::draw(bool use_texture) {
 		glPopMatrix();
 	}
 }
+
+// COIN
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
+
+Coin::Coin(Vector3 pos) : ScenarioObject(pos) {
+
+	// Basic properties
+	object_type = ObjectIs::coin;
+	on_collision_behaviour = OnCollision::coin;
+	bounding_box_radius = { 0.5f, 0.5f, 0.5f };
+}
+
+// Main methods
+// -----------------------------------------------------------------------------------
+
+void Coin::draw(bool use_texture) {
+	if (should_be_drawn()) {
+		glPushMatrix();
+		glTranslatef(object_position.x, 0.f, 0.f);
+		glScalef(1.f, 3.f, 1.f);
+		draw_manager->border(use_texture);
+		glPopMatrix();
+	}
+}

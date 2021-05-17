@@ -71,6 +71,7 @@ void Game::update(float player_position) {
 		
 		// Apply lane_deleter to each element (to free their memory)
 		for_each(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL, lane_deleter());
+		
 		// Delete null elements
 		this->lanes.erase(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL);
 

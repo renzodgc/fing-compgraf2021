@@ -82,27 +82,37 @@ vector<OnCollision> Lane::update(double elapsed_time, position player_position) 
 // Street methods
 // -----------------------------------------------------------------------------------
 
-Street::Street(float pos_z) : Lane(pos_z) {
+Street::Street(float pos_z, unsigned int level) : Lane(pos_z) {
 	lane_type = LaneIs::street;
 
-	objects_speed = (float)((rand() % 4) + 2);
-	// TODO: Revisar
-	spawn_cooldown = 2.5f / objects_speed;
-	spawn_rate = (float)((rand() % 40) + 25);
-	ready_to_spawn = true;
-	direction = rand() % 2;
+	// Set speed property
+	objects_speed = (float) BASE_SPEED_COEF + (level / (get_random(SPEED_RANDOM_COEF) + 1));
+
+	// Set spawning properties
+	spawn_cooldown = (float) BASE_SPAWN_COOLDOWN_COEF / objects_speed;
+	spawn_rate = (float) BASE_SPAWN_RATE_COEF + (get_random(SPAWN_RATE_RANDOM_COEF) + 1);
+	
+	// Set direction for cars
+	direction = get_random(2);
 	if (direction == 0) {
 		direction = -1;
 	}
+
+	// Set flag for spawning as ready
+	ready_to_spawn = true;
 }
 
 vector<OnCollision> Street::update(double elapsed_time, position player_position) {
+	
 	vector<int> objects_indices_to_destroy;
+	
 	for (size_t i = 0; i < objects.size(); i++) {
 		if (objects[i]->get_object_type() == ObjectIs::car) {
+			
 			// 1. Move the objects
 			float x = objects[i]->get_object_position().x;
 			objects[i]->set_object_x(x + (float)(objects_speed * elapsed_time * direction));
+			
 			// 2. Mark to destroy the objects out of bounds
 			if (abs(x) > LANE_HALF_LENGTH) {
 				objects_indices_to_destroy.push_back(i);
@@ -126,7 +136,7 @@ vector<OnCollision> Street::update(double elapsed_time, position player_position
 
 	if (ready_to_spawn) {
 		// Throw a dice
-		if (((rand() % 100)) <= spawn_rate * elapsed_time) {
+		if (get_random(100) <= spawn_rate * elapsed_time) {
 			ready_to_spawn = false;
 			current_cooldown = spawn_cooldown;
 			objects.push_back(new Car({ lane_position.x - LANE_HALF_LENGTH * direction, lane_position.y, lane_position.z }, direction));

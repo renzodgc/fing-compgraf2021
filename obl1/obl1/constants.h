@@ -24,7 +24,7 @@ const double MOVEMENT_CAMERA_SPEED = 2.0;
 const float MOUSE_SENSITIVITY = 0.1f;
 
 const float NEAR_PLANE_CAMERA = 0.1f;
-const float FAR_PLANE_CAMERA = 30.0f;
+const float FAR_PLANE_CAMERA = 75.0f;
 const float ANGLE_CAMERA = 45.f;
 const float RATIO_CAMERA = SCR_WIDTH / (float)SCR_HEIGHT;
 
@@ -79,11 +79,15 @@ enum class ObjectIs { car, tree, border };
 const string ROUTE_PLAYER_TEXTURE = "resources/Chicken02Col.jpg";
 const string ROUTE_PLAYER_OBJECT = "resources/Chicken02.obj";
 
+const string ROUTE_GRASS_TEXTURE = "resources/Grass.gif";
+const string ROUTE_STREET_TEXTURE = "resources/Street.png";
+
 const string ROUTE_CAR_TEXTURE = "resources/Truck04Colour.png";
 const string ROUTE_CAR_OBJECT = "resources/Truck02.obj";
-const string ROUTE_GRASS_TEXTURE = "resources/Grass.gif";
+
 const string ROUTE_WOOD_TEXTURE = "resources/Wood.jpg";
-const string ROUTE_STREET_TEXTURE = "resources/Street.png";
+const string ROUTE_LEAVES_TEXTURE = "resources/leaves.jpg";
+
 
 #endif
 

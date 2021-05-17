@@ -38,9 +38,9 @@ class Draw {
         vector<vector<float>> car_data;
         GLuint car_texture;
         GLuint grass_texture;
-        GLuint wood_texture;
         GLuint street_texture;
-
+        GLuint wood_texture;
+        GLuint leaves_texture;
     public:
         // Constructor and singleton method
         Draw(Draw const&) = delete;

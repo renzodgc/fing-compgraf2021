@@ -20,6 +20,7 @@ Draw::Draw() {
 	grass_texture = load_texture(ROUTE_GRASS_TEXTURE);
 	wood_texture = load_texture(ROUTE_WOOD_TEXTURE);
 	street_texture = load_texture(ROUTE_STREET_TEXTURE);
+	leaves_texture = load_texture(ROUTE_LEAVES_TEXTURE);
 }
 
 Draw& Draw::get_instance() {
@@ -56,7 +57,8 @@ void Draw::border(bool use_texture) {
 }
 
 void Draw::tree(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_OBJECT, DATA_TREE_OBJECT, wood_texture, use_texture);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_STUMP_OBJECT, DATA_TREE_STUMP_OBJECT, wood_texture, use_texture);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_TREE_LEAVES_OBJECT, DATA_TREE_LEAVES_OBJECT, leaves_texture, use_texture);
 }
 
 void Draw::car(bool use_texture) {

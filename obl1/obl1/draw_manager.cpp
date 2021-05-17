@@ -40,7 +40,7 @@ void Draw::player(bool use_texture) {
 void Draw::lane(LaneIs laneType, bool use_texture) {
 	switch (laneType) {
 	case LaneIs::wall:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_WALL_OBJECT);
+		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_WALL_OBJECT, DATA_LANE_WALL_OBJECT);
 		break;
 	case LaneIs::grass:
 		DrawMultiplePoints(GL_QUADS, COMMANDS_GRASS_OBJECT, DATA_LANE_GRASS_OBJECT, grass_texture, use_texture);

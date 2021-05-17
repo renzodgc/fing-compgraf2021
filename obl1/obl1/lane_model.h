@@ -53,6 +53,8 @@ class Wall : public Lane {
     public:
         // Constructor
         Wall(float pos_z);
+
+        // Main methods
         vector<OnCollision> update(double elapsed_time, position player_position);
 
 };
@@ -67,19 +69,22 @@ class Grass : public Lane {
 class Street : public Lane {
 
     private:
-        // General properties
+        // Basic properties
         float objects_speed;
-        int direction;
-        double current_cooldown;
-
-        // Spawn properties
-        bool ready_to_spawn;
         float spawn_rate;
         float spawn_cooldown;
+        int direction;
+
+        // Dynamic properties
+        double current_cooldown;
+        bool ready_to_spawn;
+        
     
     public:
         // Constructor
-        Street(float pos_z);
+        Street(float pos_z, unsigned int level);
+
+        // Main methods
         vector<OnCollision> update(double elapsed_time, position player_position);
 };
 

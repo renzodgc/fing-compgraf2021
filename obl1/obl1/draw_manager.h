@@ -59,9 +59,6 @@ class Draw {
         void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
         void DrawHUD(HUDComponent left, HUDComponent right);
         void DrawHUDComponent(HUDComponent component);
-
-        // Other objects' drawing methods
-        void DrawReferenceObject();
 };
 
 #endif

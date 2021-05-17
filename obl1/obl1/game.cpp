@@ -189,9 +189,6 @@ int main(int argc, char* argv[]) {
 
 		glPushMatrix();
 		
-		// Draw origin reference
-		draw_manager.DrawReferenceObject();
-
 		// Draw player
 		player.draw(textures);
 

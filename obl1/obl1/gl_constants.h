@@ -38,17 +38,6 @@ const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 // OBJECTS
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// Reference object 
-const vector<char> COMMANDS_REFERENCE_OBJECT = { 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V', 'V', 'V', 'C', 'V', 'V' , 'V' , 'V' };
-const vector<vector<float>> DATA_REFERENCE_OBJECT = {
-	{1.f, 0.f, 0.f, 1.f},
-	{-TILE_LENGTH, -TILE_LENGTH, 0.f}, {TILE_LENGTH, -TILE_LENGTH, 0.f}, {TILE_LENGTH, TILE_LENGTH, 0.f}, {-TILE_LENGTH, TILE_LENGTH, 0.f},
-	{0.f, 1.f, 0.f, 1.f},
-	{0.f, -TILE_LENGTH, -TILE_LENGTH}, {0.f, -TILE_LENGTH, TILE_LENGTH}, {0.f, TILE_LENGTH, TILE_LENGTH}, {0.f, TILE_LENGTH, -TILE_LENGTH},
-	{0.f, 0.f, 1.f, 1.f},
-	{-TILE_LENGTH, 0.f, -TILE_LENGTH}, {TILE_LENGTH, 0.f, -TILE_LENGTH}, {TILE_LENGTH, 0.f, TILE_LENGTH}, {-TILE_LENGTH, 0.f, TILE_LENGTH}
-};
-
 // Cube
 const vector<char> COMMANDS_CUBE_OBJECT = {
 		'C', 'V', 'V', 'V', 'V',

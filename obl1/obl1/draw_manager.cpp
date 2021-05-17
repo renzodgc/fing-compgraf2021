@@ -155,10 +155,3 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 	}
 	glDisable(GL_TEXTURE_2D);
 }
-
-// Other objects' drawing methods
-// -----------------------------------------------------------------------------------
-
-void Draw::DrawReferenceObject() {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_REFERENCE_OBJECT, DATA_REFERENCE_OBJECT);
-}

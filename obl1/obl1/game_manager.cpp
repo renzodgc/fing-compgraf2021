@@ -120,7 +120,7 @@ Lane* Game::addLane(float position) {
 
 	// If too many grasses in a row, create street and reset counter
 	if (grass_in_a_row >= MAX_GRASS_COEF) {
-		lane = new Street(position);
+		lane = new Street(position, this->level);
 		this->street_in_a_row++;
 		this->grass_in_a_row = 0;
 	}
@@ -140,7 +140,7 @@ Lane* Game::addLane(float position) {
 			this->grass_in_a_row++;
 			break;
 		case LaneIs::street:
-			lane = new Street(position);
+			lane = new Street(position, this->level);
 			this->street_in_a_row++;
 			break;
 		}

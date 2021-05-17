@@ -115,17 +115,19 @@ int main(int argc, char* argv[]) {
 					ToggleFullscreen(window);
 					break;
 				case SDLK_LEFT:
-					player.move_left();
+					if (!paused) player.move_left();
 					break;
 				case SDLK_RIGHT:
-					player.move_right();
+					if (!paused) player.move_right();
 					break;
 				case SDLK_UP:
-					player.move_up();
-					game_manager.update(player.get_player_position().z);
+					if (!paused) {
+						player.move_up();
+						game_manager.update(player.get_player_position().z);
+					}
 					break;
 				case SDLK_DOWN:
-					player.move_down();
+					if (!paused) player.move_down();
 					break;
 				}
 				break;
@@ -144,38 +146,43 @@ int main(int argc, char* argv[]) {
 		// UPDATE
 		// -----------------------------------------------------------------------------------------------
 
-		// Update lanes
-		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
-			collision_events = game_manager.getLanes()[i]->update(elapsed_time, player.get_player_position());
-			// Apply collisions events if any
-			for (size_t i = 0; i < collision_events.size(); i++) {
-				switch (collision_events[i]) {
-				case OnCollision::bounce:
-					player.bounce_back();
-					break;
-				case OnCollision::coin:
-					game_manager.addCoin();
-					ui.set_coins(game_manager.getCoins());
-					break;
-				case OnCollision::death:
-					cout << "GAME OVER!" << endl;
-					break;
-				}
-			}
-		}
-
-		// Update player
-		player.update(elapsed_time);
-
 		// Update camera
 		camera.update_position(elapsed_time, keyboard_state);
 		camera.call_look_at();
 
-		// Update HUD
-		if (game_manager.getScore() < -player.get_player_position().z) {
-			game_manager.setScore((int)-player.get_player_position().z);
-			ui.set_score(game_manager.getScore());
+		if (!paused) {
+
+			// Update lanes
+			for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+				collision_events = game_manager.getLanes()[i]->update(elapsed_time, player.get_player_position());
+				// Apply collisions events if any
+				for (size_t i = 0; i < collision_events.size(); i++) {
+					switch (collision_events[i]) {
+					case OnCollision::bounce:
+						player.bounce_back();
+						break;
+					case OnCollision::coin:
+						game_manager.addCoin();
+						ui.set_coins(game_manager.getCoins());
+						break;
+					case OnCollision::death:
+						cout << "GAME OVER!" << endl;
+						break;
+					}
+				}
+			}
+
+			// Update player
+			player.update(elapsed_time);
+
+			// Update HUD
+			if (game_manager.getScore() < -player.get_player_position().z) {
+				game_manager.setScore((int)-player.get_player_position().z);
+				ui.set_score(game_manager.getScore());
+			}
+
 		}
+		
 
 		// RENDER
 		// -----------------------------------------------------------------------------------------------

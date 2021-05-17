@@ -36,7 +36,7 @@ class ScenarioObject {
         bool should_be_drawn();
     public:
         // Constructor
-        ScenarioObject(position pos);
+        ScenarioObject(Vector3 pos);
 
         // Getters & Setters
         Vector3 get_object_position();

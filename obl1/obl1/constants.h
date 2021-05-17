@@ -32,7 +32,7 @@ const float RATIO_CAMERA = SCR_WIDTH / (float)SCR_HEIGHT;
 // ---------------------------------------------------------------------------------------
 
 enum class ObjType { squares, triangles };
-const bool FRUSTUM_CULLING = true;
+const bool FRUSTUM_CULLING = false; // TODO: Fix
 
 // PLAYER
 // ---------------------------------------------------------------------------------------

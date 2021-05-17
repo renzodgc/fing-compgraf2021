@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
 		current_t = chrono::high_resolution_clock::now();
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
 		elapsed_time = delta_time.count();
-		cout << (1.f / elapsed_time) << " FPS" << endl;
+		// cout << (1.f / elapsed_time) << " FPS" << endl;
 
 		// INPUT EVENT HANDLING
 		// -----------------------------------------------------------------------------------------------

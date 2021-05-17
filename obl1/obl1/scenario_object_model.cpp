@@ -30,7 +30,7 @@ bool ScenarioObject::should_be_drawn() {
 // Getters & Setters
 // -----------------------------------------------------------------------------------
 
-position ScenarioObject::get_object_position() {
+Vector3 ScenarioObject::get_object_position() {
 	return object_position;
 }
 void ScenarioObject::set_object_position(Vector3 pos) {

@@ -37,6 +37,7 @@ class Draw {
         vector<char>  car_commands;
         vector<vector<float>> car_data;
         GLuint car_texture;
+        GLuint grass_texture;
 
     public:
         // Constructor and singleton method

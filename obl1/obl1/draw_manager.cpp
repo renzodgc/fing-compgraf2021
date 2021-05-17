@@ -17,6 +17,7 @@ Draw::Draw() {
 	tie(player_commands, player_data) = load_obj(ROUTE_PLAYER_OBJECT, ObjType::squares);
 	car_texture = load_texture(ROUTE_CAR_TEXTURE);
 	tie(car_commands, car_data) = load_obj(ROUTE_CAR_OBJECT, ObjType::triangles);
+	grass_texture = load_texture(ROUTE_GRASS_TEXTURE);
 }
 
 Draw& Draw::get_instance() {
@@ -40,7 +41,7 @@ void Draw::lane(LaneIs laneType, bool use_texture) {
 		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_WALL_OBJECT);
 		break;
 	case LaneIs::grass:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_GRASS_OBJECT);
+		DrawMultiplePoints(GL_QUADS, COMMANDS_GRASS_OBJECT, DATA_LANE_GRASS_OBJECT, grass_texture, use_texture);
 		break;
 	case LaneIs::street:
 		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_OBJECT, DATA_LANE_STREET_OBJECT);

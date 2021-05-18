@@ -10,7 +10,7 @@
 #include "vector3.h"
 #include "plane.h"
 
-enum class HUDComponentIs { left, right };
+enum class HUDComponentIs { top_left, top_right, top_center };
 
 struct HUDComponent {
 	HUDComponentIs position;

@@ -38,7 +38,14 @@ const bool FRUSTUM_CULLING = false; // TODO: Fix
 // ---------------------------------------------------------------------------------------
 
 enum class PlayerIs { idle, moving_left, moving_right, moving_down, moving_up };
-const double PLAYER_SPEED = 7.0;
+const double PLAYER_SPEED = 6.0;
+const float PLAYER_MAX_HEIGHT = 0.5f;
+
+// MATH
+// ---------------------------------------------------------------------------------------
+
+const double PI = 3.14159265358979323846;
+const double ANG2RAD = PI / 180.0;
 
 // GAME
 // ---------------------------------------------------------------------------------------
@@ -66,7 +73,7 @@ const int INITIAL_LANES_INTERVAL = 10; // Amount of lanes created from origin wh
 const unsigned int MAX_GRASS_COEF = 4; // Max amount of grass lanes together
 const unsigned int MAX_STREET_COEF = 2; // Max amount of street lanes together (multiplied by level)
 
-const unsigned int COIN_SPAWN_RATE = 10; // 100/COIN_SPAWN_RATE gives the probability of coin spawning
+const unsigned int COIN_SPAWN_RATE = 20; // 100/COIN_SPAWN_RATE gives the probability of coin spawning
 
 // STREET
 // ---------------------------------------------------------------------------------------
@@ -79,7 +86,7 @@ const unsigned int SPAWN_RATE_RANDOM_COEF = 15;
 const unsigned int BASE_SPEED_COEF = 2;
 const unsigned int SPEED_COEF = 4;
 const unsigned int SPEED_RANDOM_COEF = 2;
-const unsigned int SPEED_SCALING_COEF = 2; // Inversely proportional
+const float SPEED_SCALING_COEF = 0.5f;
 
 // OBJECTS
 // ---------------------------------------------------------------------------------------

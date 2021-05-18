@@ -32,7 +32,7 @@ class Player {
         PlayerIs player_state;
         Vector3 player_position, before_movement;
         float player_angle;
-        bool is_bouncing;
+        bool is_bouncing, vertically_ascending, vertically_descending;
 
     public:
         // Constructor and singleton method

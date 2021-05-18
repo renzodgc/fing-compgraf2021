@@ -13,8 +13,7 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 float degree_to_radian(float degree) {
-	float pi = 3.14159265359f;
-	return(degree * (pi / 180.f));
+	return(degree * (float)ANG2RAD);
 }
 
 bool is_zero_one_or_minus_one(int k) {

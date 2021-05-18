@@ -26,8 +26,6 @@ using namespace std;
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
-#define ANG2RAD 3.14159265358979323846/180.0
-
 class FrustumGeometric {
 
 private:

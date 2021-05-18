@@ -113,7 +113,7 @@ Street::Street(float pos_z, unsigned int level) : Lane(pos_z) {
 	lane_type = LaneIs::street;
 
 	// Set speed property
-	objects_speed = (float) BASE_SPEED_COEF + (level / SPEED_SCALING_COEF*(get_random(SPEED_RANDOM_COEF) + 1));
+	objects_speed = (float) BASE_SPEED_COEF + SPEED_SCALING_COEF * (float)(level / (get_random(SPEED_RANDOM_COEF) + 1));
 
 	// Set spawning properties
 	spawn_cooldown = (float) BASE_SPAWN_COOLDOWN_COEF / objects_speed;

@@ -21,6 +21,7 @@ Draw::Draw() {
 	wood_texture = load_texture(ROUTE_WOOD_TEXTURE);
 	street_texture = load_texture(ROUTE_STREET_TEXTURE);
 	leaves_texture = load_texture(ROUTE_LEAVES_TEXTURE);
+	keybinds_texture = load_texture(ROUTE_KEYBINDS_TEXTURE);
 }
 
 Draw& Draw::get_instance() {
@@ -114,11 +115,14 @@ void Draw::DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<ve
 	DrawMultiplePoints(primitive, commands, data, NULL, false);
 }
 
-void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
+void Draw::DrawHUD(HUDComponent top_left, HUDComponent top_right, HUDComponent top_center) {
 	glPushMatrix();
-	int height = max(left.height, right.height);
-	DrawHUDComponent(left);
-	DrawHUDComponent(right);
+	
+	// TOP
+	int height = max(top_left.height, top_right.height);
+	DrawHUDComponent(top_left);
+	DrawHUDComponent(top_right);
+	DrawHUDComponent(top_center);
 
 	// Draw the rest of the overlay
 	glBegin(GL_QUADS); {
@@ -129,6 +133,21 @@ void Draw::DrawHUD(HUDComponent left, HUDComponent right) {
 		glVertex3f(0.f, 0.f, 0.f);
 	} glEnd();
 	glPopMatrix();
+
+	// BOTTOM
+
+	// Draw the rest of the overlay
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, keybinds_texture);
+	glBegin(GL_QUADS); {
+		glColor3f(1.f, 1.f, 1.f);
+		glTexCoord2d(0.f, 1.f); glVertex3f(0.f, SCR_HEIGHT - 62.f, 0.f);
+		glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT - 62.f, 0.f);
+		glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT, 0.f);
+		glTexCoord2d(0.f, 0.f); glVertex3f(0.f, SCR_HEIGHT, 0.f);
+	} glEnd();
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
 }
 
 void Draw::DrawHUDComponent(HUDComponent component) {
@@ -136,7 +155,7 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 	glBindTexture(GL_TEXTURE_2D, component.texture_id);
 	glColor3f(component.message_color.r, component.message_color.g, component.message_color.b);
 	switch (component.position) {
-	case HUDComponentIs::left:
+	case HUDComponentIs::top_left:
 		glBegin(GL_QUADS); {
 			glTexCoord2d(0.f, 1.f); glVertex3f(30.f, 3.f + component.surface_message->h, 0.f);
 			glTexCoord2d(1.f, 1.f); glVertex3f(30.f + component.surface_message->w, 3.f + component.surface_message->h, 0.f);
@@ -144,12 +163,20 @@ void Draw::DrawHUDComponent(HUDComponent component) {
 			glTexCoord2d(0.f, 0.f); glVertex3f(30.f, 3.f, 0.f);
 		} glEnd();
 		break;
-	case HUDComponentIs::right:
+	case HUDComponentIs::top_right:
 		glBegin(GL_QUADS); {
 			glTexCoord2d(0.f, 1.f); glVertex3f(SCR_WIDTH - 30.f - component.surface_message->w, 3.f + component.surface_message->h, 0.f);
 			glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH - 30.f, 3.f + component.surface_message->h, 0.f);
 			glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH - 30.f, 3.f, 0.f);
 			glTexCoord2d(0.f, 0.f); glVertex3f(SCR_WIDTH - 30.f - component.surface_message->w, 3.f, 0.f);
+		} glEnd();
+		break;
+	case HUDComponentIs::top_center:
+		glBegin(GL_QUADS); {
+			glTexCoord2d(0.f, 1.f); glVertex3f(SCR_WIDTH / 2.f - component.surface_message->w / 2, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH / 2.f + component.surface_message->w / 2, 3.f + component.surface_message->h, 0.f);
+			glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH / 2.f + component.surface_message->w / 2, 3.f, 0.f);
+			glTexCoord2d(0.f, 0.f); glVertex3f(SCR_WIDTH / 2.f - component.surface_message->w / 2, 3.f, 0.f);
 		} glEnd();
 		break;
 	}

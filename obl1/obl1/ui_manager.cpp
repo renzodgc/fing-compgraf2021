@@ -17,19 +17,27 @@ using namespace std;
 UI::UI() {
 	draw_manager = &Draw::get_instance();
 	
-	font = TTF_OpenFont("OpenSans-Regular.ttf", 24); //this opens a font style and sets a size
-	if (font == nullptr) {
+	top_font = TTF_OpenFont("OpenSans-Regular.ttf", 24); //this opens a font style and sets a size
+	if (top_font == nullptr) {
+		cerr << "TTF_OpenFont error: " << SDL_GetError() << endl;
+		return;
+	}
+	bottom_font = TTF_OpenFont("OpenSans-Regular.ttf", 12); //this opens a font style and sets a size
+	if (bottom_font == nullptr) {
 		cerr << "TTF_OpenFont error: " << SDL_GetError() << endl;
 		return;
 	}
 	score.message_color = { 255, 255, 255 };
 	coins.message_color = { 255, 255, 0 };
+	game_over.message_color = { 255, 255, 255 };
 
-	score.position = HUDComponentIs::left;
-	coins.position = HUDComponentIs::right;
+	score.position = HUDComponentIs::top_left;
+	coins.position = HUDComponentIs::top_right;
+	game_over.position = HUDComponentIs::top_center;
 
 	set_score(0);
 	set_coins(0);
+	set_game_over(false);
 }
 
 UI& UI::get_instance() {
@@ -46,7 +54,7 @@ void UI::draw() {
 
 	glMatrixMode(GL_MODELVIEW); glPushMatrix(); glLoadIdentity();
 
-	draw_manager->DrawHUD(score, coins);
+	draw_manager->DrawHUD(score, coins, game_over);
 
 	glMatrixMode(GL_PROJECTION); glPopMatrix();
 	glMatrixMode(GL_MODELVIEW); glPopMatrix();
@@ -57,7 +65,8 @@ void UI::clean_memory() {
 	SDL_FreeSurface(score.rgb_surface);
 	SDL_FreeSurface(coins.surface_message);
 	SDL_FreeSurface(coins.rgb_surface);
-	TTF_CloseFont(font);
+	TTF_CloseFont(top_font);
+	TTF_CloseFont(bottom_font);
 }
 
 // Getters & Setters
@@ -65,17 +74,27 @@ void UI::clean_memory() {
 
 void UI::set_score(int score_number) {
 	string message = "Score: " + to_string(score_number);
-	set_message_on_component(message, &score);
+	set_message_on_component(message, top_font, &score);
 }
 
 void UI::set_coins(int coins_number) {
 	string message = "Coins: " + to_string(coins_number);
-	set_message_on_component(message, &coins);
+	set_message_on_component(message, top_font, &coins);
 }
 
-void UI::set_message_on_component(string message, HUDComponent* component) {
+void UI::set_game_over(bool is_game_over) {
+	string message;
+	if (is_game_over) {
+		message = "GAME OVER!";
+	} else {
+		message = "  ";
+	}
+	set_message_on_component(message, top_font, &game_over);
+}
+
+void UI::set_message_on_component(string message, TTF_Font* font, HUDComponent* component) {
 	glColor3f(component->message_color.r, component->message_color.g, component->message_color.b);
-	component->surface_message = TTF_RenderText_Blended(font, message.c_str(), {255, 255, 255});
+	component->surface_message = TTF_RenderText_Blended(font, message.c_str(), { 255, 255, 255 });
 	if (component->surface_message == NULL) {
 		cerr << "TTF_RenderText error: " << SDL_GetError() << endl;
 		return;

@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 	cout << " F11      -> Pantalla Completa" << endl;
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
-	cout << " F3       -> Toggle Facetado/Interpolado" << endl; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
+	cout << " F3       -> Toggle Facetado/Interpolado" << endl;
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// INITIALIZE WINDOW
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	bool game_over = false;
 	bool wireframe = false;
 	bool textures = true;
-	bool interpolated_lightning = false;
+	bool interpolated_lightning = false; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
 
 	// GENERAL OBJECTS AND VARIABLES
 	SDL_Event sdl_event;
@@ -167,7 +167,10 @@ int main(int argc, char* argv[]) {
 						ui.set_coins(game_manager.getCoins());
 						break;
 					case OnCollision::death:
-						//game_over = true;
+						if (!IMMORTAL) {
+							game_over = true;
+						}
+						ui.set_game_over(true);
 						break;
 					}
 				}

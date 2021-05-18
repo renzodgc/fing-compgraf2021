@@ -33,12 +33,14 @@ class UI {
         Draw* draw_manager;
 
         // Basic properties
-        TTF_Font* font;
+        TTF_Font* top_font;
+        TTF_Font* bottom_font;
         HUDComponent score;
         HUDComponent coins;
+        HUDComponent game_over;
 
         // Basic methods
-        void set_message_on_component(string message, HUDComponent* component);
+        void set_message_on_component(string message, TTF_Font* font, HUDComponent* component);
     
     public:
         // Constructor and singleton method
@@ -53,7 +55,7 @@ class UI {
         // Setters
         void set_score(int score_number);
         void set_coins(int coins_number);
-
+        void set_game_over(bool is_game_over);
 };
 
 #endif

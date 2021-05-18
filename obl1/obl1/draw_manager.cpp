@@ -21,6 +21,8 @@ Draw::Draw() {
 	wood_texture = load_texture(ROUTE_WOOD_TEXTURE);
 	street_texture = load_texture(ROUTE_STREET_TEXTURE);
 	leaves_texture = load_texture(ROUTE_LEAVES_TEXTURE);
+	coin_texture = load_texture(ROUTE_COIN_TEXTURE);
+	wall_texture = load_texture(ROUTE_WALL_TEXTURE);
 	keybinds_texture = load_texture(ROUTE_KEYBINDS_TEXTURE);
 }
 
@@ -42,7 +44,7 @@ void Draw::player(bool use_texture) {
 void Draw::lane(LaneIs laneType, bool use_texture) {
 	switch (laneType) {
 	case LaneIs::wall:
-		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_WALL_OBJECT, DATA_LANE_WALL_OBJECT);
+		DrawMultiplePoints(GL_QUADS, COMMANDS_LANE_WALL_OBJECT, DATA_LANE_WALL_OBJECT, wall_texture, use_texture);
 		break;
 	case LaneIs::grass:
 		DrawMultiplePoints(GL_QUADS, COMMANDS_GRASS_OBJECT, DATA_LANE_GRASS_OBJECT, grass_texture, use_texture);
@@ -54,7 +56,7 @@ void Draw::lane(LaneIs laneType, bool use_texture) {
 }
 
 void Draw::border(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_CUBE_OBJECT, DATA_CUBE_OBJECT, wall_texture, use_texture);
 }
 
 void Draw::tree(bool use_texture) {
@@ -67,7 +69,7 @@ void Draw::car(bool use_texture) {
 }
 
 void Draw::coin(bool use_texture) {
-	DrawMultiplePoints(GL_QUADS, COMMANDS_COIN_OBJECT, DATA_COIN_OBJECT);
+	DrawMultiplePoints(GL_QUADS, COMMANDS_COIN_OBJECT, DATA_COIN_OBJECT, coin_texture, use_texture);
 }
 
 

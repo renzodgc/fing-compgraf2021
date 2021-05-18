@@ -42,6 +42,8 @@ class Draw {
         GLuint wood_texture;
         GLuint leaves_texture;
         GLuint keybinds_texture;
+        GLuint coin_texture;
+        GLuint wall_texture;
     public:
         // Constructor and singleton method
         Draw(Draw const&) = delete;

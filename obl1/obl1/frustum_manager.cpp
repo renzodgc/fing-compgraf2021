@@ -32,7 +32,6 @@ int FrustumGeometric::point_in_frustum(Vector3& point) {
 			return OUTSIDE;
 	}
 	return(result);
-
 }
 
 int FrustumGeometric::sphere_in_frustum(Vector3& point, float radio) {
@@ -47,22 +46,7 @@ int FrustumGeometric::sphere_in_frustum(Vector3& point, float radio) {
 			result = INTERSECT;
 	}
 	return(result);
-
 }
-
-// TODO: Remove unused methods
-/*int FrustumGeometric::box_in_frustum(AABox& b) {
-	int result = INSIDE;
-	for (int i = 0; i < 6; i++) {
-
-		if (planes[i].distance(b.getVertexP(planes[i].normal)) < 0)
-			return OUTSIDE;
-		else if (planes[i].distance(b.getVertexN(planes[i].normal)) < 0)
-			result = INTERSECT;
-	}
-	return(result);
-
-}*/
 
 void FrustumGeometric::draw_points() {
 	glBegin(GL_POINTS);
@@ -84,6 +68,7 @@ void FrustumGeometric::draw_points() {
 void FrustumGeometric::draw_lines() {
 	glBegin(GL_LINE_LOOP);
 	//near plane
+	glColor3f(1.f, 0.f, 0.f);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
@@ -92,6 +77,7 @@ void FrustumGeometric::draw_lines() {
 
 	glBegin(GL_LINE_LOOP);
 	//far plane
+	glColor3f(0.f, 0.f, 1.f);
 	glVertex3f(far_top_right.x, far_top_right.y, far_top_right.z);
 	glVertex3f(far_top_left.x, far_top_left.y, far_top_left.z);
 	glVertex3f(far_bottom_left.x, far_bottom_left.y, far_bottom_left.z);
@@ -100,6 +86,7 @@ void FrustumGeometric::draw_lines() {
 
 	glBegin(GL_LINE_LOOP);
 	//bottom plane
+	glColor3f(0.f, 1.f, 0.f);
 	glVertex3f(near_bottom_left.x, near_bottom_left.y, near_bottom_left.z);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
 	glVertex3f(far_bottom_right.x, far_bottom_right.y, far_bottom_right.z);
@@ -108,6 +95,7 @@ void FrustumGeometric::draw_lines() {
 
 	glBegin(GL_LINE_LOOP);
 	//top plane
+	glColor3f(1.f, 0.f, 1.f);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(far_top_left.x, far_top_left.y, far_top_left.z);
@@ -116,6 +104,7 @@ void FrustumGeometric::draw_lines() {
 
 	glBegin(GL_LINE_LOOP);
 	//left plane
+	glColor3f(0.f, 1.f, 1.f);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(near_bottom_left.x, near_bottom_left.y, near_bottom_left.z);
 	glVertex3f(far_bottom_left.x, far_bottom_left.y, far_bottom_left.z);
@@ -124,6 +113,7 @@ void FrustumGeometric::draw_lines() {
 
 	glBegin(GL_LINE_LOOP);
 	// right plane
+	glColor3f(1.f, 1.f, 0.f);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(far_top_right.x, far_top_right.y, far_top_right.z);
@@ -137,37 +127,42 @@ void FrustumGeometric::draw_planes() {
 	glBegin(GL_QUADS);
 
 	//near plane
+	glColor3f(1.f, 0.f, 0.f);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
 	glVertex3f(near_bottom_left.x, near_bottom_left.y, near_bottom_left.z);
 
 	//far plane
+	glColor3f(0.f, 0.f, 1.f);
 	glVertex3f(far_top_right.x, far_top_right.y, far_top_right.z);
 	glVertex3f(far_top_left.x, far_top_left.y, far_top_left.z);
 	glVertex3f(far_bottom_left.x, far_bottom_left.y, far_bottom_left.z);
 	glVertex3f(far_bottom_right.x, far_bottom_right.y, far_bottom_right.z);
 
 	//bottom plane
+	glColor3f(0.f, 1.f, 0.f);
 	glVertex3f(near_bottom_left.x, near_bottom_left.y, near_bottom_left.z);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
 	glVertex3f(far_bottom_right.x, far_bottom_right.y, far_bottom_right.z);
 	glVertex3f(far_bottom_left.x, far_bottom_left.y, far_bottom_left.z);
 
 	//top plane
+	glColor3f(1.f, 0.f, 1.f);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(far_top_left.x, far_top_left.y, far_top_left.z);
 	glVertex3f(far_top_right.x, far_top_right.y, far_top_right.z);
 
 	//left plane
-
+	glColor3f(0.f, 1.f, 1.f);
 	glVertex3f(near_top_left.x, near_top_left.y, near_top_left.z);
 	glVertex3f(near_bottom_left.x, near_bottom_left.y, near_bottom_left.z);
 	glVertex3f(far_bottom_left.x, far_bottom_left.y, far_bottom_left.z);
 	glVertex3f(far_top_left.x, far_top_left.y, far_top_left.z);
 
 	// right plane
+	glColor3f(1.f, 1.f, 0.f);
 	glVertex3f(near_bottom_right.x, near_bottom_right.y, near_bottom_right.z);
 	glVertex3f(near_top_right.x, near_top_right.y, near_top_right.z);
 	glVertex3f(far_top_right.x, far_top_right.y, far_top_right.z);

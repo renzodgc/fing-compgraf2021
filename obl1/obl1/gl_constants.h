@@ -40,115 +40,145 @@ const color LIGHT_GREY = { 0.3f, 0.3f, 0.3f, 1.f }; // RGBA
 
 // Cube
 const vector<char> COMMANDS_CUBE_OBJECT = {
-		'C', 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V'
+		'C',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<vector<float>> DATA_CUBE_OBJECT = {
 	{0.2f, 0.2f, 0.2f, 1.f}, // BACK
-	{-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH}
+	{ 0.f, 0.f, 1.f }, // Down
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{ 0.f, 0.f, -1.f }, // Up
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{ 0.f, 1.f, 0.f }, // Top
+	{0.f, 0.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{ 0.f, -1.f, 0.f }, // Bottom
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{ 1.f, 0.f, 0.f }, // Right
+	{0.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{ -1.f, 0.f, 0.f }, // Left
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}
 };
 
 // Lane objects
 const vector<char> COMMANDS_LANE_OBJECT = {
-		'C', 'V', 'V', 'V', 'V',
+		'C', 'N', 'V', 'V', 'V', 'V',
 };
 const vector<char> COMMANDS_GRASS_OBJECT = {
-		'C', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
+		'C', 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<char> COMMANDS_STREET_OBJECT = {
-		'C', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
+		'C', 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<char> COMMANDS_LANE_WALL_OBJECT = {
-		'C', 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V'
+		'C', 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+			 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+			 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+			 'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<vector<float>> DATA_LANE_INNER_OBJECT = {
 	{-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},  {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
 };
 const vector<vector<float>> DATA_LANE_GRASS_OBJECT = {
 	{0.f, 0.7f, 0.f, 1.f},
-	{0.f, 0.f}, 
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{LANE_LENGTH, 0.f},
-	{LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{LANE_LENGTH, 1.f},
-	{LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{0.f, 1.f},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f, 0.f}, // Top
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{LANE_LENGTH, 0.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{LANE_LENGTH, 1.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
 };
 const vector<vector<float>> DATA_LANE_STREET_OBJECT = {
 	{.2f, .2f, .2f, 1.f},
-	{0.f, 0.f},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{LANE_LENGTH, 0.f},
-	{LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{LANE_LENGTH, 1.f},
-	{LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{0.f, 1.f},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f, 0.f}, // Top
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{LANE_LENGTH, 0.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{LANE_LENGTH, 1.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
 };
 const vector<vector<float>> DATA_LANE_WALL_OBJECT = {
 	{0.2f, 0.2f, 0.2f, 1.f},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},  {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},  {LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{-LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH}, {LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},  {LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},  {-LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},
-	{-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},  {LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH}, {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, -1.f, 0.f}, // Bottom
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 0.f, -1.f}, // Up
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},
+	{0.f, 1.f, 0.f}, // Top
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},
+	{1.f, 0.f}, {LANE_HALF_LENGTH, TILE_LENGTH * 3, -TILE_LENGTH},
+	{1.f, 1.f}, {LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},
+	{0.f, 0.f, 1.f}, // Down
+	{0.f, 0.f}, {-LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 0.f}, {LANE_HALF_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 1.f}, {LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},
+	{0.f, 1.f}, {-LANE_HALF_LENGTH, TILE_LENGTH * 3, TILE_LENGTH},
 };
 
 // Tree Stump
 const vector<char> COMMANDS_TREE_STUMP_OBJECT = {
 	'C',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<vector<float>> DATA_TREE_STUMP_OBJECT = {
 	{.647f, .164f, .164f, 1.f}, // Stump (Brown)
+	{ 0.f, 0.f, 1.f }, // Down
 	{0.f, 0.f}, {-TREE_STUMP_LENGTH, -TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{0.f, TREE_HEIGHT}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
-
+	{ 0.f, 0.f, -1.f }, // Up
 	{0.f, 0.f}, {-TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{0.f, TREE_HEIGHT}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
-
+	{ 0.f, 1.f, 0.f }, // Top
 	{0.f, 0.f}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{0.f, TREE_HEIGHT}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
-
+	{ 0.f, -1.f, 0.f }, // Bottom
 	{0.f, 0.f}, {-TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{0.f, TREE_HEIGHT}, {-TREE_STUMP_LENGTH, -TREE_HEIGHT, TREE_STUMP_LENGTH},
-
+	{ 1.f, 0.f, 0.f }, // Right
 	{0.f, 0.f}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
 	{0.f, TREE_HEIGHT}, {TREE_STUMP_LENGTH, -TREE_HEIGHT, TREE_STUMP_LENGTH},
-
+	{ -1.f, 0.f, 0.f }, // Left
 	{0.f, 0.f}, {-TREE_STUMP_LENGTH, -TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, 0.f}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, -TREE_STUMP_LENGTH},
 	{1.f, TREE_HEIGHT}, {-TREE_STUMP_LENGTH, TREE_HEIGHT, TREE_STUMP_LENGTH},
@@ -158,40 +188,41 @@ const vector<vector<float>> DATA_TREE_STUMP_OBJECT = {
 // Tree leaves
 const vector<char> COMMANDS_TREE_LEAVES_OBJECT = {
 	'C',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
-	'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+	'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<vector<float>> DATA_TREE_LEAVES_OBJECT = {
 	{ 0.f, 0.33f, 0.f, 1.f }, // Leaves (Dark Green)
+	{ 0.f, 0.f, 1.f }, // Down
 	{0.f, 0.f}, { -TILE_LENGTH, TREE_HEIGHT, TILE_LENGTH },
 	{1.f, 0.f}, { TILE_LENGTH, TREE_HEIGHT, TILE_LENGTH },
 	{1.f, 1.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
 	{0.f, 1.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
-
+	{ 0.f, 0.f, -1.f }, // Up
 	{0.f, 0.f}, { -TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
 	{0.f, 1.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 1.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 0.f}, { TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
-
+	{ 0.f, 1.f, 0.f }, // Top
 	{0.f, 0.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 0.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 1.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
 	{0.f, 1.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
-
+	{ 0.f, -1.f, 0.f }, // Bottom
 	{0.f, 0.f}, { -TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
 	{1.f, 0.f}, { TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
 	{1.f, 1.f}, { TILE_LENGTH, TREE_HEIGHT, TILE_LENGTH },
 	{0.f, 1.f}, { -TILE_LENGTH, TREE_HEIGHT, TILE_LENGTH },
-
+	{ 1.f, 0.f, 0.f }, // Right
 	{0.f, 0.f}, { TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
 	{1.f, 0.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 1.f}, { TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
 	{0.f, 1.f}, { TILE_LENGTH, TREE_HEIGHT, TILE_LENGTH },
-
+	{ -1.f, 0.f, 0.f }, // Left
 	{0.f, 0.f}, { -TILE_LENGTH, TREE_HEIGHT, -TILE_LENGTH },
 	{1.f, 0.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, -TILE_LENGTH },
 	{1.f, 1.f}, { -TILE_LENGTH, TREE_TOP_HEIGHT, TILE_LENGTH },
@@ -200,21 +231,46 @@ const vector<vector<float>> DATA_TREE_LEAVES_OBJECT = {
 
 // Coin
 const vector<char> COMMANDS_COIN_OBJECT = {
-		'C', 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V',
-			 'V', 'V', 'V', 'V'
+		'C',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V',
+		'N', 'T', 'V', 'T', 'V', 'T', 'V', 'T', 'V'
 };
 const vector<vector<float>> DATA_COIN_OBJECT = {
 	{246.0f/255.0f, 192.0f/255.0f, 22.0f/255.0f, 1.f}, // BACK
-	{-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
-	{-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},  {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
-	{-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},  {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH}
+	{ 0.f, 0.f, 1.f }, // Down
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{ 0.f, 0.f, -1.f }, // Up
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{ 0.f, 1.f, 0.f }, // Top
+	{0.f, 0.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{ 0.f, -1.f, 0.f }, // Bottom
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{ 1.f, 0.f, 0.f }, // Right
+	{0.f, 0.f}, {TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH},
+	{ -1.f, 0.f, 0.f }, // Left
+	{0.f, 0.f}, {-TILE_LENGTH, -TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 0.f}, {-TILE_LENGTH, TILE_LENGTH, -TILE_LENGTH},
+	{1.f, 1.f}, {-TILE_LENGTH, TILE_LENGTH, TILE_LENGTH},
+	{0.f, 1.f}, {-TILE_LENGTH, -TILE_LENGTH, TILE_LENGTH}
 };
 
 #endif

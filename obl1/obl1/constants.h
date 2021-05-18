@@ -45,7 +45,14 @@ const double PLAYER_SPEED = 7.0;
 
 enum class OnCollision { bounce, death, coin };
 const unsigned int LEVEL_RAISE_COEF = 10;
-const bool IMMORTAL = false;
+const bool IMMORTAL = true;
+const bool LOG_FPS = false;
+
+// LIGHTNING
+// ---------------------------------------------------------------------------------------
+
+enum class LightningType { day, sunset, night };
+const int LIGHTNING_TYPES = 3;
 
 // LANE
 // ---------------------------------------------------------------------------------------
@@ -93,6 +100,8 @@ const string ROUTE_CAR_OBJECT = "resources/Truck02.obj";
 
 const string ROUTE_WOOD_TEXTURE = "resources/Wood.jpg";
 const string ROUTE_LEAVES_TEXTURE = "resources/leaves.jpg";
+const string ROUTE_COIN_TEXTURE = "resources/coin.jpg";
+const string ROUTE_WALL_TEXTURE = "resources/wall.jpg";
 
 const string ROUTE_KEYBINDS_TEXTURE = "resources/keybinds.jpg";
 

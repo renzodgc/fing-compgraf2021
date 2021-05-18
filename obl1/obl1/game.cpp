@@ -17,6 +17,7 @@ int main(int argc, char* argv[]) {
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
 	cout << " F3       -> Toggle Facetado/Interpolado" << endl;
+	cout << " F4       -> Toggle Iluminacion (dia/tarde/noche)" << endl;
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// INITIALIZE WINDOW
@@ -29,8 +30,9 @@ int main(int argc, char* argv[]) {
 	bool paused = false;
 	bool game_over = false;
 	bool wireframe = false;
-	bool textures = true;
+	bool use_textures = true;
 	bool interpolated_lightning = false; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
+	LightningType lightning_type = LightningType::day;
 
 	// GENERAL OBJECTS AND VARIABLES
 	SDL_Event sdl_event;
@@ -41,6 +43,12 @@ int main(int argc, char* argv[]) {
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 	vector<OnCollision> collision_events;
 
+	// Lightning
+	GLfloat light_position[4] = { 0, 0, 0, 1 };
+	GLfloat light_color[4] = { 1, 1, 1, 1 };
+	GLfloat material_ambient_diffuse_color[4] = { 1, 1, 1, 1 };
+	GLfloat material_specular_color[4] = { 0, 0, 0, 1 };
+
 	// MAIN OBJECTS
 	Player& player = Player::get_instance();
 
@@ -50,6 +58,11 @@ int main(int argc, char* argv[]) {
 	UI& ui = UI::get_instance();
 	Camera& camera = Camera::get_instance();
 	FrustumGeometric& frustum = FrustumGeometric::get_instance();
+
+	// CONFIG
+	//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_ambient_diffuse_color);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular_color);
 
 	// RENDER LOOP
 	camera.start_third_person_view();
@@ -70,7 +83,9 @@ int main(int argc, char* argv[]) {
 		current_t = chrono::high_resolution_clock::now();
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
 		elapsed_time = delta_time.count();
-		// cout << (1.f / elapsed_time) << " FPS" << endl;
+		if (LOG_FPS) {
+			cout << (1.f / elapsed_time) << " FPS" << endl;
+		}
 
 		// INPUT EVENT HANDLING
 		// -----------------------------------------------------------------------------------------------
@@ -107,10 +122,28 @@ int main(int argc, char* argv[]) {
 						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 					break;
 				case SDLK_F2:
-					textures = !textures;
+					use_textures = !use_textures;
 					break;
 				case SDLK_F3:
 					interpolated_lightning = !interpolated_lightning;
+					if (interpolated_lightning)
+						glShadeModel(GL_SMOOTH);
+					else
+						glShadeModel(GL_FLAT);
+					break;
+				case SDLK_F4:
+					lightning_type = static_cast<LightningType>((((int)lightning_type + 1) % LIGHTNING_TYPES));
+					switch (lightning_type) {
+					case LightningType::day:
+						light_color[0] = 0.8f; light_color[1] = 0.8f; light_color[2] = 0.2f;
+						break;
+					case LightningType::sunset:
+						light_color[0] = 0.8f; light_color[1] = 0.4f; light_color[2] = 0.2f;
+						break;
+					case LightningType::night:
+						light_color[0] = 0.f; light_color[1] = 0.2f; light_color[2] = 0.5f;
+						break;
+					}
 					break;
 				case SDLK_F11:
 					ToggleFullscreen(window);
@@ -188,24 +221,37 @@ int main(int argc, char* argv[]) {
 			}
 
 		}
-		
 
 		// RENDER
 		// -----------------------------------------------------------------------------------------------
 
 		glPushMatrix();
+
+		// LIGHTNING
+		if (use_textures) { // Else use flat coloring
+			glEnable(GL_LIGHTING);
+			// Enable lighting (always after gluLookAt)
+			glEnable(GL_LIGHT0); // enable light 0
+			light_position[0] = (GLfloat)(player.get_player_position().x + 0.2f);
+			light_position[1] = (GLfloat)(player.get_player_position().y + 3.f);
+			light_position[2] = (GLfloat)(player.get_player_position().z - 0.8f);
+			glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+			glLightfv(GL_LIGHT0, GL_AMBIENT, light_color);
+		}
 		
+
 		// Draw player
-		player.draw(textures);
+		player.draw(use_textures);
 
 		// Draw lanes
 		for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
-			game_manager.getLanes()[i]->draw(textures);
+			game_manager.getLanes()[i]->draw(use_textures);
 		}
 
 		// Draw HUD
+		glDisable(GL_LIGHTING);
 		ui.draw();
-		
+
 		glPopMatrix();
 
 		// POST RENDER

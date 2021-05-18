@@ -152,5 +152,5 @@ void Vector3::set(float x, float y, float z) {
 
 
 void Vector3::print() {
-	printf("Vector3(%f, %f, %f)", x, y, z);
+	printf("Vector3(%f, %f, %f) ", x, y, z);
 }

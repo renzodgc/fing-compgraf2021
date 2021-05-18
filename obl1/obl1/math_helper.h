@@ -12,6 +12,7 @@
 #include <vector>
 #include <math.h>
 
+#include "constants.h"
 #include "models.h"
 
 // NAMESPACE

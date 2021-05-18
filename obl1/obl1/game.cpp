@@ -126,6 +126,10 @@ int main(int argc, char* argv[]) {
 					break;
 				case SDLK_F3:
 					interpolated_lightning = !interpolated_lightning;
+					if (interpolated_lightning)
+						glShadeModel(GL_SMOOTH);
+					else
+						glShadeModel(GL_FLAT);
 					break;
 				case SDLK_F4:
 					lightning_type = static_cast<LightningType>((((int)lightning_type + 1) % LIGHTNING_TYPES));

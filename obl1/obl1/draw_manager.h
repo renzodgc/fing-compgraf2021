@@ -41,6 +41,7 @@ class Draw {
         GLuint street_texture;
         GLuint wood_texture;
         GLuint leaves_texture;
+        GLuint keybinds_texture;
     public:
         // Constructor and singleton method
         Draw(Draw const&) = delete;
@@ -58,11 +59,8 @@ class Draw {
         // Primitive objects' drawing methods
         void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data, GLuint texture, bool use_texture);
         void DrawMultiplePoints(GLenum primitive, vector<char> commands, vector<vector<float>> data);
-        void DrawHUD(HUDComponent left, HUDComponent right);
+        void DrawHUD(HUDComponent top_left, HUDComponent top_right, HUDComponent top_center);
         void DrawHUDComponent(HUDComponent component);
-
-        // Other objects' drawing methods
-        void DrawReferenceObject();
 };
 
 #endif

@@ -126,7 +126,7 @@ Car::Car(Vector3 pos, int direct) : ScenarioObject(pos) {
 	// Basic properties
 	object_type = ObjectIs::car;
 	on_collision_behaviour = OnCollision::death;
-	bounding_box_radius = { 1.f, 0.5f, 0.5f };
+	bounding_box_radius = { 0.6f, 0.5f, 0.45f };
 
 	// Other properties
 	direction = direct;

@@ -168,8 +168,8 @@ void Coin::draw(bool use_texture) {
 	if (should_be_drawn()) {
 		glPushMatrix();
 		glTranslatef(object_position.x, 0.f, 0.f);
-		glScalef(1.f, 3.f, 1.f);
-		draw_manager->border(use_texture);
+		glScalef(0.5f, 0.1f, 0.5f);
+		draw_manager->coin(use_texture);
 		glPopMatrix();
 	}
 }

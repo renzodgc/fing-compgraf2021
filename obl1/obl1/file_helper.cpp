@@ -32,7 +32,7 @@ GLuint load_texture(string texture_file) {
 	return texture;
 }
  
-// References: https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Load_OBJ
+// Reference: https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Load_OBJ
 // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-7-model-loading/
 // triangles is true if the model is composed by triangles or false if made by squares
 tuple<vector<char>, vector<vector<float>>> load_obj(string file, ObjType obj_type) {

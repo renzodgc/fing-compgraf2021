@@ -7,6 +7,8 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include <iostream>
+#include <stdio.h>
 #include <math.h>
 
 #include "SDL.h"
@@ -55,10 +57,8 @@ public:
 	float near_width, near_height, far_width, far_height;
 
 	// Main methods
-	//void setCamInternals(float angle, float ratio, float near_distance, float far_distance);
 	int point_in_frustum(Vector3& point);
 	int sphere_in_frustum(Vector3& point, float radio);
-	//int box_in_frustum(AABox& b);
 
 	// Draw methods
 	void draw_points();

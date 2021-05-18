@@ -247,7 +247,7 @@ int main(int argc, char* argv[]) {
 		// Draw HUD
 		glDisable(GL_LIGHTING);
 		ui.draw();
-		
+
 		glPopMatrix();
 
 		// POST RENDER

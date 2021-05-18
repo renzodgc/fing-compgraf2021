@@ -7,7 +7,8 @@ int main(int argc, char* argv[]) {
 	// DOCUMENTATION
 	cout << "Controles:" << endl;
 	cout << " FLECHAS  -> Mover Personaje" << endl;
-	cout << " WASD     -> Mover Camara (FreeView)" << endl;
+	cout << " WASD     -> Mover Camara" << endl;
+	cout << " UHJK     -> Mover Iluminación" << endl;
 	cout << " MOUSE    -> Rotar Camara" << endl;
 	cout << " I        -> Vista Isometrica" << endl;
 	cout << " T        -> Vista Tercera Persona" << endl;
@@ -52,6 +53,9 @@ int main(int argc, char* argv[]) {
 	GLfloat light_color[4] = { 1, 1, 1, 1 };
 	GLfloat material_ambient_diffuse_color[4] = { 1, 1, 1, 1 };
 	GLfloat material_specular_color[4] = { 0, 0, 0, 1 };
+	float light_offset_x = 0.2f;
+	float light_offset_y = 3.f;
+	float light_offset_z = -0.8f;
 
 	// MAIN OBJECTS
 	Player& player = Player::get_instance();
@@ -202,6 +206,20 @@ int main(int argc, char* argv[]) {
 		}
 		keyboard_state = SDL_GetKeyboardState(NULL);
 
+		// Check lighting motion
+		if (keyboard_state[SDL_SCANCODE_U]) {
+			light_offset_z -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_K]) {
+			light_offset_x += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_J]) {
+			light_offset_z += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_H]) {
+			light_offset_x -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+
 		// UPDATE
 		// -----------------------------------------------------------------------------------------------
 
@@ -257,14 +275,13 @@ int main(int argc, char* argv[]) {
 			glEnable(GL_LIGHTING);
 			// Enable lighting (always after gluLookAt)
 			glEnable(GL_LIGHT0); // enable light 0
-			light_position[0] = (GLfloat)(player.get_player_position().x + 0.2f);
-			light_position[1] = (GLfloat)(player.get_player_position().y + 3.f);
-			light_position[2] = (GLfloat)(player.get_player_position().z - 0.8f);
+			light_position[0] = (GLfloat)(player.get_player_position().x + light_offset_x);
+			light_position[1] = (GLfloat)(player.get_player_position().y + light_offset_y);
+			light_position[2] = (GLfloat)(player.get_player_position().z + light_offset_z);
 			glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 			glLightfv(GL_LIGHT0, GL_AMBIENT, light_color);
 		}
 		
-
 		// Draw player
 		player.draw(use_textures);
 

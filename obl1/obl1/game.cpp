@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
 	cout << " F2       -> Toggle Texturas On/Off" << endl;
 	cout << " F3       -> Toggle Facetado/Interpolado" << endl;
 	cout << " F4       -> Toggle Iluminacion (dia/tarde/noche)" << endl;
+	cout << " F5       -> Toggle Velocidad (lento/normal/rapido)" << endl;
 	cout << " Q/ESC    -> Salir" << endl;
 
 	// INITIALIZE WINDOW
@@ -33,6 +34,8 @@ int main(int argc, char* argv[]) {
 	bool use_textures = true;
 	bool interpolated_lightning = false; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
 	LightningType lightning_type = LightningType::day;
+	GameSpeed game_speed = GameSpeed::normal;
+	double game_speed_multiplier = 1.f;
 
 	// GENERAL OBJECTS AND VARIABLES
 	SDL_Event sdl_event;
@@ -82,7 +85,7 @@ int main(int argc, char* argv[]) {
 		previous_t = current_t;
 		current_t = chrono::high_resolution_clock::now();
 		delta_time = chrono::duration_cast<chrono::duration<double>>(current_t - previous_t);
-		elapsed_time = delta_time.count();
+		elapsed_time = delta_time.count() * game_speed_multiplier;
 		if (LOG_FPS) {
 			cout << (1.f / elapsed_time) << " FPS" << endl;
 		}
@@ -142,6 +145,20 @@ int main(int argc, char* argv[]) {
 						break;
 					case LightningType::night:
 						light_color[0] = 0.f; light_color[1] = 0.2f; light_color[2] = 0.5f;
+						break;
+					}
+					break;
+				case SDLK_F5:
+					game_speed = static_cast<GameSpeed>((((int)game_speed + 1) % GAMESPEED_TYPES));
+					switch (game_speed) {
+					case GameSpeed::slow:
+						game_speed_multiplier = 0.5f;
+						break;
+					case GameSpeed::normal:
+						game_speed_multiplier = 1.f;
+						break;
+					case GameSpeed::fast:
+						game_speed_multiplier = 2.f;
 						break;
 					}
 					break;

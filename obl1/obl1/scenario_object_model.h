@@ -87,4 +87,14 @@ class Border : public ScenarioObject {
         void draw(bool use_texture);
 };
 
+class Coin : public ScenarioObject {
+
+public:
+    // Constructor
+    Coin(Vector3 pos);
+
+    // Main methods
+    void draw(bool use_texture);
+};
+
 #endif

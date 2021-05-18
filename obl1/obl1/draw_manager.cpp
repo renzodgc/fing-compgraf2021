@@ -66,6 +66,10 @@ void Draw::car(bool use_texture) {
 	DrawMultiplePoints(GL_TRIANGLES, car_commands, car_data, car_texture, use_texture);
 }
 
+void Draw::coin(bool use_texture) {
+	DrawMultiplePoints(GL_QUADS, COMMANDS_COIN_OBJECT, DATA_COIN_OBJECT);
+}
+
 
 // Primitive objects' drawing methods
 // -----------------------------------------------------------------------------------

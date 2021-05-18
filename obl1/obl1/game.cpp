@@ -155,7 +155,9 @@ int main(int argc, char* argv[]) {
 
 			// Update lanes
 			for (size_t i = 0; i < game_manager.getLanes().size(); i++) {
+				
 				collision_events = game_manager.getLanes()[i]->update(elapsed_time, player.get_player_position());
+				
 				// Apply collisions events if any
 				for (size_t i = 0; i < collision_events.size(); i++) {
 					switch (collision_events[i]) {

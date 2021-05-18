@@ -59,6 +59,11 @@ const int INITIAL_LANES_INTERVAL = 10; // Amount of lanes created from origin wh
 const unsigned int MAX_GRASS_COEF = 4; // Max amount of grass lanes together
 const unsigned int MAX_STREET_COEF = 2; // Max amount of street lanes together (multiplied by level)
 
+const unsigned int COIN_SPAWN_RATE = 10; // 100/COIN_SPAWN_RATE gives the probability of coin spawning
+
+// STREET
+// ---------------------------------------------------------------------------------------
+
 const float BASE_SPAWN_COOLDOWN_COEF = 3.0f;
 
 const unsigned int BASE_SPAWN_RATE_COEF = 10;
@@ -69,11 +74,10 @@ const unsigned int SPEED_COEF = 4;
 const unsigned int SPEED_RANDOM_COEF = 2;
 const unsigned int SPEED_SCALING_COEF = 2; // Inversely proportional
 
-
 // OBJECTS
 // ---------------------------------------------------------------------------------------
 
-enum class ObjectIs { car, tree, border };
+enum class ObjectIs { car, tree, border, coin };
 
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------

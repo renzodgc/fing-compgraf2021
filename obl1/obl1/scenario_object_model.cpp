@@ -40,7 +40,6 @@ void ScenarioObject::set_object_position(Vector3 pos) {
 Vector3 ScenarioObject::get_bounding_box_radius() {
 	return bounding_box_radius;
 }
-
 void ScenarioObject::set_bounding_box_radius(Vector3 radius) {
 	bounding_box_radius = radius;
 }
@@ -48,7 +47,6 @@ void ScenarioObject::set_bounding_box_radius(Vector3 radius) {
 OnCollision ScenarioObject::get_on_collision_behaviour() {
 	return on_collision_behaviour;
 }
-
 void ScenarioObject::set_on_collision_behaviour(OnCollision behaviour) {
 	on_collision_behaviour = behaviour;
 }
@@ -117,7 +115,6 @@ void Border::draw(bool use_texture) {
 	}
 }
 
-
 // CAR
 // -----------------------------------------------------------------------------------
 
@@ -146,6 +143,33 @@ void Car::draw(bool use_texture) {
 			glRotatef(180.f, 0.f, 1.f, 0.f);
 		}
 		draw_manager->car(use_texture);
+		glPopMatrix();
+	}
+}
+
+// COIN
+// -----------------------------------------------------------------------------------
+
+// Constructor
+// -----------------------------------------------------------------------------------
+
+Coin::Coin(Vector3 pos) : ScenarioObject(pos) {
+
+	// Basic properties
+	object_type = ObjectIs::coin;
+	on_collision_behaviour = OnCollision::coin;
+	bounding_box_radius = { 0.5f, 0.5f, 0.5f };
+}
+
+// Main methods
+// -----------------------------------------------------------------------------------
+
+void Coin::draw(bool use_texture) {
+	if (should_be_drawn()) {
+		glPushMatrix();
+		glTranslatef(object_position.x, 0.f, 0.f);
+		glScalef(0.5f, 0.1f, 0.5f);
+		draw_manager->coin(use_texture);
 		glPopMatrix();
 	}
 }

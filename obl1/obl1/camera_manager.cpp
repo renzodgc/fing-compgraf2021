@@ -12,7 +12,6 @@ using namespace std;
 // Constructor and Singleton method
 // -----------------------------------------------------------------------------------
 
-// TODO: If the GameManager has the player we can change the set_method for a get in the constructor of the Camera
 Camera::Camera() {
 	player = &Player::get_instance();
 }
@@ -113,7 +112,6 @@ void Camera::start_isometric_view() {
 	glRotatef(35.264f, 1.0f, 0.0f, 0.0f);
 	glRotatef(-45.0f, 0.0f, 1.0f, 0.0f);
 
-	// TODO: Review this for isometric
 	FrustumGeometric::get_instance().set_cam_internals(RATIO_CAMERA, ANGLE_CAMERA, NEAR_PLANE_CAMERA, FAR_PLANE_CAMERA);
 }
 
@@ -125,7 +123,7 @@ void Camera::isometric_camera_update_position() {
 
 // Third person camera methods
 // -----------------------------------------------------------------------------------
-
+// Reference: https://www.youtube.com/watch?v=PoxDDZmctnU
 void Camera::start_third_person_view() {
 	selected_camera = CameraType::third_person;
 	camera_eye = { 0.f, 0.f, 1.f };

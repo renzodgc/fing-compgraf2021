@@ -67,11 +67,6 @@ int main(int argc, char* argv[]) {
 	Camera& camera = Camera::get_instance();
 	FrustumGeometric& frustum = FrustumGeometric::get_instance();
 
-	// CONFIG
-	//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_ambient_diffuse_color);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular_color);
-
 	// RENDER LOOP
 	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();
@@ -208,16 +203,16 @@ int main(int argc, char* argv[]) {
 
 		// Check lighting motion
 		if (keyboard_state[SDL_SCANCODE_U]) {
-			light_offset_z -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_z -= (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_K]) {
-			light_offset_x += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_x += (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_J]) {
-			light_offset_z += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_z += (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_H]) {
-			light_offset_x -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_x -= (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 
 		// UPDATE

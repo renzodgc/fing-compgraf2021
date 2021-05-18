@@ -30,6 +30,7 @@ class Game {
         int score; // Based on player position
         int level; // Level of difficulty based on player score
         int coins; // Amount of coins gathered
+        bool immortal; // Flag for checking if player should die or not
         vector<Lane*> lanes; // Current existing lanes
 
         // Used for checking lane window constraints
@@ -53,22 +54,16 @@ class Game {
         int getScore();
         int getLevel();
         int getCoins();
+        bool getImmortal();
         vector<Lane*> getLanes();
         void setScore(int score);
         void addCoin();
+        void switchImmortal();
 
         // Main methods
         void update(float player_position);
+        void clean_memory();
 
-};
-
-// Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector
-// Function object to delete lanes
-struct lane_deleter {
-    void operator()(Lane*& e) { // important to take pointer by reference!
-        delete e;
-        e = NULL;
-    }
 };
 
 #endif

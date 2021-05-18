@@ -41,10 +41,14 @@ Lane::Lane(float pos_z) {
 }
 
 Lane::~Lane() {
-	// Apply lane_deleter to each element (to free their memory)
-	for_each(this->objects.begin(), this->objects.end(), scenario_object_deleter());
-	// Delete null elements
-	this->objects.erase(this->objects.begin(), this->objects.end());
+
+	// Delete each object
+	for (size_t i = 0; i < this->objects.size(); i++) {
+		delete this->objects[i];
+	}
+
+	// Clear objects' vector
+	this->objects.clear();
 }
 
 // Getters & Setters

@@ -16,6 +16,7 @@ Game::Game() {
 	this->score = 0;
 	this->level = 1;
 	this->coins = 0;
+	this->immortal = false;
 	this->lanes = generateBaseLanes();
 }
 
@@ -39,6 +40,10 @@ int Game::getCoins() {
 	return this->coins;
 }
 
+bool Game::getImmortal() {
+	return this->immortal;
+}
+
 vector<Lane*> Game::getLanes() {
 	return this->lanes;
 }
@@ -54,6 +59,10 @@ void Game::addCoin() {
 	this->coins++;
 }
 
+void Game::switchImmortal() {
+	this->immortal = !this->immortal;
+}
+
 // Aux methods
 // -----------------------------------------------------------------------------------
 
@@ -67,12 +76,10 @@ void Game::update(float player_position) {
 			this->lanes.push_back(addLane((float)(upper_lane_limit - i)));
 		}
 
-		// Delete old LANES_INTERVAL lanes:
-		
-		// Apply lane_deleter to each element (to free their memory)
-		for_each(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL, lane_deleter());
-		
-		// Delete null elements
+		// Delete old LANES_INTERVAL lanes
+		for (size_t i = 0; i < LANES_INTERVAL; i++) {
+			delete this->lanes[i];
+		}
 		this->lanes.erase(this->lanes.begin(), this->lanes.begin() + LANES_INTERVAL);
 
 		// Update limits
@@ -83,6 +90,18 @@ void Game::update(float player_position) {
 		this->lanes.insert(this->lanes.begin(), new Wall((float)this->lower_lane_limit));
 
 	}
+
+}
+
+void Game::clean_memory() {
+
+	// Delete each lane
+	for (size_t i = 0; i < this->lanes.size(); i++) {
+		delete this->lanes[i];
+	}
+
+	// Clear lanes' vector
+	this->lanes.clear();
 
 }
 

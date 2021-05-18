@@ -54,6 +54,8 @@ enum class OnCollision { bounce, death, coin };
 const unsigned int LEVEL_RAISE_COEF = 10;
 const bool IMMORTAL = false;
 const bool LOG_FPS = false;
+enum class GameSpeed { slow, normal, fast };
+const int GAMESPEED_TYPES = 3;
 
 // LIGHTNING
 // ---------------------------------------------------------------------------------------

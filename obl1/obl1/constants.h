@@ -28,12 +28,6 @@ const float FAR_PLANE_CAMERA = 75.0f;
 const float ANGLE_CAMERA = 45.f;
 const float RATIO_CAMERA = SCR_WIDTH / (float)SCR_HEIGHT;
 
-// DRAW MANAGER
-// ---------------------------------------------------------------------------------------
-
-enum class ObjType { squares, triangles };
-const bool FRUSTUM_CULLING = false; // TODO: Fix Frustum Culling
-
 // PLAYER
 // ---------------------------------------------------------------------------------------
 
@@ -41,27 +35,17 @@ enum class PlayerIs { idle, moving_left, moving_right, moving_down, moving_up };
 const double PLAYER_SPEED = 6.0;
 const float PLAYER_MAX_HEIGHT = 0.5f;
 
-// MATH
-// ---------------------------------------------------------------------------------------
-
-const double PI = 3.14159265358979323846;
-const double ANG2RAD = PI / 180.0;
-
 // GAME
 // ---------------------------------------------------------------------------------------
 
 enum class OnCollision { bounce, death, coin };
-const unsigned int LEVEL_RAISE_COEF = 10;
-const bool IMMORTAL = false;
-const bool LOG_FPS = false;
+
 enum class GameSpeed { slow, normal, fast };
 const int GAMESPEED_TYPES = 3;
 
-// LIGHTNING
-// ---------------------------------------------------------------------------------------
+const unsigned int LEVEL_RAISE_COEF = 10;
+const bool LOG_FPS = false;
 
-enum class LightningType { day, sunset, night };
-const int LIGHTNING_TYPES = 3;
 
 // LANE
 // ---------------------------------------------------------------------------------------
@@ -94,6 +78,25 @@ const float SPEED_SCALING_COEF = 0.5f;
 // ---------------------------------------------------------------------------------------
 
 enum class ObjectIs { car, tree, border, coin };
+
+// LIGHTING
+// ---------------------------------------------------------------------------------------
+
+enum class LightingType { day, sunset, night };
+const int LIGHTING_TYPES = 3;
+
+// MATH
+// ---------------------------------------------------------------------------------------
+
+const double PI = 3.14159265358979323846;
+const double ANG2RAD = PI / 180.0;
+
+// DRAW MANAGER
+// ---------------------------------------------------------------------------------------
+
+enum class ObjType { squares, triangles };
+const bool FRUSTUM_CULLING = false; // TODO: Fix Frustum Culling
+
 
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------

@@ -92,13 +92,4 @@ class Street : public Lane {
         vector<OnCollision> update(double elapsed_time, Vector3 player_position);
 };
 
-// Reference: https://stackoverflow.com/questions/991335/how-to-erase-delete-pointers-to-objects-stored-in-a-vector
-// Function object to delete lanes
-struct scenario_object_deleter {
-    void operator()(ScenarioObject*& e) { // important to take pointer by reference!
-        delete e;
-        e = NULL;
-    }
-};
-
 #endif

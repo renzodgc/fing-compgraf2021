@@ -8,10 +8,12 @@ int main(int argc, char* argv[]) {
 	cout << "Controles:" << endl;
 	cout << " FLECHAS  -> Mover Personaje" << endl;
 	cout << " WASD     -> Mover Camara" << endl;
+	cout << " UHJK     -> Mover Iluminación" << endl;
 	cout << " MOUSE    -> Rotar Camara" << endl;
 	cout << " I        -> Vista Isometrica" << endl;
 	cout << " T        -> Vista Tercera Persona" << endl;
 	cout << " F        -> Vista Libre" << endl;
+	cout << " X        -> Bandera de Inmortalidad" << endl;
 	cout << " P        -> Pausa" << endl;
 	cout << " F11      -> Pantalla Completa" << endl;
 	cout << " F1       -> Toggle Wireframe On/Off" << endl;
@@ -33,7 +35,7 @@ int main(int argc, char* argv[]) {
 	bool wireframe = false;
 	bool use_textures = true;
 	bool interpolated_lightning = false; // Refiere al tipo de iluminacion, si liso o interpolado (flag de luz)
-	LightningType lightning_type = LightningType::day;
+	LightingType lightning_type = LightingType::day;
 	GameSpeed game_speed = GameSpeed::normal;
 	double game_speed_multiplier = 1.f;
 
@@ -46,11 +48,14 @@ int main(int argc, char* argv[]) {
 	chrono::high_resolution_clock::time_point current_t, previous_t;
 	vector<OnCollision> collision_events;
 
-	// Lightning
+	// Lighting
 	GLfloat light_position[4] = { 0, 0, 0, 1 };
 	GLfloat light_color[4] = { 1, 1, 1, 1 };
 	GLfloat material_ambient_diffuse_color[4] = { 1, 1, 1, 1 };
 	GLfloat material_specular_color[4] = { 0, 0, 0, 1 };
+	float light_offset_x = 0.2f;
+	float light_offset_y = 3.f;
+	float light_offset_z = -0.8f;
 
 	// MAIN OBJECTS
 	Player& player = Player::get_instance();
@@ -117,6 +122,13 @@ int main(int argc, char* argv[]) {
 				case SDLK_f:
 					camera.start_free_view();
 					break;
+				case SDLK_x:
+					game_manager.switchImmortal();
+					if (game_manager.getImmortal())
+						cout << "Inmortalidad activada" << endl;
+					else
+						cout << "Inmortalidad desactivada" << endl;
+					break;
 				case SDLK_F1:
 					wireframe = !wireframe;
 					if (wireframe)
@@ -135,15 +147,15 @@ int main(int argc, char* argv[]) {
 						glShadeModel(GL_FLAT);
 					break;
 				case SDLK_F4:
-					lightning_type = static_cast<LightningType>((((int)lightning_type + 1) % LIGHTNING_TYPES));
+					lightning_type = static_cast<LightingType>((((int)lightning_type + 1) % LIGHTING_TYPES));
 					switch (lightning_type) {
-					case LightningType::day:
+					case LightingType::day:
 						light_color[0] = 0.8f; light_color[1] = 0.8f; light_color[2] = 0.2f;
 						break;
-					case LightningType::sunset:
+					case LightingType::sunset:
 						light_color[0] = 0.8f; light_color[1] = 0.4f; light_color[2] = 0.2f;
 						break;
-					case LightningType::night:
+					case LightingType::night:
 						light_color[0] = 0.f; light_color[1] = 0.2f; light_color[2] = 0.5f;
 						break;
 					}
@@ -194,6 +206,20 @@ int main(int argc, char* argv[]) {
 		}
 		keyboard_state = SDL_GetKeyboardState(NULL);
 
+		// Check lighting motion
+		if (keyboard_state[SDL_SCANCODE_U]) {
+			light_offset_z -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_K]) {
+			light_offset_x += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_J]) {
+			light_offset_z += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+		if (keyboard_state[SDL_SCANCODE_H]) {
+			light_offset_x -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+		}
+
 		// UPDATE
 		// -----------------------------------------------------------------------------------------------
 
@@ -219,10 +245,10 @@ int main(int argc, char* argv[]) {
 						ui.set_coins(game_manager.getCoins());
 						break;
 					case OnCollision::death:
-						if (!IMMORTAL) {
+						if (!game_manager.getImmortal()) {
 							game_over = true;
+							ui.set_game_over(true);
 						}
-						ui.set_game_over(true);
 						break;
 					}
 				}
@@ -249,14 +275,13 @@ int main(int argc, char* argv[]) {
 			glEnable(GL_LIGHTING);
 			// Enable lighting (always after gluLookAt)
 			glEnable(GL_LIGHT0); // enable light 0
-			light_position[0] = (GLfloat)(player.get_player_position().x + 0.2f);
-			light_position[1] = (GLfloat)(player.get_player_position().y + 3.f);
-			light_position[2] = (GLfloat)(player.get_player_position().z - 0.8f);
+			light_position[0] = (GLfloat)(player.get_player_position().x + light_offset_x);
+			light_position[1] = (GLfloat)(player.get_player_position().y + light_offset_y);
+			light_position[2] = (GLfloat)(player.get_player_position().z + light_offset_z);
 			glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 			glLightfv(GL_LIGHT0, GL_AMBIENT, light_color);
 		}
 		
-
 		// Draw player
 		player.draw(use_textures);
 
@@ -279,6 +304,7 @@ int main(int argc, char* argv[]) {
 
 	// FINAL CLEANUP
 	ui.clean_memory();
+	game_manager.clean_memory();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	TTF_Quit();

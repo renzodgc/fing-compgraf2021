@@ -147,10 +147,10 @@ void Draw::DrawHUD(HUDComponent top_left, HUDComponent top_right, HUDComponent t
 	glBindTexture(GL_TEXTURE_2D, keybinds_texture);
 	glBegin(GL_QUADS); {
 		glColor3f(1.f, 1.f, 1.f);
-		glTexCoord2d(0.f, 1.f); glVertex3f(0.f, SCR_HEIGHT - 62.f, 0.f);
-		glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT - 62.f, 0.f);
-		glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT, 0.f);
-		glTexCoord2d(0.f, 0.f); glVertex3f(0.f, SCR_HEIGHT, 0.f);
+		glTexCoord2d(0.f, 1.f); glVertex3f(0.f, SCR_HEIGHT - 62.f, 1.f);
+		glTexCoord2d(1.f, 1.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT - 62.f, 1.f);
+		glTexCoord2d(1.f, 0.f); glVertex3f(SCR_WIDTH, SCR_HEIGHT, 1.f);
+		glTexCoord2d(0.f, 0.f); glVertex3f(0.f, SCR_HEIGHT, 1.f);
 	} glEnd();
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();

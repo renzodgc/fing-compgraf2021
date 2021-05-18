@@ -81,7 +81,7 @@ vector<OnCollision> Lane::update(double elapsed_time, Vector3 player_position) {
 	vector<OnCollision> collision_events;
 	if (abs(lane_position.z - player_position.z) <= 1) {
 		bool collision_x, collision_z;
-		float player_bounding_box_radius = TILE_LENGTH;
+		float player_bounding_box_radius = TILE_LENGTH - 0.07f;
 		for (size_t i = 0; i < objects.size(); i++) {
 			// Check for overlaping on BOTH the Z and the X axis (Y axis doesn't matter)
 			collision_x = (

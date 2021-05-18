@@ -52,7 +52,7 @@ const double ANG2RAD = PI / 180.0;
 
 enum class OnCollision { bounce, death, coin };
 const unsigned int LEVEL_RAISE_COEF = 10;
-const bool IMMORTAL = true;
+const bool IMMORTAL = false;
 const bool LOG_FPS = false;
 
 // LIGHTNING

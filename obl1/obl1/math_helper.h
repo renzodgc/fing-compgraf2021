@@ -13,7 +13,7 @@
 #include <math.h>
 
 #include "constants.h"
-#include "models.h"
+#include "hud.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-#include "models.h"
+#include "hud.h"
 #include "constants.h"
 #include "gl_constants.h"
 #include "math_helper.h"

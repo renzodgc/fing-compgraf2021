@@ -12,7 +12,7 @@
 #include "SDL_opengl.h"
 #include <GL/glu.h>
 
-#include "models.h"
+#include "hud.h"
 #include "constants.h"
 #include "gl_constants.h"
 #include "math_helper.h"

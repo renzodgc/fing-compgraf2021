@@ -109,7 +109,7 @@
     <ClInclude Include="player_model.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="math_helper.h" />
-    <ClInclude Include="models.h" />
+    <ClInclude Include="hud.h" />
     <ClInclude Include="ui_manager.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="window_helper.h" />

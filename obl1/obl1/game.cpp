@@ -67,11 +67,6 @@ int main(int argc, char* argv[]) {
 	Camera& camera = Camera::get_instance();
 	FrustumGeometric& frustum = FrustumGeometric::get_instance();
 
-	// CONFIG
-	//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_ambient_diffuse_color);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular_color);
-
 	// RENDER LOOP
 	camera.start_third_person_view();
 	current_t = chrono::high_resolution_clock::now();

@@ -75,7 +75,6 @@ int main(int argc, char* argv[]) {
 		// PRE RENDER
 		// -----------------------------------------------------------------------------------------------
 
-		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 
@@ -203,16 +202,16 @@ int main(int argc, char* argv[]) {
 
 		// Check lighting motion
 		if (keyboard_state[SDL_SCANCODE_U]) {
-			light_offset_z -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_z -= (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_K]) {
-			light_offset_x += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_x += (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_J]) {
-			light_offset_z += (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_z += (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 		if (keyboard_state[SDL_SCANCODE_H]) {
-			light_offset_x -= (MOVEMENT_CAMERA_SPEED * elapsed_time);
+			light_offset_x -= (float)(MOVEMENT_CAMERA_SPEED * elapsed_time);
 		}
 
 		// UPDATE

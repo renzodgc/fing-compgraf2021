@@ -75,7 +75,6 @@ int main(int argc, char* argv[]) {
 		// PRE RENDER
 		// -----------------------------------------------------------------------------------------------
 
-		// If Paused: Check if P, Q or ESC are pressed, skip rest of the loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 

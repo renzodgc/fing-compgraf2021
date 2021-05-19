@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "gl_constants.h"
-#include "models.h"
+#include "hud.h"
 
 using namespace std;
 

@@ -22,7 +22,7 @@
 #include "window_helper.h"
 
 // Models
-#include "models.h"
+#include "hud.h"
 #include "vector3.h"
 #include "plane.h"
 

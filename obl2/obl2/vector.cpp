@@ -1,38 +1,36 @@
-// Reference: http://www.lighthouse3d.com/tutorials/view-frustum-culling/
-
-#include "vector3.h"
-
-// Constructor/Destructors
+// HEADERS
 // -----------------------------------------------------------------------------------
 
+#include "vector.h"
 
-Vector3::Vector3(float x, float y, float z) {
+// METHODS
+// -----------------------------------------------------------------------------------
+
+// Constructors / Destructors
+// -----------------------------------------------------------------------------------
+
+Vector::Vector(float x, float y, float z) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
 }
-
-Vector3::Vector3(const Vector3& v) {
+Vector::Vector(const Vector& v) {
 	x = v.x;
 	y = v.y;
 	z = v.z;
 }
-
-
-Vector3::Vector3() {
+Vector::Vector() {
 	x = 0;
 	y = 0;
 	z = 0;
 }
-
-
-Vector3::~Vector3() {}
+Vector::~Vector() {}
 
 // Methods
 // -----------------------------------------------------------------------------------
 
-Vector3 Vector3::operator+(Vector3& v) {
-	Vector3 res;
+Vector Vector::operator+(Vector& v) {
+	Vector res;
 
 	res.x = x + v.x;
 	res.y = y + v.y;
@@ -41,8 +39,8 @@ Vector3 Vector3::operator+(Vector3& v) {
 	return(res);
 }
 
-Vector3 Vector3::operator-(const Vector3& v) {
-	Vector3 res;
+Vector Vector::operator-(const Vector& v) {
+	Vector res;
 
 	res.x = x - v.x;
 	res.y = y - v.y;
@@ -51,8 +49,8 @@ Vector3 Vector3::operator-(const Vector3& v) {
 	return(res);
 }
 
-Vector3 Vector3::operator-(void) {
-	Vector3 res;
+Vector Vector::operator-(void) {
+	Vector res;
 
 	res.x = -x;
 	res.y = -y;
@@ -61,9 +59,8 @@ Vector3 Vector3::operator-(void) {
 	return(res);
 }
 
-// cross product
-Vector3 Vector3::operator*(Vector3& v) {
-	Vector3 res;
+Vector Vector::operator*(Vector& v) {
+	Vector res;
 
 	res.x = y * v.z - z * v.y;
 	res.y = z * v.x - x * v.z;
@@ -72,8 +69,8 @@ Vector3 Vector3::operator*(Vector3& v) {
 	return (res);
 }
 
-Vector3 Vector3::operator*(float t) {
-	Vector3 res;
+Vector Vector::operator*(float t) {
+	Vector res;
 
 	res.x = x * t;
 	res.y = y * t;
@@ -82,9 +79,8 @@ Vector3 Vector3::operator*(float t) {
 	return (res);
 }
 
-
-Vector3 Vector3::operator/(float t) {
-	Vector3 res;
+Vector Vector::operator/(float t) {
+	Vector res;
 
 	res.x = x / t;
 	res.y = y / t;
@@ -93,13 +89,11 @@ Vector3 Vector3::operator/(float t) {
 	return (res);
 }
 
-
-
-float Vector3::magnitude() {
+float Vector::magnitude() {
 	return((float)sqrt(x * x + y * y + z * z));
 }
 
-void Vector3::normalize() {
+void Vector::normalize() {
 	float len;
 
 	len = magnitude();
@@ -110,13 +104,12 @@ void Vector3::normalize() {
 	}
 }
 
-
-float Vector3::inner_product(Vector3 v) {
+float Vector::inner_product(Vector v) {
 	return (x * v.x + y * v.y + z * v.z);
 }
 
-Vector3 Vector3::scalar_mult(float a) {
-	Vector3 res;
+Vector Vector::scalar_mult(float a) {
+	Vector res;
 
 	res.x = x * a;
 	res.y = y * a;
@@ -125,8 +118,8 @@ Vector3 Vector3::scalar_mult(float a) {
 	return res;
 }
 
-Vector3 Vector3::cross_product(Vector3 v) {
-	Vector3 res;
+Vector Vector::cross_product(Vector v) {
+	Vector res;
 
 	res.x = y * v.z - z * v.y;
 	res.y = -(x * v.z - z * v.x);
@@ -135,13 +128,13 @@ Vector3 Vector3::cross_product(Vector3 v) {
 	return res;
 }
 
-void Vector3::copy(const Vector3& v) {
+void Vector::copy(const Vector& v) {
 	x = v.x;
 	y = v.y;
 	z = v.z;
 }
 
-void Vector3::set(float x, float y, float z) {
+void Vector::set(float x, float y, float z) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
@@ -150,7 +143,6 @@ void Vector3::set(float x, float y, float z) {
 // For debug pruposes: Prints a vector
 // -----------------------------------------------------------------------------------
 
-
-void Vector3::print() {
-	printf("Vector3(%f, %f, %f) ", x, y, z);
+void Vector::print() {
+	printf("Vector(%f, %f, %f) ", x, y, z);
 }

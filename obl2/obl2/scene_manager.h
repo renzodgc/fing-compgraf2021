@@ -1,24 +1,30 @@
 #pragma once
-#ifndef MATH_HELPER_H
-#define MATH_HELPER_H
+#ifndef SCENE_MANAGER_H
+#define SCENE_MANAGER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
-#include <iostream>
-#include <random>
-#include <algorithm>
-#include <iterator>
-#include <vector>
-#include <math.h>
-
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
-
 using namespace std;
 
-// HEADERS
+// CLASS DEFINITION
 // -----------------------------------------------------------------------------------
+
+class Scene {
+
+    private:
+        // Singleton
+        Scene();
+
+    public:
+        // Constructor and singleton method
+        Scene(Scene const&) = delete;
+        void operator=(Scene const&) = delete;
+        static Scene& get_instance();
+
+};
 
 #endif

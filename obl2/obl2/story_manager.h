@@ -1,24 +1,31 @@
 #pragma once
-#ifndef MATH_HELPER_H
-#define MATH_HELPER_H
+#ifndef STORY_MANAGER_H
+#define STORY_MANAGER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
-#include <iostream>
-#include <random>
-#include <algorithm>
-#include <iterator>
-#include <vector>
-#include <math.h>
-
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
-
 using namespace std;
 
-// HEADERS
+// CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
+class Story {
+
+private:
+    // Singleton
+    Story();
+
+public:
+    // Constructor and singleton method
+    Story(Story const&) = delete;
+    void operator=(Story const&) = delete;
+    static Story& get_instance();
+
+};
+
 #endif
+#pragma once

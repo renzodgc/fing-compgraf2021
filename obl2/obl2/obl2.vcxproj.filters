@@ -37,9 +37,6 @@
     <Filter Include="Header Files\structures">
       <UniqueIdentifier>{1d0c8da5-510f-4325-8a19-764ba7b2ca8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\structures">
-      <UniqueIdentifier>{e02de45d-dd1e-4e6f-a740-ed402bb4449b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="file_helper.cpp">
@@ -48,51 +45,24 @@
     <ClCompile Include="math_helper.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="window_helper.cpp">
-      <Filter>Source Files\helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="player_model.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
-    <ClCompile Include="scenario_object_model.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
-    <ClCompile Include="lane_model.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
-    <ClCompile Include="ui_manager.cpp">
-      <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
+    <ClCompile Include="renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game_manager.cpp">
+    <ClCompile Include="scene_manager.cpp">
       <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="camera_manager.cpp">
-      <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_manager.cpp">
-      <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="frustum_manager.cpp">
-      <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="vector3.cpp">
-      <Filter>Source Files\structures</Filter>
     </ClCompile>
     <ClCompile Include="plane.cpp">
-      <Filter>Source Files\structures</Filter>
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="vector.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="story_manager.cpp">
+      <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera_manager.h">
-      <Filter>Header Files\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_manager.h">
-      <Filter>Header Files\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="game_manager.h">
+    <ClInclude Include="scene_manager.h">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
     <ClInclude Include="file_helper.h">
@@ -101,44 +71,29 @@
     <ClInclude Include="math_helper.h">
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="window_helper.h">
-      <Filter>Header Files\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="lane_model.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
-    <ClInclude Include="player_model.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
-    <ClInclude Include="scenario_object_model.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
-    <ClInclude Include="ui_manager.h">
-      <Filter>Header Files\managers</Filter>
-    </ClInclude>
     <ClInclude Include="game_manager.h">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
     <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="frustum_manager.h">
-      <Filter>Header Files\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="constants.h">
+    <ClInclude Include="routes.h">
       <Filter>Header Files\constants</Filter>
     </ClInclude>
-    <ClInclude Include="gl_constants.h">
+    <ClInclude Include="colors.h">
       <Filter>Header Files\constants</Filter>
     </ClInclude>
-    <ClInclude Include="hud.h">
-      <Filter>Header Files\structures</Filter>
+    <ClInclude Include="parameters.h">
+      <Filter>Header Files\constants</Filter>
     </ClInclude>
     <ClInclude Include="plane.h">
-      <Filter>Header Files\structures</Filter>
+      <Filter>Header Files\models</Filter>
     </ClInclude>
-    <ClInclude Include="vector3.h">
-      <Filter>Header Files\structures</Filter>
+    <ClInclude Include="vector.h">
+      <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="story_manager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

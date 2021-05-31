@@ -1,16 +1,25 @@
-#include "Plane.h"
+// HEADERS
+// -----------------------------------------------------------------------------------
 
-Plane::Plane(Vector3& v1, Vector3& v2, Vector3& v3) {
+#include "plane.h"
+
+// METHODS
+// -----------------------------------------------------------------------------------
+
+// Constructors / Destructors
+// -----------------------------------------------------------------------------------
+
+Plane::Plane(Vector& v1, Vector& v2, Vector& v3) {
 	set3Points(v1, v2, v3);
 }
-
 Plane::Plane() {}
-
 Plane::~Plane() {}
 
+// Methods
+// -----------------------------------------------------------------------------------
 
-void Plane::set3Points(Vector3& v1, Vector3& v2, Vector3& v3) {
-	Vector3 aux1, aux2;
+void Plane::set3Points(Vector& v1, Vector& v2, Vector& v3) {
+	Vector aux1, aux2;
 
 	aux1 = v1 - v2;
 	aux2 = v3 - v2;
@@ -22,7 +31,7 @@ void Plane::set3Points(Vector3& v1, Vector3& v2, Vector3& v3) {
 	d = -(normal.inner_product(point));
 }
 
-void Plane::set_normal_and_point(Vector3& normal, Vector3& point) {
+void Plane::set_normal_and_point(Vector& normal, Vector& point) {
 	this->normal.copy(normal);
 	this->normal.normalize();
 	d = -(this->normal.inner_product(point));
@@ -39,10 +48,12 @@ void Plane::set_coefficients(float a, float b, float c, float d) {
 	this->d = d / l;
 }
 
-
-float Plane::distance(Vector3& p) {
+float Plane::distance(Vector& p) {
 	return (d + normal.inner_product(p));
 }
+
+// For debug pruposes: Prints a plane
+// -----------------------------------------------------------------------------------
 
 void Plane::print() {
 	printf("Plane("); normal.print(); printf("# %f)", d);

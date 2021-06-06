@@ -82,6 +82,8 @@
   <ItemGroup>
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="render_manager.cpp" />
+    <ClCompile Include="scenario_object.cpp" />
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
@@ -89,6 +91,9 @@
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.h" />
+    <ClInclude Include="scenario_object.h" />
+    <ClInclude Include="render_manager.h" />
     <ClInclude Include="routes.h" />
     <ClInclude Include="file_helper.h" />
     <ClInclude Include="scene_manager.h" />

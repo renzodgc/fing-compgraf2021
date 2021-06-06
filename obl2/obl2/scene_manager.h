@@ -20,13 +20,15 @@ class Scene {
         // Singleton
         Scene();
 
+        Config config;
+
     public:
         // Constructor and singleton method
         Scene(Scene const&) = delete;
         void operator=(Scene const&) = delete;
         static Scene& get_instance();
 
-        void load_scene(Config config);
+        void load_scene();
 };
 
 #endif

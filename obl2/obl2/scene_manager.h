@@ -5,6 +5,7 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include "config.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -25,6 +26,7 @@ class Scene {
         void operator=(Scene const&) = delete;
         static Scene& get_instance();
 
+        void load_scene(Config config);
 };
 
 #endif

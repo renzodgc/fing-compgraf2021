@@ -25,6 +25,7 @@ public:
     void operator=(Story const&) = delete;
     static Story& get_instance();
 
+    // TODO: Generate images and intermediate images
 };
 
 #endif

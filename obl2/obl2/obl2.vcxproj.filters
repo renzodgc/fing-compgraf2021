@@ -71,9 +71,6 @@
     <ClInclude Include="math_helper.h">
       <Filter>Header Files\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="game_manager.h">
-      <Filter>Header Files\managers</Filter>
-    </ClInclude>
     <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>

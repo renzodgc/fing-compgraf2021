@@ -91,7 +91,6 @@
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h" />
     <ClInclude Include="scenario_object.h" />
     <ClInclude Include="render_manager.h" />
     <ClInclude Include="routes.h" />

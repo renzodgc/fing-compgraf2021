@@ -20,14 +20,13 @@ class Scene {
         // Singleton
         Scene();
 
-        Config config;
-
     public:
         // Constructor and singleton method
         Scene(Scene const&) = delete;
         void operator=(Scene const&) = delete;
         static Scene& get_instance();
 
+        // In charge of iterating through config_file from read_config
         void load_scene();
 };
 

@@ -8,7 +8,6 @@
 #include <string>
 #include "FreeImage.h"
 #include "routes.h"
-#include "config.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -17,8 +16,7 @@ using namespace std;
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-
-Config read_config();
+void read_config(); // TODO: Return pointer to config's data
 
 void write_image();
 

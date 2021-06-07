@@ -1,23 +1,31 @@
 #pragma once
-#ifndef FILE_HELPER_H
-#define FILE_HELPER_H
+#ifndef RENDER_MANAGER_H
+#define RENDER_MANAGER_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
-#include <string>
-#include "FreeImage.h"
-#include "routes.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
 using namespace std;
 
-// HEADERS
+// CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
-void read_config(); // TODO: Return pointer to config's data
+class Render {
 
-void write_image();
+private:
+    // Singleton
+    Render();
+
+public:
+    // Constructor and singleton method
+    Render(Render const&) = delete;
+    void operator=(Render const&) = delete;
+    static Render& get_instance();
+
+};
 
 #endif
+#pragma once

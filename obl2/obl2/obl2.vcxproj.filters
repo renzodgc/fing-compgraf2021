@@ -60,6 +60,12 @@
     <ClCompile Include="story_manager.cpp">
       <Filter>Source Files\managers</Filter>
     </ClCompile>
+    <ClCompile Include="render_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="scenario_object.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scene_manager.h">
@@ -70,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="math_helper.h">
       <Filter>Header Files\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="game_manager.h">
-      <Filter>Header Files\managers</Filter>
     </ClInclude>
     <ClInclude Include="headers.h">
       <Filter>Header Files</Filter>
@@ -94,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="story_manager.h">
       <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="render_manager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="scenario_object.h">
+      <Filter>Header Files\models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

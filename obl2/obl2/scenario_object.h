@@ -27,22 +27,26 @@ enum class ObjectIs { TriangleMesh, Sphere, Cillinder, Rectangle };
 class ScenarioObject {
 
 protected:
+    short id;
     ObjectIs type;
     Vector centre_position;
-    Color color;
-    float transparency;
+    Color diffuse_color;
+    Color specular_color;
+    float transparency; // If true object is not opaque
     float refraction_coef;
     bool reflective;
 
 public:
     // Constructor
-    ScenarioObject(Vector centre_position, Color color, float transparency, float refraction_coef, bool reflective);
+    ScenarioObject(short id, Vector centre_position, Color diffuse_color, Color specular_color, float transparency, float refraction_coef, bool reflective);
     ~ScenarioObject();
 
     // Getters & Setters
+    short get_id();
     ObjectIs get_type();
     Vector get_centre_position();
-    Color get_color();
+    Color get_diffuse_color();
+    Color get_specular_color();
     float get_transparency();
     float get_refraction_coef();
     bool get_reflective();

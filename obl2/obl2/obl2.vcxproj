@@ -81,13 +81,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="file_helper.cpp" />
+    <ClCompile Include="image.cpp" />
+    <ClCompile Include="image.h" />
+    <ClCompile Include="refraction_coefficients.h" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_manager.cpp" />
     <ClCompile Include="scenario_object.cpp" />
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
+    <ClCompile Include="ray.cpp" />
     <ClCompile Include="story_manager.cpp" />
+    <ClCompile Include="ray.h" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>

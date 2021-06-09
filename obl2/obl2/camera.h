@@ -20,16 +20,16 @@ using namespace std;
 class Camera {
 
     private:
-        Vector position;
+        Vector* position;
         pair<int, int> size;
 
     public:
         // Constructor
-        Camera(Vector position, pair<int,int> size);
+        Camera(Vector* position, pair<int,int> size);
         ~Camera();
 
         // Getters & Setters
-        Vector get_position();
+        Vector* get_position();
         pair<int, int> get_size();
 
     // Main methods

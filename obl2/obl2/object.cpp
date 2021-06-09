@@ -9,7 +9,7 @@
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Object::Object(Vector position, Color color, float transparency, float refraction_coef, bool reflective) {
+Object::Object(Vector* position, Color* color, float transparency, float refraction_coef, bool reflective) {
 	this->position = position;
 	this->color = color;
 	this->transparency = transparency;
@@ -24,11 +24,11 @@ ObjectIs Object::get_type() {
 	return type;
 }
 
-Vector Object::get_position() {
+Vector* Object::get_position() {
 	return position;
 }
 
-Color Object::get_color() {
+Color* Object::get_color() {
 	return color;
 }
 

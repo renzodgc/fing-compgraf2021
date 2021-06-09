@@ -28,21 +28,21 @@ class Object {
 
     protected:
         ObjectIs type;
-        Vector position;
-        Color color;
+        Vector* position;
+        Color* color;
         float transparency;
         float refraction_coef;
         bool reflective;
 
     public:
         // Constructor
-        Object(Vector position, Color color, float transparency, float refraction_coef, bool reflective);
+        Object(Vector* position, Color* color, float transparency, float refraction_coef, bool reflective);
         ~Object();
 
         // Getters & Setters
         ObjectIs get_type();
-        Vector get_position();
-        Color get_color();
+        Vector* get_position();
+        Color* get_color();
         float get_transparency();
         float get_refraction_coef();
         bool get_reflective();

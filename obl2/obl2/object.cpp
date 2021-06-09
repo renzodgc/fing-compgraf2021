@@ -1,15 +1,16 @@
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-#include "scenario_object.h"
+#include "object.h"
 
 // METHODS
 // -----------------------------------------------------------------------------------
 
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
-ScenarioObject::ScenarioObject(Vector centre_position, Color color, float transparency, float refraction_coef, bool reflective) {
-	this->centre_position = centre_position;
+
+Object::Object(Vector position, Color color, float transparency, float refraction_coef, bool reflective) {
+	this->position = position;
 	this->color = color;
 	this->transparency = transparency;
 	this->refraction_coef = refraction_coef;
@@ -18,27 +19,28 @@ ScenarioObject::ScenarioObject(Vector centre_position, Color color, float transp
 
 // Getters & Setters
 // -----------------------------------------------------------------------------------
-ObjectIs ScenarioObject::get_type() {
+
+ObjectIs Object::get_type() {
 	return type;
 }
 
-Vector ScenarioObject::get_centre_position() {
-	return centre_position;
+Vector Object::get_position() {
+	return position;
 }
 
-Color ScenarioObject::get_color() {
+Color Object::get_color() {
 	return color;
 }
 
-float ScenarioObject::get_transparency() {
+float Object::get_transparency() {
 	return transparency;
 }
 
-float ScenarioObject::get_refraction_coef() {
+float Object::get_refraction_coef() {
 	return refraction_coef;
 }
 
-bool ScenarioObject::get_reflective() {
+bool Object::get_reflective() {
 	return reflective;
 }
 

@@ -9,9 +9,9 @@
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Camera::Camera(Vector* position, pair<int, int> size) {
+Camera::Camera(Vector* position, Vector* window_position) {
 	this->position = position;
-	this->size = size;
+	this->window_position = window_position;
 }
 
 // Getters & Setters
@@ -20,10 +20,17 @@ Camera::Camera(Vector* position, pair<int, int> size) {
 Vector* Camera::get_position() {
 	return this->position;
 }
-
-pair<int, int> Camera::get_size() {
-	return this->size;
+void Camera::set_position(Vector* position) {
+	this->position = position;
 }
+
+Vector* Camera::get_window_position() {
+	return this->window_position;
+}
+void Camera::set_window_position(Vector* window_position) {
+	this->window_position = window_position;
+}
+
 
 // Main Methods
 // -----------------------------------------------------------------------------------

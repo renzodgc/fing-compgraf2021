@@ -34,8 +34,14 @@
     <Filter Include="Header Files\constants">
       <UniqueIdentifier>{729473eb-895d-439b-ab35-50eb270c0f66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\structures">
-      <UniqueIdentifier>{1d0c8da5-510f-4325-8a19-764ba7b2ca8f}</UniqueIdentifier>
+    <Filter Include="Source Files\libraries">
+      <UniqueIdentifier>{ecf5abb7-832d-471f-9aba-4cd792bc0e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libraries">
+      <UniqueIdentifier>{513fd5c9-b890-46d8-aee2-8e654d373329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models\objects">
+      <UniqueIdentifier>{7e77f323-49bf-4c9c-80bb-27a288970a02}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="light.cpp">
       <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Source Files\libraries</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,5 +125,13 @@
     <ClInclude Include="light.h">
       <Filter>Header Files\models</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Header Files\libraries</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

@@ -21,16 +21,16 @@ using namespace std;
 class Light {
 
     private:
-        Vector position;
+        Vector* position;
         Color color;
 
     public:
         // Constructor
-        Light(Vector position, Color color);
+        Light(Vector* position, Color color);
         ~Light();
 
         // Getters & Setters
-        Vector get_position();
+        Vector* get_position();
         Color get_color();
 
         // Main methods

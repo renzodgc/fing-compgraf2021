@@ -6,14 +6,16 @@
 // -----------------------------------------------------------------------------------
 
 #include <vector>
+#include "tinyxml2.h"
 #include "camera.h"
 #include "light.h"
 #include "object.h"
+#include "routes.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
 
-using namespace std;
+using namespace tinyxml2;
 
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
@@ -29,6 +31,15 @@ class Scene {
         vector<Light*> lights;
         vector<Object*> objects;
 
+        // Aux properties
+        bool loaded;
+        unsigned int object_counter;
+
+        // Aux methods
+        bool load_camera(XMLElement* xmlCamera);
+        bool load_light(XMLElement* xmlLight);
+        bool load_object(XMLElement* xmlObject);
+
     public:
         // Constructor and singleton method
         Scene(Scene const&) = delete;
@@ -36,12 +47,13 @@ class Scene {
         static Scene& get_instance();
 
         // Getters & setters
+        bool is_loaded();
         Camera* get_camera();
         vector<Light*> get_lights();
         vector<Object*> get_objects();
 
-        // In charge of iterating through config_file from read_config
-        void load_scene();
+        // Main methods
+        bool load_scene();
 };
 
 #endif

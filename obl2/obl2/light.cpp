@@ -9,7 +9,7 @@
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Light::Light(Vector position, Color color) {
+Light::Light(Vector* position, Color color) {
 	this->position = position;
 	this->color = color;
 }
@@ -17,7 +17,7 @@ Light::Light(Vector position, Color color) {
 // Getters & Setters
 // -----------------------------------------------------------------------------------
 
-Vector Light::get_position() {
+Vector* Light::get_position() {
 	return this->position;
 }
 

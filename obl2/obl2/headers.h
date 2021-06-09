@@ -2,15 +2,19 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 
-// DEPENDENCIES
+// C++ DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
 #include <iostream>
-#include "scene_manager.h"
+#include <vector>
+#include <string>
 
-// NAMESPACE
+// LOCAL DEPENDENCIES
 // -----------------------------------------------------------------------------------
-using namespace std;
 
+#include "scene_manager.h"
+#include "camera.h"
+#include "light.h"
+#include "object.h"
 
 #endif

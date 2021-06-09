@@ -90,6 +90,7 @@
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="story_manager.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +107,11 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="story_manager.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

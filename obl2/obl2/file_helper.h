@@ -6,18 +6,13 @@
 // -----------------------------------------------------------------------------------
 
 #include <string>
+#include <windows.h>
 #include "FreeImage.h"
 #include "routes.h"
-
-// NAMESPACE
-// -----------------------------------------------------------------------------------
-using namespace std;
 
 // HEADERS
 // -----------------------------------------------------------------------------------
 
-void read_config(); // TODO: Return pointer to config's data
-
-void write_image();
+bool create_directory(string path);
 
 #endif

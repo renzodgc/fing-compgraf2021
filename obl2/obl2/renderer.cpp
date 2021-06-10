@@ -3,11 +3,21 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	
 	FreeImage_Initialise();
 
 	Scene& scene_manager = Scene::get_instance();
 	if (scene_manager.is_loaded()) {
 		cout << "OK: El archivo config ha sido cargado correctamente" << endl;
+
+		Story& story_manager = Story::get_instance();
+		if (story_manager.is_created()) {
+			cout << "OK: El directorio de historial ha sido creado correctamente" << endl;			
+		}
+		else {
+			cerr << "Error: El directorio de historial no pudo ser creado" << endl;
+		}
+
 		cin.get();
 	}
 	else {
@@ -16,5 +26,6 @@ int main(int argc, char* argv[]) {
 	}
 
 	FreeImage_DeInitialise();
+
 	return 0;
 }

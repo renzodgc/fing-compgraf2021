@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="file_helper.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_manager.cpp" />
@@ -89,11 +90,15 @@
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
+    <ClCompile Include="ray.cpp" />
     <ClCompile Include="story_manager.cpp" />
+    <ClCompile Include="ray.h" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="image.h" />
+    <ClCompile Include="refraction_coefficients.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="light.h" />
     <ClInclude Include="object.h" />

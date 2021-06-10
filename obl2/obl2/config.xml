@@ -50,12 +50,18 @@
 				<y>0</y>
 				<z>0</z>
 			</position>
-			<color>
+			<diffuse_color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 				<a>255</a>
-			</color>
+			</diffuse_color>
+			<specular_color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+				<a>255</a>
+			</specular_color>
 			<properties>
 				<transparency>1</transparency>
 				<refraction>1</refraction>
@@ -69,12 +75,18 @@
 				<y>1</y>
 				<z>1</z>
 			</position>
-			<color>
+			<diffuse_color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 				<a>255</a>
-			</color>
+			</diffuse_color>
+			<specular_color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+				<a>255</a>
+			</specular_color>
 			<properties>
 				<transparency>1</transparency>
 				<refraction>1</refraction>
@@ -88,12 +100,18 @@
 				<y>2</y>
 				<z>2</z>
 			</position>
-			<color>
+			<diffuse_color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 				<a>255</a>
-			</color>
+			</diffuse_color>
+			<specular_color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+				<a>255</a>
+			</specular_color>
 			<properties>
 				<transparency>1</transparency>
 				<refraction>1</refraction>

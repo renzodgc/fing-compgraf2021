@@ -3,6 +3,7 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	FreeImage_Initialise();
 
 	Scene& scene_manager = Scene::get_instance();
 	if (scene_manager.is_loaded()) {
@@ -14,5 +15,6 @@ int main(int argc, char* argv[]) {
 		cin.get();
 	}
 
+	FreeImage_DeInitialise();
 	return 0;
 }

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "FreeImage.h"
 
 // LOCAL DEPENDENCIES
 // -----------------------------------------------------------------------------------

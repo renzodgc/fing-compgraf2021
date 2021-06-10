@@ -14,10 +14,11 @@ using namespace std;
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Object::Object(unsigned int id, Vector* position, Color color, float transparency, float refraction_coef, bool reflective) {
+Object::Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float transparency, float refraction_coef, bool reflective) {
 	this->id = id;
 	this->position = position;
-	this->color = color;
+	this->diffuse_color = diffuse_color;
+	this->specular_color = specular_color;
 	this->transparency = transparency;
 	this->refraction_coef = refraction_coef;
 	this->reflective = reflective;
@@ -38,8 +39,12 @@ Vector* Object::get_position() {
 	return position;
 }
 
-Color Object::get_color() {
-	return color;
+Color Object::get_diffuse_color() {
+	return diffuse_color;
+}
+
+Color Object::get_specular_color() {
+	return specular_color;
 }
 
 float Object::get_transparency() {
@@ -86,6 +91,6 @@ ObjectIs Object::parse_object_type(string type) {
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Sphere::Sphere(unsigned int id, Vector* position, Color color, float transparency, float refraction_coef, bool reflective) : Object(id, position, color, transparency, refraction_coef, reflective) {
+Sphere::Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float transparency, float refraction_coef, bool reflective) : Object(id, position, diffuse_color, specular_color, transparency, refraction_coef, reflective) {
 	this->type = ObjectIs::Sphere;
 }

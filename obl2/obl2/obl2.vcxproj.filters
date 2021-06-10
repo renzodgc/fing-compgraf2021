@@ -81,6 +81,21 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files\libraries</Filter>
     </ClCompile>
+    <ClCompile Include="refraction_coefficients.h">
+      <Filter>Header Files\constants</Filter>
+    </ClCompile>
+    <ClCompile Include="ray.h">
+      <Filter>Header Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="image.h">
+      <Filter>Header Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="ray.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scene_manager.h">

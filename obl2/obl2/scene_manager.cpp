@@ -184,10 +184,14 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	float y = 0.f;
 	float z = 0.f;
 	// Color
-	double r = 0.f;
-	double g = 0.f;
-	double b = 0.f;
-	double a = 0.f;
+	double diffuse_r = 0.f;
+	double diffuse_g = 0.f;
+	double diffuse_b = 0.f;
+	double diffuse_a = 0.f;
+	double specular_r = 0.f;
+	double specular_g = 0.f;
+	double specular_b = 0.f;
+	double specular_a = 0.f;
 	// Properties
 	float transparency = 0.f;
 	float refraction = 0.f;
@@ -214,12 +218,23 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			result = false;
 		}
 
-		XMLElement* xmlObjectColor = xmlObject->FirstChildElement("color");
-		if (xmlObjectColor != NULL) {
-			xmlObjectColor->FirstChildElement("r")->QueryDoubleText(&r);
-			xmlObjectColor->FirstChildElement("g")->QueryDoubleText(&g);
-			xmlObjectColor->FirstChildElement("b")->QueryDoubleText(&b);
-			xmlObjectColor->FirstChildElement("a")->QueryDoubleText(&a);
+		XMLElement* xmlObjectDiffuseColor = xmlObject->FirstChildElement("diffuse_color");
+		if (xmlObjectDiffuseColor != NULL) {
+			xmlObjectDiffuseColor->FirstChildElement("r")->QueryDoubleText(&diffuse_r);
+			xmlObjectDiffuseColor->FirstChildElement("g")->QueryDoubleText(&diffuse_g);
+			xmlObjectDiffuseColor->FirstChildElement("b")->QueryDoubleText(&diffuse_b);
+			xmlObjectDiffuseColor->FirstChildElement("a")->QueryDoubleText(&diffuse_a);
+		}
+		else {
+			result = false;
+		}
+
+		XMLElement* xmlObjectSpecularColor = xmlObject->FirstChildElement("specular_color");
+		if (xmlObjectSpecularColor != NULL) {
+			xmlObjectSpecularColor->FirstChildElement("r")->QueryDoubleText(&specular_r);
+			xmlObjectSpecularColor->FirstChildElement("g")->QueryDoubleText(&specular_g);
+			xmlObjectSpecularColor->FirstChildElement("b")->QueryDoubleText(&specular_b);
+			xmlObjectSpecularColor->FirstChildElement("a")->QueryDoubleText(&specular_a);
 		}
 		else {
 			result = false;
@@ -240,7 +255,8 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			this->objects.push_back(new Sphere(
 				this->object_counter,
 				new Vector(x, y, z),
-				{ r,g,b,a },
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
 				transparency,
 				refraction,
 				reflection

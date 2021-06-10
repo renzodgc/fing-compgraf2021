@@ -139,7 +139,7 @@ bool Scene::load_light(XMLElement* xmlLight) {
 
 	bool result = true;
 	float x, y, z;
-	float r, g, b, a;
+	double r, g, b, a;
 
 	if (xmlLight != NULL) {
 

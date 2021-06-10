@@ -184,10 +184,10 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	float y = 0.f;
 	float z = 0.f;
 	// Color
-	float r = 0.f;
-	float g = 0.f;
-	float b = 0.f;
-	float a = 0.f;
+	double r = 0.f;
+	double g = 0.f;
+	double b = 0.f;
+	double a = 0.f;
 	// Properties
 	float transparency = 0.f;
 	float refraction = 0.f;

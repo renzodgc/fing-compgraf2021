@@ -216,10 +216,10 @@ bool Scene::load_object(XMLElement* xmlObject) {
 
 		XMLElement* xmlObjectColor = xmlObject->FirstChildElement("color");
 		if (xmlObjectColor != NULL) {
-			xmlObjectColor->FirstChildElement("r")->QueryFloatText(&r);
-			xmlObjectColor->FirstChildElement("g")->QueryFloatText(&g);
-			xmlObjectColor->FirstChildElement("b")->QueryFloatText(&b);
-			xmlObjectColor->FirstChildElement("a")->QueryFloatText(&a);
+			xmlObjectColor->FirstChildElement("r")->QueryDoubleText(&r);
+			xmlObjectColor->FirstChildElement("g")->QueryDoubleText(&g);
+			xmlObjectColor->FirstChildElement("b")->QueryDoubleText(&b);
+			xmlObjectColor->FirstChildElement("a")->QueryDoubleText(&a);
 		}
 		else {
 			result = false;

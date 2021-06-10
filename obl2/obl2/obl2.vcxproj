@@ -80,23 +80,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="image.cpp" />
-    <ClCompile Include="image.h" />
-    <ClCompile Include="refraction_coefficients.h" />
+    <ClCompile Include="light.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_manager.cpp" />
-    <ClCompile Include="scenario_object.cpp" />
+    <ClCompile Include="object.cpp" />
     <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="ray.cpp" />
     <ClCompile Include="story_manager.cpp" />
     <ClCompile Include="ray.h" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scenario_object.h" />
+    <ClCompile Include="image.h" />
+    <ClCompile Include="refraction_coefficients.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="light.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="render_manager.h" />
     <ClInclude Include="routes.h" />
     <ClInclude Include="file_helper.h" />
@@ -107,7 +112,11 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="story_manager.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

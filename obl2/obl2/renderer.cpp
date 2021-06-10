@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 		cin.get();
 	}
 	else {
-		cout << "Error: El archivo config no pudo ser cargado" << endl;
+		cerr << "Error: El archivo config no pudo ser cargado" << endl;
 		cin.get();
 	}
 

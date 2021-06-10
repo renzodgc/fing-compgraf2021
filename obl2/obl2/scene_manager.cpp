@@ -155,10 +155,10 @@ bool Scene::load_light(XMLElement* xmlLight) {
 
 		XMLElement* xmlLightColor = xmlLight->FirstChildElement("color");
 		if (xmlLightColor != NULL) {
-			xmlLightColor->FirstChildElement("r")->QueryFloatText(&r);
-			xmlLightColor->FirstChildElement("g")->QueryFloatText(&g);
-			xmlLightColor->FirstChildElement("b")->QueryFloatText(&b);
-			xmlLightColor->FirstChildElement("a")->QueryFloatText(&a);
+			xmlLightColor->FirstChildElement("r")->QueryDoubleText(&r);
+			xmlLightColor->FirstChildElement("g")->QueryDoubleText(&g);
+			xmlLightColor->FirstChildElement("b")->QueryDoubleText(&b);
+			xmlLightColor->FirstChildElement("a")->QueryDoubleText(&a);
 		}
 		else {
 			result = false;

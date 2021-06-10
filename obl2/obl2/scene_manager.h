@@ -5,7 +5,9 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include <iostream>
 #include <vector>
+
 #include "tinyxml2.h"
 #include "camera.h"
 #include "light.h"

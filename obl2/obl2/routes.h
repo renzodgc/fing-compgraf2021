@@ -9,7 +9,7 @@ using namespace std;
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------
 
-const string ROUTE_KEYBINDS_TEXTURE = "resources/keybinds.jpg";
+const string CONFIG_FILE = "config.xml";
 
 #endif
 

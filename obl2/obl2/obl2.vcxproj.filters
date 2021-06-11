@@ -40,9 +40,6 @@
     <Filter Include="Header Files\libraries">
       <UniqueIdentifier>{513fd5c9-b890-46d8-aee2-8e654d373329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\models\objects">
-      <UniqueIdentifier>{7e77f323-49bf-4c9c-80bb-27a288970a02}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="file_helper.cpp">

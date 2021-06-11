@@ -13,6 +13,7 @@
 // LOCAL DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include "story_manager.h"
 #include "scene_manager.h"
 #include "camera.h"
 #include "light.h"

@@ -10,6 +10,7 @@ using namespace std;
 // ---------------------------------------------------------------------------------------
 
 const string CONFIG_FILE = "config.xml";
+const string SAVE_FOLDER = "results\\";
 
 #endif
 

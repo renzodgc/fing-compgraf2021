@@ -8,3 +8,7 @@ using namespace std;
 
 // METHODS
 // -----------------------------------------------------------------------------------
+
+bool create_directory(string path) {
+	return CreateDirectory(path.c_str(), NULL) != 0;
+}

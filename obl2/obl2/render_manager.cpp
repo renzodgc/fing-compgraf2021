@@ -24,6 +24,8 @@ Render& Render::get_instance() {
 // https://medium.com/nicos-softwaredev-projects/path-tracer-project-75d734e2789
 // Light rays will be traced backwards (contrary to their natural direction), that is from the eye back to the lightsources.
 Image* Render::ray_tracing() {
+	cout << "Iniciando algoritmo de Ray Tracing" << endl;
+
 	Camera * camera = Scene::get_instance().get_camera();
 	//vector <Light*> lights = scene_manager.get_lights();
 	//vector <Object*> objects = scene_manager.get_objects();
@@ -41,6 +43,9 @@ Image* Render::ray_tracing() {
 	// Obtener coordenadas de centro de proyección y ventana de plano
 
 	for (int x = 0; x < IMAGE_WIDTH; x++) { // For each sweep line
+		if (x % 64 == 0) {
+			cout << "Ray Tracing (" << x / 64 << "/" << IMAGE_WIDTH / 64 << ")" << endl;
+		}
 		for (int y = 0; y < IMAGE_HEIGHT; y++) { // For each pixel
 			ray = Ray(
 				Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z), // origin
@@ -49,6 +54,8 @@ Image* Render::ray_tracing() {
 			result->image[x][y] = trace_rr(ray, 1);
 		}
 	}
+
+	cout << "Fin de algoritmo de Ray Tracing" << endl << endl;
 	return result;
 }
 
@@ -87,7 +94,7 @@ Color Render::trace_rr(Ray ray, int depth) {
 // - Los rayos de luz L no se refractan en su trayectoria hacia la luz
 // TODO: Review type on object, point, and norm
 Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth) {
-	Color color = AMBIENT_LIGHTING;
+	Color color = scale_color(AMBIENT_LIGHTING, object->get_ambience_coef());
 	Color diffuse_component = BLACK;
 	Color specular_component = BLACK;
 	Color refractive_color = BLACK;
@@ -110,8 +117,10 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 			distance_from_light = intersection_point.euclid_distance(*(lights[i]->get_position()));
 			if ((intersection_index != -1) && (distance_intersection <= FOV) && (distance_intersection < distance_from_light)) {
 				// An object stands between the surface and the source of light
-				if (objects[intersection_index]->is_transparent()) {
+				if (!objects[intersection_index]->is_opaque()) {
 					// TODO: For shadow color: Cuando mandas el rayo hacia la luz para calcular la sombra de algo (estos rayos) no se pueden desviar! Las sombras son lineas
+
+					// TODO: Refractions
 
 					// Get Refraction Angle (Snell Law)
 					
@@ -121,18 +130,20 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 
 						);*/ // Inverse direction as refraction refraccion desde punto(inverse direction of reflaction)
 						// color_t =  trace_rr(ray_t, depth + 1)
-						// color_t = escalar color_t por el coeficiente de transmisión
+						// color_t = escalar color_t por el coeficiente de transmision TODO: Del objeto que viene la luz?
 						// color += color_t
 					// }
 				}
 				if (objects[intersection_index]->is_reflective()) {
+					// TODO: Verificar que la direccion de reflexion sea la simetrica al rayo anterior respecto a la normal
 					Ray reflective_ray = Ray(
 						intersection_point.copy(), // origin
 						norm * ((ray.direction * -1.f) * norm) * 2 + ray.direction // 2(V * n) * n - V; V = -ray
 					); // rayo en la direccion de refleccion desde el punto (inverse direction of reflection)
 
 					reflective_color = trace_rr(reflective_ray, depth + 1);
-					reflective_color = multiply_colors(reflective_color, object->get_specular_color()); // Scale color by specular coefficient.
+					reflective_color = scale_color(reflective_color, object->get_specular_coef());
+					// TODO: Multiplicar por el inverso de la distancia? I_r\lambda I_t\lambda (PPT Kajiya)
 				}
 
 				// Calcular cuanta luz es bloqueada por superficies opacas y transparentes
@@ -150,6 +161,7 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 				);*/
 			} else /*if(distance_from_light <= FOV)*/ {
 				// No object stands between the surface and the light. And the light reachs the object
+				// TODO: Revisar
 				Vector blinn = ((shadow_ray.direction + (ray.direction * -1.f)) / 2);
 				blinn.normalize();
 				diffuse_component = scale_color(
@@ -160,12 +172,13 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 					multiply_colors(lights[i]->get_color(), object->get_specular_color()),
 					max(0.f, blinn.inner_product(norm)) // pow(max(0, blinn * norm), mat->GetShine()
 				);
+				// TODO: Multiplicar por el inverso de la distancia?
 
 				color = add_colors(
 					color,
 					add_colors(
-						multiply_colors(diffuse_component, object->get_diffuse_color()),
-						multiply_colors(specular_component, object->get_specular_color())
+						multiply_colors(scale_color(diffuse_component, object->get_diffuse_coef()), object->get_diffuse_color()),
+						multiply_colors(scale_color(specular_component, object->get_specular_coef()), object->get_specular_color())
 					)
 				);
 			} //else { TODO: Light is outside FOV }

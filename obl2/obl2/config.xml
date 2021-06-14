@@ -63,10 +63,13 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>false</transparency>
-				<refraction>1</refraction>
-				<reflection>false</reflection>
-			</properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+		</properties>
 		</object>
 		<object>
 			<type>sphere</type>
@@ -88,10 +91,13 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>false</transparency>
-				<refraction>1</refraction>
-				<reflection>false</reflection>
-			</properties>
+				<refraction_coef>1.3333</refraction_coef>
+				<transmission_coef>1</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+		</properties>
 		</object>
 		<object>
 			<type>sphere</type>
@@ -113,10 +119,13 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>true</transparency>
-				<refraction>1</refraction>
-				<reflection>true</reflection>
-			</properties>
+				<refraction_coef>1.5</refraction_coef>
+				<transmission_coef>0.5</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>true</reflective>
+		</properties>
 		</object>
 	</objects>
 </scene>

@@ -193,9 +193,12 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	double specular_b = 0.f;
 	double specular_a = 0.f;
 	// Properties
-	bool transparency = false;
-	float refraction = 0.f;
-	bool reflection = false;
+	float refraction_coef = 0.f;
+	float transmission_coef = 0.f;
+	float specular_coef = 0.f;
+	float diffuse_coef = 0.f;
+	float ambience_coef = 0.f;
+	bool reflective = false;
 
 	if (xmlObject != NULL) {
 
@@ -242,9 +245,12 @@ bool Scene::load_object(XMLElement* xmlObject) {
 
 		XMLElement* xmlObjectProperties = xmlObject->FirstChildElement("properties");
 		if (xmlObjectProperties != NULL) {
-			xmlObjectProperties->FirstChildElement("transparency")->QueryBoolText(&transparency);
-			xmlObjectProperties->FirstChildElement("refraction")->QueryFloatText(&refraction);
-			xmlObjectProperties->FirstChildElement("reflection")->QueryBoolText(&reflection);
+			xmlObjectProperties->FirstChildElement("refraction_coef")->QueryFloatText(&refraction_coef);
+			xmlObjectProperties->FirstChildElement("transmission_coef")->QueryFloatText(&transmission_coef);
+			xmlObjectProperties->FirstChildElement("specular_coef")->QueryFloatText(&specular_coef);
+			xmlObjectProperties->FirstChildElement("diffuse_coef")->QueryFloatText(&diffuse_coef);
+			xmlObjectProperties->FirstChildElement("ambience_coef")->QueryFloatText(&ambience_coef);
+			xmlObjectProperties->FirstChildElement("reflective")->QueryBoolText(&reflective);
 		}
 		else {
 			result = false;
@@ -257,9 +263,12 @@ bool Scene::load_object(XMLElement* xmlObject) {
 				new Vector(x, y, z),
 				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
 				{ specular_r, specular_g, specular_b, specular_a },
-				transparency,
-				refraction,
-				reflection,
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
 				3.f // TODO: Parse radius
 			));
 			this->object_counter++;

@@ -8,21 +8,22 @@ int main(int argc, char* argv[]) {
 
 	Scene& scene_manager = Scene::get_instance();
 	if (scene_manager.is_loaded()) {
-		cout << "OK: El archivo config ha sido cargado correctamente" << endl;
+		cout << "OK: El archivo config ha sido cargado correctamente" << endl << endl;
 
 		Story& story_manager = Story::get_instance();
 		if (story_manager.is_created()) {
-			cout << "OK: El directorio de historial ha sido creado correctamente" << endl;
+			cout << "OK: El directorio de historial ha sido creado correctamente" << endl << endl;
+			cout << "Iniciando Ray Tracing:" << endl;
 			story_manager.run_ray_tracing();
 		}
 		else {
-			cerr << "Error: El directorio de historial no pudo ser creado" << endl;
+			cerr << "Error: El directorio de historial no pudo ser creado" << endl << endl;
 		}
 
 		cin.get();
 	}
 	else {
-		cerr << "Error: El archivo config no pudo ser cargado" << endl;
+		cerr << "Error: El archivo config no pudo ser cargado" << endl << endl;
 		cin.get();
 	}
 

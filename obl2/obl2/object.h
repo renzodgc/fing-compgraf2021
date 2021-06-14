@@ -29,13 +29,16 @@ class Object {
         Vector* position;
         Color diffuse_color;
         Color specular_color;
-        float transparency;
-        float refraction_coef;
+        float refraction_coef; // Material type
+        float transmission_coef; // 0 for opaque
+        float specular_coef;
+        float diffuse_coef;
+        float ambience_coef;
         bool reflective;
 
     public:
         // Constructor
-        Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, bool transparency, float refraction_coef, bool reflective);
+        Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective);
         ~Object() {};
 
         // Getters & Setters
@@ -44,8 +47,12 @@ class Object {
         Vector* get_position();
         Color get_diffuse_color();
         Color get_specular_color();
-        bool is_transparent();
+        bool is_opaque();
         float get_refraction_coef();
+        float Object::get_transmission_coef();
+        float Object::get_specular_coef();
+        float Object::get_diffuse_coef();
+        float Object::get_ambience_coef();
         bool is_reflective();
 
         // Main methods
@@ -65,7 +72,7 @@ class Sphere : public Object {
 
     public:
         // Constructor
-        Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, bool transparency, float refraction_coef, bool reflective, float radius);
+        Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective, float radius);
 
         float radius;
 

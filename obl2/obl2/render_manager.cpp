@@ -94,7 +94,7 @@ Color Render::trace_rr(Ray ray, int depth) {
 // - Los rayos de luz L no se refractan en su trayectoria hacia la luz
 // TODO: Review type on object, point, and norm
 Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth) {
-	Color color = scale_color(AMBIENT_LIGHTING, object->get_ambience_coef());
+	Color color = multiply_colors(scale_color(AMBIENT_LIGHTING, object->get_ambience_coef()), object->get_diffuse_color());
 	Color diffuse_component = BLACK;
 	Color specular_component = BLACK;
 	Color refractive_color = BLACK;

@@ -11,6 +11,7 @@
 
 #include "vector.h"
 #include "colors.h"
+#include "ray.h"
 
 // ENUMERATES
 // -----------------------------------------------------------------------------------
@@ -34,8 +35,8 @@ class Object {
 
     public:
         // Constructor
-        Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float transparency, float refraction_coef, bool reflective);
-        ~Object();
+        Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, bool transparency, float refraction_coef, bool reflective);
+        ~Object() {};
 
         // Getters & Setters
         unsigned int get_id();
@@ -43,11 +44,15 @@ class Object {
         Vector* get_position();
         Color get_diffuse_color();
         Color get_specular_color();
-        float get_transparency();
+        bool is_transparent();
         float get_refraction_coef();
-        bool get_reflective();
+        bool is_reflective();
 
         // Main methods
+
+        // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
+        virtual float intersect(Ray ray) { return 0.f; };
+        virtual Vector get_normal(Vector point) { return Vector(); };
 
         // Aux methods
         static ObjectIs parse_object_type(string type);
@@ -60,9 +65,13 @@ class Sphere : public Object {
 
     public:
         // Constructor
-        Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float transparency, float refraction_coef, bool reflective);
+        Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, bool transparency, float refraction_coef, bool reflective, float radius);
 
+        float radius;
 
+        // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
+        float intersect(Ray ray);
+        Vector get_normal(Vector point);
 };
 
 #endif

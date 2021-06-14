@@ -20,5 +20,10 @@ const Color CYAN = { 0., 1., 1., 1. }; // RGBA
 const Color MAGENTA = { 1., 0., 1., 1. }; // RGBA
 const Color YELLOW = { 1., 1., 0., 1. }; // RGBA
 const Color LIGHT_GREY = { 0.3, 0.3, 0.3, 1. }; // RGBA
+const Color DARK_GREY = { 0.1, 0.1, 0.1, 1. }; // RGBA
+
+// USED COLORS
+const Color BACKGROUND_COLOR = BLACK;
+const Color AMBIENT_LIGHTING = DARK_GREY;
 
 #endif

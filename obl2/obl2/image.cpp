@@ -39,8 +39,4 @@ FIBITMAP * Image::float_to_bitmap() {
 		}
 	}
 	return result;
-	// TODO: in Scene_Manager
-	// if(FreeImage_Save(FIF_PNG, bitmap, "test.png", 0)) {
-		// cout << "Image successfully saved!" << endl;
-	// }
 }

@@ -27,12 +27,12 @@ void Plane::set3Points(Vector& v1, Vector& v2, Vector& v3) {
 	normal = aux2 * aux1;
 
 	normal.normalize();
-	point.copy(v2);
+	point = v2.copy();
 	d = -(normal.inner_product(point));
 }
 
 void Plane::set_normal_and_point(Vector& normal, Vector& point) {
-	this->normal.copy(normal);
+	this->normal = normal.copy();
 	this->normal.normalize();
 	d = -(this->normal.inner_product(point));
 }

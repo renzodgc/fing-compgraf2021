@@ -5,10 +5,19 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include <iostream>
+#include <algorithm>    // std::max
+#include <vector>
+#include <tuple>
 #include "colors.h"
 #include "parameters.h"
 #include "ray.h"
 #include "image.h"
+#include "camera.h"
+#include "light.h"
+#include "object.h"
+#include "scene_manager.h"
+#include "math_helper.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -17,8 +26,6 @@ using namespace std;
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
-const Color BACKGROUND_COLOR = LIGHT_GREY;
-
 class Render {
 
 private:
@@ -26,7 +33,8 @@ private:
     Render();
 
     Color trace_rr(Ray ray, int depth);
-    Color shadow_rr(short object, Ray ray, Vector point, float norm, int depth);
+    Color shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth);
+    tuple<size_t, float> get_closest_intersected_object(Ray ray); // index, distance
 
 public:
     // Constructor and singleton method
@@ -34,8 +42,7 @@ public:
     void operator=(Render const&) = delete;
     static Render& get_instance();
 
-    Image ray_tracing();
+    Image* ray_tracing();
 };
 
 #endif
-#pragma once

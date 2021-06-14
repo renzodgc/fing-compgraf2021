@@ -12,7 +12,8 @@ int main(int argc, char* argv[]) {
 
 		Story& story_manager = Story::get_instance();
 		if (story_manager.is_created()) {
-			cout << "OK: El directorio de historial ha sido creado correctamente" << endl;			
+			cout << "OK: El directorio de historial ha sido creado correctamente" << endl;
+			story_manager.run_ray_tracing();
 		}
 		else {
 			cerr << "Error: El directorio de historial no pudo ser creado" << endl;

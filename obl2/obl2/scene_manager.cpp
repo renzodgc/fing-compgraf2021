@@ -193,7 +193,7 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	double specular_b = 0.f;
 	double specular_a = 0.f;
 	// Properties
-	float transparency = 0.f;
+	bool transparency = false;
 	float refraction = 0.f;
 	bool reflection = false;
 
@@ -242,7 +242,7 @@ bool Scene::load_object(XMLElement* xmlObject) {
 
 		XMLElement* xmlObjectProperties = xmlObject->FirstChildElement("properties");
 		if (xmlObjectProperties != NULL) {
-			xmlObjectProperties->FirstChildElement("transparency")->QueryFloatText(&transparency);
+			xmlObjectProperties->FirstChildElement("transparency")->QueryBoolText(&transparency);
 			xmlObjectProperties->FirstChildElement("refraction")->QueryFloatText(&refraction);
 			xmlObjectProperties->FirstChildElement("reflection")->QueryBoolText(&reflection);
 		}
@@ -259,7 +259,8 @@ bool Scene::load_object(XMLElement* xmlObject) {
 				{ specular_r, specular_g, specular_b, specular_a },
 				transparency,
 				refraction,
-				reflection
+				reflection,
+				3.f // TODO: Parse radius
 			));
 			this->object_counter++;
 			break;

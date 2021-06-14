@@ -14,6 +14,7 @@ using namespace std;
 
 Story::Story() {
 	this->current_directory = get_current_time();
+	this->directory_path = SAVE_FOLDER + this->current_directory;
 	this->created = create_current_directory();
 }
 
@@ -34,7 +35,12 @@ bool Story::is_created() {
 // -----------------------------------------------------------------------------------
 
 bool Story::create_current_directory() {
-	return create_directory(SAVE_FOLDER + this->current_directory);
+	return create_directory(directory_path);
+}
+
+bool Story::run_ray_tracing() {
+	Image *result = Render::get_instance().ray_tracing();
+	return save_image(result, directory_path + "\\result.png");
 }
 
 // Aux methods
@@ -48,7 +54,7 @@ string Story::get_current_time() {
 	time(&rawtime);
 	localtime_s(&timeinfo, &rawtime);
 
-	strftime(buffer, sizeof(buffer), "%Y-%m-%d %H-%M-%S", &timeinfo);
+	strftime(buffer, sizeof(buffer), "%Y-%m-%d_%H-%M-%S", &timeinfo);
 	string str(buffer);
 
 	return str;

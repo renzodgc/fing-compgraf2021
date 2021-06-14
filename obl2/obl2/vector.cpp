@@ -59,6 +59,7 @@ Vector Vector::operator-(void) {
 	return(res);
 }
 
+// Cross Product
 Vector Vector::operator*(Vector& v) {
 	Vector res;
 
@@ -69,6 +70,7 @@ Vector Vector::operator*(Vector& v) {
 	return (res);
 }
 
+// Scalar product
 Vector Vector::operator*(float t) {
 	Vector res;
 
@@ -104,6 +106,10 @@ void Vector::normalize() {
 	}
 }
 
+float Vector::euclid_distance(Vector v) {
+	return Vector(x - v.x, y - v.y, z - v.z).magnitude();
+}
+
 float Vector::inner_product(Vector v) {
 	return (x * v.x + y * v.y + z * v.z);
 }
@@ -128,10 +134,14 @@ Vector Vector::cross_product(Vector v) {
 	return res;
 }
 
-void Vector::copy(const Vector& v) {
-	x = v.x;
-	y = v.y;
-	z = v.z;
+Vector Vector::copy() {
+	Vector res;
+
+	res.x = x;
+	res.y = y;
+	res.z = z;
+
+	return res;
 }
 
 void Vector::set(float x, float y, float z) {

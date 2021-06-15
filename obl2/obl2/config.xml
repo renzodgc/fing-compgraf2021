@@ -2,9 +2,9 @@
 <scene>
 	<camera>
 		<position>
-			<x>10</x>
-			<y>20</y>
-			<z>30</z>
+			<x>0</x>
+			<y>0</y>
+			<z>10</z>
 		</position>
 		<window_position>
 			<x>0</x>
@@ -18,26 +18,26 @@
 			<position>
 				<x>10</x>
 				<y>10</y>
-				<z>10</z>
+				<z>30</z>
 			</position>
 			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</color>
 		</light>
 		<light>
 			<position>
-				<x>50</x>
-				<y>50</y>
+				<x>0</x>
+				<y>10</y>
 				<z>50</z>
 			</position>
 			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</color>
 		</light>
 	</lights>
@@ -48,75 +48,84 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>40</z>
 			</position>
 			<diffuse_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>0.2</g>
+				<b>0.1</b>
+				<a>1</a>
 			</diffuse_color>
 			<specular_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>1</transparency>
-				<refraction>1</refraction>
-				<reflection>true</reflection>
-			</properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+		</properties>
 		</object>
 		<object>
 			<type>sphere</type>
 			<position>
 				<x>1</x>
-				<y>1</y>
-				<z>1</z>
+				<y>5</y>
+				<z>35</z>
 			</position>
 			<diffuse_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>0.3</b>
+				<a>1</a>
 			</diffuse_color>
 			<specular_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>1</transparency>
-				<refraction>1</refraction>
-				<reflection>true</reflection>
-			</properties>
+				<refraction_coef>1.3333</refraction_coef>
+				<transmission_coef>1</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+		</properties>
 		</object>
 		<object>
 			<type>sphere</type>
 			<position>
-				<x>2</x>
-				<y>2</y>
-				<z>2</z>
+				<x>10</x>
+				<y>3</y>
+				<z>40</z>
 			</position>
 			<diffuse_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</diffuse_color>
 			<specular_color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-				<a>255</a>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
 			</specular_color>
 			<properties>
-				<transparency>1</transparency>
-				<refraction>1</refraction>
-				<reflection>true</reflection>
-			</properties>
+				<refraction_coef>1.5</refraction_coef>
+				<transmission_coef>0.5</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>true</reflective>
+		</properties>
 		</object>
 	</objects>
 </scene>

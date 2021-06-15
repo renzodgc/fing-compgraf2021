@@ -20,9 +20,9 @@ public:
 		// If a medium is exited but it's not current medium then ignore refraction.
 		// it's value equals the object's ID.
 
-	Ray();
+	Ray() {};
 	Ray(Vector origin, Vector direction);
-	~Ray();
+	~Ray() {};
 };
 
 #endif

@@ -10,6 +10,8 @@
 #include <ctime>
 #include "file_helper.h"
 #include "routes.h"
+#include "image.h"
+#include "render_manager.h"
 
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
@@ -23,6 +25,7 @@ private:
     // Main properties
     bool created;
     string current_directory;
+    string directory_path;
 
     // Aux methods
     string get_current_time();
@@ -38,6 +41,7 @@ public:
 
     // Main methods
     bool create_current_directory();
+    bool run_ray_tracing();
 };
 
 #endif

@@ -13,10 +13,18 @@
 // LOCAL DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
-#include "story_manager.h"
-#include "scene_manager.h"
+#include "math_helper.h"
+#include "file_helper.h"
+
+#include "vector.h"
+#include "ray.h"
 #include "camera.h"
+#include "image.h"
 #include "light.h"
 #include "object.h"
+
+#include "render_manager.h"
+#include "story_manager.h"
+#include "scene_manager.h"
 
 #endif

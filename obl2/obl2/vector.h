@@ -36,10 +36,11 @@ public:
 
 	float magnitude();
 	void normalize();
+	float euclid_distance(Vector v);
 	float inner_product(Vector v);
 	Vector scalar_mult(float a);
 	Vector cross_product(Vector v);
-	void copy(const Vector& v);
+	Vector copy();
 	void set(float x, float y, float z);
 
 	void print();

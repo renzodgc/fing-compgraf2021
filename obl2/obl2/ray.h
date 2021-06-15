@@ -23,6 +23,8 @@ public:
 	Ray() {};
 	Ray(Vector origin, Vector direction);
 	~Ray() {};
+
+	void print_ray();
 };
 
 #endif

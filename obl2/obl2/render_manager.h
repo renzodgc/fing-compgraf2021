@@ -34,7 +34,7 @@ private:
 
     Color trace_rr(Ray ray, int depth);
     Color shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth);
-    tuple<size_t, float> get_closest_intersected_object(Ray ray); // index, distance
+    tuple<int, float> get_closest_intersected_object(Ray ray); // index, distance
 
 public:
     // Constructor and singleton method

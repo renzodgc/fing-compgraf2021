@@ -19,3 +19,11 @@ Ray::Ray(Vector origin, Vector direction) {
 
 // Methods
 // -----------------------------------------------------------------------------------
+
+void Ray::print_ray() {
+	cout << "Origin: " << endl;
+	origin.print();
+	cout << "Direction: " << endl;
+	direction.print();
+	cout << endl;
+}

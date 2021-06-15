@@ -58,7 +58,7 @@ class Object {
         // Main methods
 
         // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
-        virtual float intersect(Ray ray) { return 0.f; };
+        virtual float intersect(Ray ray) { return -1.f; };
         virtual Vector get_normal(Vector point) { return Vector(); };
 
         // Aux methods

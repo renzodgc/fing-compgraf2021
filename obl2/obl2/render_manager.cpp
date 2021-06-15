@@ -27,8 +27,6 @@ Image* Render::ray_tracing() {
 	cout << "Iniciando algoritmo de Ray Tracing" << endl;
 
 	Camera * camera = Scene::get_instance().get_camera();
-	//vector <Light*> lights = scene_manager.get_lights();
-	//vector <Object*> objects = scene_manager.get_objects();
 
 	Vector * camera_eye = camera->get_position();
 	Vector * window_center = camera->get_window_position();
@@ -64,11 +62,12 @@ Image* Render::ray_tracing() {
 // Color can be shadowed by th closest intersection intersection
 // Depth is the current depth in the tree of rays
 Color Render::trace_rr(Ray ray, int depth) {
+	//ray.print_ray();
 	if (depth > MAX_DEPTH) {
 		return BACKGROUND_COLOR;
 	}
 	// Determine if an intersection occurs, if so get the closest object that intersects
-	size_t intersection_index;
+	int intersection_index;
 	float distance_intersection;
 	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
 	if (distance_intersection > FOV) {
@@ -101,7 +100,7 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 	Color refractive_color = BLACK;
 	Color reflective_color = BLACK;
 	vector <Light*> lights = Scene::get_instance().get_lights();
-	size_t intersection_index;
+	int intersection_index;
 	float distance_intersection, distance_from_light;
 	for (size_t i = 0; i < lights.size(); i++) {
 
@@ -189,14 +188,14 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 }
 
 
-tuple<size_t, float> Render::get_closest_intersected_object(Ray ray) {
-	size_t intersection_index = -1;
+tuple<int, float> Render::get_closest_intersected_object(Ray ray) {
+	int intersection_index = -1;
 	float distance_intersection = FOV + 1;
 	float distance;
 	vector <Object*> objects = Scene::get_instance().get_objects();
 	for (size_t i = 0; i < objects.size(); i++) {
 		distance = objects[i]->intersect(ray);
-		if (distance < distance_intersection) {
+		if (distance != -1.f && distance < distance_intersection) {
 			distance_intersection = distance;
 			intersection_index = i;
 		}

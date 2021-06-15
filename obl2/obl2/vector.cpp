@@ -154,5 +154,5 @@ void Vector::set(float x, float y, float z) {
 // -----------------------------------------------------------------------------------
 
 void Vector::print() {
-	printf("Vector(%f, %f, %f) ", x, y, z);
+	printf("Vector(%f, %f, %f) \n", x, y, z);
 }

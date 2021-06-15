@@ -47,6 +47,7 @@ Image* Render::ray_tracing() {
 			cout << "Ray Tracing (" << x / 64 << "/" << IMAGE_WIDTH / 64 << ")" << endl;
 		}
 		for (int y = 0; y < IMAGE_HEIGHT; y++) { // For each pixel
+			// TODO: Revisar si ray tiene que ser punteros
 			ray = Ray(
 				Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z), // origin
 				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - Vector(camera_eye->x, camera_eye->y, camera_eye->z)) // direction (from eye to window's pixel)
@@ -74,9 +75,9 @@ Color Render::trace_rr(Ray ray, int depth) {
 		return BACKGROUND_COLOR;
 	}
 	if(intersection_index != -1)  {
-		vector <Object*> objects = Scene::get_instance().get_objects();
-		Vector intersection = ray.origin + (ray.direction * distance_intersection);
+		Vector intersection = ray.origin + (ray.direction * distance_intersection); // TODO: Revisar?
 		
+		vector <Object*> objects = Scene::get_instance().get_objects();
 		return shadow_rr(
 			objects[intersection_index], // intersected object
 			ray, // ray that intersects

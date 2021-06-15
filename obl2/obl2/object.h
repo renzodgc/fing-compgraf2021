@@ -49,10 +49,10 @@ class Object {
         Color get_specular_color();
         bool is_opaque();
         float get_refraction_coef();
-        float Object::get_transmission_coef();
-        float Object::get_specular_coef();
-        float Object::get_diffuse_coef();
-        float Object::get_ambience_coef();
+        float get_transmission_coef();
+        float get_specular_coef();
+        float get_diffuse_coef();
+        float get_ambience_coef();
         bool is_reflective();
 
         // Main methods

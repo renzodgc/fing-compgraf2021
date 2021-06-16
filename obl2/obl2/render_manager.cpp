@@ -47,8 +47,8 @@ Image* Render::ray_tracing() {
 		for (int y = 0; y < IMAGE_HEIGHT; y++) { // For each pixel
 			// TODO: Revisar si ray tiene que ser punteros
 			ray = Ray(
-				Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z), // origin
-				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - Vector(camera_eye->x, camera_eye->y, camera_eye->z)) // direction (from eye to window's pixel)
+				camera_eye->copy(), // origin
+				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - camera_eye->copy()) // direction (from eye to window's pixel)
 			);
 			result->image[x][y] = trace_rr(ray, 1);
 		}
@@ -62,7 +62,6 @@ Image* Render::ray_tracing() {
 // Color can be shadowed by th closest intersection intersection
 // Depth is the current depth in the tree of rays
 Color Render::trace_rr(Ray ray, int depth) {
-	//ray.print_ray();
 	if (depth > MAX_DEPTH) {
 		return BACKGROUND_COLOR;
 	}
@@ -70,13 +69,14 @@ Color Render::trace_rr(Ray ray, int depth) {
 	int intersection_index;
 	float distance_intersection;
 	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
+	
 	if (distance_intersection > FOV) {
 		return BACKGROUND_COLOR;
 	}
 	if(intersection_index != -1)  {
-		Vector intersection = ray.origin + (ray.direction * distance_intersection); // TODO: Revisar?
-		
 		vector <Object*> objects = Scene::get_instance().get_objects();
+		Vector intersection = ray.origin + (ray.direction * distance_intersection);
+
 		return shadow_rr(
 			objects[intersection_index], // intersected object
 			ray, // ray that intersects
@@ -107,15 +107,16 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 		// Get light's direction (Ray between intersection and light source)
 		Ray shadow_ray = Ray(
 			intersection_point.copy(), // origin
-			(intersection_point.copy() - *(lights[i]->get_position())) // direction (from eye to window's pixel)
-		); // TODO: Point - light or light - point?
+			(lights[i]->get_position()->copy() - intersection_point.copy()) // direction (from eye to window's pixel)
+		);
 
 		// Ligting affects object if the inner product between its direction and the objects norm is positive.
 		if(shadow_ray.direction.inner_product(norm) > 0) {
+			
 			vector <Object*> objects = Scene::get_instance().get_objects();
 			tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
 			distance_from_light = intersection_point.euclid_distance(*(lights[i]->get_position()));
-			if ((intersection_index != -1) && (distance_intersection <= FOV) && (distance_intersection < distance_from_light)) {
+			if (false && (intersection_index != -1) && (distance_intersection <= FOV) && (distance_intersection < distance_from_light)) {
 				// An object stands between the surface and the source of light
 				if (!objects[intersection_index]->is_opaque()) {
 					// TODO: For shadow color: Cuando mandas el rayo hacia la luz para calcular la sombra de algo (estos rayos) no se pueden desviar! Las sombras son lineas
@@ -152,13 +153,6 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 					color,
 					add_colors(refractive_color, reflective_color)
 				);
-				/*color = add_colors(
-					color,
-					add_colors(
-						scale_color(refractive_color, object.get_diffuse_color()),
-						scale_color(reflective_color, object.get_specular_color())
-					)
-				);*/
 			} else /*if(distance_from_light <= FOV)*/ {
 				// No object stands between the surface and the light. And the light reachs the object
 				// TODO: Revisar
@@ -168,10 +162,11 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 					multiply_colors(lights[i]->get_color(), object->get_diffuse_color()),
 					max(0.f, shadow_ray.direction.inner_product(norm))
 				);
-				specular_component = scale_color(
+				// TODO: Fix Specular
+				/*specular_component = scale_color(
 					multiply_colors(lights[i]->get_color(), object->get_specular_color()),
 					max(0.f, blinn.inner_product(norm)) // pow(max(0, blinn * norm), mat->GetShine()
-				);
+				);*/
 				// TODO: Multiplicar por el inverso de la distancia?
 
 				color = add_colors(

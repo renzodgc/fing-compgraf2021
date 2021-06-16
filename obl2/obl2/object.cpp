@@ -120,7 +120,7 @@ Sphere::Sphere(unsigned int id, Vector* position, Color diffuse_color, Color spe
 // TODO: Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
 //		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Sphere::intersect(Ray ray) {
-	Vector Q = ray.origin - *this->position;
+	Vector Q = ray.origin - this->position->copy();
 	float a = ray.direction.inner_product(ray.direction); // 1.f
 	float b = 2 * ray.direction.inner_product(Q);
 	float c = Q.inner_product(Q) - radius * radius;
@@ -141,7 +141,7 @@ float Sphere::intersect(Ray ray) {
 		return sol; // Second intersection is the closest
 	}
 
-	// All "Intersections" occurred behind ray
+	// All "Intersections" occurred behind the ray
 	return -1.f;
 }
 

@@ -269,7 +269,7 @@ bool Scene::load_object(XMLElement* xmlObject) {
 				diffuse_coef,
 				ambience_coef,
 				reflective,
-				80.f // TODO: Parse radius
+				100.f // TODO: Parse radius
 			));
 			this->object_counter++;
 			break;

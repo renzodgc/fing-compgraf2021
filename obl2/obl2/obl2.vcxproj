@@ -100,7 +100,9 @@
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cylinder.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="mesh.h" />
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="refraction_coefficients.h" />
     <ClInclude Include="camera.h" />

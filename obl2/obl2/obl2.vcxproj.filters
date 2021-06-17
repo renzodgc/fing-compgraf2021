@@ -164,6 +164,12 @@
     <ClInclude Include="sphere.h">
       <Filter>Header Files\models\objects</Filter>
     </ClInclude>
+    <ClInclude Include="cylinder.h">
+      <Filter>Header Files\models\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files\models\objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">

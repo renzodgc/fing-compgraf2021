@@ -117,7 +117,8 @@ Sphere::Sphere(unsigned int id, Vector* position, Color diffuse_color, Color spe
 
 // Reference: https://math.stackexchange.com/questions/1939423/calculate-if-vector-intersects-sphere
 // Solve quadratic equation
-// TODO: Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
+// TODO: https://www.notion.so/Arreglar-errores-de-presici-n-num-rica-para-las-intersecciones-dcbe39b3f097429e9f69d1633c26f046
+//		 Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
 //		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Sphere::intersect(Ray ray) {
 	Vector Q = ray.origin - this->position->copy();

@@ -78,9 +78,6 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files\libraries</Filter>
     </ClCompile>
-    <ClCompile Include="refraction_coefficients.h">
-      <Filter>Header Files\constants</Filter>
-    </ClCompile>
     <ClCompile Include="image.cpp">
       <Filter>Source Files\models</Filter>
     </ClCompile>
@@ -139,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="image.h">
       <Filter>Header Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="refraction_coefficients.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

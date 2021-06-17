@@ -90,6 +90,9 @@ bool Scene::load_scene() {
 		}
 
 	}
+	else {
+		return false;
+	}
 
 	return true;
 }

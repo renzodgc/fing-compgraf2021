@@ -58,9 +58,7 @@ class Object {
         bool is_reflective();
 
         // Main methods
-
-        // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
-        virtual float intersect(Ray ray) { return -1.f; };
+        virtual float intersect(Ray ray) { return -1.f; }; // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
         virtual Vector get_normal(Vector point) { return Vector(); };
 
         // Aux methods

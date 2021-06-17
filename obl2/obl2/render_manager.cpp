@@ -24,7 +24,6 @@ Render& Render::get_instance() {
 // https://medium.com/nicos-softwaredev-projects/path-tracer-project-75d734e2789
 // Light rays will be traced backwards (contrary to their natural direction), that is from the eye back to the lightsources.
 Image* Render::ray_tracing() {
-	cout << "Iniciando algoritmo de Ray Tracing" << endl;
 
 	Camera * camera = Scene::get_instance().get_camera();
 
@@ -53,7 +52,6 @@ Image* Render::ray_tracing() {
 		}
 	}
 
-	cout << "Fin de algoritmo de Ray Tracing" << endl << endl;
 	return result;
 }
 

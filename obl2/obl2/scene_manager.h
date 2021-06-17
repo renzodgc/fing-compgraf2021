@@ -12,6 +12,10 @@
 #include "camera.h"
 #include "light.h"
 #include "object.h"
+#include "sphere.h"
+#include "cylinder.h"
+#include "rectangle.h"
+#include "mesh.h"
 #include "routes.h"
 
 // NAMESPACE

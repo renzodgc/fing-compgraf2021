@@ -81,9 +81,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="cylinder.cpp" />
     <ClCompile Include="file_helper.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="light.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_manager.cpp" />
     <ClCompile Include="object.cpp" />
@@ -91,12 +94,16 @@
     <ClCompile Include="math_helper.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="ray.cpp" />
+    <ClCompile Include="sphere.cpp" />
     <ClCompile Include="story_manager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cylinder.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="rectangle.h" />
     <ClInclude Include="refraction_coefficients.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="light.h" />
@@ -111,12 +118,14 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="math_helper.h" />
     <ClInclude Include="ray.h" />
+    <ClInclude Include="sphere.h" />
     <ClInclude Include="story_manager.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml" />
+    <Xml Include="config_3spheres.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

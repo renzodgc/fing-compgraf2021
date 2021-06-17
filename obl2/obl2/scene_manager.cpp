@@ -90,6 +90,9 @@ bool Scene::load_scene() {
 		}
 
 	}
+	else {
+		return false;
+	}
 
 	return true;
 }
@@ -258,6 +261,10 @@ bool Scene::load_object(XMLElement* xmlObject) {
 
 		switch (type) {
 		case ObjectIs::Sphere:
+
+			float radius;
+			xmlObjectProperties->FirstChildElement("radius")->QueryFloatText(&radius);
+
 			this->objects.push_back(new Sphere(
 				this->object_counter,
 				new Vector(x, y, z),
@@ -269,7 +276,7 @@ bool Scene::load_object(XMLElement* xmlObject) {
 				diffuse_coef,
 				ambience_coef,
 				reflective,
-				100.f // TODO: Parse radius
+				radius
 			));
 			this->object_counter++;
 			break;

@@ -38,8 +38,7 @@ bool Story::create_current_directory() {
 	return create_directory(directory_path);
 }
 
-bool Story::run_ray_tracing() {
-	Image *result = Render::get_instance().ray_tracing();
+bool Story::save_result(Image* result) {
 	return save_image(result, directory_path + "\\result.png");
 }
 

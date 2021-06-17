@@ -24,7 +24,7 @@
 #include "object.h"
 
 #include "render_manager.h"
-#include "story_manager.h"
 #include "scene_manager.h"
+#include "story_manager.h"
 
 #endif

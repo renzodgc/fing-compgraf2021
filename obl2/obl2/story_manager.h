@@ -41,7 +41,7 @@ public:
 
     // Main methods
     bool create_current_directory();
-    bool run_ray_tracing();
+    bool save_result(Image* result);
 };
 
 #endif

@@ -21,10 +21,8 @@ Image::~Image() {}
 
 // Reference: http://graphics.stanford.edu/courses/cs148-10-summer/docs/UsingFreeImage.pdf
 FIBITMAP * Image::float_to_bitmap() {
-	// TODO: Re-Normalize color values when they go beyond 0..1
-	// Ojo que no es tan simple como usar min-max
-	// porque si una pequenia parte de la imagen tiene como 1000 de color y la pasas a 1 entonces el resto queda ultra oscuro
-	// Hay que hacer algo tipo limitar el maximo de color antes de normalizar o alguna otra estrategia.
+	// TODO: https://www.notion.so/Gamma-Correction-Normalizar-colores-en-imagenes-844a1e1e05e84ebca0efce7155a3c5b9
+	// Gamma-Correction: Re-Normalize color values when they go beyond 0..1
 
 	FIBITMAP* result = FreeImage_Allocate(IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_BITS_PER_PIXEL);
 	RGBQUAD color;

@@ -40,6 +40,12 @@
     <Filter Include="Header Files\libraries">
       <UniqueIdentifier>{513fd5c9-b890-46d8-aee2-8e654d373329}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\models\objects">
+      <UniqueIdentifier>{8a6a26e9-b82a-4a09-b2de-0555c1aef0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\models\objects">
+      <UniqueIdentifier>{7d5922a3-64b7-4cd7-89aa-454af569c40d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="file_helper.cpp">
@@ -83,6 +89,18 @@
     </ClCompile>
     <ClCompile Include="ray.cpp">
       <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="sphere.cpp">
+      <Filter>Source Files\models\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="rectangle.cpp">
+      <Filter>Source Files\models\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="cylinder.cpp">
+      <Filter>Source Files\models\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>Source Files\models\objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="refraction_coefficients.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
+      <Filter>Header Files\models\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere.h">
+      <Filter>Header Files\models\objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

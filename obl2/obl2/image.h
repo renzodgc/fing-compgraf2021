@@ -12,6 +12,15 @@
 #include "parameters.h"
 #include "math_helper.h"
 
+// ENUMERATES
+// -----------------------------------------------------------------------------------
+
+enum class ImageIs {
+	FullResult,
+	ColorAmbient, ColorDiffuse, ColorSpecular,
+	Ambient, Diffuse, Specular, Reflection, Transmission
+};
+
 // MAIN CLASS
 // -----------------------------------------------------------------------------------
 

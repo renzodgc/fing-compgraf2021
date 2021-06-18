@@ -5,32 +5,33 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ libraries
 #include <iostream>
 #include <algorithm>    // std::max
 #include <vector>
 #include <tuple>
+// Constants
 #include "colors.h"
 #include "parameters.h"
-#include "ray.h"
+// Structures
 #include "image.h"
+// Models
+#include "ray.h"
 #include "camera.h"
 #include "light.h"
 #include "object.h"
-#include "scene_manager.h"
+// Helpers
 #include "math_helper.h"
+// Managers
+#include "scene_manager.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
+
 using namespace std;
 
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
-
-enum class ImageIs {
-    FullResult,
-    ColorAmbient, ColorDiffuse, ColorSpecular,
-    Ambient, Diffuse, Specular, Reflection, Transmission
-};
 
 class Render {
 

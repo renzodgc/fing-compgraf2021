@@ -5,13 +5,16 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ libraries
 #include <iostream>
 #include <string>
 #include <ctime>
-#include "file_helper.h"
+// Constants
 #include "routes.h"
+// Structures
 #include "image.h"
-#include "render_manager.h"
+// Helpers
+#include "file_helper.h"
 
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------

@@ -32,8 +32,6 @@ class Light {
         // Getters & Setters
         Vector* get_position();
         Color get_color();
-
-        // Main methods
 };
 
 #endif

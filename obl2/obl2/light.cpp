@@ -24,6 +24,3 @@ Vector* Light::get_position() {
 Color Light::get_color() {
 	return this->color;
 }
-
-// Main Methods
-// -----------------------------------------------------------------------------------

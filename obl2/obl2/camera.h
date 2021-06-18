@@ -33,8 +33,6 @@ class Camera {
         void set_position(Vector* position);
         Vector* get_window_position();
         void set_window_position(Vector* window_position);
-
-        // Main methods
 };
 
 #endif

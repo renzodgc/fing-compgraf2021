@@ -3,6 +3,11 @@
 
 #include "ray.h"
 
+// NAMESPACE
+// -----------------------------------------------------------------------------------
+
+using namespace std;
+
 // METHODS
 // -----------------------------------------------------------------------------------
 
@@ -17,7 +22,7 @@ Ray::Ray(Vector origin, Vector direction) {
 	// TODO: (Refraction) Initialize travelled_objects with value 0 and length of scenario_objects
 }
 
-// Methods
+// Aux methods
 // -----------------------------------------------------------------------------------
 
 void Ray::print_ray() {

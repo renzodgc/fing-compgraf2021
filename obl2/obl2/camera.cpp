@@ -30,7 +30,3 @@ Vector* Camera::get_window_position() {
 void Camera::set_window_position(Vector* window_position) {
 	this->window_position = window_position;
 }
-
-
-// Main Methods
-// -----------------------------------------------------------------------------------

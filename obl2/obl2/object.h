@@ -39,7 +39,7 @@ class Object {
 
         // Coefficients
         float refraction_coef; // Range [1,..)
-        float transmission_coef; // Range [0,1] (opaque, transparent)
+        float transmission_coef; // Range [0,1] (transparent, opaque)
         float specular_coef;
         float diffuse_coef;
         float ambience_coef;

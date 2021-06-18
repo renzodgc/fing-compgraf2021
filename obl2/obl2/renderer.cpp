@@ -18,17 +18,17 @@ int main(int argc, char* argv[]) {
 	// 1. Load scene from config file
 	Scene& scene_manager = Scene::get_instance();
 	if (!scene_manager.is_loaded()) {
-		cerr << "Error: El archivo config no pudo ser cargado" << endl << endl;
+		cerr << "Error: La escena no pudo ser cargada" << endl;
 		post_render();
 		cin.get();
 		return -1;
 	}
-	cout << "1. La escena ha sido cargado correctamente" << endl;
+	cout << "1. La escena ha sido cargada correctamente" << endl;
 
 	// 2. Create story directory for saving intermediate and final images
 	Story& story_manager = Story::get_instance();
 	if (!story_manager.is_created()) {
-		cerr << "Error: El directorio de historial no pudo ser creado" << endl << endl;
+		cerr << "Error: El directorio de historial no pudo ser creado" << endl;
 		post_render();
 		cin.get();
 		return -1;
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 
 	// 4. Save result image
 	if (!story_manager.save_result(result, ImageIs::FullResult)) {
-		cerr << "Error: La imagen resultante no pudo ser guardada" << endl << endl;
+		cerr << "Error: La imagen resultante no pudo ser guardada" << endl;
 		post_render();
 		cin.get();
 		return -1;

@@ -11,4 +11,6 @@ constexpr int IMAGE_BITS_PER_PIXEL = 24; // 3 x 8 bit (RGB)
 constexpr int MAX_DEPTH = 1;
 constexpr float FOV = 1500;
 
+constexpr double GAMMA_CORRECTION = 1.5;
+
 #endif

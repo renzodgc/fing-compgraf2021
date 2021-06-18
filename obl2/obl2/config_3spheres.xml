@@ -16,14 +16,27 @@
 	<lights>
 		<light>
 			<position>
-				<x>-20</x>
+				<x>-100</x>
 				<y>50</y>
 				<z>0</z>
 			</position>
 			<color>
-				<r>0.5</r>
-				<g>0.5</g>
-				<b>0.5</b>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</color>
+		</light>
+		<light>
+			<position>
+				<x>100</x>
+				<y>50</y>
+				<z>0</z>
+			</position>
+			<color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
 				<a>1</a>
 			</color>
 		</light>
@@ -40,7 +53,7 @@
 			<diffuse_color>
 				<r>1</r>
 				<g>1</g>
-				<b>1</b>
+				<b>0</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -56,6 +69,7 @@
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>true</reflective>
+				<radius>100.0</radius>
 			</properties>
 		</object>
 		<object>
@@ -66,9 +80,9 @@
 				<z>210</z>
 			</position>
 			<diffuse_color>
-				<r>1</r>
-				<g>0</g>
-				<b>0</b>
+				<r>0</r>
+				<g>1</g>
+				<b>1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -84,6 +98,7 @@
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>
+				<radius>100.0</radius>
 		</properties>
 		</object>
 		<object>
@@ -96,7 +111,7 @@
 			<diffuse_color>
 				<r>1</r>
 				<g>0</g>
-				<b>0</b>
+				<b>1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -112,6 +127,7 @@
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>
+				<radius>100.0</radius>
 			</properties>
 		</object>
 	</objects>

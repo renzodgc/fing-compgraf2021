@@ -4,12 +4,14 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>       // std::cout
 #include <stack>          // std::stack
 #include <vector>         // std::vector
-
-#include "vector.h"
+// Constants
 #include "refraction_coefficients.h"
+// Structures
+#include "vector.h"
 
 // MAIN CLASS
 // -----------------------------------------------------------------------------------

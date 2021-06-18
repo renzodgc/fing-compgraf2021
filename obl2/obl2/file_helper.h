@@ -5,11 +5,15 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <string>
 #include <windows.h>
+// 3rd party libraries
 #include "FreeImage.h"
+// Constants
 #include "routes.h"
+// Structures
 #include "image.h"
 
 // HEADERS

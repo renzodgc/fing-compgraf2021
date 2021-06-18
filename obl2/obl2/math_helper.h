@@ -5,6 +5,7 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -12,6 +13,7 @@
 #include <vector>
 #include <tuple>
 #include <math.h>
+// Constants
 #include "colors.h"
 
 // NAMESPACE

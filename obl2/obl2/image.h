@@ -1,15 +1,18 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <vector> // std::vector
 #include <algorithm>
+// 3rd party libraries
 #include "FreeImage.h"
+// Constants
 #include "colors.h"
 #include "parameters.h"
+// Helpers
 #include "math_helper.h"
 
 // ENUMERATES

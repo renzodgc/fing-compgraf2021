@@ -5,10 +5,14 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <vector>
-
+// 3rd party libraries
 #include "tinyxml2.h"
+// Constants
+#include "routes.h"
+// Objects
 #include "camera.h"
 #include "light.h"
 #include "object.h"
@@ -16,7 +20,6 @@
 #include "cylinder.h"
 #include "rectangle.h"
 #include "mesh.h"
-#include "routes.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

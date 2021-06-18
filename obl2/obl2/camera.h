@@ -5,8 +5,10 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <utility>
+// Structures
 #include "vector.h"
 
 // NAMESPACE

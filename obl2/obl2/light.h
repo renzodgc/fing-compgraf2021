@@ -5,10 +5,13 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <utility>
-#include "vector.h"
+// Constants
 #include "colors.h"
+// Structures
+#include "vector.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------

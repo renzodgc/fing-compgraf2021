@@ -5,18 +5,16 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ libraries
 #include <math.h>
 #include <stdio.h>
 #include <string>
-
-#include "vector.h"
+// Constants
 #include "colors.h"
+// Structures
+#include "vector.h"
+// Models
 #include "ray.h"
-
-// NAMESPACE
-// -----------------------------------------------------------------------------------
-
-using namespace std;
 
 // ENUMERATES
 // -----------------------------------------------------------------------------------
@@ -77,7 +75,7 @@ class Object {
         virtual Vector get_normal(Vector point) { return Vector(); };
 
         // Aux static methods
-        static ObjectIs parse_object_type(string type);
+        static ObjectIs parse_object_type(std::string type);
 };
 
 #endif

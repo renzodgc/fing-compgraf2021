@@ -2,6 +2,9 @@
 #ifndef REFRACTION_COEFFICIENTS_H
 #define REFRACTION_COEFFICIENTS_H
 
+// REFRACTION COEFFICIENTS
+// ---------------------------------------------------------------------------------------
+
 constexpr float VACUUM = 1.00000f;
 constexpr float AIR_STP = 1.00029f;
 constexpr float ACETONE = 1.36f;

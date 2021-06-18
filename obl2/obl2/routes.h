@@ -2,15 +2,16 @@
 #ifndef ROUTES_H
 #define ROUTES_H
 
-#include <string>
+// DEPENDENCIES
+// ---------------------------------------------------------------------------------------
 
-using namespace std;
+#include <string>
 
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------
 
-const string CONFIG_FILE = "config.xml";
-const string SAVE_FOLDER = "results\\";
+const std::string CONFIG_FILE = "config.xml";
+const std::string SAVE_FOLDER = "results\\";
 
 #endif
 

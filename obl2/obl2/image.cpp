@@ -33,7 +33,10 @@ FIBITMAP * Image::float_to_bitmap() {
 	// Get highest color value for normalization 0..1
 	for (size_t i = 0; i < IMAGE_WIDTH; i++) {
 		for (size_t j = 0; j < IMAGE_HEIGHT; j++) {
-			max_intensity = max(max_intensity, max(this->image[i][j].red, max(this->image[i][j].green, this->image[i][j].blue)));
+			max_intensity = max(max_intensity, this->image[i][j].red);
+			max_intensity = max(max_intensity, this->image[i][j].green);
+			max_intensity = max(max_intensity, this->image[i][j].blue);
+			max_intensity = max(max_intensity, 1.);
 		}
 	}
 

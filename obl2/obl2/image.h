@@ -6,6 +6,7 @@
 #include "FreeImage.h"
 #include "colors.h"
 #include "parameters.h"
+#include "math_helper.h"
 
 using namespace std;
 

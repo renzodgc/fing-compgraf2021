@@ -155,9 +155,6 @@
     <ClInclude Include="image.h">
       <Filter>Header Files\models</Filter>
     </ClInclude>
-    <ClInclude Include="refraction_coefficients.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rectangle.h">
       <Filter>Header Files\models\objects</Filter>
     </ClInclude>
@@ -169,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="mesh.h">
       <Filter>Header Files\models\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="refraction_coefficients.h">
+      <Filter>Header Files\constants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

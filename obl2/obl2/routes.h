@@ -9,7 +9,7 @@ using namespace std;
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------
 
-const string CONFIG_FILE = "config.xml";
+const string CONFIG_FILE = "config_3spheres.xml";
 const string SAVE_FOLDER = "results\\";
 
 #endif

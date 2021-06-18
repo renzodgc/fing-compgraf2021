@@ -3,6 +3,11 @@
 
 #include "vector.h"
 
+// NAMESPACE
+// -----------------------------------------------------------------------------------
+
+using namespace std;
+
 // METHODS
 // -----------------------------------------------------------------------------------
 
@@ -26,7 +31,7 @@ Vector::Vector() {
 }
 Vector::~Vector() {}
 
-// Methods
+// Operators
 // -----------------------------------------------------------------------------------
 
 Vector Vector::operator+(Vector& v) {
@@ -91,6 +96,18 @@ Vector Vector::operator/(float t) {
 	return (res);
 }
 
+// Getters & Setters
+// -----------------------------------------------------------------------------------
+
+void Vector::set(float x, float y, float z) {
+	this->x = x;
+	this->y = y;
+	this->z = z;
+}
+
+// Methods
+// -----------------------------------------------------------------------------------
+
 float Vector::magnitude() {
 	return((float)sqrt(x * x + y * y + z * z));
 }
@@ -144,15 +161,11 @@ Vector Vector::copy() {
 	return res;
 }
 
-void Vector::set(float x, float y, float z) {
-	this->x = x;
-	this->y = y;
-	this->z = z;
-}
 
-// For debug pruposes: Prints a vector
+// Aux methods
 // -----------------------------------------------------------------------------------
 
+// For debug pruposes: Prints a vector
 void Vector::print() {
 	printf("Vector(%f, %f, %f) \n", x, y, z);
 }

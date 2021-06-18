@@ -13,8 +13,13 @@
 class Sphere : public Object {
 
     public:
+
         // Constructor
-        Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective, float radius);
+        Sphere(unsigned int id, Vector* position, // Main properties
+            Color diffuse_color, Color specular_color, // Colors
+            float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
+            bool reflective, // Flags
+            float radius); // Sphere properties
 
         // Main properties
         float radius;

@@ -5,43 +5,48 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ libraries
 #include <iostream>
 #include <string>
 #include <ctime>
-#include "file_helper.h"
+// Constants
 #include "routes.h"
+// Structures
 #include "image.h"
-#include "render_manager.h"
+// Helpers
+#include "file_helper.h"
 
 // CLASS DEFINITION
 // -----------------------------------------------------------------------------------
 
 class Story {
 
-private:
-    // Singleton
-    Story();
+    private:
 
-    // Main properties
-    bool created;
-    string current_directory;
-    string directory_path;
+        // Singleton
+        Story();
 
-    // Aux methods
-    string get_current_time();
+        // Main properties
+        bool created;
+        string current_directory;
+        string current_directory_path;
 
-public:
-    // Constructor and singleton method
-    Story(Story const&) = delete;
-    void operator=(Story const&) = delete;
-    static Story& get_instance();
+        // Aux methods
+        string get_current_time();
 
-    // Getters & Setters
-    bool is_created();
+    public:
 
-    // Main methods
-    bool create_current_directory();
-    bool save_result(Image* result, ImageIs type);
+        // Constructor and singleton method
+        Story(Story const&) = delete;
+        void operator=(Story const&) = delete;
+        static Story& get_instance();
+
+        // Getters & Setters
+        bool is_created();
+
+        // Main methods
+        bool create_current_directory();
+        bool save_result(Image* result, ImageIs type);
 };
 
 #endif

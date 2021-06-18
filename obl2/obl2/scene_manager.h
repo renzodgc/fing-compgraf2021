@@ -5,10 +5,14 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <iostream>
 #include <vector>
-
+// 3rd party libraries
 #include "tinyxml2.h"
+// Constants
+#include "routes.h"
+// Objects
 #include "camera.h"
 #include "light.h"
 #include "object.h"
@@ -16,7 +20,6 @@
 #include "cylinder.h"
 #include "rectangle.h"
 #include "mesh.h"
-#include "routes.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -29,10 +32,11 @@ using namespace tinyxml2;
 class Scene {
 
     private:
+
         // Singleton
         Scene();
 
-        // Main objects
+        // Main properties
         Camera* camera;
         vector<Light*> lights;
         vector<Object*> objects;
@@ -47,6 +51,7 @@ class Scene {
         bool load_object(XMLElement* xmlObject);
 
     public:
+
         // Constructor and singleton method
         Scene(Scene const&) = delete;
         void operator=(Scene const&) = delete;

@@ -14,7 +14,17 @@ using namespace std;
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Cylinder::Cylinder(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective, float radius, float height) : Object(id, position, diffuse_color, specular_color, refraction_coef, transmission_coef, specular_coef, diffuse_coef, ambience_coef, reflective) {
+Cylinder::Cylinder(
+	unsigned int id, Vector* position, // Main properties
+	Color diffuse_color, Color specular_color, // Colors
+	float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
+	bool reflective, // Flags
+	float radius, float height) // Cylinder properties
+	
+	// Parent constructor
+	: Object(id, position, diffuse_color, specular_color, refraction_coef, transmission_coef, specular_coef, diffuse_coef, ambience_coef, reflective) {
+		
+	// Cylinder constructor
 	this->type = ObjectIs::Cylinder;
 	this->radius = radius;
 	this->height = height;

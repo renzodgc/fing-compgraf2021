@@ -4,6 +4,11 @@
 #include <iostream>
 #include "image.h"
 
+// NAMESPACE
+// -----------------------------------------------------------------------------------
+
+using namespace std;
+
 // METHODS
 // -----------------------------------------------------------------------------------
 
@@ -36,16 +41,26 @@ FIBITMAP * Image::float_to_bitmap() {
 			max_intensity = max(max_intensity, this->image[i][j].red);
 			max_intensity = max(max_intensity, this->image[i][j].green);
 			max_intensity = max(max_intensity, this->image[i][j].blue);
-			max_intensity = max(max_intensity, 1.);
 		}
 	}
 
-	// Normalize. Apply Gamma Correction. Convert to Byte
+	// Normalize and convert to Byte
 	for (size_t i = 0; i < IMAGE_WIDTH; i++) {
 		for (size_t j = 0; j < IMAGE_HEIGHT; j++) {
-			color.rgbRed = (BYTE)(pow(this->image[i][j].red / max_intensity, GAMMA_CORRECTION) * 255.0);
-			color.rgbGreen = (BYTE)(pow(this->image[i][j].green / max_intensity, GAMMA_CORRECTION) * 255.0);
-			color.rgbBlue = (BYTE)(pow(this->image[i][j].blue / max_intensity, GAMMA_CORRECTION) * 255.0);
+
+			// Apply gamma correction if max intensity gets over 1
+			if (max_intensity > 1) {
+				color.rgbRed = (BYTE)(pow(this->image[i][j].red / max_intensity, GAMMA_CORRECTION) * 255.0);
+				color.rgbGreen = (BYTE)(pow(this->image[i][j].green / max_intensity, GAMMA_CORRECTION) * 255.0);
+				color.rgbBlue = (BYTE)(pow(this->image[i][j].blue / max_intensity, GAMMA_CORRECTION) * 255.0);
+			}
+
+			// If not, just convert to byte
+			else {
+				color.rgbRed = (BYTE)(this->image[i][j].red * 255.0);
+				color.rgbGreen = (BYTE)(this->image[i][j].green * 255.0);
+				color.rgbBlue = (BYTE)(this->image[i][j].blue  * 255.0);
+			}
 			FreeImage_SetPixelColor(result, i, j, &color);
 		}
 	}

@@ -18,17 +18,17 @@ int main(int argc, char* argv[]) {
 	// 1. Load scene from config file
 	Scene& scene_manager = Scene::get_instance();
 	if (!scene_manager.is_loaded()) {
-		cerr << "Error: El archivo config no pudo ser cargado" << endl << endl;
+		cerr << "Error: La escena no pudo ser cargada" << endl;
 		post_render();
 		cin.get();
 		return -1;
 	}
-	cout << "1. La escena ha sido cargado correctamente" << endl;
+	cout << "1. La escena ha sido cargada correctamente" << endl;
 
 	// 2. Create story directory for saving intermediate and final images
 	Story& story_manager = Story::get_instance();
 	if (!story_manager.is_created()) {
-		cerr << "Error: El directorio de historial no pudo ser creado" << endl << endl;
+		cerr << "Error: El directorio de historial no pudo ser creado" << endl;
 		post_render();
 		cin.get();
 		return -1;
@@ -38,26 +38,37 @@ int main(int argc, char* argv[]) {
 	// 3. Initiate ray tracing
 	Render& render_manager = Render::get_instance();	
 	Image* result = render_manager.ray_tracing(ImageIs::FullResult);
-	cout << "3. Imagen generada correctamente" << endl << endl;
+	cout << "3. Imagen generada correctamente" << endl;
 
 	// 4. Save result image
 	if (!story_manager.save_result(result, ImageIs::FullResult)) {
-		cerr << "Error: La imagen resultante no pudo ser guardada" << endl << endl;
+		cerr << "Error: La imagen resultante no pudo ser guardada" << endl;
 		post_render();
 		cin.get();
 		return -1;
 	}
 	cout << "4. Imagen guardada correctamente" << endl;
-	cout << "5. Generando imagenes auxiliares" << endl;
-	result = render_manager.ray_tracing(ImageIs::Ambient); story_manager.save_result(result, ImageIs::Ambient);
-	result = render_manager.ray_tracing(ImageIs::Diffuse); story_manager.save_result(result, ImageIs::Diffuse);
-	result = render_manager.ray_tracing(ImageIs::Specular); story_manager.save_result(result, ImageIs::Specular);
-	result = render_manager.ray_tracing(ImageIs::Reflection); story_manager.save_result(result, ImageIs::Reflection);
-	result = render_manager.ray_tracing(ImageIs::Transmission); story_manager.save_result(result, ImageIs::Transmission);
 
+	// 5. Run ray tracing to generate intermediate results
+	cout << "5. Generando resultados intermedios:" << endl;
+	// Coefficient results
+	result = render_manager.ray_tracing(ImageIs::Ambient); story_manager.save_result(result, ImageIs::Ambient);
+	cout << "    5.1. Coeficiente ambiental" << endl;
+	result = render_manager.ray_tracing(ImageIs::Diffuse); story_manager.save_result(result, ImageIs::Diffuse);
+	cout << "    5.2. Coeficiente difuso" << endl;
+	result = render_manager.ray_tracing(ImageIs::Specular); story_manager.save_result(result, ImageIs::Specular);
+	cout << "    5.3. Coeficiente especular" << endl;
+	result = render_manager.ray_tracing(ImageIs::Reflection); story_manager.save_result(result, ImageIs::Reflection);
+	cout << "    5.4. Coeficiente de reflexion" << endl;
+	result = render_manager.ray_tracing(ImageIs::Transmission); story_manager.save_result(result, ImageIs::Transmission);
+	cout << "    5.5. Coeficiente de transmision" << endl;
+	// Color results
 	result = render_manager.ray_tracing(ImageIs::ColorAmbient); story_manager.save_result(result, ImageIs::ColorAmbient);
+	cout << "    5.6. Color ambiental" << endl;
 	result = render_manager.ray_tracing(ImageIs::ColorDiffuse); story_manager.save_result(result, ImageIs::ColorDiffuse);
+	cout << "    5.7. Color difuso" << endl;
 	result = render_manager.ray_tracing(ImageIs::ColorSpecular); story_manager.save_result(result, ImageIs::ColorSpecular);
+	cout << "    5.8. Color especular" << endl;
 	
 	post_render();
 	cin.get();

@@ -5,45 +5,48 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+// C++ Libraries
 #include <math.h>
 #include <stdio.h>
-
-// NAMESPACE
-// -----------------------------------------------------------------------------------
-
-using namespace std;
 
 // MAIN CLASS
 // -----------------------------------------------------------------------------------
 
 class Vector {
 
-public:
+	public:
 
-	float x, y, z;
+		// Constructor
+		Vector(float x, float y, float z);
+		Vector(const Vector& v);
+		Vector();
+		~Vector();
 
-	Vector(float x, float y, float z);
-	Vector(const Vector& v);
-	Vector();
-	~Vector();
+		// Main properties
+		float x, y, z;
 
-	Vector operator +(Vector& v);
-	Vector operator -(const Vector& v);
-	Vector operator *(Vector& v);
-	Vector operator *(float t);
-	Vector operator /(float t);
-	Vector operator -(void);
+		// Operators
+		Vector operator +(Vector& v);
+		Vector operator -(const Vector& v);
+		Vector operator *(Vector& v);
+		Vector operator *(float t);
+		Vector operator /(float t);
+		Vector operator -(void);
 
-	float magnitude();
-	void normalize();
-	float euclid_distance(Vector v);
-	float inner_product(Vector v);
-	Vector scalar_mult(float a);
-	Vector cross_product(Vector v);
-	Vector copy();
-	void set(float x, float y, float z);
+		// Getters & Setters
+		void set(float x, float y, float z);
 
-	void print();
+		// Main methods
+		float magnitude();
+		void normalize();
+		float euclid_distance(Vector v);
+		float inner_product(Vector v);
+		Vector scalar_mult(float a);
+		Vector cross_product(Vector v);
+		Vector copy();
+
+		// Aux methods
+		void print();
 };
 
 #endif

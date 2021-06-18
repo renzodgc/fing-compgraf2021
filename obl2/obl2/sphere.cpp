@@ -14,7 +14,17 @@ using namespace std;
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Sphere::Sphere(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective, float radius) : Object(id, position, diffuse_color, specular_color, refraction_coef, transmission_coef, specular_coef, diffuse_coef, ambience_coef, reflective) {
+Sphere::Sphere(
+	unsigned int id, Vector* position, // Main properties
+	Color diffuse_color, Color specular_color, // Colors
+	float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
+	bool reflective, // Flags
+	float radius) // Sphere properties
+
+	// Parent constructor
+	: Object(id, position, diffuse_color, specular_color, refraction_coef, transmission_coef, specular_coef, diffuse_coef, ambience_coef, reflective) {
+
+	// Sphere constructor
 	this->type = ObjectIs::Sphere;
 	this->radius = radius;
 }

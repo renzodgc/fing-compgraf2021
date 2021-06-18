@@ -46,6 +46,12 @@
     <Filter Include="Header Files\models\objects">
       <UniqueIdentifier>{7d5922a3-64b7-4cd7-89aa-454af569c40d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\models\structures">
+      <UniqueIdentifier>{97b790ef-5b8a-4a7f-8be7-0f78e88498e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models\structures">
+      <UniqueIdentifier>{4da18bd5-f5a0-4229-89c5-1c1c6dba9ef2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="file_helper.cpp">
@@ -59,12 +65,6 @@
     </ClCompile>
     <ClCompile Include="scene_manager.cpp">
       <Filter>Source Files\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="plane.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
-    <ClCompile Include="vector.cpp">
-      <Filter>Source Files\models</Filter>
     </ClCompile>
     <ClCompile Include="story_manager.cpp">
       <Filter>Source Files\managers</Filter>
@@ -84,9 +84,6 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files\libraries</Filter>
     </ClCompile>
-    <ClCompile Include="image.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
     <ClCompile Include="ray.cpp">
       <Filter>Source Files\models</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="mesh.cpp">
       <Filter>Source Files\models\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Source Files\models\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="vector.cpp">
+      <Filter>Source Files\models\structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,12 +128,6 @@
     <ClInclude Include="parameters.h">
       <Filter>Header Files\constants</Filter>
     </ClInclude>
-    <ClInclude Include="plane.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
-    <ClInclude Include="vector.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
     <ClInclude Include="story_manager.h">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
@@ -152,9 +149,6 @@
     <ClInclude Include="ray.h">
       <Filter>Header Files\models</Filter>
     </ClInclude>
-    <ClInclude Include="image.h">
-      <Filter>Header Files\models</Filter>
-    </ClInclude>
     <ClInclude Include="rectangle.h">
       <Filter>Header Files\models\objects</Filter>
     </ClInclude>
@@ -169,6 +163,12 @@
     </ClInclude>
     <ClInclude Include="refraction_coefficients.h">
       <Filter>Header Files\constants</Filter>
+    </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>Header Files\models\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Header Files\models\structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

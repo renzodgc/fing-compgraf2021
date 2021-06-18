@@ -41,7 +41,7 @@ public:
 
     // Main methods
     bool create_current_directory();
-    bool save_result(Image* result);
+    bool save_result(Image* result, ImageIs type);
 };
 
 #endif

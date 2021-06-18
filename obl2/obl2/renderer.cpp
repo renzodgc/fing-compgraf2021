@@ -37,18 +37,28 @@ int main(int argc, char* argv[]) {
 			
 	// 3. Initiate ray tracing
 	Render& render_manager = Render::get_instance();	
-	Image* result = render_manager.ray_tracing();
-	cout << "3. Imagen generada correctamente" << endl;
+	Image* result = render_manager.ray_tracing(ImageIs::FullResult);
+	cout << "3. Imagen generada correctamente" << endl << endl;
 
 	// 4. Save result image
-	if (!story_manager.save_result(result)) {
+	if (!story_manager.save_result(result, ImageIs::FullResult)) {
 		cerr << "Error: La imagen resultante no pudo ser guardada" << endl << endl;
 		post_render();
 		cin.get();
 		return -1;
 	}
 	cout << "4. Imagen guardada correctamente" << endl;
-			
+	cout << "5. Generando imagenes auxiliares" << endl;
+	result = render_manager.ray_tracing(ImageIs::Ambient); story_manager.save_result(result, ImageIs::Ambient);
+	result = render_manager.ray_tracing(ImageIs::Diffuse); story_manager.save_result(result, ImageIs::Diffuse);
+	result = render_manager.ray_tracing(ImageIs::Specular); story_manager.save_result(result, ImageIs::Specular);
+	result = render_manager.ray_tracing(ImageIs::Reflection); story_manager.save_result(result, ImageIs::Reflection);
+	result = render_manager.ray_tracing(ImageIs::Transmission); story_manager.save_result(result, ImageIs::Transmission);
+
+	result = render_manager.ray_tracing(ImageIs::ColorAmbient); story_manager.save_result(result, ImageIs::ColorAmbient);
+	result = render_manager.ray_tracing(ImageIs::ColorDiffuse); story_manager.save_result(result, ImageIs::ColorDiffuse);
+	result = render_manager.ray_tracing(ImageIs::ColorSpecular); story_manager.save_result(result, ImageIs::ColorSpecular);
+	
 	post_render();
 	cin.get();
 	return 0;

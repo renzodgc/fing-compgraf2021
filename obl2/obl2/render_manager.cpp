@@ -19,49 +19,63 @@ Render& Render::get_instance() {
 	return instance;
 }
 
+// Main methods
+// -----------------------------------------------------------------------------------
+
 // http://www.fsz.bme.hu/~szirmay/ray.pdf
 // https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-overview/light-transport-ray-tracing-whitted
 // https://medium.com/nicos-softwaredev-projects/path-tracer-project-75d734e2789
 // Light rays will be traced backwards (contrary to their natural direction), that is from the eye back to the lightsources.
 Image* Render::ray_tracing(ImageIs type) {
-	Camera * camera = Scene::get_instance().get_camera();
 
+	// 1. Get camera origin and window
+	Camera * camera = Scene::get_instance().get_camera();
 	Vector * camera_eye = camera->get_position();
 	Vector * window_center = camera->get_window_position();
 
+	// 2. Initiate aux objects
 	Image * result = new Image();
 	Ray ray;
 	Vector origin, direction;
 	// Obtener coordenadas de centro de proyección y ventana de plano
 
-	cout << endl;
+	// 3. Main loop (pixel by pixel)
 	for (int x = 0; x < IMAGE_WIDTH; x++) { // For each sweep line
-		if (x % 64 == 0) {
-			cout << "Ray Tracing (" << x / 64 << "/" << IMAGE_WIDTH / 64 << ")" << endl;
-		}
 		for (int y = 0; y < IMAGE_HEIGHT; y++) { // For each pixel
+
+			// 3.1. Shoot ray from camera eye to window pixel
 			ray = Ray(
 				camera_eye->copy(), // origin
 				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - camera_eye->copy()) // direction (from eye to window's pixel)
 			);
-			// Check if the image is an auxiliary for coefficients
+
+			// 3.2. Check if the image is an auxiliary for coefficients and run trace
 			if(type == ImageIs::Ambient || type == ImageIs::Diffuse || type == ImageIs::Specular || type == ImageIs::Reflection || type == ImageIs::Transmission)
 				result->image[x][y] = coef_trace_rr(ray, type);
 			else
 				result->image[x][y] = trace_rr(ray, 1, type);
 		}
+
+		// Esto luego vemos, pero ahora atomiza
+		/*
+		* 	if (x % 64 == 0) {
+				cout << "Ray Tracing (" << x / 64 << "/" << IMAGE_WIDTH / 64 << ")" << endl;
+			}
+		*/
 	}
 
 	return result;
 }
 
-// Intersect ray with objects and compute colour based on refraction and reflection.
+// Intersect ray with objects and compute color based on refraction and reflection.
 // Color can be shadowed by th closest intersection intersection
-// Depth is the current depth in the tree of rays
 Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
+
+	// 1. Return background color in case ray tree's depth is more than the max allowed
 	if (depth > MAX_DEPTH) {
 		return BACKGROUND_COLOR;
 	}
+
 	// Determine if an intersection occurs, if so get the closest object that intersects
 	int intersection_index;
 	float distance_intersection;
@@ -86,6 +100,37 @@ Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
 	return BACKGROUND_COLOR;
 }
 
+Color Render::coef_trace_rr(Ray ray, ImageIs type) {
+	// Determine if an intersection occurs, if so get the closest object that intersects
+	int intersection_index;
+	float distance_intersection;
+	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
+
+	if (distance_intersection <= FOV && intersection_index != -1) {
+		vector <Object*> objects = Scene::get_instance().get_objects();
+		float coefficient;
+		switch (type) {
+		case ImageIs::Reflection:
+			coefficient = objects[intersection_index]->is_reflective();
+			break;
+		case ImageIs::Transmission:
+			coefficient = objects[intersection_index]->get_transmission_coef();
+			break;
+		case ImageIs::Ambient:
+			coefficient = objects[intersection_index]->get_ambience_coef();
+			break;
+		case ImageIs::Diffuse:
+			coefficient = objects[intersection_index]->get_diffuse_coef();
+			break;
+		case ImageIs::Specular:
+			coefficient = objects[intersection_index]->get_specular_coef();
+			break;
+		}
+		return scale_color(WHITE, coefficient);
+	}
+	return BLACK;
+}
+
 // Problemas del algoritmo (Whitted)
 // - El algoritmo es susceptible a problemas de presicion numerica
 // - Los rayos generados pueden intersectar los objetos de donde salen
@@ -97,6 +142,10 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 	color = add_colors(color, get_reflective_component(object, ray, intersection_point, norm, depth, type));
 	return color;
 }
+
+
+// Aux methods
+// -----------------------------------------------------------------------------------
 
 Color Render::get_ambient_component(Object* object, ImageIs type) {
 	// Apply Ambient Lightning (I_a * k_a * O_d)
@@ -273,33 +322,4 @@ tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray ray) {
 	return { intersection_indexes, intersected_distances };
 }
 
-Color Render::coef_trace_rr(Ray ray, ImageIs type) {
-	// Determine if an intersection occurs, if so get the closest object that intersects
-	int intersection_index;
-	float distance_intersection;
-	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
 
-	if (distance_intersection <= FOV && intersection_index != -1) {
-		vector <Object*> objects = Scene::get_instance().get_objects();
-		float coefficient;
-		switch (type) {
-		case ImageIs::Reflection:
-			coefficient = objects[intersection_index]->is_reflective();
-			break;
-		case ImageIs::Transmission:
-			coefficient = objects[intersection_index]->get_transmission_coef();
-			break;
-		case ImageIs::Ambient:
-			coefficient = objects[intersection_index]->get_ambience_coef();
-			break;
-		case ImageIs::Diffuse:
-			coefficient = objects[intersection_index]->get_diffuse_coef();
-			break;
-		case ImageIs::Specular:
-			coefficient = objects[intersection_index]->get_specular_coef();
-			break;
-		}
-		return scale_color(WHITE, coefficient);
-	}
-	return BLACK;
-}

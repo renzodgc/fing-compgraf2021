@@ -27,7 +27,6 @@
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
-
 using namespace std;
 
 // CLASS DEFINITION
@@ -36,15 +35,20 @@ using namespace std;
 class Render {
 
     private:
+
         // Singleton
         Render();
 
+        // Main methods
         Color trace_rr(Ray ray, int depth, ImageIs type);
+        Color coef_trace_rr(Ray ray, ImageIs type);
         Color shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth, ImageIs type);
+
+        // Aux methods
         tuple<int, float> get_closest_intersected_object(Ray ray); // index, distance
         tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray ray); // List of indexes, list of distances
-        Color coef_trace_rr(Ray ray, ImageIs type);
 
+        // Aux methods - intermediate results
         Color get_ambient_component(Object* object, ImageIs type);
         Color get_lights_component(Object* object, Ray ray, Vector intersection_point, Vector norm, ImageIs type);
         Color get_diffuse_component(Object* object, Ray ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray);
@@ -53,11 +57,13 @@ class Render {
         Color get_reflective_component(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth, ImageIs type);
 
     public:
+
         // Constructor and singleton method
         Render(Render const&) = delete;
         void operator=(Render const&) = delete;
         static Render& get_instance();
 
+        // Main methods
         Image* ray_tracing(ImageIs type);
 };
 

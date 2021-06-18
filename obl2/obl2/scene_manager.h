@@ -29,10 +29,11 @@ using namespace tinyxml2;
 class Scene {
 
     private:
+
         // Singleton
         Scene();
 
-        // Main objects
+        // Main properties
         Camera* camera;
         vector<Light*> lights;
         vector<Object*> objects;
@@ -47,6 +48,7 @@ class Scene {
         bool load_object(XMLElement* xmlObject);
 
     public:
+
         // Constructor and singleton method
         Scene(Scene const&) = delete;
         void operator=(Scene const&) = delete;

@@ -102,9 +102,6 @@
     <ClCompile Include="image.cpp">
       <Filter>Source Files\models\structures</Filter>
     </ClCompile>
-    <ClCompile Include="plane.cpp">
-      <Filter>Source Files\models\structures</Filter>
-    </ClCompile>
     <ClCompile Include="vector.cpp">
       <Filter>Source Files\models\structures</Filter>
     </ClCompile>
@@ -168,9 +165,6 @@
       <Filter>Header Files\constants</Filter>
     </ClInclude>
     <ClInclude Include="vector.h">
-      <Filter>Header Files\models\structures</Filter>
-    </ClInclude>
-    <ClInclude Include="plane.h">
       <Filter>Header Files\models\structures</Filter>
     </ClInclude>
     <ClInclude Include="image.h">

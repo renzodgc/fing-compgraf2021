@@ -18,6 +18,7 @@
 class Image {
 
 	public:
+
 		// Constructor
 		Image();
 		~Image();

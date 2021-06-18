@@ -14,7 +14,11 @@ using namespace std;
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Object::Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective) {
+Object::Object(unsigned int id, Vector* position, // Main properties
+	Color diffuse_color, Color specular_color, // Colors
+	float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
+	bool reflective) { // Flags
+
 	this->id = id;
 	this->position = position;
 	this->diffuse_color = diffuse_color;
@@ -30,50 +34,46 @@ Object::Object(unsigned int id, Vector* position, Color diffuse_color, Color spe
 // Getters & Setters
 // -----------------------------------------------------------------------------------
 
-ObjectIs Object::get_type() {
-	return type;
-}
-
+// Main properties
 unsigned int Object::get_id() {
 	return id;
 }
-
+ObjectIs Object::get_type() {
+	return type;
+}
 Vector* Object::get_position() {
 	return position;
 }
 
+// Colors
 Color Object::get_diffuse_color() {
 	return diffuse_color;
 }
-
 Color Object::get_specular_color() {
 	return specular_color;
 }
 
-bool Object::is_opaque() {
-	return transmission_coef == 1.f;
-}
-
+// Coefficients
 float Object::get_refraction_coef() {
 	return refraction_coef;
 }
-
 float Object::get_transmission_coef() {
 	return transmission_coef;
 }
-
 float Object::get_specular_coef() {
 	return specular_coef;
 }
-
 float Object::get_diffuse_coef() {
 	return diffuse_coef;
 }
-
 float Object::get_ambience_coef() {
 	return ambience_coef;
 }
 
+// Flags
+bool Object::is_opaque() {
+	return transmission_coef == 1.f;
+}
 bool Object::is_reflective() {
 	return reflective;
 }
@@ -83,7 +83,7 @@ bool Object::is_reflective() {
 
 ObjectIs Object::parse_object_type(string type) {
 	
-	ObjectIs result;
+	ObjectIs result = ObjectIs::Sphere;
 
 	if (type == "triangle_mesh") {
 		result = ObjectIs::TriangleMesh;

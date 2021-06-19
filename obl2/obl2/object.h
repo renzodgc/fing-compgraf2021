@@ -9,6 +9,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string>
+#include <vector>
 // Constants
 #include "colors.h"
 // Structures

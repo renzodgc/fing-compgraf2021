@@ -30,7 +30,9 @@ Rectangle::Rectangle(
 	this->width = width;
 	this->height = height;
 
-	this->get_vertexes();
+	// Rectangle aux calls
+	this->get_centers();
+	this->get_normals();
 }
 
 // Main methods
@@ -46,44 +48,113 @@ Rectangle::Rectangle(
 //		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Rectangle::intersect(Ray ray) {
 
-	// 1. Get vector between ray and rectangle (P - C)
-	Vector Q = ray.origin - this->position.copy();
-
-	// 2. Get quadratic equation parameters
-	float a = ray.direction.inner_product(ray.direction); // U^2 = 1.f
-	float b = 2 * ray.direction.inner_product(Q); // 2UQ
-	float c = Q.inner_product(Q) - this->width * this->width; // Q^2 - r^2
-	float d = b * b - 4 * a * c; // Quadratic equation b^2-4ac part
-
-	// 3. Solutions are complex, intersection does not occur
-	if (d < 0) {
-		return -1.f;
+	// For each face
+	for (size_t i = 0; i < this->faces; i++) {
+		float intersection_normal_ray = this->normals[i].inner_product(ray.direction);
+		if (intersection_normal_ray > 1e-6) {
+			Vector intersection_center_ray = this->centers[i] - ray.origin;
+			float distance = intersection_center_ray.inner_product(this->normals[i]) / intersection_normal_ray;
+			if (distance >= 0) {
+				return distance;
+			}
+		}
 	}
 
-	// 4. Get first solution (closest one)
-	float sol = (-b - sqrtf(d)) / (2 * a);
-	if (sol >= 0) return sol;
-
-	// 5. Get second solution (furthest one, returned if closest is behind ray (negative position))
-	sol = (-b + sqrtf(d)) / (2 * a);
-	if (sol >= 0) return sol;
-
-	// All "Intersections" occurred behind the ray
 	return -1.f;
 }
 
 
 Vector Rectangle::get_normal(Vector point) {
-	Vector normal = point - this->position;
-	normal.normalize();
-	return(normal);
+
+	// Check if point intersects with right face
+	if (point.x == this->centers[0].x) {
+		return this->normals[0];
+	} 
+	// Check if point intersects with left face
+	else if (point.x == this->centers[1].x) {
+		return this->normals[1];
+	} 
+	// Check if point intersects with top face
+	else if (point.y == this->centers[2].y) {
+		return this->normals[2];
+	}
+	// Check if point intersects with bottom face
+	else if (point.y == this->centers[3].y) {
+		return this->normals[3];
+	}
+	// Check if point intersects with back face
+	else if (point.z == this->centers[4].z) {
+		return this->normals[4];
+	}
+	// Check if point intersects with front face
+	else if (point.z == this->centers[5].z) {
+		return this->normals[5];
+	}
+
 }
 
 // Aux methods
 // -----------------------------------------------------------------------------------
 
-void Rectangle::get_vertexes() {
+void Rectangle::get_centers() {
 
-	//this->vertexes[0] = this->position;
+	float x = this->position.x;
+	float y = this->position.y;
+	float z = this->position.z;
 
+	// Right face
+	this->centers[0] = Vector(x + (this->width / 2), y, z);
+	// Left face
+	this->centers[1] = Vector(x - (this->width / 2), y, z);
+	// Top face
+	this->centers[2] = Vector(x, y + (this->height / 2), z);
+	// Bottom face
+	this->centers[3] = Vector(x, y - (this->height / 2), z);
+	// Back face
+	this->centers[4] = Vector(x, y, z + (this->length / 2));
+	// Front face
+	this->centers[5] = Vector(x, y, z - (this->length / 2));
+
+}
+
+void Rectangle::get_normals() {
+
+	Vector length, width, height;
+
+	// Get right face's normal
+	width = this->centers[0] + this->centers[4];
+	height = this->centers[0] + this->centers[2];
+	this->normals[0] = width.cross_product(height);
+
+	// Get left face's normal
+	width = this->centers[1] + this->centers[4];
+	height = this->centers[1] + this->centers[2];
+	this->normals[1] = width.cross_product(height);
+	
+	// Get top face's normal
+	width = this->centers[2] + this->centers[4];
+	length = this->centers[2] + this->centers[0];
+	this->normals[2] = width.cross_product(length);
+
+	// Get bottom face's normal
+	width = this->centers[3] + this->centers[4];
+	length = this->centers[3] + this->centers[0];
+	this->normals[3] = width.cross_product(length);
+	
+	// Get back face's normal
+	length = this->centers[4] + this->centers[0];
+	height = this->centers[4] + this->centers[2];
+	this->normals[4] = height.cross_product(length);
+	
+	// Get front face's normal
+	length = this->centers[5] + this->centers[0];
+	height = this->centers[5] + this->centers[2];
+	this->normals[5] = height.cross_product(length);
+
+	// Normalize each of them
+	for (size_t i = 0; i < this->faces; i++) {
+		this->normals[i].normalize();
+		this->normals[i].print();
+		cout << endl;
+	}
 }

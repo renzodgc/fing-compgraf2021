@@ -143,8 +143,41 @@ Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vect
 	return color;
 }
 
+// Aux methods - Intersection
+// -----------------------------------------------------------------------------------
 
-// Aux methods
+tuple<int, float> Render::get_closest_intersected_object(Ray ray) {
+	int intersection_index = -1;
+	float distance_intersection = FOV + 1;
+	float distance;
+	vector <Object*> objects = Scene::get_instance().get_objects();
+	for (size_t i = 0; i < objects.size(); i++) {
+		distance = objects[i]->intersect(ray);
+		if (distance != -1.f && distance < distance_intersection) {
+			distance_intersection = distance;
+			intersection_index = i;
+		}
+	}
+	return { intersection_index, distance_intersection };
+}
+
+tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray ray) {
+	vector<int> intersection_indexes;
+	vector<float> intersected_distances;
+	float distance;
+	vector <Object*> objects = Scene::get_instance().get_objects();
+	for (size_t i = 0; i < objects.size(); i++) {
+		distance = objects[i]->intersect(ray);
+		if (distance != -1.f && distance <= FOV) {
+			intersection_indexes.push_back((int)i);
+			intersected_distances.push_back(distance);
+		}
+	}
+	return { intersection_indexes, intersected_distances };
+}
+
+
+// Aux methods - Components
 // -----------------------------------------------------------------------------------
 
 Color Render::get_ambient_component(Object* object, ImageIs type) {
@@ -291,35 +324,3 @@ Color Render::get_reflective_component(Object* object, Ray ray, Vector intersect
 	}
 	return reflective_color;
 }
-
-tuple<int, float> Render::get_closest_intersected_object(Ray ray) {
-	int intersection_index = -1;
-	float distance_intersection = FOV + 1;
-	float distance;
-	vector <Object*> objects = Scene::get_instance().get_objects();
-	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(ray);
-		if (distance != -1.f && distance < distance_intersection) {
-			distance_intersection = distance;
-			intersection_index = i;
-		}
-	}
-	return { intersection_index, distance_intersection };
-}
-
-tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray ray) {
-	vector<int> intersection_indexes;
-	vector<float> intersected_distances;
-	float distance;
-	vector <Object*> objects = Scene::get_instance().get_objects();
-	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(ray);
-		if (distance != -1.f && distance <= FOV) {
-			intersection_indexes.push_back((int)i);
-			intersected_distances.push_back(distance);
-		}
-	}
-	return { intersection_indexes, intersected_distances };
-}
-
-

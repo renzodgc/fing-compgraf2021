@@ -105,6 +105,9 @@
     <ClCompile Include="vector.cpp">
       <Filter>Source Files\models\structures</Filter>
     </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>Source Files\models\structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scene_manager.h">
@@ -170,12 +173,15 @@
     <ClInclude Include="image.h">
       <Filter>Header Files\models\structures</Filter>
     </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>Header Files\models\structures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config.xml">
+    <Xml Include="config_3spheres.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="config_rectangle.xml">
+    <Xml Include="config.xml">
       <Filter>Resource Files</Filter>
     </Xml>
     <Xml Include="config_sphere.xml">

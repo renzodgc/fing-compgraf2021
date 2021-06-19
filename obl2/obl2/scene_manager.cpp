@@ -280,6 +280,51 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			));
 			this->object_counter++;
 			break;
+
+		case ObjectIs::Rectangle:
+
+			float length, width, height;
+			xmlObjectProperties->FirstChildElement("length")->QueryFloatText(&length);
+			xmlObjectProperties->FirstChildElement("width")->QueryFloatText(&width);
+			xmlObjectProperties->FirstChildElement("height")->QueryFloatText(&height);
+
+			this->objects.push_back(new Rectangle(
+				this->object_counter,
+				Vector(x, y, z),
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
+				length,
+				width,
+				height
+			));
+			this->object_counter++;
+			break;
+
+		case ObjectIs::TriangleMesh:
+
+			vector<Polygon*> polygons = load_mesh(xmlObjectProperties);
+
+			this->objects.push_back(new Mesh(
+				this->object_counter,
+				Vector(x, y, z),
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
+				polygons
+			));
+			this->object_counter++;
+			break;
 		}
 	}
 	else {
@@ -287,4 +332,48 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	}
 
 	return result;
+}
+
+vector<Polygon*> Scene::load_mesh(XMLElement* xmlObjectProperties) {
+
+	vector<Polygon*> result;
+
+	XMLElement* xmlPolygons = xmlObjectProperties->FirstChildElement("polygons");
+	if (xmlPolygons != NULL) {
+
+		XMLElement* xmlPolygon = xmlPolygons->FirstChildElement("polygon");
+		while (xmlPolygon) {
+			Polygon* polygon = load_polygon(xmlPolygon);
+			result.push_back(polygon);
+			xmlPolygon = xmlPolygon->NextSiblingElement("polygon");
+		}
+	}
+
+	return result;
+}
+
+Polygon* Scene::load_polygon(XMLElement* xmlPolygon) {
+
+	Vector vectors[3];
+	short counter = 0;
+
+	if (xmlPolygon != NULL) {
+
+		XMLElement* xmlVertex = xmlPolygon->FirstChildElement("vertex");
+		for (size_t i = 0; i < 3; i++) {
+			
+			// Read vertex values
+			float x, y, z;
+			xmlVertex->FirstChildElement("x")->QueryFloatText(&x);
+			xmlVertex->FirstChildElement("y")->QueryFloatText(&y);
+			xmlVertex->FirstChildElement("z")->QueryFloatText(&z);
+
+			// Create vector and go to next vertex
+			vectors[counter] = Vector(x, y, z);
+			counter++;
+			xmlVertex = xmlVertex->NextSiblingElement("vertex");
+		}
+	}
+
+	return new Polygon(vectors[0], vectors[1], vectors[2]);
 }

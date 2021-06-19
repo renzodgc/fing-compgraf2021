@@ -85,7 +85,7 @@ ObjectIs Object::parse_object_type(string type) {
 	
 	ObjectIs result = ObjectIs::Sphere;
 
-	if (type == "triangle_mesh") {
+	if (type == "mesh") {
 		result = ObjectIs::TriangleMesh;
 	} 
 	else if (type == "sphere") {

@@ -12,6 +12,8 @@
 #include "tinyxml2.h"
 // Constants
 #include "routes.h"
+// Structures
+#include "polygon.h"
 // Objects
 #include "camera.h"
 #include "light.h"
@@ -49,6 +51,8 @@ class Scene {
         bool load_camera(XMLElement* xmlCamera);
         bool load_light(XMLElement* xmlLight);
         bool load_object(XMLElement* xmlObject);
+        vector<Polygon*> load_mesh(XMLElement* xmlObject);
+        Polygon* load_polygon(XMLElement* xmlObject);
 
     public:
 

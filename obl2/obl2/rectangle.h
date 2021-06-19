@@ -15,10 +15,13 @@ class Rectangle : public Object {
     private:
 
         // Aux properties
-        Vector vertexes[8];
+        static const int faces = 6;
+        Vector centers[faces]; // right, left, top, bottom, back, front
+        Vector normals[faces]; // right, left, top, bottom, back, front
 
         // Aux methods
-        void get_vertexes();
+        void get_centers();
+        void get_normals();
 
     public:
 
@@ -40,4 +43,3 @@ class Rectangle : public Object {
 };
 
 #endif
-#pragma once

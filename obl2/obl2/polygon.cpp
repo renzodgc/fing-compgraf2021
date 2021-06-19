@@ -29,6 +29,8 @@ Vector Polygon::get_normal() {
 	Vector length = this->a - this->b;
 	Vector width = this->a - this->c;
 
-	// Get normal by cross product them
-	return length.cross_product(width);
+	// Get normal by cross product them and normalize it
+	Vector normal = length.cross_product(width);
+	normal.normalize();
+	return normal;
 }

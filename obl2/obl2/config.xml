@@ -59,18 +59,35 @@
 				<polygons>
 					<polygon>
 						<vertex>
-							<x>-250.0</x>
-							<y>250.0</y>
+							<x>-50.0</x>
+							<y>-50.0</y>
 							<z>500.0</z>
 						</vertex>
 						<vertex>
-							<x>250.0</x>
-							<y>250.0</y>
+							<x>50.0</x>
+							<y>50.0</y>
 							<z>500.0</z>
 						</vertex>
 						<vertex>
-							<x>-250.0</x>
-							<y>-250.0</y>
+							<x>-50.0</x>
+							<y>50.0</y>
+							<z>500.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-50.0</x>
+							<y>-50.0</y>
+							<z>500.0</z>
+						</vertex>
+						<vertex>
+							<x>50.0</x>
+							<y>-50.0</y>
+							<z>500.0</z>
+						</vertex>
+						<vertex>
+							<x>50.0</x>
+							<y>50.0</y>
 							<z>500.0</z>
 						</vertex>
 					</polygon>

@@ -15,18 +15,16 @@
 
 class Polygon {
 
-private:
+    public:
 
-    // Main properties
-    Vector a, b, c;
+        // Constructor
+        Polygon(Vector a, Vector b, Vector c);
 
-public:
+        // Main properties
+        Vector a, b, c;
 
-    // Constructor
-    Polygon(Vector a, Vector b, Vector c);
-
-    // Main methods
-    Vector get_normal();
+        // Main methods
+        Vector get_normal();
 };
 
 #endif

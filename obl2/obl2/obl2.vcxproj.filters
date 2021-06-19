@@ -90,9 +90,6 @@
     <ClCompile Include="sphere.cpp">
       <Filter>Source Files\models\objects</Filter>
     </ClCompile>
-    <ClCompile Include="rectangle.cpp">
-      <Filter>Source Files\models\objects</Filter>
-    </ClCompile>
     <ClCompile Include="cylinder.cpp">
       <Filter>Source Files\models\objects</Filter>
     </ClCompile>
@@ -152,9 +149,6 @@
     <ClInclude Include="ray.h">
       <Filter>Header Files\models</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle.h">
-      <Filter>Header Files\models\objects</Filter>
-    </ClInclude>
     <ClInclude Include="sphere.h">
       <Filter>Header Files\models\objects</Filter>
     </ClInclude>
@@ -178,13 +172,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config_3spheres.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
     <Xml Include="config.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="config_two_planes.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
     <Xml Include="config_sphere.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="config_meshes.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

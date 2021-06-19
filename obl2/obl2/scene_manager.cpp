@@ -281,31 +281,6 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			this->object_counter++;
 			break;
 
-		case ObjectIs::Rectangle:
-
-			float length, width, height;
-			xmlObjectProperties->FirstChildElement("length")->QueryFloatText(&length);
-			xmlObjectProperties->FirstChildElement("width")->QueryFloatText(&width);
-			xmlObjectProperties->FirstChildElement("height")->QueryFloatText(&height);
-
-			this->objects.push_back(new Rectangle(
-				this->object_counter,
-				Vector(x, y, z),
-				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
-				{ specular_r, specular_g, specular_b, specular_a },
-				refraction_coef,
-				transmission_coef,
-				specular_coef,
-				diffuse_coef,
-				ambience_coef,
-				reflective,
-				length,
-				width,
-				height
-			));
-			this->object_counter++;
-			break;
-
 		case ObjectIs::TriangleMesh:
 
 			vector<Polygon*> polygons = load_mesh(xmlObjectProperties);

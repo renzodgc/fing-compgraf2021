@@ -4,7 +4,7 @@
 		<position>
 			<x>0</x>
 			<y>0</y>
-			<z>-1000</z>
+			<z>-1024</z>
 		</position>
 		<window_position>
 			<x>0</x>
@@ -35,7 +35,7 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>210</z>
+				<z>500</z>
 			</position>
 			<diffuse_color>
 				<r>1</r>

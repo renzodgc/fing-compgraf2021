@@ -20,7 +20,7 @@
 // ENUMERATES
 // -----------------------------------------------------------------------------------
 
-enum class ObjectIs { TriangleMesh, Sphere, Cylinder, Rectangle };
+enum class ObjectIs { TriangleMesh, Sphere, Cylinder };
 
 // MAIN CLASS
 // -----------------------------------------------------------------------------------

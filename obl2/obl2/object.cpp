@@ -94,9 +94,6 @@ ObjectIs Object::parse_object_type(string type) {
 	else if (type == "cylinder") {
 		result = ObjectIs::Cylinder;
 	}
-	else if (type == "rectangle") {
-		result = ObjectIs::Rectangle;
-	}
 
 	return result;
 }

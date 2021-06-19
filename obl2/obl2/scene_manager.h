@@ -20,7 +20,6 @@
 #include "object.h"
 #include "sphere.h"
 #include "cylinder.h"
-#include "rectangle.h"
 #include "mesh.h"
 
 // NAMESPACE

@@ -12,10 +12,18 @@
 
 class Rectangle : public Object {
 
+    private:
+
+        // Aux properties
+        Vector vertexes[8];
+
+        // Aux methods
+        void get_vertexes();
+
     public:
 
         // Constructor
-        Rectangle(unsigned int id, Vector* position, // Main properties
+        Rectangle(unsigned int id, Vector position, // Main properties
             Color diffuse_color, Color specular_color, // Colors
             float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
             bool reflective, // Flags

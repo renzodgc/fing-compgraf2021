@@ -31,7 +31,7 @@ class Object {
         // Main properties
         unsigned int id;
         ObjectIs type;
-        Vector* position;
+        Vector position;
 
         // Colors
         Color diffuse_color;
@@ -50,13 +50,13 @@ class Object {
     public:
 
         // Constructor
-        Object(unsigned int id, Vector* position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective);
+        Object(unsigned int id, Vector position, Color diffuse_color, Color specular_color, float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, bool reflective);
         ~Object() {};
 
         // Getters & Setters - Main properties
         unsigned int get_id();
         ObjectIs get_type();
-        Vector* get_position();
+        Vector get_position();
         // Getters & Setters - Colors
         Color get_diffuse_color();
         Color get_specular_color();

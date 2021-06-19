@@ -15,7 +15,7 @@ using namespace std;
 // -----------------------------------------------------------------------------------
 
 Cylinder::Cylinder(
-	unsigned int id, Vector* position, // Main properties
+	unsigned int id, Vector position, // Main properties
 	Color diffuse_color, Color specular_color, // Colors
 	float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
 	bool reflective, // Flags
@@ -44,7 +44,7 @@ float Cylinder::intersect(Ray ray) {
 
 
 Vector Cylinder::get_normal(Vector point) {
-	Vector normal = point - *(this->position);
+	Vector normal = point - this->position;
 	normal.normalize();
 	return(normal);
 }

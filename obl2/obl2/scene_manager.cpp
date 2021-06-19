@@ -43,7 +43,7 @@ vector<Object*> Scene::get_objects() {
 bool Scene::load_scene() {
 
 	// 1. Scene's objects pre-initialization
-	this->camera = new Camera(new Vector(0, 0, 0), new Vector(0, 0, 0));
+	this->camera = new Camera(Vector(0, 0, 0), Vector(0, 0, 0));
 	this->lights = {};
 	this->objects = {};
 
@@ -112,7 +112,7 @@ bool Scene::load_camera(XMLElement* xmlCamera) {
 			xmlCameraPosition->FirstChildElement("x")->QueryFloatText(&x);
 			xmlCameraPosition->FirstChildElement("y")->QueryFloatText(&y);
 			xmlCameraPosition->FirstChildElement("z")->QueryFloatText(&z);
-			this->camera->set_position(new Vector(x, y, z));
+			this->camera->set_position(Vector(x, y, z));
 		}
 		else {
 			result = false;
@@ -124,7 +124,7 @@ bool Scene::load_camera(XMLElement* xmlCamera) {
 			xmlCameraWindowPosition->FirstChildElement("x")->QueryFloatText(&x);
 			xmlCameraWindowPosition->FirstChildElement("y")->QueryFloatText(&y);
 			xmlCameraWindowPosition->FirstChildElement("z")->QueryFloatText(&z);
-			this->camera->set_window_position(new Vector(x,y,z));
+			this->camera->set_window_position(Vector(x,y,z));
 		}
 		else {
 			result = false;
@@ -167,7 +167,7 @@ bool Scene::load_light(XMLElement* xmlLight) {
 			result = false;
 		}
 
-		this->lights.push_back(new Light(new Vector(x, y, z), { r,g,b,a }));
+		this->lights.push_back(new Light(Vector(x, y, z), { r,g,b,a }));
 	}
 	else {
 		result = false;
@@ -267,7 +267,7 @@ bool Scene::load_object(XMLElement* xmlObject) {
 
 			this->objects.push_back(new Sphere(
 				this->object_counter,
-				new Vector(x, y, z),
+				Vector(x, y, z),
 				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
 				{ specular_r, specular_g, specular_b, specular_a },
 				refraction_coef,

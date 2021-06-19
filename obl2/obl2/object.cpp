@@ -14,7 +14,7 @@ using namespace std;
 // Constructors / Destructors
 // -----------------------------------------------------------------------------------
 
-Object::Object(unsigned int id, Vector* position, // Main properties
+Object::Object(unsigned int id, Vector position, // Main properties
 	Color diffuse_color, Color specular_color, // Colors
 	float refraction_coef, float transmission_coef, float specular_coef, float diffuse_coef, float ambience_coef, // Coefficients
 	bool reflective) { // Flags
@@ -41,7 +41,7 @@ unsigned int Object::get_id() {
 ObjectIs Object::get_type() {
 	return type;
 }
-Vector* Object::get_position() {
+Vector Object::get_position() {
 	return position;
 }
 

@@ -29,9 +29,9 @@ Render& Render::get_instance() {
 Image* Render::ray_tracing(ImageIs type) {
 
 	// 1. Get camera origin and window
-	Camera * camera = Scene::get_instance().get_camera();
-	Vector * camera_eye = camera->get_position();
-	Vector * window_center = camera->get_window_position();
+	Camera* camera = Scene::get_instance().get_camera();
+	Vector camera_eye = camera->get_position();
+	Vector window_center = camera->get_window_position();
 
 	// 2. Initiate aux objects
 	Image * result = new Image();
@@ -45,8 +45,8 @@ Image* Render::ray_tracing(ImageIs type) {
 
 			// 3.1. Shoot ray from camera eye to window pixel
 			ray = Ray(
-				camera_eye->copy(), // origin
-				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - camera_eye->copy()) // direction (from eye to window's pixel)
+				camera_eye.copy(), // origin
+				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center.z) - camera_eye.copy()) // direction (from eye to window's pixel)
 			);
 
 			// 3.2. Check if the image is an auxiliary for coefficients and run trace
@@ -172,7 +172,7 @@ Color Render::get_lights_component(Object* object, Ray ray, Vector intersection_
 			// Cast a Ray from the intersection_point to the light source. This ray is a straight line.
 			Ray shadow_ray = Ray(
 				intersection_point.copy(), // origin
-				(lights[i]->get_position()->copy() - intersection_point.copy()) // direction (from eye to window's pixel)
+				(lights[i]->get_position().copy() - intersection_point.copy()) // direction (from eye to window's pixel)
 			);
 			// If no objects stands it applies directly
 
@@ -182,7 +182,7 @@ Color Render::get_lights_component(Object* object, Ray ray, Vector intersection_
 				// Check if an object stands between the intersection point and the light source.
 				vector <Object*> objects = Scene::get_instance().get_objects();
 				tie(intersection_indexes, intersected_distances) = get_all_intersected_objects(ray);
-				distance_from_light = intersection_point.euclid_distance(*(lights[i]->get_position()));
+				distance_from_light = intersection_point.euclid_distance(lights[i]->get_position());
 
 				if (!intersection_indexes.empty()) {
 					// At least one object is in the same direction as the light. Shadow may be cast

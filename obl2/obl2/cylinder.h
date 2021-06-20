@@ -26,7 +26,7 @@ public:
 
     // Main methods
     float intersect(Ray ray); // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
-    Vector get_normal(Vector point, Ray ray);
+    Vector get_normal(Vector point);
 };
 
 #endif

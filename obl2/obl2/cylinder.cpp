@@ -64,7 +64,7 @@ float Cylinder::intersect(Ray ray) {;
 	return -1.f;
 }
 
-Vector Cylinder::get_normal(Vector point, Ray ray) {
+Vector Cylinder::get_normal(Vector point) {
 	Vector normal = Vector(point.x - this->position.x, 0, point.z - this->position.z);
 	normal.normalize();
 	return normal;

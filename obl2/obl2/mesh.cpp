@@ -84,12 +84,12 @@ float Mesh::intersect(Ray ray) {
 	return -1.f;
 }
 
-Vector Mesh::get_normal(Vector point, Ray ray) {
+Vector Mesh::get_normal(Vector point) {
 	
 	for (size_t i = 0; i < this->polygons.size(); i++) {
 
 		Polygon* polygon = this->polygons[i];
-		Vector normal = polygon->get_normal(ray);
+		Vector normal = polygon->get_normal();
 
 		// Get polygon's edges
 		Vector edge0 = polygon->b - polygon->a;

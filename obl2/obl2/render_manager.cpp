@@ -92,7 +92,7 @@ Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
 			objects[intersection_index], // intersected object
 			ray, // ray that intersects
 			intersection, // point of intersection
-			objects[intersection_index]->get_normal(intersection, ray), // normal of intersection
+			objects[intersection_index]->get_normal(intersection), // normal of intersection
 			depth, // current depth
 			type // image type
 		);

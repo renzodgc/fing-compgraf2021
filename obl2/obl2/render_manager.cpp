@@ -269,7 +269,7 @@ Color Render::get_diffuse_component(Object* object, Ray* ray, Vector intersectio
 
 Color Render::get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
 	Color specular_component = BLACK;
-	// Specular Component = k_s * O_s * (R_i * V)^n
+	// Specular Component = k_s * O_s * (R * V)^n
 	if (type == ImageIs::FullResult || type == ImageIs::ColorSpecular) {
 		
 		Vector R_vector = norm.scalar_mult(2).scalar_mult( // 2N *

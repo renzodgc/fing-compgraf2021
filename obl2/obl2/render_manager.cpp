@@ -35,8 +35,9 @@ Image* Render::ray_tracing(ImageIs type) {
 
 	// 2. Initiate aux objects
 	Image * result = new Image();
-	Ray ray;
+	Ray* ray;
 	Vector origin, direction;
+	int object_lenght = Scene::get_instance().get_objects().size();
 	// Obtener coordenadas de centro de proyección y ventana de plano
 
 	// 3. Main loop (pixel by pixel)
@@ -44,7 +45,7 @@ Image* Render::ray_tracing(ImageIs type) {
 		for (int y = 0; y < IMAGE_HEIGHT; y++) { // For each pixel
 
 			// 3.1. Shoot ray from camera eye to window pixel
-			ray = Ray(
+			ray = new Ray(
 				camera_eye->copy(), // origin
 				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - camera_eye->copy()) // direction (from eye to window's pixel)
 			);
@@ -54,6 +55,8 @@ Image* Render::ray_tracing(ImageIs type) {
 				result->image[x][y] = coef_trace_rr(ray, type);
 			else
 				result->image[x][y] = trace_rr(ray, 1, type);
+
+			delete ray;
 		}
 
 		// Esto luego vemos, pero ahora atomiza
@@ -69,7 +72,7 @@ Image* Render::ray_tracing(ImageIs type) {
 
 // Intersect ray with objects and compute color based on refraction and reflection.
 // Color can be shadowed by th closest intersection intersection
-Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
+Color Render::trace_rr(Ray* ray, int depth, ImageIs type) {
 
 	// 1. Return background color in case ray tree's depth is more than the max allowed
 	if (depth > MAX_DEPTH) {
@@ -80,13 +83,13 @@ Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
 	int intersection_index;
 	float distance_intersection;
 	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
-	
+
 	if (distance_intersection > FOV) {
 		return BACKGROUND_COLOR;
 	}
 	if(intersection_index != -1)  {
 		vector <Object*> objects = Scene::get_instance().get_objects();
-		Vector intersection = ray.origin + (ray.direction * distance_intersection);
+		Vector intersection = ray->origin + (ray->direction * distance_intersection);
 
 		return shadow_rr(
 			objects[intersection_index], // intersected object
@@ -100,15 +103,15 @@ Color Render::trace_rr(Ray ray, int depth, ImageIs type) {
 	return BACKGROUND_COLOR;
 }
 
-Color Render::coef_trace_rr(Ray ray, ImageIs type) {
+Color Render::coef_trace_rr(Ray* ray, ImageIs type) {
 	// Determine if an intersection occurs, if so get the closest object that intersects
 	int intersection_index;
 	float distance_intersection;
+	float coefficient = 0.f;
 	tie(intersection_index, distance_intersection) = get_closest_intersected_object(ray);
 
 	if (distance_intersection <= FOV && intersection_index != -1) {
 		vector <Object*> objects = Scene::get_instance().get_objects();
-		float coefficient;
 		switch (type) {
 		case ImageIs::Reflection:
 			coefficient = objects[intersection_index]->is_reflective();
@@ -135,7 +138,7 @@ Color Render::coef_trace_rr(Ray ray, ImageIs type) {
 // - El algoritmo es susceptible a problemas de presicion numerica
 // - Los rayos generados pueden intersectar los objetos de donde salen
 // - Los rayos de luz L no se refractan en su trayectoria hacia la luz
-Color Render::shadow_rr(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
+Color Render::shadow_rr(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
 	Color color = get_ambient_component(object, type);
 	color = add_colors(color, get_lights_component(object, ray, intersection_point, norm, type));
 	color = add_colors(color, get_transmission_component(object, ray, intersection_point, norm, depth, type));
@@ -155,12 +158,13 @@ Color Render::get_ambient_component(Object* object, ImageIs type) {
 		return BLACK;
 }
 
-Color Render::get_lights_component(Object* object, Ray ray, Vector intersection_point, Vector norm, ImageIs type) {
+Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type) {
 	Color light_component = BLACK;
 	Color lights_component = BLACK;
 	float transmission_coef_light, distance_from_light;
 	vector<int> intersection_indexes;
 	vector<float> intersected_distances;
+	int object_lenght = Scene::get_instance().get_objects().size();
 
 	// Apply Shadow Lightning (Sum for every light)
 	if (type == ImageIs::FullResult || type == ImageIs::ColorDiffuse || type == ImageIs::ColorSpecular) {
@@ -189,8 +193,9 @@ Color Render::get_lights_component(Object* object, Ray ray, Vector intersection_
 					for (size_t i = 0; i < intersection_indexes.size(); i++) {
 						if (intersected_distances[i] < distance_from_light) {
 							// Object stands between the surface and the source of light.
-							// Substract its transmission coefficient accounting for the light it obscures
-							transmission_coef_light -= objects[intersection_indexes[i]]->get_transmission_coef();
+							// Substract from the transmission coefficient accounting for the light it obscures
+							// Convert transmission coefficient [0,1] (opaque, translucid) to [1,0] (translucid, opaque) by using f(x) = -x + 1
+							transmission_coef_light -= (-objects[intersection_indexes[i]]->get_transmission_coef() + 1);
 						} // Else ignore object
 					}
 					transmission_coef_light = min(1.f, max(0.f, transmission_coef_light));
@@ -222,7 +227,7 @@ Color Render::get_lights_component(Object* object, Ray ray, Vector intersection_
 	return lights_component;
 }
 
-Color Render::get_diffuse_component(Object* object, Ray ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
+Color Render::get_diffuse_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
 	Color diffuse_component = BLACK;
 	// Diffuse Component = k_d * O_d * (N * L_i)
 	if (type == ImageIs::FullResult || type == ImageIs::ColorDiffuse) {
@@ -237,13 +242,13 @@ Color Render::get_diffuse_component(Object* object, Ray ray, Vector intersection
 	return diffuse_component;
 }
 
-Color Render::get_specular_component(Object* object, Ray ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
+Color Render::get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
 	Color specular_component = BLACK;
 	// Specular Component = k_s * O_s * (R_i * V)^n
 	if (type == ImageIs::FullResult || type == ImageIs::ColorSpecular) {
 		// TODO: https://www.notion.so/Componente-Especular-Phong-3cdecb82b099488ab9b38fc0b1d85b92
 		// Mirar PPTs de Iluminacion local
-		Vector blinn = ((shadow_ray.direction + (ray.direction * -1.f)) / 2); // TODO: Revisar (al arreglar el componente especular)
+		Vector blinn = ((shadow_ray.direction + (ray->direction * -1.f)) / 2); // TODO: Revisar (al arreglar el componente especular)
 		blinn.normalize();
 		/*specular_component = scale_color(
 			multiply_colors(lights[i]->get_color(), object->get_specular_color()),
@@ -255,26 +260,60 @@ Color Render::get_specular_component(Object* object, Ray ray, Vector intersectio
 	return specular_component;
 }
 
-Color Render::get_transmission_component(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
+// Reference: https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
+// https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/adding-reflection-and-refraction
+// http://web.cse.ohio-state.edu/~shen.94/681/Site/Slides_files/reflection_refraction.pdf
+Color Render::get_transmission_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
 	Color refractive_color = BLACK;
-	// TODO: https://www.notion.so/Refracci-n-Transmisi-n-2f95446e295a410285aa0adca7adfc8f
-	// Transmission/Refraction component (k_t * I_t)
 	if (type == ImageIs::FullResult && !object->is_opaque()) {
-		// Get Refraction Angle (Snell Law)
+		float cosi = min(1.f, max(-1.f, ray->direction.inner_product(norm))); // Cosine of the intersection before refraction
+		vector <Object*> objects = Scene::get_instance().get_objects();
+		float etai = VACUUM; // Medium before refraction
+		float etat = VACUUM; // Medium after refraction
+		if (cosi <= 0) {
+			// Incident and normal have opposite directions, so the ray is outside the material.
+			cosi = -cosi; // Ray is outside the surface, invert it so cos(thetha) is positive
+			if (ray->refraction_stack.empty()) {
+				etai = VACUUM;
+			} else {
+				etai = objects[ray->refraction_stack.top()]->get_refraction_coef();
+			}
+			etat = object->get_refraction_coef();
+			ray->refraction_stack.push(object->get_id());
+		}
+		else { // ray->refraction_stack.top() == object->get_id()
+			// Incident and normal have the same direction, ray is inside the material.
+			norm = -norm; // Ray is inside the surface, cos(thetha) is already positive. But norm's direction needs to be reversed
+			etai = object->get_refraction_coef();
+			ray->refraction_stack.pop();
+			if (ray->refraction_stack.empty()) {
+				etat = VACUUM;
+			} else {
+				etat = objects[ray->refraction_stack.top()]->get_refraction_coef();
+			}
+		}
+		float eta = etai / etat;
 
-		// if(no ocurre reflexion interna total) {
-			/*Ray refractive_ray = Ray(
-				intersection_point.copy(), // origin
+		//float sint = eta * sqrtf(max(0.f, 1.f - cosi * cosi));
+		float cost = 1.f - pow(eta, 2.f) * (1.f - pow(cosi, 2.f));
+		if (cost >= 0.f) {
+			// Refraction occurs
+			ray->origin = intersection_point;
+			Vector refraction_direction = (ray->direction * eta) + (norm * (eta * cosi - sqrtf(cost)));
+			refraction_direction.normalize();
+			ray->direction = refraction_direction;
 
-			);*/ // Inverse direction as refraction refraccion desde punto(inverse direction of reflaction)
-			// refractive_color =  trace_rr(refractive_ray, depth + 1)
-			// refractive_color = scale_color(refractive_color, object->get_transmission_coef());
-		// }
+			ray->origin = ray->origin - (norm * EPSILON);
+			refractive_color = trace_rr(ray, depth + 1, type);
+			// Transmission/Refraction component (k_t * I_t)
+			refractive_color = scale_color(refractive_color, object->get_transmission_coef());
+		} // If k < 0. Total internal reflection occurs
 	}
 	return refractive_color;
 }
 
-Color Render::get_reflective_component(Object* object, Ray ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
+Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
+	ray->origin = ray->origin + (norm * EPSILON);
 	Color reflective_color = BLACK;
 	// TODO: https://www.notion.so/Reflexi-n-b50caf8c3d544cfa8234cd7b1c55736a
 	// Reflective component (k_t * I_t)
@@ -285,6 +324,12 @@ Color Render::get_reflective_component(Object* object, Ray ray, Vector intersect
 			norm * ((ray.direction * -1.f) * norm) * 2 + ray.direction // 2(V * n) * n - V; V = -ray
 		); // rayo en la direccion de refleccion desde el punto (inverse direction of reflection)
 
+		Returns the reflection of a vector on a normal.
+		inline Vector reflect(Vector i, Vector n)
+		{
+			return i - n * (2 * (i * n));
+		}
+
 		reflective_color = trace_rr(reflective_ray, depth + 1);
 		reflective_color = scale_color(reflective_color, object->get_specular_coef());
 		*/
@@ -292,13 +337,13 @@ Color Render::get_reflective_component(Object* object, Ray ray, Vector intersect
 	return reflective_color;
 }
 
-tuple<int, float> Render::get_closest_intersected_object(Ray ray) {
+tuple<int, float> Render::get_closest_intersected_object(Ray* ray) {
 	int intersection_index = -1;
 	float distance_intersection = FOV + 1;
 	float distance;
 	vector <Object*> objects = Scene::get_instance().get_objects();
 	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(ray);
+		distance = objects[i]->intersect(*ray);
 		if (distance != -1.f && distance < distance_intersection) {
 			distance_intersection = distance;
 			intersection_index = i;
@@ -307,13 +352,13 @@ tuple<int, float> Render::get_closest_intersected_object(Ray ray) {
 	return { intersection_index, distance_intersection };
 }
 
-tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray ray) {
+tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray* ray) {
 	vector<int> intersection_indexes;
 	vector<float> intersected_distances;
 	float distance;
 	vector <Object*> objects = Scene::get_instance().get_objects();
 	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(ray);
+		distance = objects[i]->intersect(*ray);
 		if (distance != -1.f && distance <= FOV) {
 			intersection_indexes.push_back((int)i);
 			intersected_distances.push_back(distance);

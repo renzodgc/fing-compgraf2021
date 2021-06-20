@@ -28,6 +28,6 @@ const Color DARK_GREY = { 0.1, 0.1, 0.1, 1. }; // RGBA
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const Color BACKGROUND_COLOR = BLACK;
-const Color AMBIENT_LIGHTING = LIGHT_GREY;
+const Color AMBIENT_LIGHTING = GREY;
 
 #endif

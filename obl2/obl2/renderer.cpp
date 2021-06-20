@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 	}
 	cout << "4. Imagen guardada correctamente" << endl;
 
-	/*
+
 	// 5. Run ray tracing to generate intermediate results
 	cout << "5. Generando resultados intermedios:" << endl;
 	// Coefficient results
@@ -70,7 +70,6 @@ int main(int argc, char* argv[]) {
 	cout << "    5.7. Color difuso" << endl;
 	result = render_manager.ray_tracing(ImageIs::ColorSpecular); story_manager.save_result(result, ImageIs::ColorSpecular);
 	cout << "    5.8. Color especular" << endl;
-	*/
 
 	post_render();
 	cin.get();

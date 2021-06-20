@@ -18,8 +18,6 @@ Ray::Ray(Vector origin, Vector direction) {
 	this->origin = origin;
 	direction.normalize();
 	this->direction = direction;
-
-	// TODO: (Refraction) Initialize travelled_objects with value 0 and length of scenario_objects
 }
 
 // Aux methods

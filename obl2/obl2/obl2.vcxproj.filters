@@ -184,6 +184,9 @@
     <Xml Include="config.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="config_3spheres_refraction.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
     <Xml Include="config_3spheres.xml">
       <Filter>Resource Files</Filter>
     </Xml>

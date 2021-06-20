@@ -72,7 +72,7 @@ float Object::get_ambience_coef() {
 
 // Flags
 bool Object::is_opaque() {
-	return transmission_coef == 1.f;
+	return transmission_coef == 0.f;
 }
 bool Object::is_reflective() {
 	return reflective;

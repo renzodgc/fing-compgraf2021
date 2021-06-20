@@ -73,7 +73,7 @@ class Object {
 
         // Main abstract methods
         virtual float intersect(Ray ray) { return -1.f; }; // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
-        virtual Vector get_normal(Vector point) { return Vector(); };
+        virtual Vector get_normal(Vector point, Ray ray) { return Vector(); };
 
         // Aux static methods
         static ObjectIs parse_object_type(std::string type);

@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config_3spheres.xml" />
+    <Xml Include="config_3spheres_reflection.xml" />
     <Xml Include="config_3spheres_refraction.xml" />
     <Xml Include="config_two_planes.xml" />
     <Xml Include="config_cylinder.xml" />

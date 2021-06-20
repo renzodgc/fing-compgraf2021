@@ -58,13 +58,6 @@ Image* Render::ray_tracing(ImageIs type) {
 
 			delete ray;
 		}
-
-		// Esto luego vemos, pero ahora atomiza
-		/*
-		* 	if (x % 64 == 0) {
-				cout << "Ray Tracing (" << x / 64 << "/" << IMAGE_WIDTH / 64 << ")" << endl;
-			}
-		*/
 	}
 
 	return result;
@@ -95,7 +88,7 @@ Color Render::trace_rr(Ray* ray, int depth, ImageIs type) {
 			objects[intersection_index], // intersected object
 			ray, // ray that intersects
 			intersection, // point of intersection
-			objects[intersection_index]->get_normal(intersection), // normal of intersection
+			objects[intersection_index]->get_normal(intersection, *ray), // normal of intersection
 			depth, // current depth
 			type // image type
 		);
@@ -320,11 +313,17 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 			// Incident and normal have the same direction, ray is inside the material.
 			norm = -norm; // Ray is inside the surface, cos(thetha) is already positive. But norm's direction needs to be reversed
 			etai = object->get_refraction_coef();
-			ray->refraction_stack.pop();
 			if (ray->refraction_stack.empty()) {
 				etat = VACUUM;
 			} else {
-				etat = objects[ray->refraction_stack.top()]->get_refraction_coef();
+				ray->refraction_stack.pop();
+				if (ray->refraction_stack.empty()) {
+					etat = VACUUM;
+				}
+				else {
+					etat = objects[ray->refraction_stack.top()]->get_refraction_coef();
+				}
+				
 			}
 		}
 		// Get cosine of reflection angle
@@ -347,9 +346,7 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 }
 
 Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
-	ray->origin = ray->origin + (norm * EPSILON);
 	Color reflective_color = BLACK;
-	// TODO: https://www.notion.so/Reflexi-n-b50caf8c3d544cfa8234cd7b1c55736a
 	// Reflective component (k_t * I_t)
 	if (type == ImageIs::FullResult && object->is_reflective()) {
 		// TODO: Verificar que la direccion de reflexion sea la simetrica al rayo anterior respecto a la normal
@@ -357,16 +354,13 @@ Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersec
 			intersection_point.copy(), // origin
 			norm * ((ray.direction * -1.f) * norm) * 2 + ray.direction // 2(V * n) * n - V; V = -ray
 		); // rayo en la direccion de refleccion desde el punto (inverse direction of reflection)
-
-		Returns the reflection of a vector on a normal.
-		inline Vector reflect(Vector i, Vector n)
-		{
-			return i - n * (2 * (i * n));
-		}
-
-		reflective_color = trace_rr(reflective_ray, depth + 1);
-		reflective_color = scale_color(reflective_color, object->get_specular_coef());
 		*/
+		ray->origin = intersection_point + (norm * EPSILON);
+		// Reflect the ray's direction symetrically in regards to the norm.
+		ray->direction = ray->direction - (norm * (2 * (ray->direction.inner_product(norm)))); // I - 2N(N . I)
+
+		reflective_color = trace_rr(ray, depth + 1, type);
+		reflective_color = scale_color(reflective_color, object->get_specular_coef());
 	}
 	return reflective_color;
 }

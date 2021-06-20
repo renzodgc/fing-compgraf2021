@@ -109,7 +109,7 @@ void Vector::set(float x, float y, float z) {
 // -----------------------------------------------------------------------------------
 
 float Vector::magnitude() {
-	return((float)sqrt(x * x + y * y + z * z));
+	return((float)sqrtf(x * x + y * y + z * z));
 }
 
 void Vector::normalize() {

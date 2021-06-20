@@ -17,8 +17,8 @@
 		<light>
 			<position>
 				<x>0</x>
-				<y>400</y>
-				<z>341</z>
+				<y>450</y>
+				<z>20</z>
 			</position>
 			<color>
 				<r>1</r>
@@ -30,7 +30,7 @@
 		<light>
 			<position>
 				<x>0</x>
-				<y>400</y>
+				<y>450</y>
 				<z>682</z>
 			</position>
 			<color>
@@ -318,7 +318,7 @@
 			</position>
 			<diffuse_color>
 				<r>0</r>
-				<g>1</g>
+				<g>0.6</g>
 				<b>0</b>
 				<a>1</a>
 			</diffuse_color>
@@ -591,8 +591,8 @@
 			</position>
 			<diffuse_color>
 				<r>1</r>
-				<g>0.8</g>
-				<b>0.1</b>
+				<g>0.714</g>
+				<b>0.757</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -602,11 +602,11 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1</refraction_coef>
-				<transmission_coef>0</transmission_coef>
-				<specular_coef>1</specular_coef>
+				<refraction_coef>1.33</refraction_coef>
+				<transmission_coef>0.9</transmission_coef>
+				<specular_coef>0.3</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
-				<ambience_coef>1</ambience_coef>
+				<ambience_coef>0.8</ambience_coef>
 				<reflective>false</reflective>
 				<radius>128.0</radius>
 			</properties>
@@ -633,8 +633,8 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1</refraction_coef>
-				<transmission_coef>0</transmission_coef>
+				<refraction_coef>1.57</refraction_coef>
+				<transmission_coef>0.8</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
@@ -653,9 +653,9 @@
 				<z>640</z>
 			</position>
 			<diffuse_color>
-				<r>0.8</r>
-				<g>0.3</g>
-				<b>0.5</b>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -668,9 +668,9 @@
 				<refraction_coef>1</refraction_coef>
 				<transmission_coef>0</transmission_coef>
 				<specular_coef>1</specular_coef>
-				<diffuse_coef>1</diffuse_coef>
-				<ambience_coef>1</ambience_coef>
-				<reflective>false</reflective>
+				<diffuse_coef>0.3</diffuse_coef>
+				<ambience_coef>0.3</ambience_coef>
+				<reflective>true</reflective>
 				<radius>64.0</radius>
 			</properties>
 		</object>

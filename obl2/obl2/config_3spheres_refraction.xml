@@ -63,7 +63,7 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1.13</refraction_coef>
+				<refraction_coef>1</refraction_coef>
 				<transmission_coef>0.8</transmission_coef>
 				<specular_coef>0</specular_coef>
 				<diffuse_coef>0</diffuse_coef>
@@ -82,7 +82,7 @@
 			<diffuse_color>
 				<r>1</r>
 				<g>1</g>
-				<b>0</b>
+				<b>1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -92,11 +92,11 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1.33</refraction_coef>
-				<transmission_coef>0.5</transmission_coef>
-				<specular_coef>1</specular_coef>
-				<diffuse_coef>0.5</diffuse_coef>
-				<ambience_coef>1</ambience_coef>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0.8</transmission_coef>
+				<specular_coef>0</specular_coef>
+				<diffuse_coef>0</diffuse_coef>
+				<ambience_coef>0.5</ambience_coef>
 				<reflective>false</reflective>
 				<radius>100.0</radius>
 			</properties>

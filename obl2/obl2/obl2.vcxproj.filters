@@ -193,5 +193,8 @@
     <Xml Include="config_2cylinders.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="config_3spheres_reflection.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

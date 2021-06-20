@@ -34,3 +34,17 @@ Vector Polygon::get_normal() {
 	normal.normalize();
 	return normal;
 }
+
+Vector Polygon::get_normal(Vector direction) {
+
+	// Get polygon's sides as vectors
+	Vector length = this->a - this->b;
+	Vector width = this->a - this->c;
+
+	// Get normal by cross product them and normalize it
+	Vector normal = length.cross_product(width);
+	//if (normal.inner_product(direction) >= 0)
+	//	normal = -normal;
+	normal.normalize();
+	return normal;
+}

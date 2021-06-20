@@ -43,7 +43,7 @@ vector<Object*> Scene::get_objects() {
 bool Scene::load_scene() {
 
 	// 1. Scene's objects pre-initialization
-	this->camera = new Camera(new Vector(0, 0, 0), new Vector(0, 0, 0));
+	this->camera = new Camera(Vector(0, 0, 0), Vector(0, 0, 0));
 	this->lights = {};
 	this->objects = {};
 
@@ -112,7 +112,7 @@ bool Scene::load_camera(XMLElement* xmlCamera) {
 			xmlCameraPosition->FirstChildElement("x")->QueryFloatText(&x);
 			xmlCameraPosition->FirstChildElement("y")->QueryFloatText(&y);
 			xmlCameraPosition->FirstChildElement("z")->QueryFloatText(&z);
-			this->camera->set_position(new Vector(x, y, z));
+			this->camera->set_position(Vector(x, y, z));
 		}
 		else {
 			result = false;
@@ -124,7 +124,7 @@ bool Scene::load_camera(XMLElement* xmlCamera) {
 			xmlCameraWindowPosition->FirstChildElement("x")->QueryFloatText(&x);
 			xmlCameraWindowPosition->FirstChildElement("y")->QueryFloatText(&y);
 			xmlCameraWindowPosition->FirstChildElement("z")->QueryFloatText(&z);
-			this->camera->set_window_position(new Vector(x,y,z));
+			this->camera->set_window_position(Vector(x,y,z));
 		}
 		else {
 			result = false;
@@ -167,7 +167,7 @@ bool Scene::load_light(XMLElement* xmlLight) {
 			result = false;
 		}
 
-		this->lights.push_back(new Light(new Vector(x, y, z), { r,g,b,a }));
+		this->lights.push_back(new Light(Vector(x, y, z), { r,g,b,a }));
 	}
 	else {
 		result = false;
@@ -259,15 +259,16 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			result = false;
 		}
 
+		float radius, height;
+
 		switch (type) {
 		case ObjectIs::Sphere:
 
-			float radius;
 			xmlObjectProperties->FirstChildElement("radius")->QueryFloatText(&radius);
 
 			this->objects.push_back(new Sphere(
 				this->object_counter,
-				new Vector(x, y, z),
+				Vector(x, y, z),
 				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
 				{ specular_r, specular_g, specular_b, specular_a },
 				refraction_coef,
@@ -280,6 +281,48 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			));
 			this->object_counter++;
 			break;
+
+		case ObjectIs::Cylinder:
+
+			xmlObjectProperties->FirstChildElement("radius")->QueryFloatText(&radius);
+			xmlObjectProperties->FirstChildElement("height")->QueryFloatText(&height);
+
+			this->objects.push_back(new Cylinder(
+				this->object_counter,
+				Vector(x, y, z),
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
+				radius,
+				height
+			));
+			this->object_counter++;
+			break;
+
+		case ObjectIs::TriangleMesh:
+
+			vector<Polygon*> polygons = load_mesh(xmlObjectProperties);
+
+			this->objects.push_back(new Mesh(
+				this->object_counter,
+				Vector(x, y, z),
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
+				polygons
+			));
+			this->object_counter++;
+			break;
 		}
 	}
 	else {
@@ -287,4 +330,48 @@ bool Scene::load_object(XMLElement* xmlObject) {
 	}
 
 	return result;
+}
+
+vector<Polygon*> Scene::load_mesh(XMLElement* xmlObjectProperties) {
+
+	vector<Polygon*> result;
+
+	XMLElement* xmlPolygons = xmlObjectProperties->FirstChildElement("polygons");
+	if (xmlPolygons != NULL) {
+
+		XMLElement* xmlPolygon = xmlPolygons->FirstChildElement("polygon");
+		while (xmlPolygon) {
+			Polygon* polygon = load_polygon(xmlPolygon);
+			result.push_back(polygon);
+			xmlPolygon = xmlPolygon->NextSiblingElement("polygon");
+		}
+	}
+
+	return result;
+}
+
+Polygon* Scene::load_polygon(XMLElement* xmlPolygon) {
+
+	Vector vectors[3];
+	short counter = 0;
+
+	if (xmlPolygon != NULL) {
+
+		XMLElement* xmlVertex = xmlPolygon->FirstChildElement("vertex");
+		for (size_t i = 0; i < 3; i++) {
+			
+			// Read vertex values
+			float x, y, z;
+			xmlVertex->FirstChildElement("x")->QueryFloatText(&x);
+			xmlVertex->FirstChildElement("y")->QueryFloatText(&y);
+			xmlVertex->FirstChildElement("z")->QueryFloatText(&z);
+
+			// Create vector and go to next vertex
+			vectors[counter] = Vector(x, y, z);
+			counter++;
+			xmlVertex = xmlVertex->NextSiblingElement("vertex");
+		}
+	}
+
+	return new Polygon(vectors[0], vectors[1], vectors[2]);
 }

@@ -15,6 +15,7 @@
 #include "parameters.h"
 // Structures
 #include "image.h"
+#include "polygon.h"
 // Models
 #include "ray.h"
 #include "camera.h"

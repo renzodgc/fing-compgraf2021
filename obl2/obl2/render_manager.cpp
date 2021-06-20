@@ -277,7 +277,7 @@ Color Render::get_specular_component(Object* object, Ray* ray, Vector intersecti
 		) - shadow_ray.direction; // - L
 
 		Vector V_vector = -ray->direction; // V
-		float n = 16.f;
+		float n = 64.f;
 
 		specular_component = scale_color(
 			scale_color(

@@ -263,6 +263,7 @@ Color Render::get_specular_component(Object* object, Ray* ray, Vector intersecti
 // Reference: https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
 // https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/adding-reflection-and-refraction
 // http://web.cse.ohio-state.edu/~shen.94/681/Site/Slides_files/reflection_refraction.pdf
+// https://github.com/TomCrypto/Lambda
 Color Render::get_transmission_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
 	Color refractive_color = BLACK;
 	if (type == ImageIs::FullResult && !object->is_opaque()) {
@@ -270,6 +271,8 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 		vector <Object*> objects = Scene::get_instance().get_objects();
 		float etai = VACUUM; // Medium before refraction
 		float etat = VACUUM; // Medium after refraction
+
+		// Determine if entering or leaving surface
 		if (cosi <= 0) {
 			// Incident and normal have opposite directions, so the ray is outside the material.
 			cosi = -cosi; // Ray is outside the surface, invert it so cos(thetha) is positive
@@ -292,22 +295,21 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 				etat = objects[ray->refraction_stack.top()]->get_refraction_coef();
 			}
 		}
+		// Get cosine of reflection angle
 		float eta = etai / etat;
-
-		//float sint = eta * sqrtf(max(0.f, 1.f - cosi * cosi));
 		float cost = 1.f - pow(eta, 2.f) * (1.f - pow(cosi, 2.f));
 		if (cost >= 0.f) {
 			// Refraction occurs
-			ray->origin = intersection_point;
+			ray->origin = intersection_point - (norm * EPSILON);
 			Vector refraction_direction = (ray->direction * eta) + (norm * (eta * cosi - sqrtf(cost)));
 			refraction_direction.normalize();
 			ray->direction = refraction_direction;
 
-			ray->origin = ray->origin - (norm * EPSILON);
 			refractive_color = trace_rr(ray, depth + 1, type);
 			// Transmission/Refraction component (k_t * I_t)
 			refractive_color = scale_color(refractive_color, object->get_transmission_coef());
-		} // If k < 0. Total internal reflection occurs
+		}
+		// If k < 0. Total internal reflection occurs
 	}
 	return refractive_color;
 }

@@ -25,6 +25,7 @@ class Polygon {
 
         // Main methods
         Vector get_normal();
+        Vector get_normal(Vector direction);
 };
 
 #endif

@@ -47,7 +47,7 @@
 			<type>cylinder</type>
 			<position>
 				<x>0</x>
-				<y>-500</y>
+				<y>-400</y>
 				<z>256</z>
 			</position>
 			<diffuse_color>
@@ -64,11 +64,11 @@
 			</specular_color>
 			<properties>
 				<refraction_coef>1.5</refraction_coef>
-				<transmission_coef>0.5</transmission_coef>
+				<transmission_coef>0</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
-				<reflective>true</reflective>
+				<reflective>false</reflective>
 				<radius>100.0</radius>
 				<height>200.0</height>
 			</properties>

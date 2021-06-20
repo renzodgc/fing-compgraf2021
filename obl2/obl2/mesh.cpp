@@ -54,7 +54,6 @@ float Mesh::intersect(Ray ray) {
 
 			// Check if distance is positive. If not, ray is coming from behind so no return
 			if (distance > 0) {
-			
 				// Get point of intersection with plane
 				Vector point = ray.origin + ray.direction.scalar_mult(distance);
 
@@ -84,12 +83,12 @@ float Mesh::intersect(Ray ray) {
 	return -1.f;
 }
 
-Vector Mesh::get_normal(Vector point) {
+Vector Mesh::get_normal(Vector point, Ray ray) {
 	
 	for (size_t i = 0; i < this->polygons.size(); i++) {
 
 		Polygon* polygon = this->polygons[i];
-		Vector normal = polygon->get_normal();
+		Vector normal = polygon->get_normal(ray.direction);
 
 		// Get polygon's edges
 		Vector edge0 = polygon->b - polygon->a;

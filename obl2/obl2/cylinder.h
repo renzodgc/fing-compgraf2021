@@ -6,6 +6,8 @@
 // -----------------------------------------------------------------------------------
 
 #include "object.h"
+// Constants
+#include "parameters.h"
 
 // MAIN CLASS
 // -----------------------------------------------------------------------------------
@@ -26,7 +28,10 @@ public:
 
     // Main methods
     float intersect(Ray ray); // Returns distance if the ray intersects the object, -1.f if intersection does not occur.
-    Vector get_normal(Vector point);
+    Vector get_normal(Vector point, Ray ray);
+    
+    // Auxiliary methods
+    float intersect_with_base(Ray ray, Vector norm, Vector base_point);
 };
 
 #endif

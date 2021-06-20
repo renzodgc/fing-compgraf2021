@@ -271,16 +271,22 @@ Color Render::get_specular_component(Object* object, Ray* ray, Vector intersecti
 	Color specular_component = BLACK;
 	// Specular Component = k_s * O_s * (R_i * V)^n
 	if (type == ImageIs::FullResult || type == ImageIs::ColorSpecular) {
-		// TODO: https://www.notion.so/Componente-Especular-Phong-3cdecb82b099488ab9b38fc0b1d85b92
-		// Mirar PPTs de Iluminacion local
-		Vector blinn = ((shadow_ray.direction + (ray->direction * -1.f)) / 2); // TODO: Revisar (al arreglar el componente especular)
-		blinn.normalize();
-		/*specular_component = scale_color(
-			multiply_colors(lights[i]->get_color(), object->get_specular_color()),
-			max(0.f, blinn.inner_product(norm)) // pow(max(0, blinn * norm), mat->GetShine()
+		
+		Vector R_vector = norm.scalar_mult(2).scalar_mult( // 2N *
+			norm.inner_product(shadow_ray.direction) // ( N . L )
+		) - shadow_ray.direction; // - L
+
+		Vector V_vector = -ray->direction; // V
+		float n = 16.f;
+
+		specular_component = scale_color(
+			scale_color(
+				object->get_specular_color(), // O_s
+				object->get_specular_coef() // k_s
+			),
+			pow(R_vector.inner_product(V_vector), n)
 		);
-		specular_component = multiply_colors(scale_color(specular_component, object->get_specular_coef()), object->get_specular_color())
-		*/
+		
 	}
 	return specular_component;
 }

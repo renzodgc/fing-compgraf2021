@@ -29,16 +29,16 @@ Render& Render::get_instance() {
 Image* Render::ray_tracing(ImageIs type) {
 
 	// 1. Get camera origin and window
-	Camera * camera = Scene::get_instance().get_camera();
-	Vector * camera_eye = camera->get_position();
-	Vector * window_center = camera->get_window_position();
+	Camera* camera = Scene::get_instance().get_camera();
+	Vector camera_eye = camera->get_position();
+	Vector window_center = camera->get_window_position();
 
 	// 2. Initiate aux objects
 	Image * result = new Image();
 	Ray* ray;
 	Vector origin, direction;
 	int object_lenght = Scene::get_instance().get_objects().size();
-	// Obtener coordenadas de centro de proyección y ventana de plano
+	// Obtener coordenadas de centro de proyecciï¿½n y ventana de plano
 
 	// 3. Main loop (pixel by pixel)
 	for (int x = 0; x < IMAGE_WIDTH; x++) { // For each sweep line
@@ -46,8 +46,8 @@ Image* Render::ray_tracing(ImageIs type) {
 
 			// 3.1. Shoot ray from camera eye to window pixel
 			ray = new Ray(
-				camera_eye->copy(), // origin
-				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center->z) - camera_eye->copy()) // direction (from eye to window's pixel)
+				camera_eye.copy(), // origin
+				(Vector((float)(x - HALF_IMAGE_WIDTH), (float)(y - HALF_IMAGE_HEIGHT), window_center.z) - camera_eye.copy()) // direction (from eye to window's pixel)
 			);
 
 			// 3.2. Check if the image is an auxiliary for coefficients and run trace
@@ -146,8 +146,40 @@ Color Render::shadow_rr(Object* object, Ray* ray, Vector intersection_point, Vec
 	return color;
 }
 
+// Aux methods - Intersection
+// -----------------------------------------------------------------------------------
 
-// Aux methods
+tuple<int, float> Render::get_closest_intersected_object(Ray* ray) {
+	int intersection_index = -1;
+	float distance_intersection = FOV + 1;
+	float distance;
+	vector <Object*> objects = Scene::get_instance().get_objects();
+	for (size_t i = 0; i < objects.size(); i++) {
+		distance = objects[i]->intersect(*ray);
+		if (distance != -1.f && distance < distance_intersection) {
+			distance_intersection = distance;
+			intersection_index = i;
+		}
+	}
+	return { intersection_index, distance_intersection };
+}
+
+tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray* ray) {
+	vector<int> intersection_indexes;
+	vector<float> intersected_distances;
+	float distance;
+	vector <Object*> objects = Scene::get_instance().get_objects();
+	for (size_t i = 0; i < objects.size(); i++) {
+		distance = objects[i]->intersect(*ray);
+		if (distance != -1.f && distance <= FOV) {
+			intersection_indexes.push_back((int)i);
+			intersected_distances.push_back(distance);
+		}
+	}
+	return { intersection_indexes, intersected_distances };
+}
+
+// Aux methods - Components
 // -----------------------------------------------------------------------------------
 
 Color Render::get_ambient_component(Object* object, ImageIs type) {
@@ -176,7 +208,7 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 			// Cast a Ray from the intersection_point to the light source. This ray is a straight line.
 			Ray shadow_ray = Ray(
 				intersection_point.copy(), // origin
-				(lights[i]->get_position()->copy() - intersection_point.copy()) // direction (from eye to window's pixel)
+				(lights[i]->get_position().copy() - intersection_point.copy()) // direction (from eye to window's pixel)
 			);
 			// If no objects stands it applies directly
 
@@ -186,7 +218,7 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 				// Check if an object stands between the intersection point and the light source.
 				vector <Object*> objects = Scene::get_instance().get_objects();
 				tie(intersection_indexes, intersected_distances) = get_all_intersected_objects(ray);
-				distance_from_light = intersection_point.euclid_distance(*(lights[i]->get_position()));
+				distance_from_light = intersection_point.euclid_distance(lights[i]->get_position());
 
 				if (!intersection_indexes.empty()) {
 					// At least one object is in the same direction as the light. Shadow may be cast
@@ -338,35 +370,3 @@ Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersec
 	}
 	return reflective_color;
 }
-
-tuple<int, float> Render::get_closest_intersected_object(Ray* ray) {
-	int intersection_index = -1;
-	float distance_intersection = FOV + 1;
-	float distance;
-	vector <Object*> objects = Scene::get_instance().get_objects();
-	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(*ray);
-		if (distance != -1.f && distance < distance_intersection) {
-			distance_intersection = distance;
-			intersection_index = i;
-		}
-	}
-	return { intersection_index, distance_intersection };
-}
-
-tuple<vector<int>, vector<float>> Render::get_all_intersected_objects(Ray* ray) {
-	vector<int> intersection_indexes;
-	vector<float> intersected_distances;
-	float distance;
-	vector <Object*> objects = Scene::get_instance().get_objects();
-	for (size_t i = 0; i < objects.size(); i++) {
-		distance = objects[i]->intersect(*ray);
-		if (distance != -1.f && distance <= FOV) {
-			intersection_indexes.push_back((int)i);
-			intersected_distances.push_back(distance);
-		}
-	}
-	return { intersection_indexes, intersected_distances };
-}
-
-

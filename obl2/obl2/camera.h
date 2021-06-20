@@ -22,19 +22,19 @@ using namespace std;
 class Camera {
 
     private:
-        Vector* position;
-        Vector* window_position;
+        Vector position;
+        Vector window_position;
 
     public:
         // Constructor
-        Camera(Vector* position, Vector* window_position);
+        Camera(Vector position, Vector window_position);
         ~Camera();
 
         // Getters & Setters
-        Vector* get_position();
-        void set_position(Vector* position);
-        Vector* get_window_position();
-        void set_window_position(Vector* window_position);
+        Vector get_position();
+        void set_position(Vector position);
+        Vector get_window_position();
+        void set_window_position(Vector window_position);
 };
 
 #endif

@@ -99,7 +99,7 @@
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>
 				<radius>100.0</radius>
-		</properties>
+			</properties>
 		</object>
 		<object>
 			<type>sphere</type>

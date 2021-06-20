@@ -86,7 +86,7 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="mesh.cpp" />
-    <ClCompile Include="rectangle.cpp" />
+    <ClCompile Include="polygon.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="render_manager.cpp" />
     <ClCompile Include="object.cpp" />
@@ -102,7 +102,7 @@
     <ClInclude Include="cylinder.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="mesh.h" />
-    <ClInclude Include="rectangle.h" />
+    <ClInclude Include="polygon.h" />
     <ClInclude Include="refraction_coefficients.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="light.h" />
@@ -122,9 +122,13 @@
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config.xml" />
     <Xml Include="config_3spheres.xml" />
     <Xml Include="config_3spheres_refraction.xml" />
+    <Xml Include="config_two_planes.xml" />
+    <Xml Include="config_cylinder.xml" />
+    <Xml Include="config.xml" />
+    <Xml Include="config_sphere.xml" />
+    <Xml Include="config_2cylinders.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

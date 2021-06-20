@@ -16,6 +16,7 @@ constexpr int IMAGE_BITS_PER_PIXEL = 24; // 3 x 8 bit (RGB)
 constexpr int MAX_DEPTH = 6;
 constexpr float FOV = 2500.f;
 constexpr float EPSILON = 0.005f;
+constexpr float SPECULAR_EXPONENT = 64.f;
 
 // Gamma correction
 constexpr double GAMMA_CORRECTION = 0.667;

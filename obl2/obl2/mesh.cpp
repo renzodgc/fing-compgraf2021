@@ -104,9 +104,11 @@ Vector Mesh::get_normal(Vector point, Ray ray) {
 		if (edge0.cross_product(C0).inner_product(normal) >= 0 &&
 			edge1.cross_product(C1).inner_product(normal) >= 0 &&
 			edge2.cross_product(C2).inner_product(normal) >= 0) {
-			return normal;
+			if (ray.direction.inner_product(normal) < 0)
+				return normal;
+			else
+				return -normal;
 		}
-
 	}
 
 	return Vector(0, 0, 0);

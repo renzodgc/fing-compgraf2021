@@ -259,10 +259,11 @@ bool Scene::load_object(XMLElement* xmlObject) {
 			result = false;
 		}
 
+		float radius, height;
+
 		switch (type) {
 		case ObjectIs::Sphere:
 
-			float radius;
 			xmlObjectProperties->FirstChildElement("radius")->QueryFloatText(&radius);
 
 			this->objects.push_back(new Sphere(
@@ -277,6 +278,28 @@ bool Scene::load_object(XMLElement* xmlObject) {
 				ambience_coef,
 				reflective,
 				radius
+			));
+			this->object_counter++;
+			break;
+
+		case ObjectIs::Cylinder:
+
+			xmlObjectProperties->FirstChildElement("radius")->QueryFloatText(&radius);
+			xmlObjectProperties->FirstChildElement("height")->QueryFloatText(&height);
+
+			this->objects.push_back(new Cylinder(
+				this->object_counter,
+				Vector(x, y, z),
+				{ diffuse_r, diffuse_g, diffuse_b, diffuse_a },
+				{ specular_r, specular_g, specular_b, specular_a },
+				refraction_coef,
+				transmission_coef,
+				specular_coef,
+				diffuse_coef,
+				ambience_coef,
+				reflective,
+				radius,
+				height
 			));
 			this->object_counter++;
 			break;

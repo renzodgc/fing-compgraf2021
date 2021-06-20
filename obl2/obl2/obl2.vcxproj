@@ -122,10 +122,12 @@
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="config_3spheres.xml" />
     <Xml Include="config_two_planes.xml" />
-    <Xml Include="config.xml" />
-    <Xml Include="config_meshes.xml" />
+    <Xml Include="config_cylinder.xml" />
+    <Xml Include="config_wall.xml" />
     <Xml Include="config_sphere.xml" />
+    <Xml Include="config.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

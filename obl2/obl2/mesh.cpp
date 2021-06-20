@@ -40,6 +40,7 @@ Mesh::Mesh(
 //		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Mesh::intersect(Ray ray) {
 
+	// For each polygon in the mesh
 	for (size_t i = 0; i < this->polygons.size(); i++) {
 
 		Polygon* polygon = this->polygons[i];
@@ -68,9 +69,9 @@ float Mesh::intersect(Ray ray) {
 				Vector C2 = point - polygon->c;
 			
 				// Way to check if point is inside triangle
-				if (edge0.cross_product(C0).inner_product(normal) > 0 &&
-					edge1.cross_product(C1).inner_product(normal) > 0 &&
-					edge2.cross_product(C2).inner_product(normal) > 0) {
+				if (edge0.cross_product(C0).inner_product(normal) >= 0 &&
+					edge1.cross_product(C1).inner_product(normal) >= 0 &&
+					edge2.cross_product(C2).inner_product(normal) >= 0) {
 					return distance;
 				}
 
@@ -101,9 +102,9 @@ Vector Mesh::get_normal(Vector point) {
 		Vector C2 = point - polygon->c;
 
 		// Way to check if point is inside triangle
-		if (edge0.cross_product(C0).inner_product(normal) > 0 &&
-			edge1.cross_product(C1).inner_product(normal) > 0 &&
-			edge2.cross_product(C2).inner_product(normal) > 0) {
+		if (edge0.cross_product(C0).inner_product(normal) >= 0 &&
+			edge1.cross_product(C1).inner_product(normal) >= 0 &&
+			edge2.cross_product(C2).inner_product(normal) >= 0) {
 			return normal;
 		}
 

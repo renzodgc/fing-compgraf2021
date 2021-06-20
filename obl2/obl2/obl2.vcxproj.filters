@@ -172,7 +172,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config.xml">
+    <Xml Include="config_cylinder.xml">
       <Filter>Resource Files</Filter>
     </Xml>
     <Xml Include="config_two_planes.xml">
@@ -181,7 +181,13 @@
     <Xml Include="config_sphere.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="config_meshes.xml">
+    <Xml Include="config_wall.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="config_3spheres.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="config.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

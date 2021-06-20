@@ -44,11 +44,11 @@
 
 	<objects>
 		<object>
-			<type>sphere</type>
+			<type>cylinder</type>
 			<position>
-				<x>-250</x>
+				<x>-256</x>
 				<y>0</y>
-				<z>210</z>
+				<z>256</z>
 			</position>
 			<diffuse_color>
 				<r>1</r>
@@ -69,15 +69,16 @@
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>true</reflective>
-				<radius>100.0</radius>
+				<radius>128.0</radius>
+				<height>256.0</height>
 			</properties>
 		</object>
 		<object>
-			<type>sphere</type>
+			<type>cylinder</type>
 			<position>
-				<x>0</x>
+				<x>512</x>
 				<y>0</y>
-				<z>210</z>
+				<z>1024</z>
 			</position>
 			<diffuse_color>
 				<r>0</r>
@@ -92,42 +93,14 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1</refraction_coef>
-				<transmission_coef>0</transmission_coef>
+				<refraction_coef>1.5</refraction_coef>
+				<transmission_coef>0.5</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
-				<reflective>false</reflective>
-				<radius>100.0</radius>
-			</properties>
-		</object>
-		<object>
-			<type>sphere</type>
-			<position>
-				<x>250</x>
-				<y>0</y>
-				<z>210</z>
-			</position>
-			<diffuse_color>
-				<r>1</r>
-				<g>0</g>
-				<b>1</b>
-				<a>1</a>
-			</diffuse_color>
-			<specular_color>
-				<r>1</r>
-				<g>1</g>
-				<b>1</b>
-				<a>1</a>
-			</specular_color>
-			<properties>
-				<refraction_coef>1.3333</refraction_coef>
-				<transmission_coef>1</transmission_coef>
-				<specular_coef>1</specular_coef>
-				<diffuse_coef>1</diffuse_coef>
-				<ambience_coef>1</ambience_coef>
-				<reflective>false</reflective>
-				<radius>100.0</radius>
+				<reflective>true</reflective>
+				<radius>128.0</radius>
+				<height>384.0</height>
 			</properties>
 		</object>
 	</objects>

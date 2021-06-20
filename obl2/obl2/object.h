@@ -1,6 +1,6 @@
 #pragma once
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef OBJECT2_H
+#define OBJECT2_H
 
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ constexpr int IMAGE_BITS_PER_PIXEL = 24; // 3 x 8 bit (RGB)
 
 // Ray tracing
 constexpr int MAX_DEPTH = 1;
-constexpr float FOV = 1500;
+constexpr float FOV = 2500;
 
 // Gamma correction
 constexpr double GAMMA_CORRECTION = 1.5;

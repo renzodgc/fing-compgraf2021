@@ -67,7 +67,7 @@ float Sphere::intersect(Ray ray) {
 }
 
 
-Vector Sphere::get_normal(Vector point) {
+Vector Sphere::get_normal(Vector point, Ray ray) {
 	Vector normal = point - this->position;
 	normal.normalize();
 	return(normal);

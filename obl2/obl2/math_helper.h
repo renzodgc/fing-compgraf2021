@@ -15,6 +15,8 @@
 #include <math.h>
 // Constants
 #include "colors.h"
+// Structures
+#include "vector.h"
 
 // NAMESPACE
 // -----------------------------------------------------------------------------------
@@ -29,5 +31,7 @@ Color add_colors(Color a, Color b);
 Color multiply_colors(Color a, Color b);
 
 Color scale_color(Color a, float k);
+
+float determinant3x3(Vector a, Vector b, Vector c);
 
 #endif

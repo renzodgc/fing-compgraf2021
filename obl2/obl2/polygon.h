@@ -7,8 +7,12 @@
 
 // C++ libraries
 #include <vector>
+// Helpers
+#include "math_helper.h"
 // Structures
 #include "vector.h"
+// Models
+#include "ray.h"
 
 // MAIN CLASS
 // -----------------------------------------------------------------------------------
@@ -25,6 +29,7 @@ class Polygon {
 
         // Main methods
         Vector get_normal();
+        Vector get_normal(Ray ray);
 };
 
 #endif

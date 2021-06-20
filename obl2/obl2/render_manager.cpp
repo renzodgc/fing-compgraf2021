@@ -83,12 +83,13 @@ Color Render::trace_rr(Ray* ray, int depth, ImageIs type) {
 	if(intersection_index != -1)  {
 		vector <Object*> objects = Scene::get_instance().get_objects();
 		Vector intersection = ray->origin + (ray->direction * distance_intersection);
+		Vector norm = objects[intersection_index]->get_normal(intersection, *ray);
 
 		return shadow_rr(
 			objects[intersection_index], // intersected object
 			ray, // ray that intersects
 			intersection, // point of intersection
-			objects[intersection_index]->get_normal(intersection, *ray), // normal of intersection
+			norm, // normal of intersection
 			depth, // current depth
 			type // image type
 		);
@@ -199,18 +200,17 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 			transmission_coef_light = 1.0f;
 
 			// Cast a Ray from the intersection_point to the light source. This ray is a straight line.
-			Ray shadow_ray = Ray(
-				intersection_point.copy(), // origin
+			Ray* shadow_ray = new Ray(
+				intersection_point.copy() + norm * EPSILON, // origin
 				(lights[i]->get_position().copy() - intersection_point.copy()) // direction (from eye to window's pixel)
 			);
 			// If no objects stands it applies directly
 
 			// Ligting affects object if the inner product between its direction and the objects norm is positive.
-			if (shadow_ray.direction.inner_product(norm) > 0) {
-
+			if (shadow_ray->direction.inner_product(norm) > 0) {
 				// Check if an object stands between the intersection point and the light source.
 				vector <Object*> objects = Scene::get_instance().get_objects();
-				tie(intersection_indexes, intersected_distances) = get_all_intersected_objects(ray);
+				tie(intersection_indexes, intersected_distances) = get_all_intersected_objects(shadow_ray);
 				distance_from_light = intersection_point.euclid_distance(lights[i]->get_position());
 
 				if (!intersection_indexes.empty()) {
@@ -219,9 +219,9 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 						if (intersected_distances[i] < distance_from_light) {
 							// Object stands between the surface and the source of light.
 							// Substract from the transmission coefficient accounting for the light it obscures
-							// Convert transmission coefficient [0,1] (opaque, translucid) to [1,0] (translucid, opaque) by using f(x) = -x + 1
-							transmission_coef_light -= (-objects[intersection_indexes[i]]->get_transmission_coef() + 1);
-						} // Else ignore object
+							// Convert transmission coefficient [0,1] (opaque, translucid) to [1,0] (translucid, opaque) by using f(x) = 1 - x
+							transmission_coef_light -= (1 - objects[intersection_indexes[i]]->get_transmission_coef());
+						} // Else light stands in between, object is not factored
 					}
 					transmission_coef_light = min(1.f, max(0.f, transmission_coef_light));
 					// TODO: https://www.notion.so/Sombras-con-colores-65d808c0f468410bb45e8739b23ada25
@@ -247,12 +247,14 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 				//		 Scale by attenuation factor (f_att, delete f_att part in equation if not implemented)
 				lights_component = add_colors(lights_component, light_component);
 			}
+
+			delete shadow_ray;
 		}
 	}
 	return lights_component;
 }
 
-Color Render::get_diffuse_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
+Color Render::get_diffuse_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray* shadow_ray) {
 	Color diffuse_component = BLACK;
 	// Diffuse Component = k_d * O_d * (N * L_i)
 	if (type == ImageIs::FullResult || type == ImageIs::ColorDiffuse) {
@@ -261,20 +263,20 @@ Color Render::get_diffuse_component(Object* object, Ray* ray, Vector intersectio
 				object->get_diffuse_color(), // O_d
 				object->get_diffuse_coef() // k_d
 			),
-			max(0.f, shadow_ray.direction.inner_product(norm)) // L_i * N
+			max(0.f, shadow_ray->direction.inner_product(norm)) // L_i * N
 		);
 	}
 	return diffuse_component;
 }
 
-Color Render::get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray) {
+Color Render::get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray* shadow_ray) {
 	Color specular_component = BLACK;
 	// Specular Component = k_s * O_s * (R * V)^n
 	if (type == ImageIs::FullResult || type == ImageIs::ColorSpecular) {
 		
 		Vector R_vector = norm.scalar_mult(2).scalar_mult( // 2N *
-			norm.inner_product(shadow_ray.direction) // ( N . L )
-		) - shadow_ray.direction; // - L
+			norm.inner_product(shadow_ray->direction) // ( N . L )
+		) - shadow_ray->direction; // - L
 
 		Vector V_vector = -ray->direction; // V
 
@@ -314,7 +316,7 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 			etat = object->get_refraction_coef();
 			ray->refraction_stack.push(object->get_id());
 		}
-		else { // ray->refraction_stack.top() == object->get_id()
+		else {
 			// Incident and normal have the same direction, ray is inside the material.
 			norm = -norm; // Ray is inside the surface, cos(thetha) is already positive. But norm's direction needs to be reversed
 			etai = object->get_refraction_coef();
@@ -354,12 +356,6 @@ Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersec
 	Color reflective_color = BLACK;
 	// Reflective component (k_t * I_t)
 	if (type == ImageIs::FullResult && object->is_reflective()) {
-		// TODO: Verificar que la direccion de reflexion sea la simetrica al rayo anterior respecto a la normal
-		/*Ray reflective_ray = Ray(
-			intersection_point.copy(), // origin
-			norm * ((ray.direction * -1.f) * norm) * 2 + ray.direction // 2(V * n) * n - V; V = -ray
-		); // rayo en la direccion de refleccion desde el punto (inverse direction of reflection)
-		*/
 		ray->origin = intersection_point + (norm * EPSILON);
 		// Reflect the ray's direction symetrically in regards to the norm.
 		ray->direction = ray->direction - (norm * (2 * (ray->direction.inner_product(norm)))); // I - 2N(N . I)

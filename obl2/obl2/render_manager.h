@@ -52,8 +52,8 @@ class Render {
         // Aux methods - intermediate results
         Color get_ambient_component(Object* object, ImageIs type);
         Color get_lights_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type);
-        Color get_diffuse_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray);
-        Color get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray shadow_ray);
+        Color get_diffuse_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray* shadow_ray);
+        Color get_specular_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, ImageIs type, Ray* shadow_ray);
         Color get_transmission_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type);
         Color get_reflective_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type);
 

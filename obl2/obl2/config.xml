@@ -17,8 +17,8 @@
 		<light>
 			<position>
 				<x>0</x>
-				<y>450</y>
-				<z>20</z>
+				<y>400</y>
+				<z>50</z>
 			</position>
 			<color>
 				<r>1</r>
@@ -30,7 +30,7 @@
 		<light>
 			<position>
 				<x>0</x>
-				<y>450</y>
+				<y>400</y>
 				<z>682</z>
 			</position>
 			<color>
@@ -133,7 +133,7 @@
 			<properties>
 				<refraction_coef>1</refraction_coef>
 				<transmission_coef>0</transmission_coef>
-				<specular_coef>1</specular_coef>
+				<specular_coef>0</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>

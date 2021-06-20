@@ -277,14 +277,13 @@ Color Render::get_specular_component(Object* object, Ray* ray, Vector intersecti
 		) - shadow_ray.direction; // - L
 
 		Vector V_vector = -ray->direction; // V
-		float n = SPECULAR_EXPONENT;
 
 		specular_component = scale_color(
 			scale_color(
 				object->get_specular_color(), // O_s
 				object->get_specular_coef() // k_s
 			),
-			pow(R_vector.inner_product(V_vector), n) // ( R . V )^n
+			pow(R_vector.inner_product(V_vector), SPECULAR_EXPONENT) // ( R . V )^n
 		);
 		
 	}

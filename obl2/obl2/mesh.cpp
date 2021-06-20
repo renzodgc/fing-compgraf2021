@@ -50,7 +50,7 @@ float Mesh::intersect(Ray ray) {
 		float parallelism = normal.inner_product(ray.direction);
 		if (parallelism != 0) {
 			float D = normal.inner_product(polygon->a);
-			float distance = -(normal.inner_product(ray.origin) + D) / parallelism;
+			float distance = -(normal.inner_product(ray.origin) - D) / parallelism;
 
 			// Check if distance is positive. If not, ray is coming from behind so no return
 			if (distance > 0) {

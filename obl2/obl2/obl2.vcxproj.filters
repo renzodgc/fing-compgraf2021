@@ -181,13 +181,13 @@
     <Xml Include="config_sphere.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="config_wall.xml">
+    <Xml Include="config.xml">
       <Filter>Resource Files</Filter>
     </Xml>
     <Xml Include="config_3spheres.xml">
       <Filter>Resource Files</Filter>
     </Xml>
-    <Xml Include="config.xml">
+    <Xml Include="config_2cylinders.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>

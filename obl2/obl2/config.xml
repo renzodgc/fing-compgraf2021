@@ -4,7 +4,7 @@
 		<position>
 			<x>0</x>
 			<y>0</y>
-			<z>-1000</z>
+			<z>-1024</z>
 		</position>
 		<window_position>
 			<x>0</x>
@@ -16,9 +16,9 @@
 	<lights>
 		<light>
 			<position>
-				<x>-100</x>
-				<y>50</y>
-				<z>0</z>
+				<x>0</x>
+				<y>400</y>
+				<z>341</z>
 			</position>
 			<color>
 				<r>1</r>
@@ -29,9 +29,9 @@
 		</light>
 		<light>
 			<position>
-				<x>100</x>
-				<y>50</y>
-				<z>0</z>
+				<x>0</x>
+				<y>400</y>
+				<z>682</z>
 			</position>
 			<color>
 				<r>1</r>
@@ -43,15 +43,281 @@
 	</lights>
 
 	<objects>
+
+		<!-- Floor -->
 		<object>
-			<type>sphere</type>
+			<type>mesh</type>
 			<position>
-				<x>-250</x>
+				<x>0</x>
 				<y>0</y>
-				<z>210</z>
+				<z>-1023</z>
 			</position>
 			<diffuse_color>
 				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<polygons>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
+			</properties>
+		</object>
+
+		<!-- Ceiling -->
+		<object>
+			<type>mesh</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>-1023</z>
+			</position>
+			<diffuse_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<polygons>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
+			</properties>
+		</object>
+		
+		<!-- Back wall -->
+		<object>
+			<type>mesh</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>-1023</z>
+			</position>
+			<diffuse_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<polygons>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
+			</properties>
+		</object>
+
+		<!-- Left wall -->
+		<object>
+			<type>mesh</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>-1023</z>
+			</position>
+			<diffuse_color>
+				<r>1</r>
+				<g>0</g>
+				<b>0</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<polygons>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>-512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
+			</properties>
+		</object>
+
+		<!-- Right wall -->
+		<object>
+			<type>mesh</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>-1023</z>
+			</position>
+			<diffuse_color>
+				<r>0</r>
 				<g>1</g>
 				<b>0</b>
 				<a>1</a>
@@ -63,21 +329,58 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1.5</refraction_coef>
-				<transmission_coef>0.5</transmission_coef>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
-				<reflective>true</reflective>
-				<radius>100.0</radius>
+				<reflective>false</reflective>
+				<polygons>
+					<polygon>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>0.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>512.0</x>
+							<y>-512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>1024.0</z>
+						</vertex>
+						<vertex>
+							<x>512.0</x>
+							<y>512.0</y>
+							<z>0.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
 			</properties>
 		</object>
+
+		<!-- Table -->
 		<object>
-			<type>sphere</type>
+			<type>mesh</type>
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>210</z>
+				<z>512</z>
 			</position>
 			<diffuse_color>
 				<r>0</r>
@@ -98,20 +401,198 @@
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>
-				<radius>100.0</radius>
+				<polygons>
+					<!-- Front face -->
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-512.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+					</polygon>
+					<!-- Back face -->
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+					<!-- Left face -->
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+					</polygon>
+					<!-- Right face -->
+					<polygon>
+						<vertex>
+							<x>256.0</x>
+							<y>-512.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>256.0</x>
+							<y>-512.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+					</polygon>
+					<!-- Top face -->
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+					<polygon>
+						<vertex>
+							<x>-384.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>512.0</z>
+						</vertex>
+						<vertex>
+							<x>256.0</x>
+							<y>-256.0</y>
+							<z>768.0</z>
+						</vertex>
+					</polygon>
+				</polygons>
 			</properties>
 		</object>
+
+		<!-- Big sphere -->
 		<object>
 			<type>sphere</type>
 			<position>
-				<x>250</x>
-				<y>0</y>
-				<z>210</z>
+				<x>-214.0</x>
+				<y>-128.0</y>
+				<z>640</z>
 			</position>
 			<diffuse_color>
 				<r>1</r>
-				<g>0</g>
-				<b>1</b>
+				<g>0.8</g>
+				<b>0.1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>
@@ -121,14 +602,78 @@
 				<a>1</a>
 			</specular_color>
 			<properties>
-				<refraction_coef>1.3333</refraction_coef>
-				<transmission_coef>1</transmission_coef>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>
 				<reflective>false</reflective>
-				<radius>100.0</radius>
+				<radius>128.0</radius>
 			</properties>
 		</object>
+
+		<!-- Cylinder -->
+		<object>
+			<type>cylinder</type>
+			<position>
+				<x>-64.0</x>
+				<y>-192.0</y>
+				<z>576</z>
+			</position>
+			<diffuse_color>
+				<r>0</r>
+				<g>1</g>
+				<b>0</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<radius>64.0</radius>
+				<height>128.0</height>
+			</properties>
+		</object>
+
+		<!-- Small sphere -->
+		<object>
+			<type>sphere</type>
+			<position>
+				<x>160.0</x>
+				<y>-192.0</y>
+				<z>640</z>
+			</position>
+			<diffuse_color>
+				<r>0.8</r>
+				<g>0.3</g>
+				<b>0.5</b>
+				<a>1</a>
+			</diffuse_color>
+			<specular_color>
+				<r>1</r>
+				<g>1</g>
+				<b>1</b>
+				<a>1</a>
+			</specular_color>
+			<properties>
+				<refraction_coef>1</refraction_coef>
+				<transmission_coef>0</transmission_coef>
+				<specular_coef>1</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
+				<radius>64.0</radius>
+			</properties>
+		</object>
+		
 	</objects>
 </scene>

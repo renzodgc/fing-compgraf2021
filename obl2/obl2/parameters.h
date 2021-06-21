@@ -15,6 +15,7 @@ constexpr int IMAGE_BITS_PER_PIXEL = 24; // 3 x 8 bit (RGB)
 // Ray tracing
 constexpr int MAX_DEPTH = 5;
 constexpr float FOV = 2500.f;
+const bool ANTIALIASING = true;
 constexpr float EPSILON = 0.005f;
 constexpr float SPECULAR_EXPONENT = 64.f;
 const float LIGHT_ATTENUATION_C0_ADDITION = 0.05f;

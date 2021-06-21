@@ -26,7 +26,7 @@ Render& Render::get_instance() {
 // https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-overview/light-transport-ray-tracing-whitted
 // https://medium.com/nicos-softwaredev-projects/path-tracer-project-75d734e2789
 // Light rays will be traced backwards (contrary to their natural direction), that is from the eye back to the lightsources.
-Image* Render::ray_tracing(ImageIs type) {
+Image* Render::ray_tracing(ImageIs type, bool anti_aliasing) {
 
 	// 1. Get camera origin and window
 	Camera* camera = Scene::get_instance().get_camera();
@@ -35,7 +35,7 @@ Image* Render::ray_tracing(ImageIs type) {
 
 	// 2. Initiate aux objects
 	Image * result = new Image();
-	Ray* ray;
+	Ray * ray, *ray_00, * ray_01, * ray_10, * ray_11;
 	Vector origin, direction;
 	int object_lenght = Scene::get_instance().get_objects().size();
 	// Obtener coordenadas de centro de proyecci�n y ventana de plano
@@ -53,8 +53,21 @@ Image* Render::ray_tracing(ImageIs type) {
 			// 3.2. Check if the image is an auxiliary for coefficients and run trace
 			if(type == ImageIs::Ambient || type == ImageIs::Diffuse || type == ImageIs::Specular || type == ImageIs::Reflection || type == ImageIs::Transmission)
 				result->image[x][y] = coef_trace_rr(ray, type);
-			else
+			else {
 				result->image[x][y] = trace_rr(ray, 1, type);
+				if (ANTIALIASING) {
+					ray_00 = new Ray( camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - 0.25f, (float)(y - HALF_IMAGE_HEIGHT) - 0.25f, window_center.z) - camera_eye.copy()));
+					ray_01 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - 0.25f, (float)(y - HALF_IMAGE_HEIGHT) + 0.25f, window_center.z) - camera_eye.copy()));
+					ray_10 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + 0.25f, (float)(y - HALF_IMAGE_HEIGHT) - 0.25f, window_center.z) - camera_eye.copy()));
+					ray_11 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + 0.25f, (float)(y - HALF_IMAGE_HEIGHT) + 0.25f, window_center.z) - camera_eye.copy()));
+					result->image[x][y] = add_colors(result->image[x][y], add_colors(
+						add_colors(trace_rr(ray_00, 1, type), trace_rr(ray_01, 1, type)),
+						add_colors(trace_rr(ray_10, 1, type), trace_rr(ray_11, 1, type))
+					));
+					result->image[x][y] = scale_color(result->image[x][y], 1.f / 5.f);
+					delete ray_00; delete ray_01; delete ray_10; delete ray_11;
+				}
+			}
 
 			delete ray;
 		}

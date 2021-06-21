@@ -28,9 +28,7 @@ class Ray {
 		// Main properties
 		Vector origin;
 		Vector direction;
-		std::stack<int> refraction_stack; // Keep state of current medium IDs. 
-			// TODO: If a medium is exited but it's not current medium then ignore refraction.
-			// it's value equals the object's ID.
+		std::stack<int> refraction_stack; // Keep state of current mediums (entered) IDs. 
 	
 		// Aux methods
 		void print_ray();

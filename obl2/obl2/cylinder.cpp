@@ -77,9 +77,9 @@ float Cylinder::intersect(Ray ray) {
 Vector Cylinder::get_normal(Vector point, Ray ray) {
 	Vector normal;
 	// Check if point is at the top
-	if (point.y >= this->position.y + this->height/2 - EPSILON)
+	if (point.y >= this->position.y + this->height/2)
 		normal = Vector(0, 1, 0);
-	else if(point.y <= this->position.y - this->height/2 + EPSILON)
+	else if(point.y <= this->position.y - this->height/2)
 		normal = Vector(0, -1, 0);
 	else
 		normal = Vector(point.x - this->position.x, 0, point.z - this->position.z);

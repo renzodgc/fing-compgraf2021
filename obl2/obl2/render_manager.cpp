@@ -56,10 +56,10 @@ Image* Render::ray_tracing(ImageIs type, bool anti_aliasing) {
 			else {
 				result->image[x][y] = trace_rr(ray, 1, type);
 				if (ANTIALIASING) {
-					ray_00 = new Ray( camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - 0.25f, (float)(y - HALF_IMAGE_HEIGHT) - 0.25f, window_center.z) - camera_eye.copy()));
-					ray_01 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - 0.25f, (float)(y - HALF_IMAGE_HEIGHT) + 0.25f, window_center.z) - camera_eye.copy()));
-					ray_10 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + 0.25f, (float)(y - HALF_IMAGE_HEIGHT) - 0.25f, window_center.z) - camera_eye.copy()));
-					ray_11 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + 0.25f, (float)(y - HALF_IMAGE_HEIGHT) + 0.25f, window_center.z) - camera_eye.copy()));
+					ray_00 = new Ray( camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - ANTIALIASING_SHIFT, (float)(y - HALF_IMAGE_HEIGHT) - ANTIALIASING_SHIFT, window_center.z) - camera_eye.copy()));
+					ray_01 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) - ANTIALIASING_SHIFT, (float)(y - HALF_IMAGE_HEIGHT) + ANTIALIASING_SHIFT, window_center.z) - camera_eye.copy()));
+					ray_10 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + ANTIALIASING_SHIFT, (float)(y - HALF_IMAGE_HEIGHT) - ANTIALIASING_SHIFT, window_center.z) - camera_eye.copy()));
+					ray_11 = new Ray(camera_eye.copy(), (Vector((float)(x - HALF_IMAGE_WIDTH) + ANTIALIASING_SHIFT, (float)(y - HALF_IMAGE_HEIGHT) + ANTIALIASING_SHIFT, window_center.z) - camera_eye.copy()));
 					result->image[x][y] = add_colors(result->image[x][y], add_colors(
 						add_colors(trace_rr(ray_00, 1, type), trace_rr(ray_01, 1, type)),
 						add_colors(trace_rr(ray_10, 1, type), trace_rr(ray_11, 1, type))
@@ -377,6 +377,8 @@ Color Render::get_transmission_component(Object* object, Ray* ray, Vector inters
 	return refractive_color;
 }
 
+// Reference: https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/adding-reflection-and-refraction
+// https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
 Color Render::get_reflective_component(Object* object, Ray* ray, Vector intersection_point, Vector norm, int depth, ImageIs type) {
 	Color reflective_color = BLACK;
 	// Reflective component (k_t * I_t)

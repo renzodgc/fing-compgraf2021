@@ -43,8 +43,6 @@ Vector Polygon::get_normal(Vector direction) {
 
 	// Get normal by cross product them and normalize it
 	Vector normal = length.cross_product(width);
-	//if (normal.inner_product(direction) >= 0)
-	//	normal = -normal;
 	normal.normalize();
 	return normal;
 }

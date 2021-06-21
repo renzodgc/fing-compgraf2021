@@ -5,6 +5,7 @@
 // DEPENDENCIES
 // -----------------------------------------------------------------------------------
 
+#include "parameters.h"
 #include "polygon.h"
 #include "object.h"
 

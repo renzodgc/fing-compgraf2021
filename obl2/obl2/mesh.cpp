@@ -39,6 +39,7 @@ Mesh::Mesh(
 //		 Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
 //		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Mesh::intersect(Ray ray) {
+	float closest_distance = FOV + 1.f;
 
 	// For each polygon in the mesh
 	for (size_t i = 0; i < this->polygons.size(); i++) {
@@ -71,7 +72,7 @@ float Mesh::intersect(Ray ray) {
 				if (edge0.cross_product(C0).inner_product(normal) >= 0 &&
 					edge1.cross_product(C1).inner_product(normal) >= 0 &&
 					edge2.cross_product(C2).inner_product(normal) >= 0) {
-					return distance;
+					closest_distance = min(distance, closest_distance);
 				}
 
 			}
@@ -79,6 +80,9 @@ float Mesh::intersect(Ray ray) {
 		}
 
 	}
+
+	if(closest_distance != FOV + 1.f)
+		return closest_distance;
 
 	return -1.f;
 }
@@ -104,7 +108,7 @@ Vector Mesh::get_normal(Vector point, Ray ray) {
 		if (edge0.cross_product(C0).inner_product(normal) >= 0 &&
 			edge1.cross_product(C1).inner_product(normal) >= 0 &&
 			edge2.cross_product(C2).inner_product(normal) >= 0) {
-			if (ray.direction.inner_product(normal) < 0)
+			if (ray.direction.inner_product(normal) <= 0)
 				return normal;
 			else
 				return -normal;

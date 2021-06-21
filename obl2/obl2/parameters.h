@@ -17,6 +17,8 @@ constexpr int MAX_DEPTH = 5;
 constexpr float FOV = 2500.f;
 constexpr float EPSILON = 0.005f;
 constexpr float SPECULAR_EXPONENT = 64.f;
+const float LIGHT_ATTENUATION_C0_ADDITION = 0.05f;
+const float LIGHT_ATTENUATION_C1_MULTIPLIER = 150.f; // Scale up the attenuation ratio since our distances are in pixels
 
 // Gamma correction
 constexpr double GAMMA_CORRECTION = 0.667;

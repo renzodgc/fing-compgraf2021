@@ -65,7 +65,7 @@ class Render {
         static Render& get_instance();
 
         // Main methods
-        Image* ray_tracing(ImageIs type);
+        Image* ray_tracing(ImageIs type, bool anti_aliasing);
 };
 
 #endif

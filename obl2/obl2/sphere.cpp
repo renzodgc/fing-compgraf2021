@@ -36,10 +36,6 @@ Sphere::Sphere(
 // Ray vector: P + tU (P base point, U unit direction)
 // Sphere surface: (X - C)^2 - r^2 = 0 (C sphere center, r sphere radius, X points that intersect sphere surface)
 // Quadratic equation to solve: (P + tU - C)^2 - r^2 = 0 <=> U^2 t^2 + 2t U(P-C) + (P-C)^2 - r^2 = 0
-// 
-// TODO: https://www.notion.so/Arreglar-errores-de-presici-n-num-rica-para-las-intersecciones-dcbe39b3f097429e9f69d1633c26f046
-//		 Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
-//		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Sphere::intersect(Ray ray) {
 
 	// 1. Get vector between ray and sphere (P - C)

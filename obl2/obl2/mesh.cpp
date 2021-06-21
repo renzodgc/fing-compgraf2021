@@ -34,10 +34,6 @@ Mesh::Mesh(
 // -----------------------------------------------------------------------------------
 
 // Reference: https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/ray-triangle-intersection-geometric-solution
-//
-// TODO: https://www.notion.so/Arreglar-errores-de-presici-n-num-rica-para-las-intersecciones-dcbe39b3f097429e9f69d1633c26f046
-//		 Esto por errores de presicion puede detectar que la interseccion ocurre dentro del objeto, esto es un problema
-//		 Para resolverlo hay que restarle epsilon "hacia afuera" del objeto.
 float Mesh::intersect(Ray ray) {
 	float closest_distance = FOV + 1.f;
 

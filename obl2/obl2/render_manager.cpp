@@ -211,18 +211,22 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 
 			// Ligting affects object if the inner product between its direction and the objects norm is positive.
 			if (shadow_ray->direction.inner_product(norm) > 0) {
-				// S_i * f_att * I_p * (Specular + Diffuse)
-				light_component = multiply_colors(
-					add_colors(
-						get_diffuse_component(object, ray, intersection_point, norm, type, shadow_ray),
-						get_specular_component(object, ray, intersection_point, norm, type, shadow_ray)
+				distance_from_light = intersection_point.euclid_distance(lights[i]->get_position());
+
+				// f_att * I_p * (Specular + Diffuse)
+				light_component = scale_color(
+					multiply_colors(
+						add_colors(
+							get_diffuse_component(object, ray, intersection_point, norm, type, shadow_ray),
+							get_specular_component(object, ray, intersection_point, norm, type, shadow_ray)
+						),
+						lights[i]->get_color() // I_pi
 					),
-					lights[i]->get_color() // I_pi
+					min(LIGHT_ATTENUATION_C0_ADDITION + (LIGHT_ATTENUATION_C1_MULTIPLIER / distance_from_light), 1.f)
 				);
 
 				// Check if an object stands between the intersection point and the light source.
 				tie(intersection_indexes, intersected_distances) = get_all_intersected_objects(shadow_ray);
-				distance_from_light = intersection_point.euclid_distance(lights[i]->get_position());
 
 				if (!intersection_indexes.empty()) {
 					// At least one object is in the same direction as the light. Shadow may be cast
@@ -238,12 +242,13 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 					
 					tie(closest_intersection_index, closest_intersection_distance) = get_closest_intersected_object(shadow_ray);
 					if (closest_intersection_distance < distance_from_light) {
+						// S_i * (Transmitted Color) * f_att * I_p * (Specular + Diffuse)
 						light_component = scale_color(
 							multiply_colors( // 
 								light_component,
 								// TODO: Show cylinder bleeding
 								//objects[closest_intersection_index]->get_diffuse_color()
-								scale_color(
+								scale_color( // Project the object's color into the shadow
 									objects[closest_intersection_index]->get_diffuse_color(),
 									objects[closest_intersection_index]->get_diffuse_coef()
 								)
@@ -251,29 +256,8 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 							transmission_coef_light // S_i
 						);
 					}
-					
-					// TODO: https://www.notion.so/Sombras-con-colores-65d808c0f468410bb45e8739b23ada25
-					//		 Get diffuse colour of the closest intersected object so the color of the shadow is altered by it.
 				}
 				// Else: No object stands between the surface and the light. And the light fully reachs the object (transmission_coef_light = 1.0f)
-
-
-				// S_i * f_att * I_p * (Specular + Diffuse)
-				/*light_component = scale_color(
-					multiply_colors(
-						add_colors(
-							get_diffuse_component(object, ray, intersection_point, norm, type, shadow_ray),
-							get_specular_component(object, ray, intersection_point, norm, type, shadow_ray)
-						),
-						lights[i]->get_color() // I_pi
-					),
-					transmission_coef_light // S_i
-				);*/
-				// TODO: https://www.notion.so/Sombras-con-colores-65d808c0f468410bb45e8739b23ada25
-				//		 Apply shadow color (multiply color of light)
-				// TODO: https://www.notion.so/Atenuaci-n-por-distancia-respecto-a-luz-f062c5222267473aaa6de2231d7cb20e
-				//		 Opcional!
-				//		 Scale by attenuation factor (f_att, delete f_att part in equation if not implemented)
 				lights_component = add_colors(lights_component, light_component);
 			}
 			delete shadow_ray;

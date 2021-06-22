@@ -33,19 +33,35 @@ Cylinder::Cylinder(
 // Main methods
 // -----------------------------------------------------------------------------------
 
-// Reference: https://github.com/iceman201/RayTracing
+// Reference: https://github.com/iceman201/RayTracing/blob/master/Ray%20tracing/Cylinder.cpp
+// http://www.irisa.fr/prive/kadi/Master_Recherche/cours_CTR/RayTracing.pdf
 // https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-plane-and-ray-disk-intersection
 float Cylinder::intersect(Ray ray) {
 	float t;
 
+
+	// 1. Get vector between ray and sphere (P - C)
+	/*Vector Q = ray.origin - this->position.copy();
+	Ray copy_ray = Ray(
+		{ray.origin.x, 0.f, ray.origin.z},
+		{ray.direction.x, 0.f, ray.direction.z}
+	);
+	Q.y = 0;
+
+	// 2. Get quadratic equation parameters
+	float a = copy_ray.direction.inner_product(copy_ray.direction); // U^2 = 1.f
+	float b = 2 * copy_ray.direction.inner_product(Q); // 2UQ
+	float c = Q.inner_product(Q) - radius * radius; // Q^2 - r^2*/
+
 	// 1. Get quadratic equation parameters
-	float a = (ray.direction.x * ray.direction.x) + (ray.direction.z * ray.direction.z);
+	float a = powf(ray.direction.x, 2.f) + powf(ray.direction.z, 2.f);
 	float b = 2 * (ray.direction.x * (ray.origin.x - this->position.x) + ray.direction.z * (ray.origin.z - this->position.z));
-	float c = (ray.origin.x - this->position.x) * (ray.origin.x - this->position.x) + (ray.origin.z - this->position.z) * (ray.origin.z - this->position.z) - (this->radius * this->radius);
-	float d = b * b - 4 * (a * c);
+	float c = powf(ray.origin.x - this->position.x, 2.f) + powf(ray.origin.z - this->position.z, 2) - powf(this->radius, 2);
+	float d = (b * b) - (4 * (a * c));
 
 	// 2. Solutions are complex, intersection does not occur
-	if (d < 0) return -1.f;
+	if (fabs(d) < 0.001) return -1.0;
+	if (d < 0.f) return -1.f;
 
 	// 3. Get first solution (closest one)
 	float sol1 = (-b - sqrtf(d)) / (2 * a);
@@ -61,7 +77,7 @@ float Cylinder::intersect(Ray ray) {
 	float r = ray.origin.y + t * ray.direction.y;
 
 	// 7. Check if ray is in cylinder height and return distance
-	if ((r >= this->position.y - (height/2) && (r <= this->position.y + (height/2)))) return t;
+	if ((r >= (this->position.y - (height/2)) && (r <= (this->position.y + (height/2))))) return t;
 
 	// 8. Check intersection with caps of the cylinder
 	t = intersect_with_base(ray, Vector(0, 1, 0), this->position + Vector(0, this->height / 2, 0)); // Top
@@ -77,12 +93,12 @@ float Cylinder::intersect(Ray ray) {
 Vector Cylinder::get_normal(Vector point, Ray ray) {
 	Vector normal;
 	// Check if point is at the top
-	if (point.y >= this->position.y + this->height/2)
+	if (point.y == this->position.y + this->height/2)
 		normal = Vector(0, 1, 0);
-	else if(point.y <= this->position.y - this->height/2)
+	else if(point.y == this->position.y - this->height/2)
 		normal = Vector(0, -1, 0);
 	else
-		normal = Vector(point.x - this->position.x, 0, point.z - this->position.z);
+		normal = Vector(point.x - this->position.x, 0.f, point.z - this->position.z);
 	
 	normal.normalize();
 	return normal;

@@ -34,13 +34,13 @@
 			<type>cylinder</type>
 			<position>
 				<x>0</x>
-				<y>-100</y>
+				<y>-250</y>
 				<z>256</z>
 			</position>
 			<diffuse_color>
-				<r>1</r>
+				<r>0</r>
 				<g>1</g>
-				<b>0</b>
+				<b>1</b>
 				<a>1</a>
 			</diffuse_color>
 			<specular_color>

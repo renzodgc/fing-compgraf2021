@@ -39,20 +39,6 @@ Cylinder::Cylinder(
 float Cylinder::intersect(Ray ray) {
 	float t;
 
-
-	// 1. Get vector between ray and sphere (P - C)
-	/*Vector Q = ray.origin - this->position.copy();
-	Ray copy_ray = Ray(
-		{ray.origin.x, 0.f, ray.origin.z},
-		{ray.direction.x, 0.f, ray.direction.z}
-	);
-	Q.y = 0;
-
-	// 2. Get quadratic equation parameters
-	float a = copy_ray.direction.inner_product(copy_ray.direction); // U^2 = 1.f
-	float b = 2 * copy_ray.direction.inner_product(Q); // 2UQ
-	float c = Q.inner_product(Q) - radius * radius; // Q^2 - r^2*/
-
 	// 1. Get quadratic equation parameters
 	float a = powf(ray.direction.x, 2.f) + powf(ray.direction.z, 2.f);
 	float b = 2 * (ray.direction.x * (ray.origin.x - this->position.x) + ray.direction.z * (ray.origin.z - this->position.z));
@@ -93,9 +79,9 @@ float Cylinder::intersect(Ray ray) {
 Vector Cylinder::get_normal(Vector point, Ray ray) {
 	Vector normal;
 	// Check if point is at the top
-	if (point.y == this->position.y + this->height/2)
+	if (point.y == (this->position.y + this->height/2))
 		normal = Vector(0, 1, 0);
-	else if(point.y == this->position.y - this->height/2)
+	else if(point.y == (this->position.y - this->height/2))
 		normal = Vector(0, -1, 0);
 	else
 		normal = Vector(point.x - this->position.x, 0.f, point.z - this->position.z);

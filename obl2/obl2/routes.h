@@ -10,7 +10,7 @@
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------
 
-const std::string CONFIG_FILE = "config.xml";
+const std::string CONFIG_FILE = "tests_config_spheres_overlapped.xml";
 const std::string SAVE_FOLDER = "results\\";
 
 // FILE NAMES

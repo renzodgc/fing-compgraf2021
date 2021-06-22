@@ -582,7 +582,7 @@
 		</object>
 
 		<!-- Big sphere -->
-		<!--<object>
+		<object>
 			<type>sphere</type>
 			<position>
 				<x>-214.0</x>
@@ -610,7 +610,7 @@
 				<reflective>false</reflective>
 				<radius>132.0</radius>
 			</properties>
-		</object>-->
+		</object>
 
 		<!--
 		Sphere instead of cylinder
@@ -655,7 +655,7 @@
 			</position>
 			<diffuse_color>
 				<r>0</r>
-				<g>0</g>
+				<g>1</g>
 				<b>0</b>
 				<a>1</a>
 			</diffuse_color>
@@ -668,17 +668,17 @@
 			<properties>
 				<refraction_coef>1</refraction_coef>
 				<transmission_coef>0</transmission_coef>
-				<specular_coef>1</specular_coef>
-				<diffuse_coef>0</diffuse_coef>
-				<ambience_coef>0</ambience_coef>
-				<reflective>true</reflective>
+				<specular_coef>0.2</specular_coef>
+				<diffuse_coef>1</diffuse_coef>
+				<ambience_coef>1</ambience_coef>
+				<reflective>false</reflective>
 				<radius>80.0</radius>
 				<height>168.0</height>
 			</properties>
 		</object>
 
 		<!-- Small sphere -->
-		<!--<object>
+		<object>
 			<type>sphere</type>
 			<position>
 				<x>160.0</x>
@@ -706,6 +706,6 @@
 				<reflective>true</reflective>
 				<radius>96.0</radius>
 			</properties>
-		</object>-->
+		</object>
 	</objects>
 </scene>

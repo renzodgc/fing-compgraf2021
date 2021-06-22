@@ -218,7 +218,7 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 			// Cast a Ray from the intersection_point to the light source. This ray is a straight line.
 			Ray* shadow_ray = new Ray(
 				intersection_point.copy() + norm * EPSILON, // origin
-				(lights[i]->get_position().copy() - intersection_point.copy()) // direction (from eye to window's pixel)
+				(lights[i]->get_position().copy() - (intersection_point.copy() + norm * EPSILON)) // direction (from eye to window's pixel)
 			);
 			// If no objects stands it applies directly
 

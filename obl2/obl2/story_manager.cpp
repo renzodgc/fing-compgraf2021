@@ -14,7 +14,7 @@ using namespace std;
 
 Story::Story() {
 	this->current_directory = get_current_time();
-	this->current_directory_path = "pruebas_" + SAVE_FOLDER + this->current_directory + "\\";
+	this->current_directory_path = SAVE_FOLDER + "pruebas_" + this->current_directory + "\\";
 	this->created = create_current_directory();
 }
 

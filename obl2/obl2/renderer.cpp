@@ -48,7 +48,9 @@ int main(int argc, char* argv[]) {
 	std::chrono::duration<double> elapsed = finish_time_ray_tracing - start_time_ray_tracing;
 	std::cout << "Tiempo en ejecutar Ray tracing completo: " << elapsed.count() << " s\n";
 
-	string file_name = "normal" + '_' + to_string(elapsed.count());
+	string tiene_antialising = (ANTIALIASING ? "con" : "sin");
+
+	string file_name = "principal_" + tiene_antialising + "-antialiasing_profundidad-" + to_string(MAX_DEPTH) + "___" + to_string(elapsed.count());
 
 	// 4. Save result image
 	if (!story_manager.save_result(result, file_name)) {

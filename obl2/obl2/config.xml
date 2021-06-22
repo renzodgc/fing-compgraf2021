@@ -667,7 +667,7 @@
 			</specular_color>
 			<properties>
 				<refraction_coef>1.57</refraction_coef>
-				<transmission_coef>0.4</transmission_coef>
+				<transmission_coef>0</transmission_coef>
 				<specular_coef>1</specular_coef>
 				<diffuse_coef>0.1</diffuse_coef>
 				<ambience_coef>1</ambience_coef>

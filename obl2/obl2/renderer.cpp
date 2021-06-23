@@ -42,11 +42,11 @@ int main(int argc, char* argv[]) {
 	auto start_time_ray_tracing = std::chrono::high_resolution_clock::now();
 
 	Image* result = render_manager.ray_tracing(ImageIs::FullResult, ANTIALIASING);
-	cout << "3. Imagen generada correctamente" << endl;
+	cout << "3. Imagen generada correctamente\n" << endl;
 
 	auto finish_time_ray_tracing = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish_time_ray_tracing - start_time_ray_tracing;
-	std::cout << "Tiempo en ejecutar Ray tracing completo: " << elapsed.count() << " s\n";
+	std::cout << "Tiempo en ejecutar Ray tracing completo: " << elapsed.count() << " s\n\n";
 
 	string tiene_antialising = (ANTIALIASING ? "con" : "sin");
 
@@ -63,26 +63,26 @@ int main(int argc, char* argv[]) {
 
 
 
-	// 5. Run ray tracing to generate intermediate results
-	//cout << "5. Generando resultados intermedios:" << endl;
-	//// Coefficient results
-	//result = render_manager.ray_tracing(ImageIs::Ambient, false); story_manager.save_result(result, ImageIs::Ambient);
-	//cout << "    5.1. Coeficiente ambiental" << endl;
-	//result = render_manager.ray_tracing(ImageIs::Diffuse, false); story_manager.save_result(result, ImageIs::Diffuse);
-	//cout << "    5.2. Coeficiente difuso" << endl;
-	//result = render_manager.ray_tracing(ImageIs::Specular, false); story_manager.save_result(result, ImageIs::Specular);
-	//cout << "    5.3. Coeficiente especular" << endl;
-	//result = render_manager.ray_tracing(ImageIs::Reflection, false); story_manager.save_result(result, ImageIs::Reflection);
-	//cout << "    5.4. Coeficiente de reflexion" << endl;
-	//result = render_manager.ray_tracing(ImageIs::Transmission, false); story_manager.save_result(result, ImageIs::Transmission);
-	//cout << "    5.5. Coeficiente de transmision" << endl;
-	//// Color results
-	//result = render_manager.ray_tracing(ImageIs::ColorAmbient, false); story_manager.save_result(result, ImageIs::ColorAmbient);
-	//cout << "    5.6. Color ambiental" << endl;
-	//result = render_manager.ray_tracing(ImageIs::ColorDiffuse, false); story_manager.save_result(result, ImageIs::ColorDiffuse);
-	//cout << "    5.7. Color difuso" << endl;
-	//result = render_manager.ray_tracing(ImageIs::ColorSpecular, false); story_manager.save_result(result, ImageIs::ColorSpecular);
-	//cout << "    5.8. Color especular" << endl;
+	//5. Run ray tracing to generate intermediate results
+	cout << "5. Generando resultados intermedios:" << endl;
+	// Coefficient results
+	result = render_manager.ray_tracing(ImageIs::Ambient, false); story_manager.save_result(result, ImageIs::Ambient);
+	cout << "    5.1. Coeficiente ambiental" << endl;
+	result = render_manager.ray_tracing(ImageIs::Diffuse, false); story_manager.save_result(result, ImageIs::Diffuse);
+	cout << "    5.2. Coeficiente difuso" << endl;
+	result = render_manager.ray_tracing(ImageIs::Specular, false); story_manager.save_result(result, ImageIs::Specular);
+	cout << "    5.3. Coeficiente especular" << endl;
+	result = render_manager.ray_tracing(ImageIs::Reflection, false); story_manager.save_result(result, ImageIs::Reflection);
+	cout << "    5.4. Coeficiente de reflexion" << endl;
+	result = render_manager.ray_tracing(ImageIs::Transmission, false); story_manager.save_result(result, ImageIs::Transmission);
+	cout << "    5.5. Coeficiente de transmision" << endl;
+	// Color results
+	result = render_manager.ray_tracing(ImageIs::ColorAmbient, false); story_manager.save_result(result, ImageIs::ColorAmbient);
+	cout << "    5.6. Color ambiental" << endl;
+	result = render_manager.ray_tracing(ImageIs::ColorDiffuse, false); story_manager.save_result(result, ImageIs::ColorDiffuse);
+	cout << "    5.7. Color difuso" << endl;
+	result = render_manager.ray_tracing(ImageIs::ColorSpecular, false); story_manager.save_result(result, ImageIs::ColorSpecular);
+	cout << "    5.8. Color especular" << endl;
 
 	
 

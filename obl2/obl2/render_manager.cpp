@@ -259,8 +259,6 @@ Color Render::get_lights_component(Object* object, Ray* ray, Vector intersection
 						light_component = scale_color(
 							multiply_colors( // 
 								light_component,
-								// TODO: Show cylinder bleeding
-								//objects[closest_intersection_index]->get_diffuse_color()
 								scale_color( // Project the object's color into the shadow
 									objects[closest_intersection_index]->get_diffuse_color(),
 									objects[closest_intersection_index]->get_diffuse_coef()

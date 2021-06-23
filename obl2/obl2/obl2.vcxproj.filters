@@ -196,5 +196,20 @@
     <Xml Include="config_3spheres_reflection.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="tests_config_mirrors.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="tests_config_spheres_overlapped.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="tests_config_full_scene.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="tests_config_full_scene_diffuse.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="tests_config_3spheres_diffuse.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

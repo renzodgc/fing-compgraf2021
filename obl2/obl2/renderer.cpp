@@ -37,11 +37,23 @@ int main(int argc, char* argv[]) {
 			
 	// 3. Initiate ray tracing
 	Render& render_manager = Render::get_instance();	
+
+	// Measuring time for ray tracing..
+	auto start_time_ray_tracing = std::chrono::high_resolution_clock::now();
+
 	Image* result = render_manager.ray_tracing(ImageIs::FullResult, ANTIALIASING);
-	cout << "3. Imagen generada correctamente" << endl;
+	cout << "3. Imagen generada correctamente\n" << endl;
+
+	auto finish_time_ray_tracing = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish_time_ray_tracing - start_time_ray_tracing;
+	std::cout << "Tiempo en ejecutar Ray tracing completo: " << elapsed.count() << " s\n\n";
+
+	string tiene_antialising = (ANTIALIASING ? "con" : "sin");
+
+	string file_name = "principal_" + tiene_antialising + "-antialiasing_profundidad-" + to_string(MAX_DEPTH) + "___" + to_string(elapsed.count());
 
 	// 4. Save result image
-	if (!story_manager.save_result(result, ImageIs::FullResult)) {
+	if (!story_manager.save_result(result, file_name)) {
 		cerr << "Error: La imagen resultante no pudo ser guardada" << endl;
 		post_render();
 		cin.get();
@@ -50,7 +62,8 @@ int main(int argc, char* argv[]) {
 	cout << "4. Imagen guardada correctamente" << endl;
 
 
-	// 5. Run ray tracing to generate intermediate results
+
+	//5. Run ray tracing to generate intermediate results
 	cout << "5. Generando resultados intermedios:" << endl;
 	// Coefficient results
 	result = render_manager.ray_tracing(ImageIs::Ambient, false); story_manager.save_result(result, ImageIs::Ambient);
@@ -70,6 +83,8 @@ int main(int argc, char* argv[]) {
 	cout << "    5.7. Color difuso" << endl;
 	result = render_manager.ray_tracing(ImageIs::ColorSpecular, false); story_manager.save_result(result, ImageIs::ColorSpecular);
 	cout << "    5.8. Color especular" << endl;
+
+	
 
 	post_render();
 	cin.get();

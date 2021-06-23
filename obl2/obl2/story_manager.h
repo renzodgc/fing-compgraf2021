@@ -47,6 +47,7 @@ class Story {
         // Main methods
         bool create_current_directory();
         bool save_result(Image* result, ImageIs type);
+        bool save_result(Image* result, string file_name);
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include "FreeImage.h"
+#include <chrono>
 
 // LOCAL DEPENDENCIES
 // -----------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ using namespace std;
 
 Story::Story() {
 	this->current_directory = get_current_time();
-	this->current_directory_path = SAVE_FOLDER + this->current_directory + "\\";
+	this->current_directory_path = SAVE_FOLDER + "pruebas_" + this->current_directory + "\\";
 	this->created = create_current_directory();
 }
 
@@ -69,6 +69,10 @@ bool Story::save_result(Image* result, ImageIs type) {
 		break;
 	}
 	return save_image(result, current_directory_path + file_name.c_str());
+}
+
+bool Story::save_result(Image* result, string file_name) {
+	return save_image(result, current_directory_path + file_name.c_str() + ".png");
 }
 
 // Aux methods

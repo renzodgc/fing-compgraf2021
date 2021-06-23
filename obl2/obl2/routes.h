@@ -10,7 +10,7 @@
 // FILE ROUTES
 // ---------------------------------------------------------------------------------------
 
-const std::string CONFIG_FILE = "tests_config_full_scene_diffuse.xml";
+const std::string CONFIG_FILE = "config_3spheres.xml";
 const std::string SAVE_FOLDER = "results\\";
 
 // FILE NAMES

@@ -208,5 +208,8 @@
     <Xml Include="tests_config_full_scene_diffuse.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="tests_config_3spheres_diffuse.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

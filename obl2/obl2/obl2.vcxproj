@@ -131,6 +131,7 @@
     <Xml Include="config_sphere.xml" />
     <Xml Include="config_2cylinders.xml" />
     <Xml Include="tests_config_full_scene.xml" />
+    <Xml Include="tests_config_full_scene_diffuse.xml" />
     <Xml Include="tests_config_mirrors.xml" />
     <Xml Include="tests_config_spheres_overlapped.xml" />
   </ItemGroup>
